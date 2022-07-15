@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class GunPivot : Node2D
+public class WeaponPivot : Node2D
 {
     public override void _Process(float delta)
     {

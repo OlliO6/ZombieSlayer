@@ -2,16 +2,19 @@ using Godot;
 using System;
 using Additions;
 
-public class Bullet : Area2D
+public class Bullet : Area2D, IKillable, IDamageDealer
 {
-    [TroughtSignal]
-    private void OnBodyEntered(Node body)
+    [Export] public int DamageAmount { get; set; }
+
+    public float speed;
+
+    public override void _PhysicsProcess(float delta)
     {
-        Die();
+        Position += speed * delta * Transform.x;
     }
 
     [TroughtSignal]
-    private void OnAreaEntered(Area2D body)
+    private void OnBodyEntered(Node body)
     {
         Die();
     }
@@ -19,5 +22,10 @@ public class Bullet : Area2D
     public void Die()
     {
         QueueFree();
+    }
+
+    public void DamageReceived(IDamageable to)
+    {
+        Die();
     }
 }

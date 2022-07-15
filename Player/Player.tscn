@@ -1,12 +1,16 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
-[ext_resource path="res://Guns/Pistol/Pistol.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Player/GunPivot.cs" type="Script" id=4]
+[ext_resource path="res://Weapons/Guns/Pistol/Pistol.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/WeaponPivot.cs" type="Script" id=4]
+[ext_resource path="res://BasicStuff/HurtArea.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.16228
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 3, 4 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Idle"
@@ -69,6 +73,7 @@ nodes/RunSpeed/position = Vector2( -140, 260 )
 node_connections = [ "output", 0, "MovementState", "RunSpeed", 0, "Animation 2", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed" ]
 
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 4
 script = ExtResource( 1 )
 movementSpeed = 35.0
 
@@ -79,6 +84,20 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -5 )
 hframes = 2
+
+[node name="HurtArea" parent="." instance=ExtResource( 5 )]
+collision_mask = 8
+
+[node name="CollisionShape2D" parent="HurtArea" index="0"]
+position = Vector2( 0, -3 )
+shape = SubResource( 9 )
+
+[node name="WeaponPivot" type="Position2D" parent="."]
+position = Vector2( 0, -5 )
+rotation = -0.0837758
+script = ExtResource( 4 )
+
+[node name="Pistol" parent="WeaponPivot" instance=ExtResource( 3 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 2 )
@@ -91,9 +110,4 @@ active = true
 parameters/MovementState/current = 0
 parameters/RunSpeed/scale = 1.0
 
-[node name="GunPivot" type="Position2D" parent="."]
-position = Vector2( 0, -5 )
-rotation = -0.0837758
-script = ExtResource( 4 )
-
-[node name="Pistol" parent="GunPivot" instance=ExtResource( 3 )]
+[editable path="HurtArea"]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Pistol.png-fc15c8ba042d1dbcf30752a08e4532a3.stex"
+path="res://.import/Pistol.png-f33ca95a2b70a3739f8091fd1ea27b34.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Guns/Pistol/Pistol.png"
-dest_files=[ "res://.import/Pistol.png-fc15c8ba042d1dbcf30752a08e4532a3.stex" ]
+source_file="res://Weapons/Guns/Pistol/Pistol.png"
+dest_files=[ "res://.import/Pistol.png-f33ca95a2b70a3739f8091fd1ea27b34.stex" ]
 
 [params]
 

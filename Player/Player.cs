@@ -2,7 +2,7 @@ using Additions;
 using Godot;
 using System;
 
-public class Player : KinematicBody2D
+public class Player : KinematicBody2D, IDamageable, IKillable
 {
     [Export] public float movementSpeed;
 
@@ -41,5 +41,15 @@ public class Player : KinematicBody2D
         {
             AnimationTree.Set("parameters/MovementState/current", 0);
         }
+    }
+
+    public void GetDamage(int amount)
+    {
+        GD.Print($"Player got {amount} damage");
+    }
+
+    public void Die()
+    {
+        QueueFree();
     }
 }
