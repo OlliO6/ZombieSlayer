@@ -13,14 +13,15 @@ gradient = SubResource( 3 )
 
 [sub_resource type="ParticlesMaterial" id=5]
 lifetime_randomness = 0.55
+emission_shape = 2
+emission_box_extents = Vector3( 1, 1, 1 )
 flag_disable_z = true
-spread = 20.0
+spread = 9.41
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 75.0
+initial_velocity = 28.55
 initial_velocity_random = 0.28
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-damping = 100.0
 color = Color( 1.54, 1.28, 0.84, 1 )
 color_ramp = SubResource( 4 )
 hue_variation = 0.03
@@ -71,12 +72,25 @@ tracks/1/keys = {
 "method": "restart"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("MuzzleFlash:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [node name="Pistol" type="Node2D"]
 script = ExtResource( 2 )
 bulletScene = ExtResource( 3 )
 bulletSpeedRange = Vector2( 90, 100 )
-bulletSpread = 20.0
+bulletSpread = 5.0
+bulletDamage = 3
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -85,13 +99,14 @@ hframes = 3
 frame = 2
 
 [node name="MuzzleFlash" type="Particles2D" parent="."]
-position = Vector2( 11, -3 )
+position = Vector2( 10, -3 )
 emitting = false
 amount = 4
 lifetime = 0.2
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 24
+fract_delta = false
 process_material = SubResource( 5 )
 
 [node name="InstantiatePoint" type="Position2D" parent="."]
@@ -100,3 +115,4 @@ position = Vector2( 11, -3 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 1 )
 anims/Shoot = SubResource( 2 )
+next/Shoot = "Idle"

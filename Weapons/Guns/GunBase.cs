@@ -7,7 +7,7 @@ public class GunBase : WeaponBase
     [Export] private PackedScene bulletScene;
     [Export] private Vector2 bulletSpeedRange;
     [Export] private float bulletSpread;
-
+    [Export] private int bulletDamage;
 
     #region InstantiatePoint Reference
 
@@ -21,6 +21,8 @@ public class GunBase : WeaponBase
 
     public override void Attack()
     {
+        if (AnimationPlayer.CurrentAnimation == "Shoot") return;
+
         lastBullet = bulletScene.Instance<Bullet>();
 
         GetTree().CurrentScene.AddChild(lastBullet);
@@ -29,5 +31,9 @@ public class GunBase : WeaponBase
         lastBullet.Rotate(Mathf.Deg2Rad((float)GD.RandRange(-bulletSpread, bulletSpread)));
 
         lastBullet.speed = (float)GD.RandRange(bulletSpeedRange.x, bulletSpeedRange.y);
+
+        lastBullet.DamageAmount = bulletDamage;
+
+        AnimationPlayer.Play("Shoot");
     }
 }

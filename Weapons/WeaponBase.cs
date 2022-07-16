@@ -13,7 +13,7 @@ public class WeaponBase : Node
 
     protected bool attackInput;
 
-    public override void _UnhandledInput(InputEvent @event)
+    public override void _Input(InputEvent @event)
     {
         if (!@event.IsAction("Attack")) return;
 

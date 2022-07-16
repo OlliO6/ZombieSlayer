@@ -14,3 +14,8 @@ public interface IDamageDealer
 
     public void DamageReceived(IDamageable to);
 }
+public interface IHealth
+{
+    public int CurrentHealth { get; set; }
+    public int MaxHealth { get; set; }
+}

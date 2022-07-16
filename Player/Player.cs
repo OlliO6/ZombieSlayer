@@ -2,9 +2,29 @@ using Additions;
 using Godot;
 using System;
 
-public class Player : KinematicBody2D, IDamageable, IKillable
+public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 {
-    [Export] public float movementSpeed;
+    [Export] public float movementSpeed, invincibilityTime;
+
+    [Export] public int MaxHealth { get; set; }
+
+    public int CurrentHealth
+    {
+        get => storerForCurrentHealth;
+        set
+        {
+            GD.Print($"CurrentHealth: {value}; MaxHealth: {MaxHealth};");
+            storerForCurrentHealth = value;
+            EmitSignal(nameof(OnHealthChanged));
+            if (value <= 0) Die();
+        }
+    }
+    private int storerForCurrentHealth;
+
+
+    [Signal] public delegate void OnInvincibilityStarted();
+    [Signal] public delegate void OnInvincibilityEnded();
+    [Signal] public delegate void OnHealthChanged();
 
 
     #region AnimationTree Reference
@@ -14,6 +34,19 @@ public class Player : KinematicBody2D, IDamageable, IKillable
 
     #endregion
 
+    #region Sprite Reference
+
+    private Sprite storerForSprite;
+    public Sprite Sprite => this.LazyGetNode(ref storerForSprite, "Sprite");
+
+    #endregion
+
+    public bool isInvincible;
+
+    public override void _Ready()
+    {
+        CurrentHealth = MaxHealth;
+    }
 
     public override void _PhysicsProcess(float delta)
     {
@@ -45,7 +78,23 @@ public class Player : KinematicBody2D, IDamageable, IKillable
 
     public void GetDamage(int amount)
     {
+        if (isInvincible)
+            return;
+
         GD.Print($"Player got {amount} damage");
+
+        isInvincible = true;
+        EmitSignal(nameof(OnInvincibilityStarted));
+        Sprite.SetShaderParam("blinking", true);
+
+        ToSignal(GetTree().CreateTimer(invincibilityTime), Constants.timeout).OnCompleted(() =>
+        {
+            isInvincible = false;
+            EmitSignal(nameof(OnInvincibilityEnded));
+            Sprite.SetShaderParam("blinking", false);
+        });
+
+        CurrentHealth -= amount;
     }
 
     public void Die()
