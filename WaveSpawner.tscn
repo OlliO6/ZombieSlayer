@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://WaveSpawner.cs" type="Script" id=1]
+[ext_resource path="res://Enemies/Zombie/Zombie.tscn" type="PackedScene" id=3]
+
+[node name="WaveSpawner" type="Node"]
+script = ExtResource( 1 )
+minWaveInterval = 10.0
+waveIntervalMultiplierRange = Vector2( 0.8, 1.5 )
+enemies = [ ExtResource( 3 ) ]

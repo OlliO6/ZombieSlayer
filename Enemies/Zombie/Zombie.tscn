@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://BasicStuff/DamagingHurtArea.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/Zombie/Zombie.png" type="Texture" id=2]
 [ext_resource path="res://Enemies/Zombie/Zombie.cs" type="Script" id=3]
 [ext_resource path="res://Sounds/Hit_hurt.wav" type="AudioStream" id=4]
+[ext_resource path="res://Items/Coin/Coin.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -142,7 +143,7 @@ input_2/name = "Dead"
 input_2/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=14]
-graph_offset = Vector2( -523.153, -104.477 )
+graph_offset = Vector2( -385, 77 )
 nodes/Animation/node = SubResource( 11 )
 nodes/Animation/position = Vector2( -380, -20 )
 "nodes/Animation 2/node" = SubResource( 9 )
@@ -162,6 +163,7 @@ node_connections = [ "output", 0, "Damage", "State", 0, "Animation", "State", 1,
 collision_layer = 2
 script = ExtResource( 3 )
 MaxHealth = 12
+coinScene = ExtResource( 5 )
 movementSpeedRandomness = 0.8
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -198,6 +200,7 @@ parameters/State/current = 0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource( 5 )
+volume_db = -31.1164
 bus = "SFX"
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]

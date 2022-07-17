@@ -4,6 +4,8 @@ using Additions;
 
 public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
 {
+    [Export] private PackedScene coinScene;
+    [Export] private int coinsAmount = 2;
     [Export] private float movementSpeed = 20;
     [Export(PropertyHint.Range, "0,1")] private float movementSpeedRandomness = 0.5f;
 
@@ -74,5 +76,20 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
         dead = true;
 
         AnimTree.Set("parameters/State/current", 2);
+
+        SpawnCoins();
+    }
+
+    private void SpawnCoins()
+    {
+        for (int i = 0; i < coinsAmount; i++)
+        {
+            Coin coin = coinScene.Instance<Coin>();
+
+            GetTree().CurrentScene.CallDeferred("add_child", coin);
+
+            coin.GlobalPosition = GlobalPosition;
+            coin.Launch();
+        }
     }
 }
