@@ -116,4 +116,9 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     {
         SceneManager.LoadMenu();
     }
+
+    public void AddDice(Dice dice)
+    {
+        GetNode("DiceHolder").AddChild(dice);
+    }
 }

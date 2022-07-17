@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/DiceRoll.wav-ac6a186c2952955ae44a1ba07f7a8df5.sample"
+
+[deps]
+
+source_file="res://Sounds/DiceRoll.wav"
+dest_files=[ "res://.import/DiceRoll.wav-ac6a186c2952955ae44a1ba07f7a8df5.sample" ]
+
+[params]
+
+force/8_bit=true
+force/mono=true
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

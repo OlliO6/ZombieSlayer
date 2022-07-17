@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/DiceJump.wav-de1fac2bcde252fb97456f0242efad41.sample"
+
+[deps]
+
+source_file="res://Sounds/DiceJump.wav"
+dest_files=[ "res://.import/DiceJump.wav-de1fac2bcde252fb97456f0242efad41.sample" ]
+
+[params]
+
+force/8_bit=true
+force/mono=true
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
