@@ -1,8 +1,34 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://BasicStuff/DamagingHurtArea.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/Zombie/Zombie.png" type="Texture" id=2]
 [ext_resource path="res://Enemies/Zombie/Zombie.cs" type="Script" id=3]
+[ext_resource path="res://Sounds/Hit_hurt.wav" type="AudioStream" id=4]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform bool flash = true;
+uniform vec4 flashColor : hint_color;
+
+void fragment(){
+	vec4 fullColor = texture(TEXTURE, UV);
+	
+	vec3 color = fullColor.rgb;
+	float alpha = fullColor.a;
+	
+	if (flash){
+		color = flashColor.rgb;
+	}
+	
+	COLOR.rgb = color;
+	COLOR.a = alpha;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/flash = false
+shader_param/flashColor = Color( 1, 1, 1, 1 )
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 2.23607
@@ -10,14 +36,115 @@ radius = 2.23607
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 3, 5 )
 
+[sub_resource type="AudioStreamRandomPitch" id=5]
+audio_stream = ExtResource( 4 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "Damage"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/flash")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": SubResource( 5 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Run"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Run"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "Damage"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeOneShot" id=12]
+
+[sub_resource type="AnimationNodeTransition" id=13]
+input_count = 2
+input_0/name = "Ildle"
+input_0/auto_advance = false
+input_1/name = "Run"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeBlendTree" id=14]
+graph_offset = Vector2( -427.264, -68.6322 )
+nodes/Animation/node = SubResource( 11 )
+nodes/Animation/position = Vector2( -380, -20 )
+"nodes/Animation 2/node" = SubResource( 9 )
+"nodes/Animation 2/position" = Vector2( -380, 120 )
+"nodes/Animation 3/node" = SubResource( 10 )
+"nodes/Animation 3/position" = Vector2( -80, 240 )
+nodes/Damage/node = SubResource( 12 )
+nodes/Damage/position = Vector2( 140, 160 )
+nodes/MovementState/node = SubResource( 13 )
+nodes/MovementState/position = Vector2( -100, 40 )
+nodes/output/position = Vector2( 360, 160 )
+node_connections = [ "output", 0, "Damage", "Damage", 0, "MovementState", "Damage", 1, "Animation 3", "MovementState", 0, "Animation", "MovementState", 1, "Animation 2" ]
+
 [node name="Zombie" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 4 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -6 )
 hframes = 2
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -25,9 +152,26 @@ shape = SubResource( 1 )
 [node name="DamagingHurtArea" parent="." instance=ExtResource( 1 )]
 collision_layer = 2
 collision_mask = 16
+DamageAmount = 1
 
 [node name="CollisionShape2D" parent="DamagingHurtArea" index="0"]
 position = Vector2( 0, -4 )
 shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Damage = SubResource( 6 )
+anims/Idle = SubResource( 7 )
+anims/Run = SubResource( 8 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 14 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/Damage/active = false
+parameters/MovementState/current = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 5 )
+volume_db = -31.0973
 
 [editable path="DamagingHurtArea"]

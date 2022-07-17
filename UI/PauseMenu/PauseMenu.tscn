@@ -1,45 +1,58 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://UI/Theme.tres" type="Theme" id=1]
+[ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/PauseMenu/PauseMenu.cs" type="Script" id=2]
+[ext_resource path="res://UI/OptionsMenu/OptionsMenu.tscn" type="PackedScene" id=3]
 
-[node name="PauseMenu" type="CenterContainer"]
+[node name="PauseMenu" type="Popup"]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.392157 )
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 89.0
-margin_top = 45.0
-margin_right = 166.0
-margin_bottom = 104.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -38.5
+margin_top = -26.5
+margin_right = 38.5
+margin_bottom = 26.5
 
 [node name="Button" type="Button" parent="VBoxContainer"]
-margin_right = 77.375
-margin_bottom = 17.0
+margin_right = 77.0
+margin_bottom = 15.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Continue"
-flat = true
 
 [node name="Button2" type="Button" parent="VBoxContainer"]
-margin_top = 21.0
+margin_top = 19.0
 margin_right = 77.0
-margin_bottom = 38.0
+margin_bottom = 34.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Options"
-flat = true
 
 [node name="Button3" type="Button" parent="VBoxContainer"]
-margin_top = 42.0
+margin_top = 38.0
 margin_right = 77.0
-margin_bottom = 59.0
+margin_bottom = 53.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Menu"
-flat = true
+
+[node name="OptionsMenu" parent="." instance=ExtResource( 3 )]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="OptionsMenu"]
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="Unpause"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="OptionsMenu" method="OnOptionsPressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="OnMenuButtonPressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -6,8 +6,7 @@
 [ext_resource path="res://Player/WeaponPivot.cs" type="Script" id=4]
 [ext_resource path="res://BasicStuff/HurtArea.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/HealthDisplay/HealthDisplay.tscn" type="PackedScene" id=6]
-[ext_resource path="res://UI/PauseMenu/PauseMenu.cs" type="Script" id=7]
-[ext_resource path="res://UI/Theme.tres" type="Theme" id=8]
+[ext_resource path="res://UI/PauseMenu/PauseMenu.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.16228
@@ -90,7 +89,7 @@ nodes/MovementState/node = SubResource( 6 )
 nodes/MovementState/position = Vector2( 120, 140 )
 nodes/RunSpeed/node = SubResource( 7 )
 nodes/RunSpeed/position = Vector2( -140, 260 )
-node_connections = [ "output", 0, "MovementState", "RunSpeed", 0, "Animation 2", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed" ]
+node_connections = [ "output", 0, "MovementState", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed", "RunSpeed", 0, "Animation 2" ]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
@@ -146,48 +145,10 @@ editor_draw_screen = false
 maxHealth = 4
 currentHealth = 4
 
-[node name="PauseMenu" type="CenterContainer" parent="UI"]
-pause_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 8 )
-script = ExtResource( 7 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseMenu"]
-margin_left = 89.0
-margin_top = 45.0
-margin_right = 166.0
-margin_bottom = 104.0
-
-[node name="Button" type="Button" parent="UI/PauseMenu/VBoxContainer"]
-margin_right = 77.375
-margin_bottom = 17.0
-focus_mode = 0
-enabled_focus_mode = 0
-text = "Continue"
-flat = true
-
-[node name="Button2" type="Button" parent="UI/PauseMenu/VBoxContainer"]
-margin_top = 21.0
-margin_right = 77.0
-margin_bottom = 38.0
-focus_mode = 0
-enabled_focus_mode = 0
-text = "Options"
-flat = true
-
-[node name="Button3" type="Button" parent="UI/PauseMenu/VBoxContainer"]
-margin_top = 42.0
-margin_right = 77.0
-margin_bottom = 59.0
-focus_mode = 0
-enabled_focus_mode = 0
-text = "Menu"
-flat = true
+[node name="PauseMenu" parent="UI" instance=ExtResource( 7 )]
 
 [connection signal="OnHealthChanged" from="." to="UI/HealthDisplay" method="OnPlayerHealthChanged"]
 [connection signal="OnInvincibilityEnded" from="." to="HurtArea/CollisionShape2D" method="set_disabled" flags=3 binds= [ false ]]
 [connection signal="OnInvincibilityStarted" from="." to="HurtArea/CollisionShape2D" method="set_disabled" flags=3 binds= [ true ]]
-[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/Button" to="UI/PauseMenu" method="Unpause"]
 
 [editable path="HurtArea"]

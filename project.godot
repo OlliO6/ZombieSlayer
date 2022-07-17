@@ -11,15 +11,17 @@ config_version=4
 [application]
 
 config/name="GMTK2022"
-run/main_scene="res://Node2D.tscn"
+run/main_scene="res://UI/Menu/Menu.tscn"
 
 [audio]
 
-default_bus_layout=""
+default_bus_layout="res://BusLayout.tres"
 
 [autoload]
 
 InputManager="*res://Singletons/InputManager.cs"
+SceneManager="*res://Singletons/SceneManager.tscn"
+OptionsManager="*res://Singletons/OptionsManager.cs"
 
 [display]
 
@@ -56,6 +58,16 @@ texture={
 "size_limit": 0,
 "stream": false,
 "svg/scale": 1.0
+}
+wav={
+"compress/mode": 0,
+"edit/loop": false,
+"edit/normalize": false,
+"edit/trim": false,
+"force/8_bit": true,
+"force/max_rate": false,
+"force/max_rate_hz": 44100,
+"force/mono": true
 }
 
 [input]
