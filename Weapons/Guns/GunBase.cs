@@ -34,6 +34,9 @@ public class GunBase : WeaponBase
 
         lastBullet.DamageAmount = bulletDamage;
 
+        if (Player.currentPlayer is not null)
+            lastBullet.DamageAmount += Player.currentPlayer.extraDamage;
+
         AnimationPlayer.Play("Shoot");
     }
 }

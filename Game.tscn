@@ -1,12 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tileset/GrassVariant.png" type="Texture" id=2]
-[ext_resource path="res://Items/SpeedUp/SpeedPickUp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Music/GameSong.wav" type="AudioStream" id=5]
 [ext_resource path="res://Shop/Shop.tscn" type="PackedScene" id=7]
 [ext_resource path="res://WaveSpawner.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Items/Dice/Dice.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -65,6 +63,7 @@ bus = "Music"
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 128, 85 )
+startCoins = 200
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
@@ -152,21 +151,3 @@ position = Vector2( 119, 246 )
 
 [node name="Node2D24" type="Node2D" parent="SpawnPositions"]
 position = Vector2( -26, 44 )
-
-[node name="Dice" parent="." instance=ExtResource( 9 )]
-position = Vector2( 176, 45 )
-
-[node name="Pickup" parent="." instance=ExtResource( 3 )]
-position = Vector2( 24, 87 )
-
-[node name="Pickup2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 61, 104 )
-
-[node name="Pickup3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 89, 71 )
-
-[node name="Pickup4" parent="." instance=ExtResource( 3 )]
-position = Vector2( 102, 134 )
-
-[node name="Pickup5" parent="." instance=ExtResource( 3 )]
-position = Vector2( 157, 124 )

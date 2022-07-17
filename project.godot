@@ -12,6 +12,8 @@ config_version=4
 
 config/name="GMTK2022"
 run/main_scene="res://UI/Menu/Menu.tscn"
+config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [audio]
 

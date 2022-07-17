@@ -1,27 +1,79 @@
 using Godot;
 using System;
 
-public class ShopItem : Button
+public class ShopItem : Control
 {
     [Export] public PackedScene sceneToBuy;
     [Export] private int startPrice = 10;
-    [Export] private int maxBuyCount = 1;
-    [Export] private int endPrice = 10;
+    [Export] private int priceAdded = 10;
+    [Export] private float priceMultiplier = 1.3f;
+
+    [Signal] public delegate void OnCurrentAmountChanged();
+
+    public int currentAmount;
+    public int currentPrice;
 
     private int buyCount;
 
+    private Label priceLabel;
+
     public int GetPrice()
     {
-        if (buyCount >= maxBuyCount) return -1;
-
-        return Mathf.RoundToInt(Mathf.Lerp(startPrice, endPrice, (float)buyCount / (float)maxBuyCount));
+        return Mathf.RoundToInt(startPrice + (buyCount * priceAdded) * (priceMultiplier * buyCount));
     }
 
+    public override void _Ready()
+    {
+        Connect(nameof(OnCurrentAmountChanged), Owner, "OnUpdateRatio");
+        priceLabel = GetNode<Label>("Label");
 
+        UpdateButtonEnableStateAndPriceLAbel();
+    }
+
+    private void UpdateButtonEnableStateAndPriceLAbel()
+    {
+        priceLabel.Text = GetPrice().ToString();
+
+        if (currentAmount is 0)
+            SetRemoveButtonEnabled(false);
+        else
+            SetRemoveButtonEnabled(true);
+
+    }
 
     [TroughtSignal]
-    private void OnButtonDown()
+    private void OnAddButtonPressed()
     {
-        
+        currentAmount++;
+        currentPrice += GetPrice();
+        buyCount++;
+
+        EmitSignal(nameof(OnCurrentAmountChanged));
+        UpdateButtonEnableStateAndPriceLAbel();
+    }
+    [TroughtSignal]
+    private void OnRemoveButtonPressed()
+    {
+        currentAmount--;
+        buyCount--;
+        currentPrice -= GetPrice();
+
+        EmitSignal(nameof(OnCurrentAmountChanged));
+        UpdateButtonEnableStateAndPriceLAbel();
+    }
+
+    public void SetAddButtonEnabled(bool enabled)
+    {
+        GetNode<Button>("HBoxContainer/AddButton").Disabled = !enabled;
+    }
+    public void SetRemoveButtonEnabled(bool enabled)
+    {
+        GetNode<Button>("HBoxContainer/RemoveButton").Disabled = !enabled;
+    }
+
+    public void Sell()
+    {
+        currentAmount = 0;
+        currentPrice = 0;
     }
 }

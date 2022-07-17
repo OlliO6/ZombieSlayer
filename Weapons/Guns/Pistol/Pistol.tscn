@@ -107,8 +107,8 @@ tracks/3/keys = {
 script = ExtResource( 2 )
 bulletScene = ExtResource( 3 )
 bulletSpeedRange = Vector2( 90, 100 )
-bulletSpread = 5.0
-bulletDamage = 3
+bulletSpread = 3.0
+bulletDamage = 5
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

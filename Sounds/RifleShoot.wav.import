@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/RifleShoot.wav-e6dd037a3569cfd52116cd23db2c17f2.sample"
+
+[deps]
+
+source_file="res://Sounds/RifleShoot.wav"
+dest_files=[ "res://.import/RifleShoot.wav-e6dd037a3569cfd52116cd23db2c17f2.sample" ]
+
+[params]
+
+force/8_bit=true
+force/mono=true
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

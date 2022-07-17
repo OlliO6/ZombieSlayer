@@ -104,3 +104,4 @@ visible = false
 [connection signal="pressed" from="CanvasLayer/ShopMenu/MarginContainer/Panel/BackButton" to="." method="CloseMenu"]
 
 [editable path="CanvasLayer/ShopMenu"]
+[editable path="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/RiflePickUp"]

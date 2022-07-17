@@ -82,6 +82,7 @@ public class Dice : Node2D
     private void SpawnRandomScene()
     {
         RandomNumberGenerator rng = new();
+        rng.Randomize();
 
         int scene = rng.RandiRange(1, 6);
 

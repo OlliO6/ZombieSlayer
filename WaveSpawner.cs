@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Additions;
 
 public class WaveSpawner : Node
 {
@@ -11,36 +12,43 @@ public class WaveSpawner : Node
 
     [Signal] public delegate void OnWaveStarted();
 
+    #region WaveTimer Reference
+
+    private Timer storerForWaveTimer;
+    public Timer WaveTimer => this.LazyGetNode(ref storerForWaveTimer, "WaveTimer");
+
+    #endregion
+
+    #region SpawnTimer Reference
+
+    private Timer storerForSpawnTimer;
+    public Timer SpawnTimer => this.LazyGetNode(ref storerForSpawnTimer, "SpawnTimer");
+
+    #endregion
+
     public int currentWave;
 
-    public override void _Ready()
-    {
-        StartWave();
-    }
+    private RandomNumberGenerator rng = new();
 
-    private async void StartWave()
+    private int enemyCount;
+
+    [TroughtSignal]
+    private void StartWave()
     {
-        RandomNumberGenerator rng = new();
         rng.Randomize();
 
         currentWave++;
         EmitSignal(nameof(OnWaveStarted));
 
-        await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
+        enemyCount = Mathf.RoundToInt(Mathf.Pow(currentWave * enemyCountMultiplier, enemyCountPower));
 
-        int enemyCount = Mathf.RoundToInt(Mathf.Pow(currentWave * enemyCountMultiplier, enemyCountPower));
-
-        SpawnEnemy(enemyCount, rng);
-
-        await ToSignal(GetTree().CreateTimer((enemyCount * rng.RandfRange(waveIntervalMultiplierRange.x, waveIntervalMultiplierRange.y) + minWaveInterval)), "timeout");
-
-        StartWave();
+        WaveTimer.Start((enemyCount * rng.RandfRange(waveIntervalMultiplierRange.x, waveIntervalMultiplierRange.y) + minWaveInterval));
+        SpawnTimer.Start(rng.RandfRange(spawnIntervalRange.x, spawnIntervalRange.y));
     }
 
-    private async void SpawnEnemy(int enemyCount, RandomNumberGenerator rng)
+    [TroughtSignal]
+    private void SpawnEnemy()
     {
-        if (enemyCount <= 0) return;
-
         enemyCount--;
 
         Node2D enemy = enemies[rng.RandiRange(0, enemies.Length - 1)].Instance<Node2D>();
@@ -50,8 +58,8 @@ public class WaveSpawner : Node
 
         enemy.GlobalPosition = spawnPositions.GetChild<Node2D>(rng.RandiRange(0, spawnPositions.GetChildCount() - 1)).GlobalPosition;
 
-        await ToSignal(GetTree().CreateTimer(rng.RandfRange(spawnIntervalRange.x, spawnIntervalRange.y)), "timeout");
+        if (enemyCount <= 0) return;
 
-        SpawnEnemy(enemyCount, rng);
+        SpawnTimer.Start(rng.RandfRange(spawnIntervalRange.x, spawnIntervalRange.y));
     }
 }

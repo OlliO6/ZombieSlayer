@@ -6,6 +6,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 {
     public static Player currentPlayer;
     [Export] public float movementSpeed, invincibilityTime;
+    [Export] public int extraDamage = 0;
     [Export] public int startCoins = 0;
 
     [Export] public int MaxHealth { get; set; }
@@ -102,14 +103,16 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         EmitSignal(nameof(OnInvincibilityStarted));
         Sprite.SetShaderParam("blinking", true);
 
-        ToSignal(GetTree().CreateTimer(invincibilityTime), Constants.timeout).OnCompleted(() =>
-        {
-            isInvincible = false;
-            EmitSignal(nameof(OnInvincibilityEnded));
-            Sprite.SetShaderParam("blinking", false);
-        });
-
         CurrentHealth -= amount;
+
+        GetNode<Timer>("InvincibilityTimer").Start(invincibilityTime);
+    }
+    [TroughtSignal]
+    private void OnInvincibilityTimeEnded()
+    {
+        isInvincible = false;
+        EmitSignal(nameof(OnInvincibilityEnded));
+        Sprite.SetShaderParam("blinking", false);
     }
 
     public void Die()
@@ -117,8 +120,19 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         SceneManager.LoadMenu();
     }
 
+    public void ChangeWeapon(PackedScene weaponScene)
+    {
+        Node weaponHolder = GetNode("WeaponPivot");
+        weaponHolder.GetChild(0)?.QueueFree();
+
+        weaponHolder.AddChild(weaponScene.Instance());
+    }
     public void AddDice(Dice dice)
     {
         GetNode("DiceHolder").AddChild(dice);
+    }
+    public bool HasDice()
+    {
+        return GetNode("DiceHolder").GetChildCount() > 0;
     }
 }
