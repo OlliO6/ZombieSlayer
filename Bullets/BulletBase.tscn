@@ -102,6 +102,7 @@ hue_variation = -0.06
 hue_variation_random = 1.0
 
 [node name="Bullet" type="Area2D"]
+z_index = 1
 collision_layer = 24
 script = ExtResource( 1 )
 

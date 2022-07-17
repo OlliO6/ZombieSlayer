@@ -3,26 +3,32 @@ using System;
 using Additions;
 
 [Tool]
-public class HealthDisplay : Control
+public class IngameUI : Control
 {
     [Export] private PackedScene heartScene;
-    [Export] private NodePath heartContainer;
+    [Export] private NodePath heartContainer, coinLabel;
 
     [Export] public int maxHealth;
     [Export] public int currentHealth;
 
     [Export]
-    private bool Updade { get => false; set => CallDeferred(nameof(UpdateDisplay)); }
+    private bool Updade { get => false; set => CallDeferred(nameof(UpdateHealthDisplay)); }
 
     [TroughtSignal]
     private void OnPlayerHealthChanged()
     {
         maxHealth = GetOwner<Player>().MaxHealth;
         currentHealth = GetOwner<Player>().CurrentHealth;
-        UpdateDisplay();
+        UpdateHealthDisplay();
     }
 
-    private void UpdateDisplay()
+    [TroughtSignal]
+    private void OnCoinsAmountChanged(int amount)
+    {
+        GetNode<Label>(coinLabel).Text = amount.ToString();
+    }
+
+    private void UpdateHealthDisplay()
     {
         Control container = GetNode<Control>(heartContainer);
 

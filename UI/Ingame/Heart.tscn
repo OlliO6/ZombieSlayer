@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://UI/HealthDisplay/Heart.png" type="Texture" id=1]
+[ext_resource path="res://UI/Ingame/Heart.png" type="Texture" id=1]
 [ext_resource path="res://UI/TiledTexture.shader" type="Shader" id=2]
 
 [sub_resource type="ShaderMaterial" id=1]

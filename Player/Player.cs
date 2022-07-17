@@ -4,7 +4,9 @@ using System;
 
 public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 {
+    public static Player currentPlayer;
     [Export] public float movementSpeed, invincibilityTime;
+    [Export] public int startCoins = 0;
 
     [Export] public int MaxHealth { get; set; }
 
@@ -21,7 +23,18 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     }
     private int storerForCurrentHealth;
 
+    public int Coins
+    {
+        get => coins;
+        set
+        {
+            coins = value;
+            EmitSignal(nameof(OnCoinsAmountChanged), value);
+        }
+    }
+    private int coins;
 
+    [Signal] public delegate void OnCoinsAmountChanged(int amount);
     [Signal] public delegate void OnInvincibilityStarted();
     [Signal] public delegate void OnInvincibilityEnded();
     [Signal] public delegate void OnHealthChanged();
@@ -46,6 +59,8 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     public override void _Ready()
     {
         CurrentHealth = MaxHealth;
+        currentPlayer = this;
+        Coins = startCoins;
     }
 
     public override void _PhysicsProcess(float delta)
@@ -99,6 +114,6 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     public void Die()
     {
-        QueueFree();
+        SceneManager.LoadMenu();
     }
 }

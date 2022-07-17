@@ -8,6 +8,7 @@ public class InputManager : Node
     public override void _Ready()
     {
         instance = this;
+        GD.Randomize();
     }
 
     public static Vector2 GetMovementInput() => instance._GetMovementInput();

@@ -5,7 +5,7 @@
 [ext_resource path="res://Weapons/Guns/Pistol/Pistol.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/WeaponPivot.cs" type="Script" id=4]
 [ext_resource path="res://BasicStuff/HurtArea.tscn" type="PackedScene" id=5]
-[ext_resource path="res://UI/HealthDisplay/HealthDisplay.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/Ingame/IngameUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/PauseMenu/PauseMenu.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -89,14 +89,14 @@ nodes/MovementState/node = SubResource( 6 )
 nodes/MovementState/position = Vector2( 120, 140 )
 nodes/RunSpeed/node = SubResource( 7 )
 nodes/RunSpeed/position = Vector2( -140, 260 )
-node_connections = [ "output", 0, "MovementState", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed", "RunSpeed", 0, "Animation 2" ]
+node_connections = [ "output", 0, "MovementState", "RunSpeed", 0, "Animation 2", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed" ]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
 script = ExtResource( 1 )
 MaxHealth = 4
 movementSpeed = 35.0
-invincibilityTime = 1.0
+invincibilityTime = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -108,6 +108,7 @@ offset = Vector2( 0, -5 )
 hframes = 2
 
 [node name="HurtArea" parent="." instance=ExtResource( 5 )]
+collision_layer = 4
 collision_mask = 10
 
 [node name="CollisionShape2D" parent="HurtArea" index="0"]
@@ -137,17 +138,15 @@ current = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
-editor_draw_screen = false
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="HealthDisplay" parent="UI" instance=ExtResource( 6 )]
-maxHealth = 4
-currentHealth = 4
+[node name="UI" parent="UI" instance=ExtResource( 6 )]
 
 [node name="PauseMenu" parent="UI" instance=ExtResource( 7 )]
 
-[connection signal="OnHealthChanged" from="." to="UI/HealthDisplay" method="OnPlayerHealthChanged"]
+[connection signal="OnCoinsAmountChanged" from="." to="UI/UI" method="OnCoinsAmountChanged"]
+[connection signal="OnHealthChanged" from="." to="UI/UI" method="OnPlayerHealthChanged"]
 [connection signal="OnInvincibilityEnded" from="." to="HurtArea/CollisionShape2D" method="set_disabled" flags=3 binds= [ false ]]
 [connection signal="OnInvincibilityStarted" from="." to="HurtArea/CollisionShape2D" method="set_disabled" flags=3 binds= [ true ]]
 

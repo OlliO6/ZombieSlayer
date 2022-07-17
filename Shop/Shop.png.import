@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Heart.png-c03e9116f0afe2f2e77790d755bf35d5.stex"
+path="res://.import/Shop.png-c27d56c84f578ec7e84766fd85f2c1b3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/HealthDisplay/Heart.png"
-dest_files=[ "res://.import/Heart.png-c03e9116f0afe2f2e77790d755bf35d5.stex" ]
+source_file="res://Shop/Shop.png"
+dest_files=[ "res://.import/Shop.png-c27d56c84f578ec7e84766fd85f2c1b3.stex" ]
 
 [params]
 

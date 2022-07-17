@@ -23,6 +23,8 @@ public class PauseMenu : Control
 
     private void Pause()
     {
+        if (GetTree().Paused) return;
+
         paused = true;
         GetTree().Paused = true;
         Visible = true;

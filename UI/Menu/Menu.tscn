@@ -1,14 +1,59 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/Menu/Menu.cs" type="Script" id=2]
 [ext_resource path="res://Game.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/OptionsMenu/OptionsMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Music/MenuSong.wav" type="AudioStream" id=5]
+[ext_resource path="res://Weapons/Guns/Pistol/Pistol.png" type="Texture" id=6]
+[ext_resource path="res://Player/Player.png" type="Texture" id=7]
+[ext_resource path="res://Enemies/Zombie/Zombie.png" type="Texture" id=8]
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource( 2 )
 gameScene = ExtResource( 3 )
+
+[node name="Dekoration" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Sprite" type="Sprite" parent="Dekoration"]
+position = Vector2( 49, 74 )
+texture = ExtResource( 7 )
+hframes = 2
+
+[node name="Sprite" type="Sprite" parent="Dekoration/Sprite"]
+position = Vector2( 6, -3 )
+texture = ExtResource( 6 )
+hframes = 3
+
+[node name="Sprite2" type="Sprite" parent="Dekoration"]
+position = Vector2( 75, 46 )
+texture = ExtResource( 8 )
+hframes = 2
+vframes = 3
+
+[node name="Sprite3" type="Sprite" parent="Dekoration"]
+position = Vector2( 197, 71 )
+texture = ExtResource( 8 )
+hframes = 2
+vframes = 3
+frame = 5
+
+[node name="Sprite4" type="Sprite" parent="Dekoration"]
+position = Vector2( 205, 53 )
+texture = ExtResource( 8 )
+hframes = 2
+vframes = 3
+frame = 5
+
+[node name="Sprite5" type="Sprite" parent="Dekoration"]
+position = Vector2( 186, 58 )
+texture = ExtResource( 8 )
+flip_h = true
+hframes = 2
+vframes = 3
+frame = 5
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
