@@ -63,7 +63,6 @@ bus = "Music"
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 128, 85 )
-startCoins = 200
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
