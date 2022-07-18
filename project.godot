@@ -12,8 +12,6 @@ config_version=4
 
 config/name="ZombieSlayer"
 run/main_scene="res://UI/Menu/Menu.tscn"
-config/icon="res://icon.png"
-config/windows_native_icon="res://icon.ico"
 
 [audio]
 
@@ -130,4 +128,3 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 environment/default_clear_color=Color( 0.243137, 0.286275, 0.219608, 1 )
-environment/default_environment="res://default_env.tres"

@@ -106,7 +106,7 @@ tracks/3/keys = {
 [node name="Rifle" type="Node2D"]
 script = ExtResource( 2 )
 bulletScene = ExtResource( 3 )
-bulletSpeedRange = Vector2( 80, 90 )
+bulletSpeedRange = Vector2( 130, 140 )
 bulletSpread = 6.0
 bulletDamage = 3
 

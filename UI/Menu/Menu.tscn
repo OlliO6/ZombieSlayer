@@ -2,7 +2,7 @@
 
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/Menu/Menu.cs" type="Script" id=2]
-[ext_resource path="res://Game.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game/Game.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/OptionsMenu/OptionsMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Music/MenuSong.wav" type="AudioStream" id=5]
 [ext_resource path="res://Weapons/Guns/Pistol/Pistol.png" type="Texture" id=6]
@@ -12,6 +12,14 @@
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource( 2 )
 gameScene = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 11.0
+margin_right = 184.0
+margin_bottom = 25.0
+theme = ExtResource( 1 )
+text = "Zombie Slayer"
 
 [node name="Dekoration" type="Control" parent="."]
 margin_right = 40.0
@@ -100,14 +108,6 @@ text = "Quit"
 stream = ExtResource( 5 )
 autoplay = true
 bus = "Music"
-
-[node name="Label" type="Label" parent="."]
-margin_left = 80.0
-margin_top = 11.0
-margin_right = 184.0
-margin_bottom = 25.0
-theme = ExtResource( 1 )
-text = "Zombie Slayer"
 
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/PlayButton" to="." method="OnPlayPressed"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/OptionsButton" to="Control/OptionsMenu" method="OnOptionsPressed"]

@@ -34,6 +34,7 @@ public class SceneManager : Node
         await ToSignal(AnimationPlayer, "animation_finished");
 
         GetTree().ChangeSceneTo(scene);
+
         AnimationPlayer.Play("FadeEnd");
         GetTree().Paused = false;
     }

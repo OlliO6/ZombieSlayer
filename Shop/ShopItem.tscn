@@ -11,6 +11,7 @@ margin_bottom = 58.0
 rect_min_size = Vector2( 100, 16 )
 script = ExtResource( 2 )
 sceneToBuy = ExtResource( 3 )
+priceMultiplier = 1.1
 
 [node name="Background" type="Button" parent="."]
 margin_right = 100.0

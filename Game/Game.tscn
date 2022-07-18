@@ -4,7 +4,7 @@
 [ext_resource path="res://Tileset/GrassVariant.png" type="Texture" id=2]
 [ext_resource path="res://Music/GameSong.wav" type="AudioStream" id=5]
 [ext_resource path="res://Shop/Shop.tscn" type="PackedScene" id=7]
-[ext_resource path="res://WaveSpawner.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Game/WaveSpawner.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -150,3 +150,5 @@ position = Vector2( 119, 246 )
 
 [node name="Node2D24" type="Node2D" parent="SpawnPositions"]
 position = Vector2( -26, 44 )
+
+[connection signal="OnCoinsAmountChanged" from="Player" to="Player/UI/UI" method="OnCoinsAmountChanged"]

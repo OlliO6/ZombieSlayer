@@ -105,3 +105,4 @@ visible = false
 
 [editable path="CanvasLayer/ShopMenu"]
 [editable path="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/RiflePickUp"]
+[editable path="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/ShopItem"]

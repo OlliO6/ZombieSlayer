@@ -40,7 +40,9 @@ public class Shop : Area2D
     {
         GetTree().Paused = true;
 
-        GetNode<CanvasItem>(shopMenu).Visible = true;
+        ShopMenu shop = GetNode<ShopMenu>(shopMenu);
+        shop.Visible = true;
+        shop.OnUpdateRatio();
 
         EmitSignal(nameof(OnMenuOpen));
     }

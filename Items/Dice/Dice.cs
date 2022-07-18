@@ -2,7 +2,7 @@ using Godot;
 using System;
 using Additions;
 
-public class Dice : Node2D
+public class Dice : KinematicBody2D
 {
     [Export] public PackedScene scene1, scene2, scene3, scene4, scene5, scene6;
 
@@ -54,7 +54,7 @@ public class Dice : Node2D
 
         launchVelocity.z += launchGravity * delta;
 
-        Position += new Vector2(launchVelocity.x, launchVelocity.y) * delta * rollSpeed;
+        MoveAndSlide(new Vector2(launchVelocity.x, launchVelocity.y) * rollSpeed);
 
         AnimatedSprite.Position += new Vector2(0, launchVelocity.z) * delta;
         AnimatedSprite.SpeedScale = rollSpeed;

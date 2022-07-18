@@ -15,7 +15,7 @@ public class ShopMenu : Control
     }
 
     [TroughtSignal]
-    private void OnUpdateRatio()
+    public void OnUpdateRatio()
     {
         List<ShopItem> items = GetNode(shopItems).GetChildren().OfType<ShopItem>().ToList();
 

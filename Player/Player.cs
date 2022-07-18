@@ -8,6 +8,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     [Export] public float movementSpeed, invincibilityTime;
     [Export] public int extraDamage = 0;
     [Export] public int startCoins = 0;
+    [Export] private float startMagnetSize = 4;
 
     [Export] public int MaxHealth { get; set; }
 
@@ -35,6 +36,8 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     }
     private int coins;
 
+    public float MagnetAreaSize { get => MagnetArea.Size; set => MagnetArea.Size = value; }
+
     [Signal] public delegate void OnCoinsAmountChanged(int amount);
     [Signal] public delegate void OnInvincibilityStarted();
     [Signal] public delegate void OnInvincibilityEnded();
@@ -55,13 +58,21 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     #endregion
 
+    #region MagnetArea Reference
+
+    private MagnetArea storerForMagnetArea;
+    public MagnetArea MagnetArea => this.LazyGetNode(ref storerForMagnetArea, "MagnetArea");
+
+    #endregion
+
     public bool isInvincible;
 
     public override void _Ready()
     {
-        CurrentHealth = MaxHealth;
         currentPlayer = this;
+        CurrentHealth = MaxHealth;
         Coins = startCoins;
+        MagnetAreaSize = startMagnetSize;
     }
 
     public override void _PhysicsProcess(float delta)
