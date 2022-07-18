@@ -1,9 +1,0 @@
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\GMTK2022\.mono\temp\obj\ExportRelease\GMTK2022.csproj.AssemblyReference.cache
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\GMTK2022\.mono\temp\obj\ExportRelease\GMTK2022.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\GMTK2022\.mono\temp\obj\ExportRelease\GMTK2022.AssemblyInfoInputs.cache
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\GMTK2022\.mono\temp\obj\ExportRelease\GMTK2022.AssemblyInfo.cs
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\GMTK2022\.mono\temp\obj\ExportRelease\GMTK2022.csproj.CoreCompileInputs.cache
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\GMTK2022\.mono\temp\bin\ExportRelease\GMTK2022.dll
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\GMTK2022\.mono\temp\bin\ExportRelease\GMTK2022.pdb
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\GMTK2022\.mono\temp\obj\ExportRelease\GMTK2022.dll
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\GMTK2022\.mono\temp\obj\ExportRelease\GMTK2022.pdb
