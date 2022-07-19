@@ -1,0 +1,9 @@
+C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\bin\ExportDebug\ZombieSlayer.dll
+C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\bin\ExportDebug\ZombieSlayer.pdb
+C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\obj\ExportDebug\ZombieSlayer.csproj.AssemblyReference.cache
+C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\obj\ExportDebug\ZombieSlayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\obj\ExportDebug\ZombieSlayer.AssemblyInfoInputs.cache
+C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\obj\ExportDebug\ZombieSlayer.AssemblyInfo.cs
+C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\obj\ExportDebug\ZombieSlayer.csproj.CoreCompileInputs.cache
+C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\obj\ExportDebug\ZombieSlayer.dll
+C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\obj\ExportDebug\ZombieSlayer.pdb

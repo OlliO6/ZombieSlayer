@@ -28,6 +28,8 @@ public class MagnetArea : Area2D
     {
         foreach (Area2D item in GetOverlappingAreas())
         {
+            if (item is not PickupBase pickup || !pickup.IsCollectable()) continue;
+
             Vector2 dir = (GlobalPosition - item.GlobalPosition).Normalized();
 
             item.GlobalPosition += dir * (attractionSpeed + Size * moreAttractionSpeedPerSize) * delta;

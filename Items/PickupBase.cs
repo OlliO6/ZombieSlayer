@@ -11,13 +11,13 @@ public class PickupBase : Area2D
     {
         if (Player.currentPlayer is null) return;
 
+        if (!IsCollectable()) return;
+
         Collect();
 
         EmitSignal(nameof(OnCollected));
     }
 
-    public virtual void Collect()
-    {
-
-    }
+    public virtual void Collect() { }
+    public virtual bool IsCollectable() => true;
 }

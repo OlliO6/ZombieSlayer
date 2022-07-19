@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class ShopMenu : Control
-{
+{ // TODO Add some rabatt for the buoght stuff that the dice didnt rolled, to do that add some stuff to the dice script
     [Export] private PackedScene diceScene;
     [Export] private NodePath ratioLabel, priceLabel, buyDiceButton, backButton;
     [Export] private NodePath shopItems;
@@ -23,6 +23,7 @@ public class ShopMenu : Control
         int price = 0;
         foreach (var item in items)
         {
+            item.UpdateShopItem();
             ratio += item.currentAmount;
             price += item.currentPrice;
         }

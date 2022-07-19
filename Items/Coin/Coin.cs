@@ -2,13 +2,11 @@ using Godot;
 using System;
 using Additions;
 
-public class Coin : Area2D
+public class Coin : PickupBase
 {
     [Export] public int amount;
     [Export] private Vector3 minLaunchVelocity, maxLaunchVelocity;
     [Export] private float launchGravity = 9.8f;
-
-    [Signal] public delegate void OnCollected();
 
     #region Sprite Reference
 
@@ -20,14 +18,9 @@ public class Coin : Area2D
     private bool isLaunching;
     private Vector3 launchVelocity;
 
-    [TroughtSignal]
-    private void OnAreaEntered(Area2D area)
+    public override void Collect()
     {
-        if (Player.currentPlayer is null) return;
-
         Player.currentPlayer.Coins += amount;
-
-        EmitSignal(nameof(OnCollected));
     }
 
     public void Launch()

@@ -27,10 +27,10 @@ public class ShopItem : Control
         Connect(nameof(OnCurrentAmountChanged), Owner, "OnUpdateRatio");
         priceLabel = GetNode<Label>("Label");
 
-        UpdateButtonEnableStateAndPriceLAbel();
+        UpdateShopItem();
     }
 
-    private void UpdateButtonEnableStateAndPriceLAbel()
+    public void UpdateShopItem()
     {
         priceLabel.Text = GetPrice().ToString();
 
@@ -49,7 +49,7 @@ public class ShopItem : Control
         buyCount++;
 
         EmitSignal(nameof(OnCurrentAmountChanged));
-        UpdateButtonEnableStateAndPriceLAbel();
+        UpdateShopItem();
     }
     [TroughtSignal]
     private void OnRemoveButtonPressed()
@@ -59,7 +59,7 @@ public class ShopItem : Control
         currentPrice -= GetPrice();
 
         EmitSignal(nameof(OnCurrentAmountChanged));
-        UpdateButtonEnableStateAndPriceLAbel();
+        UpdateShopItem();
     }
 
     public void SetAddButtonEnabled(bool enabled)
