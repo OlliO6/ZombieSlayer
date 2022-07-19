@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tileset/GrassVariant.png" type="Texture" id=2]
-[ext_resource path="res://Items/Health/HealthPickup.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Music/GameSong.wav" type="AudioStream" id=5]
 [ext_resource path="res://Shop/Shop.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Game/WaveSpawner.tscn" type="PackedScene" id=8]
@@ -152,11 +151,4 @@ position = Vector2( 119, 246 )
 [node name="Node2D24" type="Node2D" parent="SpawnPositions"]
 position = Vector2( -26, 44 )
 
-[node name="HealthPickup" parent="." instance=ExtResource( 3 )]
-position = Vector2( 21, 89 )
-
-[node name="HealthPickup2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 59, 58 )
-
-[node name="HealthPickup3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 90, 86 )
+[connection signal="OnCoinsAmountChanged" from="Player" to="Player/UI/UI" method="OnCoinsAmountChanged"]
