@@ -7,6 +7,6 @@ public class SpeedPickUp : PickupBase
 
     public override void Collect()
     {
-        Player.currentPlayer.movementSpeed += amount;
+        Player.currentPlayer.AddUpgrade(new MovementSpeedUpgrade(amount));
     }
 }

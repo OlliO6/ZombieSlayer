@@ -144,6 +144,8 @@ invincibilityTime = 2.0
 startCoins = 500
 startMagnetSize = 5.0
 
+[node name="Upgrades" type="Node" parent="."]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
@@ -200,15 +202,15 @@ smoothing_enabled = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="UI" parent="UI" instance=ExtResource( 6 )]
+[node name="IngameUI" parent="UI" instance=ExtResource( 6 )]
 
 [node name="PauseMenu" parent="UI" instance=ExtResource( 7 )]
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="OnCoinsAmountChanged" from="." to="UI/UI" method="OnCoinsAmountChanged"]
-[connection signal="OnHealthChanged" from="." to="UI/UI" method="OnPlayerHealthChanged"]
+[connection signal="OnCoinsAmountChanged" from="." to="UI/IngameUI" method="OnCoinsAmountChanged"]
+[connection signal="OnHealthChanged" from="." to="UI/IngameUI" method="OnPlayerHealthChanged"]
 [connection signal="OnInvincibilityEnded" from="." to="HurtArea/CollisionShape2D" method="set_disabled" flags=3 binds= [ false ]]
 [connection signal="OnInvincibilityStarted" from="." to="HurtArea/CollisionShape2D" method="set_disabled" flags=3 binds= [ true ]]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="OnInvincibilityTimeEnded"]

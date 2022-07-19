@@ -1,6 +1,7 @@
 using Additions;
 using Godot;
-using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 {
@@ -67,9 +68,13 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     public bool isInvincible;
 
-    public override void _Ready()
+    public override void _EnterTree()
     {
         currentPlayer = this;
+    }
+
+    public override void _Ready()
+    {
         CurrentHealth = MaxHealth;
         Coins = startCoins;
         MagnetAreaSize = startMagnetSize;
@@ -146,4 +151,9 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     {
         return GetNode("DiceHolder").GetChildCount() > 0;
     }
+    public void AddUpgrade(Upgrade upgrade)
+    {
+        GetNode("Upgrades").AddChild(upgrade);
+    }
+    public IEnumerable<Upgrade> GetUpgrades() => GetNode("Upgrades").GetChildren<Upgrade>();
 }

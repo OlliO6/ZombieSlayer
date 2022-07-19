@@ -7,6 +7,6 @@ public class DamagePickUp : PickupBase
 
     public override void Collect()
     {
-        Player.currentPlayer.extraDamage += amount;
+        Player.currentPlayer.AddUpgrade(new DamageUpgrade(amount));
     }
 }
