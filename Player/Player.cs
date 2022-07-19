@@ -136,13 +136,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         SceneManager.LoadMenu();
     }
 
-    public void ChangeWeapon(PackedScene weaponScene)
-    {
-        Node weaponHolder = GetNode("WeaponPivot");
-        weaponHolder.GetChild(0)?.QueueFree();
 
-        weaponHolder.AddChild(weaponScene.Instance());
-    }
     public void AddDice(Dice dice)
     {
         GetNode("DiceHolder").AddChild(dice);
@@ -151,9 +145,16 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     {
         return GetNode("DiceHolder").GetChildCount() > 0;
     }
+
     public void AddUpgrade(Upgrade upgrade)
     {
         GetNode("Upgrades").AddChild(upgrade);
     }
     public IEnumerable<Upgrade> GetUpgrades() => GetNode("Upgrades").GetChildren<Upgrade>();
+
+    public void AddWeapon(WeaponBase weapon)
+    {
+        GetNode<WeaponSwitcher>("WeaponPivot/WeaponSwitcher").AddWeapon(weapon);
+    }
+    public IEnumerable<WeaponBase> GetWeapons() => GetNode("WeaponPivot/WeaponSwitcher").GetChildren<WeaponBase>();
 }

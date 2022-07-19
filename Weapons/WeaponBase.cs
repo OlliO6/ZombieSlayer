@@ -2,8 +2,10 @@ using Godot;
 using System;
 using Additions;
 
-public class WeaponBase : Node
+public class WeaponBase : Node2D
 {
+    [Export(PropertyHint.File, "*tscn,*scn")] public string weaponPickup;
+
     #region AnimationPlayer Reference
 
     private AnimationPlayer storerForAnimationPlayer;
@@ -11,11 +13,23 @@ public class WeaponBase : Node
 
     #endregion
 
+    public bool disabled;
     protected bool attackInput;
+
+    public virtual void Disable()
+    {
+        Visible = false;
+        disabled = true;
+    }
+    public virtual void Enable()
+    {
+        Visible = true;
+        disabled = false;
+    }
 
     public override void _Input(InputEvent @event)
     {
-        if (!@event.IsAction("Attack")) return;
+        if (disabled || !@event.IsAction("Attack")) return;
 
         if (@event.IsPressed())
         {
@@ -29,7 +43,7 @@ public class WeaponBase : Node
 
     public override void _Process(float delta)
     {
-        if (attackInput) AttackInputProcess();
+        if (attackInput && !disabled) AttackInputProcess();
     }
 
     protected virtual void AttackInputStarted() { }

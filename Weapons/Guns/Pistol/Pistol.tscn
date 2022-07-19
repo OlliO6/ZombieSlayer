@@ -105,19 +105,21 @@ tracks/3/keys = {
 
 [node name="Pistol" type="Node2D"]
 script = ExtResource( 2 )
+weaponPickup = "res://Items/WeaponPickUps/PistolPickup.tscn"
 bulletScene = ExtResource( 3 )
 bulletSpeedRange = Vector2( 90, 100 )
 bulletSpread = 3.0
 bulletDamage = 5
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 2 )
 texture = ExtResource( 1 )
 offset = Vector2( 6, -2 )
 hframes = 3
 frame = 2
 
 [node name="MuzzleFlash" type="Particles2D" parent="."]
-position = Vector2( 10, -3 )
+position = Vector2( 10, -1 )
 emitting = false
 amount = 4
 lifetime = 0.2
@@ -128,9 +130,10 @@ fract_delta = false
 process_material = SubResource( 5 )
 
 [node name="InstantiatePoint" type="Position2D" parent="."]
-position = Vector2( 11, -3 )
+position = Vector2( 11, -1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
 anims/Idle = SubResource( 1 )
 anims/Shoot = SubResource( 2 )
 next/Shoot = "Idle"

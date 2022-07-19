@@ -20,6 +20,11 @@ public class Dice : KinematicBody2D
 
     #endregion
 
+    public override void _Ready()
+    {
+        AnimatedSprite.Frame = Mathf.RoundToInt((float)GD.RandRange(0, AnimatedSprite.Frames.GetFrameCount(AnimatedSprite.Animation) - 1));
+    }
+
     public override void _UnhandledInput(InputEvent @event)
     {
         if (!isRolling && !done && @event.IsActionPressed("Interact"))

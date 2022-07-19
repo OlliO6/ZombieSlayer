@@ -1,11 +1,11 @@
 using Godot;
 using System;
 
-public class WeaponPickUp : PickupBase
+public class WeaponPickUp : InteractionPickupBase
 {
     [Export] private PackedScene weaponScene;
     public override void Collect()
     {
-        Player.currentPlayer.ChangeWeapon(weaponScene);
+        Player.currentPlayer.AddWeapon(weaponScene.Instance<WeaponBase>());
     }
 }

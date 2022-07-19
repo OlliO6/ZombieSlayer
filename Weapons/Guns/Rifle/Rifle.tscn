@@ -105,6 +105,7 @@ tracks/3/keys = {
 
 [node name="Rifle" type="Node2D"]
 script = ExtResource( 2 )
+weaponPickup = "res://Items/WeaponPickUps/RiflePickup.tscn"
 bulletScene = ExtResource( 3 )
 bulletSpeedRange = Vector2( 130, 140 )
 bulletSpread = 6.0
@@ -131,6 +132,7 @@ process_material = SubResource( 5 )
 position = Vector2( 12, -1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
 anims/Idle = SubResource( 1 )
 anims/Shoot = SubResource( 2 )
 next/Shoot = "Idle"

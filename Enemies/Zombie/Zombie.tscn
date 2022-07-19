@@ -157,7 +157,7 @@ nodes/Damage/position = Vector2( 140, 160 )
 nodes/State/node = SubResource( 13 )
 nodes/State/position = Vector2( -100, 40 )
 nodes/output/position = Vector2( 400, 160 )
-node_connections = [ "output", 0, "Damage", "Damage", 0, "State", "Damage", 1, "Animation 3", "State", 0, "Animation", "State", 1, "Animation 2", "State", 2, "Animation 4" ]
+node_connections = [ "output", 0, "Damage", "State", 0, "Animation", "State", 1, "Animation 2", "State", 2, "Animation 4", "Damage", 0, "State", "Damage", 1, "Animation 3" ]
 
 [node name="Zombie" type="KinematicBody2D"]
 collision_layer = 2

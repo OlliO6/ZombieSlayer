@@ -105,5 +105,4 @@ stream = SubResource( 3 )
 bus = "SFX"
 
 [connection signal="OnCollected" from="." to="AnimationPlayer" method="play" binds= [ "Collect" ]]
-[connection signal="OnCollected" from="." to="CollisionShape2D" method="set_disabled" flags=3 binds= [ true ]]
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]

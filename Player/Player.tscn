@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://UI/Ingame/IngameUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/PauseMenu/PauseMenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Player/MagnetArea.cs" type="Script" id=8]
+[ext_resource path="res://Weapons/Guns/Rifle/Rifle.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Player/WeaponSwitcher.cs" type="Script" id=10]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.16228
@@ -133,7 +135,7 @@ nodes/MovementState/node = SubResource( 6 )
 nodes/MovementState/position = Vector2( 120, 140 )
 nodes/RunSpeed/node = SubResource( 7 )
 nodes/RunSpeed/position = Vector2( -140, 260 )
-node_connections = [ "output", 0, "MovementState", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed", "RunSpeed", 0, "Animation 2" ]
+node_connections = [ "output", 0, "MovementState", "RunSpeed", 0, "Animation 2", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed" ]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
@@ -168,7 +170,12 @@ position = Vector2( 0, -5 )
 rotation = -0.0837758
 script = ExtResource( 4 )
 
-[node name="Pistol" parent="WeaponPivot" instance=ExtResource( 3 )]
+[node name="WeaponSwitcher" type="Node2D" parent="WeaponPivot"]
+script = ExtResource( 10 )
+
+[node name="Pistol" parent="WeaponPivot/WeaponSwitcher" instance=ExtResource( 3 )]
+
+[node name="Rifle" parent="WeaponPivot/WeaponSwitcher" instance=ExtResource( 9 )]
 
 [node name="DiceHolder" type="Node2D" parent="."]
 position = Vector2( 0, -5 )
