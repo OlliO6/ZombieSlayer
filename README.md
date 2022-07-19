@@ -2,9 +2,13 @@ Slay zombies get money and upgrade using dices.
 
 Controls:
   -'Left Mouse' to shoot
+  
   -'E' to interact and to throw a dice
+  
   -'WASD' to move
+  
   -'Escape' to pause
+  
 
 
 When you go to the shop you can choose up to 6 upgrades (more upgrades, more money) and then buy a dice that has these upgrades, 
