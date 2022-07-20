@@ -7,10 +7,10 @@
 [ext_resource path="res://Shop/ShopItem.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Weapons/Guns/Rifle/Rifle.png" type="Texture" id=6]
 [ext_resource path="res://UI/TiledTexture.shader" type="Shader" id=7]
-[ext_resource path="res://Items/DamageUp/DamageUp.png" type="Texture" id=8]
-[ext_resource path="res://Items/DamageUp/DamagePickUp.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Items/Magnet/MagnetPickup.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Items/Magnet/Magnet.png" type="Texture" id=11]
+[ext_resource path="res://Player/Upgrades/Icons/DamageUp.png" type="Texture" id=8]
+[ext_resource path="res://Items/UpgradePickups/DamagePickUp.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Items/UpgradePickups/MagnetPickup.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Player/Upgrades/Icons/Magnet.png" type="Texture" id=11]
 [ext_resource path="res://UI/Ingame/Heart.png" type="Texture" id=12]
 [ext_resource path="res://UI/ui_cancel_shortcut.tres" type="ShortCut" id=13]
 
@@ -113,12 +113,12 @@ text = "4"
 
 [node name="AddButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/SpeedUp/HBoxContainer" index="0"]
 margin_right = 12.0
-margin_bottom = 15.0
+margin_bottom = 17.0
 
 [node name="RemoveButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/SpeedUp/HBoxContainer" index="1"]
 margin_left = 16.0
 margin_right = 28.0
-margin_bottom = 15.0
+margin_bottom = 17.0
 
 [node name="Magnet" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 24.0
@@ -139,12 +139,12 @@ text = "4"
 
 [node name="AddButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Magnet/HBoxContainer" index="0"]
 margin_right = 12.0
-margin_bottom = 15.0
+margin_bottom = 17.0
 
 [node name="RemoveButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Magnet/HBoxContainer" index="1"]
 margin_left = 16.0
 margin_right = 28.0
-margin_bottom = 15.0
+margin_bottom = 17.0
 
 [node name="RiflePickUp" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 44.0
@@ -166,12 +166,12 @@ text = "20"
 
 [node name="AddButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/RiflePickUp/HBoxContainer" index="0"]
 margin_right = 12.0
-margin_bottom = 15.0
+margin_bottom = 17.0
 
 [node name="RemoveButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/RiflePickUp/HBoxContainer" index="1"]
 margin_left = 16.0
 margin_right = 28.0
-margin_bottom = 15.0
+margin_bottom = 17.0
 
 [node name="DamageUp" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 64.0
@@ -192,12 +192,12 @@ text = "8"
 
 [node name="AddButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/DamageUp/HBoxContainer" index="0"]
 margin_right = 12.0
-margin_bottom = 15.0
+margin_bottom = 17.0
 
 [node name="RemoveButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/DamageUp/HBoxContainer" index="1"]
 margin_left = 16.0
 margin_right = 28.0
-margin_bottom = 15.0
+margin_bottom = 17.0
 
 [node name="Heart" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 84.0
@@ -214,12 +214,12 @@ texture = ExtResource( 12 )
 
 [node name="AddButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Heart/HBoxContainer" index="0"]
 margin_right = 12.0
-margin_bottom = 15.0
+margin_bottom = 17.0
 
 [node name="RemoveButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Heart/HBoxContainer" index="1"]
 margin_left = 16.0
 margin_right = 28.0
-margin_bottom = 15.0
+margin_bottom = 17.0
 
 [node name="BackButton" type="Button" parent="MarginContainer/Panel"]
 margin_left = 4.0

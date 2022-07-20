@@ -3,13 +3,7 @@ using System;
 
 public class MagnetUpgrade : Upgrade
 {
-    [Export] public float amount = 5;
-
-    public MagnetUpgrade(float amount)
-    {
-        this.amount = amount;
-    }
-    public MagnetUpgrade() { }
+    const float amount = 5;
 
     public override void AddBuff(Player player)
     {
