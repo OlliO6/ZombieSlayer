@@ -1,12 +1,13 @@
 using Godot;
-using System;
+using System.Collections.Generic;
+using System.Linq;
 using Additions;
 
 [Tool]
 public class IngameUI : Control
 {
     [Export] private PackedScene heartScene;
-    [Export] private NodePath heartContainer, coinLabel;
+    [Export] private NodePath heartContainer, coinLabel, weaponFields;
 
     [Export] public int maxHealth;
     [Export] public int currentHealth;
@@ -62,6 +63,38 @@ public class IngameUI : Control
                 }
                 return;
             }
+        }
+    }
+
+    [TroughtSignal]
+    private void OnWeaponChanged(int index)
+    {
+        List<WeaponBase> weapons = Player.currentPlayer.GetWeapons().ToList();
+
+        Control container = GetNode<Control>(weaponFields);
+
+        for (int i = 0; i < container.GetChildCount(); i++)
+        {
+            WeaponField field = container.GetChild<WeaponField>(i);
+
+            if (i >= weapons.Count)
+            {
+                field.Visible = false;
+                continue;
+            }
+
+            WeaponBase weapon = weapons[i];
+
+            field.Visible = true;
+            field.Selected = i == index;
+
+            if (weapon is null)
+            {
+                field.Icon = null;
+                continue;
+            }
+
+            field.Icon = weapon.icon;
         }
     }
 }

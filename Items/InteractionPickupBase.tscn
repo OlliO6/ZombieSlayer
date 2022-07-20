@@ -1,12 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
-[ext_resource path="res://Items/Coin/Coin.png" type="Texture" id=2]
-[ext_resource path="res://Sounds/Pickup_coin.wav" type="AudioStream" id=3]
+[ext_resource path="res://Weapons/Guns/Pistol/PistolIcon.png" type="Texture" id=2]
+[ext_resource path="res://Sounds/WeaponCollect.wav" type="AudioStream" id=3]
 [ext_resource path="res://Items/InteractionPickupBase.cs" type="Script" id=4]
-
-[sub_resource type="AudioStreamRandomPitch" id=3]
-audio_stream = ExtResource( 3 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "Collect"
@@ -21,7 +18,7 @@ tracks/0/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": SubResource( 3 )
+"stream": ExtResource( 3 )
 } ],
 "times": PoolRealArray( 0 )
 }
@@ -111,6 +108,30 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=7]
 resource_name = "ShowText"
@@ -138,7 +159,6 @@ script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
@@ -152,7 +172,7 @@ anims/ShowText = SubResource( 7 )
 shape = SubResource( 8 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = SubResource( 3 )
+stream = ExtResource( 3 )
 bus = "SFX"
 
 [node name="Label" type="Label" parent="."]

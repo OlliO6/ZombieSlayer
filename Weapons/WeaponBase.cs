@@ -5,6 +5,7 @@ using Additions;
 public class WeaponBase : Node2D
 {
     [Export(PropertyHint.File, "*tscn,*scn")] public string weaponPickup;
+    [Export] public Texture icon;
 
     #region AnimationPlayer Reference
 

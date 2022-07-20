@@ -135,7 +135,7 @@ nodes/MovementState/node = SubResource( 6 )
 nodes/MovementState/position = Vector2( 120, 140 )
 nodes/RunSpeed/node = SubResource( 7 )
 nodes/RunSpeed/position = Vector2( -140, 260 )
-node_connections = [ "output", 0, "MovementState", "RunSpeed", 0, "Animation 2", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed" ]
+node_connections = [ "output", 0, "MovementState", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed", "RunSpeed", 0, "Animation 2" ]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
@@ -185,6 +185,7 @@ collision_layer = 0
 collision_mask = 32
 monitorable = false
 script = ExtResource( 8 )
+attractionSpeed = 40.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea"]
 shape = SubResource( 13 )
@@ -220,6 +221,7 @@ one_shot = true
 [connection signal="OnHealthChanged" from="." to="UI/IngameUI" method="OnPlayerHealthChanged"]
 [connection signal="OnInvincibilityEnded" from="." to="HurtArea/CollisionShape2D" method="set_disabled" flags=3 binds= [ false ]]
 [connection signal="OnInvincibilityStarted" from="." to="HurtArea/CollisionShape2D" method="set_disabled" flags=3 binds= [ true ]]
+[connection signal="OnWeaponChanged" from="WeaponPivot/WeaponSwitcher" to="UI/IngameUI" method="OnWeaponChanged"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="OnInvincibilityTimeEnded"]
 
 [editable path="HurtArea"]

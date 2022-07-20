@@ -156,5 +156,29 @@ position = Vector2( -26, 44 )
 [node name="RiflePickup" parent="." instance=ExtResource( 4 )]
 position = Vector2( 102, 62 )
 
+[node name="RiflePickup7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 107, 76 )
+
+[node name="RiflePickup8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 81, 72 )
+
+[node name="RiflePickup9" parent="." instance=ExtResource( 4 )]
+position = Vector2( 93, 85 )
+
+[node name="RiflePickup10" parent="." instance=ExtResource( 4 )]
+position = Vector2( 60, 81 )
+
 [node name="RiflePickup2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 84, 79 )
+position = Vector2( 69, 113 )
+
+[node name="RiflePickup3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 25, 103 )
+
+[node name="RiflePickup4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 46, 101 )
+
+[node name="RiflePickup5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 34, 82 )
+
+[node name="RiflePickup6" parent="." instance=ExtResource( 3 )]
+position = Vector2( 47, 67 )

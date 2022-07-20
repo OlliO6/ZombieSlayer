@@ -2,7 +2,7 @@ using Godot;
 using Additions;
 using System;
 
-public class WeaponSwitcher : Node2D // TODO a visualisation of the weapon inventory
+public class WeaponSwitcher : Node2D
 {
     public int currentIndex;
 
