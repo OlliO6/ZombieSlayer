@@ -78,7 +78,6 @@ script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 4 )
-flip_h = true
 hframes = 1
 
 [node name="AnimationPlayer" parent="." index="1"]

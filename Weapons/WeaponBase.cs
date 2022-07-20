@@ -14,7 +14,12 @@ public class WeaponBase : Node2D
     #endregion
 
     public bool disabled;
-    protected bool attackInput;
+
+    public override void _Ready()
+    {
+        InputManager.instance.Connect(nameof(InputManager.OnAttackInputStarted), this, nameof(OnAttackInputStarted));
+        InputManager.instance.Connect(nameof(InputManager.OnAttackInputEnded), this, nameof(OnAttackInputEnded));
+    }
 
     public virtual void Disable()
     {
@@ -27,23 +32,20 @@ public class WeaponBase : Node2D
         disabled = false;
     }
 
-    public override void _Input(InputEvent @event)
-    {
-        if (disabled || !@event.IsAction("Attack")) return;
-
-        if (@event.IsPressed())
-        {
-            attackInput = true;
-            AttackInputStarted();
-            return;
-        }
-        attackInput = false;
-        AttackInputEnded();
-    }
-
     public override void _Process(float delta)
     {
-        if (attackInput && !disabled) AttackInputProcess();
+        if (InputManager.attackInput && !disabled) AttackInputProcess();
+    }
+
+    [TroughtSignal]
+    private void OnAttackInputStarted()
+    {
+        if (!disabled) AttackInputStarted();
+    }
+    [TroughtSignal]
+    private void OnAttackInputEnded()
+    {
+        if (!disabled) AttackInputEnded();
     }
 
     protected virtual void AttackInputStarted() { }

@@ -2,7 +2,7 @@ using Godot;
 using Additions;
 using System;
 
-public class WeaponSwitcher : Node2D
+public class WeaponSwitcher : Node2D // TODO a visualisation of the weapon inventory
 {
     public int currentIndex;
 
@@ -18,7 +18,7 @@ public class WeaponSwitcher : Node2D
     }
     private WeaponBase _currentWeapon;
 
-    [Signal] public delegate void OnWeaponChanged(WeaponBase to);
+    [Signal] public delegate void OnWeaponChanged(int to);
 
     public override void _Ready()
     {
@@ -67,7 +67,7 @@ public class WeaponSwitcher : Node2D
         {
             if (keyInput.PhysicalScancode is (int)KeyList.Q)
             {
-                DropCurrentWeapon();
+                DropWeapon(CurrentWeapon);
                 return;
             }
 
@@ -114,7 +114,7 @@ public class WeaponSwitcher : Node2D
 
         CurrentWeapon = GetChild<WeaponBase>(currentIndex);
 
-        EmitSignal(nameof(OnWeaponChanged), CurrentWeapon);
+        EmitSignal(nameof(OnWeaponChanged), currentIndex);
     }
 
     public void AddWeapon(WeaponBase weapon)
@@ -123,18 +123,18 @@ public class WeaponSwitcher : Node2D
 
         if (GetChildCount() > 9)
         {
-            DropCurrentWeapon();
+            DropWeapon(CurrentWeapon);
         }
 
         currentIndex = GetChildCount() - 1;
         IndexChanged();
     }
 
-    public void DropCurrentWeapon()
+    public void DropWeapon(WeaponBase weapon)
     {
-        if (CurrentWeapon.weaponPickup is not null)
+        if (weapon.weaponPickup is not null)
         {
-            WeaponPickUp pickup = GD.Load<PackedScene>(CurrentWeapon.weaponPickup).Instance<WeaponPickUp>();
+            WeaponPickUp pickup = GD.Load<PackedScene>(weapon.weaponPickup).Instance<WeaponPickUp>();
 
             GetTree().CurrentScene.AddChild(pickup);
 
@@ -145,8 +145,8 @@ public class WeaponSwitcher : Node2D
 
         if (currentIndex > childCount - 2) currentIndex = childCount - 2;
 
-        RemoveChild(CurrentWeapon);
-        CurrentWeapon.QueueFree();
+        RemoveChild(weapon);
+        weapon.QueueFree();
         IndexChanged();
     }
 }
