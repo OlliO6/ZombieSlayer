@@ -120,13 +120,13 @@ public class WeaponSwitcher : Node2D
     public void AddWeapon(WeaponBase weapon)
     {
         AddChild(weapon);
+        MoveChild(weapon, currentIndex);
 
         if (GetChildCount() > 9)
         {
             DropWeapon(CurrentWeapon);
         }
 
-        currentIndex = GetChildCount() - 1;
         IndexChanged();
     }
 
