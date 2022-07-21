@@ -3,6 +3,8 @@ using System;
 
 public abstract class Upgrade : Node
 {
+    public static string GetDescription() => "";
+
     public override void _EnterTree()
     {
         if (Player.currentPlayer is not null) AddBuff(Player.currentPlayer);

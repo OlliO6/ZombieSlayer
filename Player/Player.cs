@@ -154,11 +154,11 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     public void AddDice(Dice dice)
     {
-        GetNode("DiceHolder").AddChild(dice);
+        GetNode("DiceInventory").AddChild(dice);
     }
     public bool HasDice()
     {
-        return GetNode("DiceHolder").GetChildCount() > 0;
+        return GetNode("DiceInventory").GetChildCount() > 0;
     }
 
     public void AddUpgrade(Upgrade upgrade)

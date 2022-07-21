@@ -10,22 +10,12 @@ margin_right = 18.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 18, 18 )
 texture = ExtResource( 3 )
-draw_center = false
 region_rect = Rect2( 1, 1, 6, 6 )
 patch_margin_left = 1
 patch_margin_top = 1
 patch_margin_right = 1
 patch_margin_bottom = 1
 script = ExtResource( 4 )
-
-[node name="Background" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 1.0
-margin_top = 1.0
-margin_right = -1.0
-margin_bottom = -1.0
-color = Color( 0.192157, 0.266667, 0.290196, 0.501961 )
 
 [node name="Icon" type="TextureRect" parent="."]
 anchor_left = 0.5

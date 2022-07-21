@@ -35,4 +35,9 @@ public class UpgradeDisplay : HBoxContainer
     #endregion
 
     public void SetAmount(int amount) => AmountLabel.Text = amount.ToString();
+
+    public override void _Ready()
+    {
+        HintTooltip = upgradeType.Call("GetDescription") as string;
+    }
 }

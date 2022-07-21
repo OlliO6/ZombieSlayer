@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Weapons/Guns/Rifle/Rifle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player/WeaponSwitcher.cs" type="Script" id=10]
 [ext_resource path="res://UI/Inventory/Inventory.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Items/Dice/Dice.tscn" type="PackedScene" id=12]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.16228
@@ -37,7 +38,7 @@ shader_param/blinkSpeed = 16.0
 extents = Vector2( 3, 4 )
 
 [sub_resource type="CircleShape2D" id=13]
-radius = 3.0
+radius = 1.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "Idle"
@@ -55,7 +56,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("DiceHolder:position")
+tracks/1/path = NodePath("DiceInventory:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -70,7 +71,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=12]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("DiceHolder:position")
+tracks/0/path = NodePath("DiceInventory:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -99,7 +100,7 @@ tracks/0/keys = {
 "values": [ 1, 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("DiceHolder:position")
+tracks/1/path = NodePath("DiceInventory:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -145,9 +146,7 @@ MaxHealth = 4
 movementSpeed = 35.0
 invincibilityTime = 2.0
 startCoins = 500
-startMagnetSize = 3.0
-
-[node name="Upgrades" type="Node" parent="."]
+startMagnetSize = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -158,13 +157,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -5 )
 hframes = 2
 
-[node name="HurtArea" parent="." instance=ExtResource( 5 )]
-collision_layer = 4
-collision_mask = 10
-
-[node name="CollisionShape2D" parent="HurtArea" index="0"]
-position = Vector2( 0, -3 )
-shape = SubResource( 9 )
+[node name="Upgrades" type="Node" parent="."]
 
 [node name="WeaponPivot" type="Position2D" parent="."]
 position = Vector2( 0, -5 )
@@ -178,8 +171,19 @@ script = ExtResource( 10 )
 
 [node name="Rifle" parent="WeaponPivot/WeaponSwitcher" instance=ExtResource( 9 )]
 
-[node name="DiceHolder" type="Node2D" parent="."]
+[node name="DiceInventory" type="Node2D" parent="."]
 position = Vector2( 0, -5 )
+
+[node name="Dice" parent="DiceInventory" instance=ExtResource( 12 )]
+visible = false
+
+[node name="HurtArea" parent="." instance=ExtResource( 5 )]
+collision_layer = 4
+collision_mask = 10
+
+[node name="CollisionShape2D" parent="HurtArea" index="0"]
+position = Vector2( 0, -3 )
+shape = SubResource( 9 )
 
 [node name="MagnetArea" type="Area2D" parent="."]
 position = Vector2( 0, -1 )
@@ -188,7 +192,6 @@ collision_mask = 32
 monitorable = false
 script = ExtResource( 8 )
 attractionSpeed = 40.0
-radiusMultiplier = 0.9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea"]
 shape = SubResource( 13 )

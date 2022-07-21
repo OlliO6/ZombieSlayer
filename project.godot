@@ -12,6 +12,7 @@ config_version=4
 
 config/name="ZombieSlayer"
 run/main_scene="res://UI/Menu/Menu.tscn"
+config/icon="res://ZombieIcon.png"
 
 [audio]
 

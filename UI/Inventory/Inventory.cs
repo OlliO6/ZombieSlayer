@@ -19,6 +19,8 @@ public class Inventory : Control
 
     private void Open()
     {
+        if (GetTree().Paused == true) return;
+
         isOpen = true;
         GetTree().Paused = true;
         Visible = true;

@@ -26,19 +26,20 @@
     {
       "title": "Todo",
       "tasks": [
-        0
+
       ]
     },
     {
       "title": "Doing",
       "tasks": [
-        1
+        2,
+        0
       ]
     },
     {
       "title": "Done",
       "tasks": [
-
+        1
       ]
     }
   ],
@@ -51,6 +52,11 @@
     {
       "category": 0,
       "title": "Inventory Menu",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Dice Inventory",
       "details": ""
     }
   ]

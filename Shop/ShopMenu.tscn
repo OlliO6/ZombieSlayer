@@ -1,28 +1,17 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Items/Dice/Dice.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Shop/ShopMenu.cs" type="Script" id=3]
 [ext_resource path="res://Items/WeaponPickUps/RiflePickup.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Shop/ShopItem.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Weapons/Guns/Rifle/Rifle.png" type="Texture" id=6]
-[ext_resource path="res://UI/TiledTexture.shader" type="Shader" id=7]
+[ext_resource path="res://Weapons/Guns/Rifle/RifleIcon.png" type="Texture" id=6]
+[ext_resource path="res://UI/Ingame/FullHeart.png" type="Texture" id=7]
 [ext_resource path="res://Player/Upgrades/Icons/DamageUp.png" type="Texture" id=8]
 [ext_resource path="res://Items/UpgradePickups/DamagePickUp.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Items/UpgradePickups/MagnetPickup.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Player/Upgrades/Icons/Magnet.png" type="Texture" id=11]
-[ext_resource path="res://UI/Ingame/Heart.png" type="Texture" id=12]
 [ext_resource path="res://UI/ui_cancel_shortcut.tres" type="ShortCut" id=13]
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 7 )
-shader_param/frames = Vector2( 3, 1 )
-shader_param/currentFrame = Vector2( 2, 0 )
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 7 )
-shader_param/frames = Vector2( 2, 1 )
-shader_param/currentFrame = Vector2( 0, 0 )
 
 [node name="ShopMenu" type="Control"]
 pause_mode = 2
@@ -86,140 +75,60 @@ text = "Price: 100"
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 3.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel/CenterContainer"]
 margin_left = 40.0
-margin_top = 20.0
+margin_top = 19.0
 margin_right = 156.0
-margin_bottom = 108.001
+margin_bottom = 107.001
 rect_min_size = Vector2( 0, 88.001 )
 scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/CenterContainer/ScrollContainer"]
 margin_right = 100.0
-margin_bottom = 100.0
-
-[node name="Control" type="Control" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer"]
-margin_right = 100.0
+margin_bottom = 99.0
+custom_constants/separation = 1
 
 [node name="SpeedUp" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_top = 4.0
-margin_bottom = 20.0
+margin_top = 0.0
+margin_bottom = 19.0
+hint_tooltip = "Move faster"
 startPrice = 4
 priceAdded = 1
 
-[node name="Label" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/SpeedUp" index="2"]
-text = "4"
-
-[node name="AddButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/SpeedUp/HBoxContainer" index="0"]
-margin_right = 12.0
-margin_bottom = 17.0
-
-[node name="RemoveButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/SpeedUp/HBoxContainer" index="1"]
-margin_left = 16.0
-margin_right = 28.0
-margin_bottom = 17.0
-
 [node name="Magnet" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_top = 24.0
-margin_bottom = 40.0
+margin_top = 20.0
+margin_bottom = 39.0
+hint_tooltip = "Attract coins and other collectables"
+Icon = ExtResource( 11 )
 sceneToBuy = ExtResource( 10 )
 startPrice = 5
 priceAdded = 1
 
-[node name="TextureRect" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Magnet" index="1"]
-margin_left = 4.0
-margin_top = 3.0
-margin_right = 44.0
-margin_bottom = 43.0
-texture = ExtResource( 11 )
-
-[node name="Label" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Magnet" index="2"]
-text = "4"
-
-[node name="AddButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Magnet/HBoxContainer" index="0"]
-margin_right = 12.0
-margin_bottom = 17.0
-
-[node name="RemoveButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Magnet/HBoxContainer" index="1"]
-margin_left = 16.0
-margin_right = 28.0
-margin_bottom = 17.0
-
 [node name="RiflePickUp" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_top = 44.0
-margin_bottom = 60.0
+margin_top = 40.0
+margin_bottom = 59.0
+Icon = ExtResource( 6 )
 sceneToBuy = ExtResource( 4 )
 startPrice = 20
 priceAdded = 6
 
-[node name="TextureRect" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/RiflePickUp" index="1"]
-material = SubResource( 1 )
-margin_left = -1.0
-margin_top = -2.0
-margin_right = 47.0
-margin_bottom = 38.0
-texture = ExtResource( 6 )
-
-[node name="Label" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/RiflePickUp" index="2"]
-text = "20"
-
-[node name="AddButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/RiflePickUp/HBoxContainer" index="0"]
-margin_right = 12.0
-margin_bottom = 17.0
-
-[node name="RemoveButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/RiflePickUp/HBoxContainer" index="1"]
-margin_left = 16.0
-margin_right = 28.0
-margin_bottom = 17.0
-
 [node name="DamageUp" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_top = 64.0
-margin_bottom = 80.0
+margin_top = 60.0
+margin_bottom = 79.0
+hint_tooltip = "Deal more damage"
+Icon = ExtResource( 8 )
 sceneToBuy = ExtResource( 9 )
 startPrice = 8
 priceAdded = 2
 
-[node name="TextureRect" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/DamageUp" index="1"]
-margin_left = 4.0
-margin_top = 1.999
-margin_right = 44.0
-margin_bottom = 41.999
-texture = ExtResource( 8 )
-
-[node name="Label" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/DamageUp" index="2"]
-text = "8"
-
-[node name="AddButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/DamageUp/HBoxContainer" index="0"]
-margin_right = 12.0
-margin_bottom = 17.0
-
-[node name="RemoveButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/DamageUp/HBoxContainer" index="1"]
-margin_left = 16.0
-margin_right = 28.0
-margin_bottom = 17.0
-
 [node name="Heart" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_top = 84.0
-margin_bottom = 100.0
+margin_top = 80.0
+margin_bottom = 99.0
+hint_tooltip = "Move faster"
+Icon = ExtResource( 7 )
 priceAdded = 5
-
-[node name="TextureRect" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Heart" index="1"]
-material = SubResource( 2 )
-margin_left = 5.0
-margin_top = 2.999
-margin_right = 45.0
-margin_bottom = 42.999
-texture = ExtResource( 12 )
-
-[node name="AddButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Heart/HBoxContainer" index="0"]
-margin_right = 12.0
-margin_bottom = 17.0
-
-[node name="RemoveButton" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Heart/HBoxContainer" index="1"]
-margin_left = 16.0
-margin_right = 28.0
-margin_bottom = 17.0
 
 [node name="BackButton" type="Button" parent="MarginContainer/Panel"]
 margin_left = 4.0
@@ -248,9 +157,3 @@ text = "Buy Dice"
 flat = true
 
 [connection signal="pressed" from="MarginContainer/Panel/BuyButton" to="." method="OnBuyDicePressed"]
-
-[editable path="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/SpeedUp"]
-[editable path="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Magnet"]
-[editable path="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/RiflePickUp"]
-[editable path="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/DamageUp"]
-[editable path="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Heart"]

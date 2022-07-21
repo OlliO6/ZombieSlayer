@@ -15,6 +15,9 @@ public class IngameUI : Control
     [Export]
     private bool Updade { get => false; set => CallDeferred(nameof(UpdateHealthDisplay)); }
 
+    private Texture emptyHeart = GD.Load<Texture>("res://UI/Ingame/EmptyHeart.png");
+    private Texture fullHeart = GD.Load<Texture>("res://UI/Ingame/FullHeart.png");
+
     [TroughtSignal]
     private void OnPlayerHealthChanged()
     {
@@ -37,7 +40,7 @@ public class IngameUI : Control
 
         for (int i = 0; i < container.GetChildCount(); i++)
         {
-            container.GetChild<TextureRect>(i).SetShaderParam("currentFrame", new Vector2(i >= currentHealth ? 1 : 0, 0));
+            container.GetChild<TextureRect>(i).Texture = (i >= currentHealth) ? emptyHeart : fullHeart;
         }
 
         void AdjustChildCount()
