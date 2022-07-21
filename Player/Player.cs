@@ -67,6 +67,20 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     #endregion
 
+    #region Weapons Reference
+
+    private WeaponSwitcher storerForWeapons;
+    public WeaponSwitcher Weapons => this.LazyGetNode(ref storerForWeapons, "WeaponPivot/WeaponSwitcher");
+
+    #endregion
+
+    #region Upgrades Reference
+
+    private Node storerForUpgrades;
+    public Node Upgrades => this.LazyGetNode(ref storerForUpgrades, "Upgrades");
+
+    #endregion
+
     public bool isInvincible;
 
     public override void _EnterTree()
@@ -149,15 +163,12 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     public void AddUpgrade(Upgrade upgrade)
     {
-        GetNode("Upgrades").AddChild(upgrade);
+        Upgrades.AddChild(upgrade);
 
         EmitSignal(nameof(OnUpgradesChanged));
     }
-    public IEnumerable<Upgrade> GetUpgrades() => GetNode("Upgrades").GetChildren<Upgrade>();
+    public IEnumerable<Upgrade> GetUpgrades() => Upgrades.GetChildren<Upgrade>();
 
-    public void AddWeapon(WeaponBase weapon)
-    {
-        GetNode<WeaponSwitcher>("WeaponPivot/WeaponSwitcher").AddWeapon(weapon);
-    }
-    public IEnumerable<WeaponBase> GetWeapons() => GetNode("WeaponPivot/WeaponSwitcher").GetChildren<WeaponBase>();
+    public void AddWeapon(WeaponBase weapon) => Weapons.AddWeapon(weapon);
+    public IEnumerable<WeaponBase> GetWeapons() => Weapons.GetChildren<WeaponBase>();
 }

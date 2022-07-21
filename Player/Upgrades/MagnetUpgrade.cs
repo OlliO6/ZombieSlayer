@@ -3,7 +3,7 @@ using System;
 
 public class MagnetUpgrade : Upgrade
 {
-    const float amount = 5;
+    const float amount = 16;
 
     public override void AddBuff(Player player)
     {

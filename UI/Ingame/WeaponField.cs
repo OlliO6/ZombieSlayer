@@ -26,10 +26,10 @@ public class WeaponField : NinePatchRect
         }
     }
 
+    public int Index => GetIndex();
+
     private bool _selected;
     private Texture _icon;
-
-    public int Index => GetIndex();
 
     #region SelectFrame Reference
 

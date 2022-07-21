@@ -30,7 +30,7 @@ public class WeaponSwitcher : Node2D
             }
 
             currentIndex = 0;
-            IndexChanged();
+            WeaponsChanged();
         }
     }
 
@@ -47,7 +47,7 @@ public class WeaponSwitcher : Node2D
 
                 if (currentIndex > GetChildCount() - 1) currentIndex = 0;
 
-                IndexChanged();
+                WeaponsChanged();
                 return;
             }
             if (mouseButtonInput.ButtonIndex is (int)ButtonList.WheelDown)
@@ -58,7 +58,7 @@ public class WeaponSwitcher : Node2D
 
                 if (currentIndex < 0) currentIndex = GetChildCount() - 1;
 
-                IndexChanged();
+                WeaponsChanged();
             }
             return;
         }
@@ -104,11 +104,11 @@ public class WeaponSwitcher : Node2D
                     break;
             }
 
-            if (prevIndex != currentIndex) IndexChanged();
+            if (prevIndex != currentIndex) WeaponsChanged();
         }
     }
 
-    public void IndexChanged()
+    public void WeaponsChanged()
     {
         GD.Print(currentIndex);
 
@@ -127,7 +127,7 @@ public class WeaponSwitcher : Node2D
             DropWeapon(CurrentWeapon);
         }
 
-        IndexChanged();
+        WeaponsChanged();
     }
 
     public void DropWeapon(WeaponBase weapon)
@@ -147,6 +147,6 @@ public class WeaponSwitcher : Node2D
 
         RemoveChild(weapon);
         weapon.QueueFree();
-        IndexChanged();
+        WeaponsChanged();
     }
 }

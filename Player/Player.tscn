@@ -37,7 +37,7 @@ shader_param/blinkSpeed = 16.0
 extents = Vector2( 3, 4 )
 
 [sub_resource type="CircleShape2D" id=13]
-radius = 5.0
+radius = 3.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "Idle"
@@ -145,7 +145,7 @@ MaxHealth = 4
 movementSpeed = 35.0
 invincibilityTime = 2.0
 startCoins = 500
-startMagnetSize = 5.0
+startMagnetSize = 3.0
 
 [node name="Upgrades" type="Node" parent="."]
 
@@ -182,11 +182,13 @@ script = ExtResource( 10 )
 position = Vector2( 0, -5 )
 
 [node name="MagnetArea" type="Area2D" parent="."]
+position = Vector2( 0, -1 )
 collision_layer = 0
 collision_mask = 32
 monitorable = false
 script = ExtResource( 8 )
 attractionSpeed = 40.0
+radiusMultiplier = 0.9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea"]
 shape = SubResource( 13 )

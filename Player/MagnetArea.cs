@@ -4,7 +4,7 @@ using Additions;
 
 public class MagnetArea : Area2D
 {
-    [Export] public float attractionSpeed = 30, moreAttractionSpeedPerSize = 0.3f;
+    [Export] public float attractionSpeed = 30, moreAttractionSpeedPerSize = 0.3f, radiusMultiplier = 0.8f;
 
     #region Collider Reference
 
@@ -19,7 +19,8 @@ public class MagnetArea : Area2D
         set
         {
             _size = value;
-            (Collider.Shape as CircleShape2D).Radius = value;
+            (Collider.Shape as CircleShape2D).Radius = value * radiusMultiplier;
+            GD.Print(value * radiusMultiplier);
         }
     }
     private float _size;

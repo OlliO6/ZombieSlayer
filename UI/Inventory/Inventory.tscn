@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://UI/Inventory/Inventory.cs" type="Script" id=1]
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=2]
-[ext_resource path="res://UI/Ingame/WeaponField.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/Inventory/DragableWeaponField.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/ui_cancel_shortcut.tres" type="ShortCut" id=4]
 [ext_resource path="res://Player/Upgrades/Icons/SpeedUpgrade.png" type="Texture" id=5]
 [ext_resource path="res://Player/Upgrades/Icons/DamageUp.png" type="Texture" id=6]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Player/Upgrades/DamageUpgrade.cs" type="Script" id=9]
 [ext_resource path="res://Player/Upgrades/MagnetUpgrade.cs" type="Script" id=10]
 [ext_resource path="res://UI/Inventory/UpgradeContainer.cs" type="Script" id=11]
+[ext_resource path="res://UI/Inventory/WeaponContainer.cs" type="Script" id=12]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 content_margin_left = 4.0
@@ -90,50 +91,69 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 alignment = 2
 
-[node name="Weapons" type="CenterContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 207.0
 margin_bottom = 118.0
 size_flags_horizontal = 3
 
-[node name="WeaponContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Weapons"]
-margin_left = 6.0
+[node name="CenterContainer" type="CenterContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 207.0
+margin_bottom = 118.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer"]
+margin_left = 14.0
 margin_top = 50.0
-margin_right = 200.0
+margin_right = 192.0
 margin_bottom = 68.0
+custom_constants/separation = 0
 
-[node name="WeaponField" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Weapons/WeaponContainer" instance=ExtResource( 3 )]
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+visible = false
+margin_right = 178.0
+margin_bottom = 13.0
+text = "Weapons"
+align = 1
 
-[node name="WeaponField2" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Weapons/WeaponContainer" instance=ExtResource( 3 )]
-margin_left = 22.0
-margin_right = 40.0
+[node name="WeaponContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 178.0
+margin_bottom = 18.0
+custom_constants/separation = 2
+script = ExtResource( 12 )
 
-[node name="WeaponField3" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Weapons/WeaponContainer" instance=ExtResource( 3 )]
-margin_left = 44.0
-margin_right = 62.0
+[node name="DragableWeaponField" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
 
-[node name="WeaponField4" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Weapons/WeaponContainer" instance=ExtResource( 3 )]
-margin_left = 66.0
-margin_right = 84.0
+[node name="DragableWeaponField2" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+margin_left = 20.0
+margin_right = 38.0
 
-[node name="WeaponField5" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Weapons/WeaponContainer" instance=ExtResource( 3 )]
-margin_left = 88.0
-margin_right = 106.0
+[node name="DragableWeaponField3" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+margin_left = 40.0
+margin_right = 58.0
 
-[node name="WeaponField6" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Weapons/WeaponContainer" instance=ExtResource( 3 )]
-margin_left = 110.0
-margin_right = 128.0
+[node name="DragableWeaponField4" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+margin_left = 60.0
+margin_right = 78.0
 
-[node name="WeaponField7" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Weapons/WeaponContainer" instance=ExtResource( 3 )]
-margin_left = 132.0
-margin_right = 150.0
+[node name="DragableWeaponField5" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+margin_left = 80.0
+margin_right = 98.0
 
-[node name="WeaponField8" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Weapons/WeaponContainer" instance=ExtResource( 3 )]
-margin_left = 154.0
-margin_right = 172.0
+[node name="DragableWeaponField6" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+margin_left = 100.0
+margin_right = 118.0
 
-[node name="WeaponField9" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Weapons/WeaponContainer" instance=ExtResource( 3 )]
-margin_left = 176.0
-margin_right = 194.0
+[node name="DragableWeaponField7" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+margin_left = 120.0
+margin_right = 138.0
+
+[node name="DragableWeaponField8" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+margin_left = 140.0
+margin_right = 158.0
+
+[node name="DragableWeaponField9" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+margin_left = 160.0
+margin_right = 178.0
 
 [node name="CenterContainer" type="CenterContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 207.0
@@ -141,11 +161,9 @@ margin_right = 233.0
 margin_bottom = 118.0
 
 [node name="UpgradeContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer"]
-margin_top = 35.0
+margin_top = 31.0
 margin_right = 26.0
-margin_bottom = 83.0
-custom_constants/vseparation = 0
-custom_constants/hseparation = 0
+margin_bottom = 87.0
 script = ExtResource( 11 )
 
 [node name="Speed" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer/UpgradeContainer" instance=ExtResource( 7 )]
@@ -153,15 +171,16 @@ Icon = ExtResource( 5 )
 upgradeType = ExtResource( 8 )
 
 [node name="Magnet" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer/UpgradeContainer" instance=ExtResource( 7 )]
-margin_top = 16.0
-margin_bottom = 32.0
+margin_top = 20.0
+margin_bottom = 36.0
 upgradeType = ExtResource( 10 )
 
 [node name="Damage" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer/UpgradeContainer" instance=ExtResource( 7 )]
-margin_top = 32.0
-margin_bottom = 48.0
+margin_top = 40.0
+margin_bottom = 56.0
 Icon = ExtResource( 6 )
 upgradeType = ExtResource( 9 )
 
-[connection signal="OnOpened" from="." to="Panel/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer/UpgradeContainer" method="UpdateAmounts"]
+[connection signal="OnOpened" from="." to="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/VBoxContainer/WeaponContainer" method="OnInventoryOpened"]
+[connection signal="OnOpened" from="." to="Panel/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer/UpgradeContainer" method="OnInventoryOpened"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Top Bar/CloseButton" to="." method="Close"]

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 public class UpgradeContainer : GridContainer
 {
     [TroughtSignal]
+    private void OnInventoryOpened() => UpdateAmounts();
+
     private void UpdateAmounts()
     {
         if (Player.currentPlayer is null) return;
