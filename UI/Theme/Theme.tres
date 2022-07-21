@@ -12,7 +12,7 @@ texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 8, 8 )
 margin_left = 2.0
 margin_right = 2.0
-margin_top = 3.0
+margin_top = 2.0
 margin_bottom = 2.0
 modulate_color = Color( 1, 1, 1, 0.392157 )
 
@@ -21,7 +21,7 @@ texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 8, 8 )
 margin_left = 2.0
 margin_right = 2.0
-margin_top = 3.0
+margin_top = 2.0
 margin_bottom = 2.0
 modulate_color = Color( 0.886275, 0.886275, 0.886275, 1 )
 
@@ -38,7 +38,7 @@ texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 8, 8 )
 margin_left = 2.0
 margin_right = 2.0
-margin_top = 3.0
+margin_top = 2.0
 margin_bottom = 2.0
 modulate_color = Color( 0.733333, 0.733333, 0.733333, 1 )
 
@@ -178,6 +178,7 @@ Label/colors/font_color = Color( 0.803922, 0.745098, 0.67451, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
 Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 Panel/styles/panel = SubResource( 5 )
+PanelContainer/styles/panel = SubResource( 1 )
 PopupPanel/styles/panel = SubResource( 5 )
 ScrollContainer/styles/bg = null
 VScrollBar/icons/decrement = SubResource( 9 )

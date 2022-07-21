@@ -3,13 +3,7 @@ using System;
 
 public class DamageUpgrade : Upgrade
 {
-    [Export] public int amount = 1;
-
-    public DamageUpgrade(int amount)
-    {
-        this.amount = amount;
-    }
-    public DamageUpgrade() { }
+    const int amount = 1;
 
     public override void AddBuff(Player player)
     {

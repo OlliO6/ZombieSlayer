@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Player/MagnetArea.cs" type="Script" id=8]
 [ext_resource path="res://Weapons/Guns/Rifle/Rifle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player/WeaponSwitcher.cs" type="Script" id=10]
+[ext_resource path="res://UI/Inventory/Inventory.tscn" type="PackedScene" id=11]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.16228
@@ -214,6 +215,8 @@ smoothing_enabled = true
 
 [node name="PauseMenu" parent="UI" instance=ExtResource( 7 )]
 
+[node name="Inventory" parent="UI" instance=ExtResource( 11 )]
+
 [node name="InvincibilityTimer" type="Timer" parent="."]
 one_shot = true
 
@@ -222,6 +225,7 @@ one_shot = true
 [connection signal="OnInvincibilityEnded" from="." to="HurtArea/CollisionShape2D" method="set_disabled" flags=3 binds= [ false ]]
 [connection signal="OnInvincibilityStarted" from="." to="HurtArea/CollisionShape2D" method="set_disabled" flags=3 binds= [ true ]]
 [connection signal="OnWeaponChanged" from="WeaponPivot/WeaponSwitcher" to="UI/IngameUI" method="OnWeaponChanged"]
+[connection signal="OnInventoryPressed" from="UI/PauseMenu" to="UI/Inventory" method="Open"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="OnInvincibilityTimeEnded"]
 
 [editable path="HurtArea"]

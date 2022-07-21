@@ -3,13 +3,7 @@ using System;
 
 public class MovementSpeedUpgrade : Upgrade
 {
-    [Export] public float amount = 5;
-
-    public MovementSpeedUpgrade(float amount)
-    {
-        this.amount = amount;
-    }
-    public MovementSpeedUpgrade() { }
+    const float amount = 5;
 
     public override void AddBuff(Player player)
     {

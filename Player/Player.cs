@@ -43,6 +43,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     [Signal] public delegate void OnInvincibilityStarted();
     [Signal] public delegate void OnInvincibilityEnded();
     [Signal] public delegate void OnHealthChanged();
+    [Signal] public delegate void OnUpgradesChanged();
 
 
     #region AnimationTree Reference
@@ -149,6 +150,8 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     public void AddUpgrade(Upgrade upgrade)
     {
         GetNode("Upgrades").AddChild(upgrade);
+
+        EmitSignal(nameof(OnUpgradesChanged));
     }
     public IEnumerable<Upgrade> GetUpgrades() => GetNode("Upgrades").GetChildren<Upgrade>();
 

@@ -8,6 +8,7 @@ public class Dice : KinematicBody2D
 
     [Export] private Vector3 minLaunchVelocity, maxLaunchVelocity;
     [Export] private float launchGravity = 9.8f;
+    [Export(PropertyHint.Range, "0,1")] private float bounciness = 0.8f, speedRemainWhenBounce = 0.8f;
 
     private bool isRolling, done;
     private Vector3 launchVelocity;
@@ -69,11 +70,11 @@ public class Dice : KinematicBody2D
             AnimatedSprite.Position = Vector2.Zero;
             GetNode<AudioStreamPlayer>("RollPlayer").Play();
 
-            launchVelocity.z *= -0.6f;
+            launchVelocity.z *= -bounciness;
 
-            rollSpeed -= 0.2f;
+            rollSpeed *= speedRemainWhenBounce;
 
-            if (rollSpeed <= 0)
+            if (rollSpeed <= 0.05f)
             {
                 isRolling = false;
                 done = true;

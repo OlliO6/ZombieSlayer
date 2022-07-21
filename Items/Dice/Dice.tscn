@@ -91,9 +91,10 @@ tracks/2/keys = {
 [node name="Dice" type="KinematicBody2D"]
 collision_layer = 32
 script = ExtResource( 3 )
-minLaunchVelocity = Vector3( -15, -15, -30 )
-maxLaunchVelocity = Vector3( 15, 15, -45 )
+minLaunchVelocity = Vector3( -15, -15, -25 )
+maxLaunchVelocity = Vector3( 15, 15, -30 )
 launchGravity = 80.0
+bounciness = 0.85
 
 [node name="Shadow" type="Sprite" parent="."]
 texture = ExtResource( 2 )

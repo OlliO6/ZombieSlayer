@@ -1,0 +1,304 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://addons/kanban_tasks/board.gd" type="Script" id=1]
+[ext_resource path="res://addons/kanban_tasks/documentation.gd" type="Script" id=2]
+[ext_resource path="res://addons/kanban_tasks/details_dialog.gd" type="Script" id=3]
+[ext_resource path="res://addons/kanban_tasks/settings.gd" type="Script" id=5]
+
+[sub_resource type="Image" id=3]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"format": "LumAlpha8",
+"height": 16,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="ImageTexture" id=2]
+flags = 4
+flags = 4
+image = SubResource( 3 )
+size = Vector2( 16, 16 )
+
+[node name="VBoxContainer" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+script = ExtResource( 1 )
+
+[node name="Header" type="MarginContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 31.0
+mouse_filter = 2
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Header"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1019.0
+margin_bottom = 31.0
+custom_constants/separation = 5
+
+[node name="Search" type="LineEdit" parent="Header/HBoxContainer"]
+margin_right = 910.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+clear_button_enabled = true
+right_icon = SubResource( 2 )
+placeholder_text = "Search"
+
+[node name="SearchDetails" type="Button" parent="Header/HBoxContainer"]
+margin_left = 915.0
+margin_right = 943.0
+margin_bottom = 26.0
+hint_tooltip = "Search in details."
+toggle_mode = true
+icon = SubResource( 2 )
+
+[node name="VSeparator" type="VSeparator" parent="Header/HBoxContainer"]
+margin_left = 948.0
+margin_right = 948.0
+margin_bottom = 26.0
+custom_constants/separation = 0
+
+[node name="Help" type="Button" parent="Header/HBoxContainer"]
+margin_left = 953.0
+margin_right = 981.0
+margin_bottom = 26.0
+hint_tooltip = "Manage board settings."
+icon = SubResource( 2 )
+flat = true
+
+[node name="Settings" type="Button" parent="Header/HBoxContainer"]
+margin_left = 986.0
+margin_right = 1014.0
+margin_bottom = 26.0
+hint_tooltip = "Manage board settings."
+icon = SubResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_top = 31.0
+margin_right = 1024.0
+margin_bottom = 600.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1019.0
+margin_bottom = 564.0
+scroll_vertical_enabled = false
+
+[node name="Columns" type="HBoxContainer" parent="MarginContainer/ScrollContainer"]
+margin_right = 1014.0
+margin_bottom = 559.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 5
+alignment = 1
+
+[node name="Dialogs" type="Control" parent="."]
+margin_top = 600.0
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="Details" type="AcceptDialog" parent="Dialogs"]
+margin_right = 370.0
+margin_bottom = 300.0
+window_title = "Task"
+resizable = true
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Dialogs/Details"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Dialogs/Details/VBoxContainer"]
+margin_right = 354.0
+margin_bottom = 22.0
+
+[node name="OptionButton" type="OptionButton" parent="Dialogs/Details/VBoxContainer/HBoxContainer"]
+margin_right = 354.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="PopupMenu" type="PopupMenu" parent="Dialogs/Details/VBoxContainer/HBoxContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+
+[node name="TextEdit" type="TextEdit" parent="Dialogs/Details/VBoxContainer"]
+margin_top = 26.0
+margin_right = 354.0
+margin_bottom = 254.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_vertical = 3
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Documentation" type="AcceptDialog" parent="Dialogs"]
+visible = true
+margin_right = 650.0
+margin_bottom = 450.0
+window_title = "Documentation"
+resizable = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Dialogs/Documentation"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Dialogs/Documentation/VBoxContainer"]
+margin_right = 634.0
+margin_bottom = 406.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+bbcode_text = "[u]How to use[/u]
+
+- Double click on names to change them (works on stages, tasks and categories). Using F2 will also work.
+- Drag and drop the tasks to move them between stages or reorder them.
+- Click the pencil icon of a task to view its details. You can also press Enter while it has focus.
+
+[u]Features[/u]
+
+- Renamable stages
+- Tasks with detailed description and titles
+- Search in tasks and task details
+- Intuitive drag and drop usage utilising the godot build in drag and drop
+- Support for shortcuts *
+- Categories
+- Different stage layouts with multiple stages per column ***
+- Supports all editor themes including light ones
+
+* uses godot defaults because the custom shortcuts cannot be accessed; not tested on mac (would be nice if someone could test)  
+*** the layout can currently only be changed via editing the data.json file  
+
+[u]Where is the data stored?[/u]
+
+The data is stored inside of the addon folder (res://addons/kanban_tasks/data.json).
+Currently some features require editing the file to use. Do this before adding tasks to prevent save file corruption. You can have a look at the examples folder on github for some example data configurations.
+
+
+[center]Leave a star on [url=https://github.com/HolonProduction/godot_kanban_tasks]Github[/url][/center]"
+text = "How to use
+
+- Double click on names to change them (works on stages, tasks and categories). Using F2 will also work.
+- Drag and drop the tasks to move them between stages or reorder them.
+- Click the pencil icon of a task to view its details. You can also press Enter while it has focus.
+
+Features
+
+- Renamable stages
+- Tasks with detailed description and titles
+- Search in tasks and task details
+- Intuitive drag and drop usage utilising the godot build in drag and drop
+- Support for shortcuts *
+- Categories
+- Different stage layouts with multiple stages per column ***
+- Supports all editor themes including light ones
+
+* uses godot defaults because the custom shortcuts cannot be accessed; not tested on mac (would be nice if someone could test)  
+*** the layout can currently only be changed via editing the data.json file  
+
+Where is the data stored?
+
+The data is stored inside of the addon folder (res://addons/kanban_tasks/data.json).
+Currently some features require editing the file to use. Do this before adding tasks to prevent save file corruption. You can have a look at the examples folder on github for some example data configurations.
+
+
+Leave a star on Github"
+
+[node name="Settings" type="AcceptDialog" parent="Dialogs"]
+margin_right = 650.0
+margin_bottom = 450.0
+window_title = "Settings"
+resizable = true
+script = ExtResource( 5 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Dialogs/Settings"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+follow_focus = true
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Dialogs/Settings/ScrollContainer"]
+margin_right = 634.0
+margin_bottom = 406.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Categories" type="PanelContainer" parent="Dialogs/Settings/ScrollContainer/VBoxContainer"]
+margin_right = 634.0
+margin_bottom = 406.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Dialogs/Settings/ScrollContainer/VBoxContainer/Categories"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 627.0
+margin_bottom = 399.0
+
+[node name="Header" type="HBoxContainer" parent="Dialogs/Settings/ScrollContainer/VBoxContainer/Categories/VBoxContainer"]
+margin_right = 620.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="Dialogs/Settings/ScrollContainer/VBoxContainer/Categories/VBoxContainer/Header"]
+margin_top = 3.0
+margin_right = 604.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+text = "Categories"
+
+[node name="Add" type="Button" parent="Dialogs/Settings/ScrollContainer/VBoxContainer/Categories/VBoxContainer/Header"]
+margin_left = 608.0
+margin_right = 620.0
+margin_bottom = 20.0
+
+[node name="HSeparator" type="HSeparator" parent="Dialogs/Settings/ScrollContainer/VBoxContainer/Categories/VBoxContainer"]
+margin_top = 24.0
+margin_right = 620.0
+margin_bottom = 28.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Dialogs/Settings/ScrollContainer/VBoxContainer/Categories/VBoxContainer"]
+margin_top = 32.0
+margin_right = 620.0
+margin_bottom = 100.0

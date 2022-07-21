@@ -91,26 +91,21 @@ margin_right = 78.0
 [node name="WeaponField5" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
 margin_left = 80.0
 margin_right = 98.0
-Icon = null
 
 [node name="WeaponField6" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
 margin_left = 100.0
 margin_right = 118.0
-Icon = null
 
 [node name="WeaponField7" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
 margin_left = 120.0
 margin_right = 138.0
-Icon = null
 
 [node name="WeaponField8" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
 margin_left = 140.0
 margin_right = 158.0
-Icon = null
 
 [node name="WeaponField9" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
 margin_left = 160.0
 margin_right = 178.0
-Icon = null
 
 [editable path="MarginContainer/VBoxContainer/CoinDisplay"]

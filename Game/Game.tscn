@@ -182,3 +182,5 @@ position = Vector2( 34, 82 )
 
 [node name="RiflePickup6" parent="." instance=ExtResource( 3 )]
 position = Vector2( 47, 67 )
+
+[connection signal="OnCoinsAmountChanged" from="Player" to="Player/UI/IngameUI" method="OnCoinsAmountChanged"]

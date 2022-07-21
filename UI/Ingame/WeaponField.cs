@@ -44,9 +44,4 @@ public class WeaponField : NinePatchRect
     public TextureRect IconRect => this.LazyGetNode(ref storerForIconRect, "Icon");
 
     #endregion
-
-    public void SetWeapon(WeaponBase weapon)
-    {
-        Icon = weapon.icon;
-    }
 }
