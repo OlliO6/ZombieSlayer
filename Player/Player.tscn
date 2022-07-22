@@ -11,7 +11,7 @@
 [ext_resource path="res://Weapons/Guns/Rifle/Rifle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player/WeaponSwitcher.cs" type="Script" id=10]
 [ext_resource path="res://UI/Inventory/Inventory.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Items/Dice/Dice.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Player/DiceInventory.cs" type="Script" id=13]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.16228
@@ -137,7 +137,7 @@ nodes/MovementState/node = SubResource( 6 )
 nodes/MovementState/position = Vector2( 120, 140 )
 nodes/RunSpeed/node = SubResource( 7 )
 nodes/RunSpeed/position = Vector2( -140, 260 )
-node_connections = [ "output", 0, "MovementState", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed", "RunSpeed", 0, "Animation 2" ]
+node_connections = [ "output", 0, "MovementState", "RunSpeed", 0, "Animation 2", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed" ]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
@@ -173,9 +173,13 @@ script = ExtResource( 10 )
 
 [node name="DiceInventory" type="Node2D" parent="."]
 position = Vector2( 0, -5 )
+script = ExtResource( 13 )
 
-[node name="Dice" parent="DiceInventory" instance=ExtResource( 12 )]
-visible = false
+[node name="WorkingDices" type="Node2D" parent="DiceInventory"]
+position = Vector2( 0, 4 )
+
+[node name="BrokenDices" type="Node2D" parent="DiceInventory"]
+position = Vector2( 0, 4 )
 
 [node name="HurtArea" parent="." instance=ExtResource( 5 )]
 collision_layer = 4

@@ -1,16 +1,19 @@
 using Godot;
-using System;
+using System.Linq;
 using Additions;
 
 public class Dice : KinematicBody2D
 {
-    [Export] public PackedScene scene1, scene2, scene3, scene4, scene5, scene6;
+    [Export] public PackedScene[] scenes;
+    [Export] public bool broken;
+
+    [Export] private PackedScene pickupScene;
 
     [Export] private Vector3 minLaunchVelocity, maxLaunchVelocity;
     [Export] private float launchGravity = 9.8f;
     [Export(PropertyHint.Range, "0,1")] private float bounciness = 0.8f, speedRemainWhenBounce = 0.8f;
 
-    private bool isRolling, done;
+    private bool isRolling;
     private Vector3 launchVelocity;
     private float rollSpeed;
 
@@ -28,7 +31,7 @@ public class Dice : KinematicBody2D
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (!isRolling && !done && @event.IsActionPressed("Interact"))
+        if (!isRolling && !broken && Player.currentPlayer is not null && Player.currentPlayer.GetWorkingDices().Contains(this) && @event.IsActionPressed("Interact"))
         {
             Launch();
         }
@@ -76,13 +79,39 @@ public class Dice : KinematicBody2D
 
             if (rollSpeed <= 0.05f)
             {
-                isRolling = false;
-                done = true;
-                AnimatedSprite.SpeedScale = 0;
-
-                SpawnRandomScene();
+                Finish();
             }
         }
+    }
+
+    private void Finish()
+    {
+        isRolling = false;
+        broken = true;
+        AnimatedSprite.SpeedScale = 0;
+
+        SpawnRandomScene();
+
+        if (scenes.All((PackedScene scene) => scene is null))
+        {
+            GetNode<AnimationPlayer>("AnimationPlayer").Play("BreakComplete");
+            return;
+        }
+
+        SpawnBrokenDicePickup();
+
+        GetNode<AnimationPlayer>("AnimationPlayer").Play("Break");
+    }
+
+    private void SpawnBrokenDicePickup()
+    {
+        DicePickup pickup = pickupScene.Instance<DicePickup>();
+
+        GetParent().AddChild(pickup);
+        pickup.GlobalPosition = GlobalPosition;
+
+        GetParent().RemoveChild(this);
+        pickup.Dice = this;
     }
 
     private void SpawnRandomScene()
@@ -90,36 +119,11 @@ public class Dice : KinematicBody2D
         RandomNumberGenerator rng = new();
         rng.Randomize();
 
-        int scene = rng.RandiRange(1, 6);
-
-        Node2D instance = null;
-
-        switch (scene)
-        {
-            case 1:
-                instance = scene1?.Instance<Node2D>();
-                break;
-            case 2:
-                instance = scene2?.Instance<Node2D>();
-                break;
-            case 3:
-                instance = scene3?.Instance<Node2D>();
-                break;
-            case 4:
-                instance = scene4?.Instance<Node2D>();
-                break;
-            case 5:
-                instance = scene5?.Instance<Node2D>();
-                break;
-            case 6:
-                instance = scene6?.Instance<Node2D>();
-                break;
-        }
+        Node2D instance = RandomInstance(rng);
 
         if (instance is null)
         {
             GetNode<AudioStreamPlayer>("LoosePlayer").Play();
-            GetNode<AnimationPlayer>("AnimationPlayer").Play("Finish");
             return;
         }
 
@@ -128,6 +132,26 @@ public class Dice : KinematicBody2D
         GetParent().AddChild(instance);
         instance.GlobalPosition = GlobalPosition;
 
-        GetNode<AnimationPlayer>("AnimationPlayer").Play("Finish");
+        Node2D RandomInstance(RandomNumberGenerator rng)
+        {
+            if (scenes is null || scenes.Length is 0) return null;
+
+            int index = rng.RandiRange(0, scenes.Length - 1);
+
+            PackedScene scene = scenes[index];
+            RemoveAndFitFromArray(index);
+
+            return scene is null ? null : scene.Instance<Node2D>();
+        }
+
+        void RemoveAndFitFromArray(int index)
+        {
+            scenes[index] = null;
+
+            for (int i = index; i < scenes.Length; i++)
+            {
+                scenes[i] = i + 1 < scenes.Length ? scenes[i + 1] : null;
+            }
+        }
     }
 }

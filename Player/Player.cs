@@ -43,7 +43,6 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     [Signal] public delegate void OnInvincibilityStarted();
     [Signal] public delegate void OnInvincibilityEnded();
     [Signal] public delegate void OnHealthChanged();
-    [Signal] public delegate void OnUpgradesChanged();
 
 
     #region AnimationTree Reference
@@ -78,6 +77,13 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     private Node storerForUpgrades;
     public Node Upgrades => this.LazyGetNode(ref storerForUpgrades, "Upgrades");
+
+    #endregion
+
+    #region DiceInventory Reference
+
+    private DiceInventory storerForDiceInventory;
+    public DiceInventory DiceInventory => this.LazyGetNode(ref storerForDiceInventory, "DiceInventory");
 
     #endregion
 
@@ -152,21 +158,11 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     }
 
 
-    public void AddDice(Dice dice)
-    {
-        GetNode("DiceInventory").AddChild(dice);
-    }
-    public bool HasDice()
-    {
-        return GetNode("DiceInventory").GetChildCount() > 0;
-    }
+    public void AddDice(Dice dice) => DiceInventory.AddDice(dice);
+    public IEnumerable<Dice> GetWorkingDices() => DiceInventory.GetWorkingDices();
+    public IEnumerable<Dice> GetBrokenDices() => DiceInventory.GetBrokenDices();
 
-    public void AddUpgrade(Upgrade upgrade)
-    {
-        Upgrades.AddChild(upgrade);
-
-        EmitSignal(nameof(OnUpgradesChanged));
-    }
+    public void AddUpgrade(Upgrade upgrade) => Upgrades.AddChild(upgrade);
     public IEnumerable<Upgrade> GetUpgrades() => Upgrades.GetChildren<Upgrade>();
 
     public void AddWeapon(WeaponBase weapon) => Weapons.AddWeapon(weapon);

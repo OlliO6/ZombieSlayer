@@ -13,20 +13,22 @@ public class InteractionPickupBase : Area2D
     [TroughtSignal]
     private void OnAreaEntered(Area2D area)
     {
-        if (collected || Player.currentPlayer is null) return;
+        if (collected || Player.currentPlayer is null || playerInArea) return;
 
         if (!IsCollectable()) return;
 
         playerInArea = true;
+        GD.Print("OnPlayerEntered");
         EmitSignal(nameof(OnPlayerEntered));
     }
 
     [TroughtSignal]
     private void OnAreaExited(Area2D area)
     {
-        if (collected) return;
+        if (collected || !playerInArea) return;
 
         playerInArea = false;
+        GD.Print("OnPlayerExited");
         EmitSignal(nameof(OnPlayerExited));
     }
 
@@ -38,6 +40,7 @@ public class InteractionPickupBase : Area2D
         {
             collected = true;
             Collect();
+            GD.Print("OnCollected");
             EmitSignal(nameof(OnCollected));
         }
     }

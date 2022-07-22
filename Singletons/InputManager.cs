@@ -13,6 +13,7 @@ public class InputManager : Node
     public override void _Ready()
     {
         instance = this;
+        PauseMode = PauseModeEnum.Process;
         GD.Randomize();
     }
 

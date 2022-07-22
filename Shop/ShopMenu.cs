@@ -47,7 +47,7 @@ public class ShopMenu : Control
             }
         }
 
-        if (ratio == 0 || Player.currentPlayer is null || Player.currentPlayer.HasDice() || Player.currentPlayer.Coins < price)
+        if (ratio == 0 || Player.currentPlayer is null || Player.currentPlayer.Coins < price)
         {
             GetNode<Button>(buyDiceButton).Disabled = true;
         }
@@ -60,7 +60,7 @@ public class ShopMenu : Control
     [TroughtSignal]
     private void OnBuyDicePressed()
     {
-        if (Player.currentPlayer is null || Player.currentPlayer.HasDice()) return;
+        if (Player.currentPlayer is null) return;
 
         Dice dice = diceScene.Instance<Dice>();
 
@@ -94,29 +94,13 @@ public class ShopMenu : Control
 
     private void AddScenesToDice(Dice dice, List<PackedScene> scenes)
     {
-        for (int i = 0; i < scenes.Count; i++)
+        const int sideCount = 6;
+
+        dice.scenes = new PackedScene[sideCount];
+
+        for (int i = 0; i < (scenes.Count > sideCount ? sideCount : scenes.Count); i++)
         {
-            switch (i)
-            {
-                case 0:
-                    dice.scene1 = scenes[0];
-                    break;
-                case 1:
-                    dice.scene2 = scenes[1];
-                    break;
-                case 2:
-                    dice.scene3 = scenes[2];
-                    break;
-                case 3:
-                    dice.scene4 = scenes[3];
-                    break;
-                case 4:
-                    dice.scene5 = scenes[4];
-                    break;
-                case 5:
-                    dice.scene6 = scenes[5];
-                    break;
-            }
+            dice.scenes[i] = scenes[i];
         }
     }
 }

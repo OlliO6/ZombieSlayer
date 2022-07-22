@@ -141,11 +141,11 @@ margin_right = 34.0
 margin_bottom = 92.0
 scroll_horizontal_enabled = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer"]
+[node name="DiceContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer"]
 margin_right = 18.0
 margin_bottom = 106.0
 
-[node name="DiceField" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="DiceField" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer"]
 margin_right = 18.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 18, 18 )
@@ -159,7 +159,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer/DiceField"]
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer/DiceField"]
 material = SubResource( 2 )
 margin_left = 4.6
 margin_top = 5.25
@@ -167,7 +167,7 @@ margin_right = 28.6
 margin_bottom = 21.25
 texture = ExtResource( 15 )
 
-[node name="DiceField2" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="DiceField2" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer"]
 margin_top = 22.0
 margin_right = 18.0
 margin_bottom = 40.0
@@ -182,7 +182,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer/DiceField2"]
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer/DiceField2"]
 material = SubResource( 3 )
 margin_left = 4.6
 margin_top = 5.25
@@ -190,7 +190,7 @@ margin_right = 28.6
 margin_bottom = 21.25
 texture = ExtResource( 15 )
 
-[node name="DiceField3" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="DiceField3" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer"]
 margin_top = 44.0
 margin_right = 18.0
 margin_bottom = 62.0
@@ -205,7 +205,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer/DiceField3"]
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer/DiceField3"]
 material = SubResource( 4 )
 margin_left = 4.6
 margin_top = 5.25
@@ -213,7 +213,7 @@ margin_right = 28.6
 margin_bottom = 21.25
 texture = ExtResource( 15 )
 
-[node name="DiceField4" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="DiceField4" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer"]
 margin_top = 66.0
 margin_right = 18.0
 margin_bottom = 84.0
@@ -228,7 +228,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer/DiceField4"]
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer/DiceField4"]
 material = SubResource( 2 )
 margin_left = 4.6
 margin_top = 5.25
@@ -236,7 +236,7 @@ margin_right = 28.6
 margin_bottom = 21.25
 texture = ExtResource( 15 )
 
-[node name="DiceField5" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="DiceField5" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer"]
 margin_top = 88.0
 margin_right = 18.0
 margin_bottom = 106.0
@@ -251,7 +251,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer/DiceField5"]
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer/DiceField5"]
 material = SubResource( 2 )
 margin_left = 4.6
 margin_top = 5.25
@@ -341,17 +341,20 @@ margin_bottom = 56.0
 script = ExtResource( 11 )
 
 [node name="Speed" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer/MarginContainer/UpgradeContainer" instance=ExtResource( 7 )]
+hint_tooltip = "Move faster"
 Icon = ExtResource( 5 )
 upgradeType = ExtResource( 8 )
 
 [node name="Magnet" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer/MarginContainer/UpgradeContainer" instance=ExtResource( 7 )]
 margin_top = 20.0
 margin_bottom = 36.0
+hint_tooltip = "Attract coins and other collectables"
 upgradeType = ExtResource( 10 )
 
 [node name="Damage" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer/MarginContainer/UpgradeContainer" instance=ExtResource( 7 )]
 margin_top = 40.0
 margin_bottom = 56.0
+hint_tooltip = "Deal more damage"
 Icon = ExtResource( 6 )
 upgradeType = ExtResource( 9 )
 
