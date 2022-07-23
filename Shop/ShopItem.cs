@@ -5,16 +5,29 @@ using Additions;
 [Tool]
 public class ShopItem : Control
 {
-    [Export] public PackedScene sceneToBuy;
     [Export] private int startPrice = 10;
     [Export] private int priceAdded = 10;
     [Export] private float priceMultiplier = 1.3f;
+
+    [Export]
+    public PackedScene SceneToBuy
+    {
+        get => _sceneToBuy;
+        set
+        {
+            _sceneToBuy = value;
+
+            if (Icons.IconPickupMatrix.ContainsKey(value)) SetDeferred(nameof(Icon), Icons.IconPickupMatrix[value]);
+        }
+    }
+
     [Export]
     private Texture Icon
     {
         get => _icon;
         set
         {
+            GD.Print(value, IconRect);
             _icon = value;
             IconRect?.SetDeferred("texture", value);
         }
@@ -34,6 +47,7 @@ public class ShopItem : Control
 
     private int buyCount;
     private Texture _icon;
+    private PackedScene _sceneToBuy;
 
     private Label priceLabel;
 
@@ -44,7 +58,7 @@ public class ShopItem : Control
 
     public override void _Ready()
     {
-        Connect(nameof(OnCurrentAmountChanged), Owner, "OnUpdateRatio");
+        if (Owner is not null) Connect(nameof(OnCurrentAmountChanged), Owner, "OnUpdateRatio");
         priceLabel = GetNode<Label>("HBoxContainer/Label");
 
         UpdateShopItem();
@@ -54,7 +68,9 @@ public class ShopItem : Control
 
     private string GetDescription()
     {
-        SceneState sceneState = sceneToBuy.GetState();
+        if (SceneToBuy is null) return "";
+
+        SceneState sceneState = SceneToBuy.GetState();
 
         GD.Print(sceneState.GetNodePropertyName(0, 1));
 

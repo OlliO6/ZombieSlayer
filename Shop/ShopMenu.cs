@@ -74,7 +74,7 @@ public class ShopMenu : Control
         {
             for (int i = 0; i < item.currentAmount; i++)
             {
-                scenes.Add(item.sceneToBuy);
+                scenes.Add(item.SceneToBuy);
             }
             price += item.currentPrice;
         }

@@ -1,8 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Player/Upgrades/Icons/SpeedUpgrade.png" type="Texture" id=1]
 [ext_resource path="res://Shop/ShopItem.cs" type="Script" id=2]
-[ext_resource path="res://Items/UpgradePickups/SpeedPickUp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=4]
 [ext_resource path="res://UI/Theme/SmallRect.png" type="Texture" id=5]
 
@@ -19,11 +17,10 @@ margin_top = 42.0
 margin_right = 100.0
 margin_bottom = 58.0
 rect_min_size = Vector2( 100, 16 )
+hint_tooltip = "Move faster"
 theme = ExtResource( 4 )
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 2 )
-Icon = ExtResource( 1 )
-sceneToBuy = ExtResource( 3 )
 priceMultiplier = 1.1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -36,7 +33,6 @@ margin_bottom = 18.0
 margin_right = 16.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 16, 16 )
-texture = ExtResource( 1 )
 stretch_mode = 4
 
 [node name="Label" type="Label" parent="HBoxContainer"]
@@ -61,6 +57,7 @@ margin_left = 86.0
 margin_right = 98.0
 margin_bottom = 17.0
 focus_mode = 0
+disabled = true
 enabled_focus_mode = 0
 text = "-"
 flat = true
