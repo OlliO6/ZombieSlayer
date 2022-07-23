@@ -29,14 +29,6 @@ public class Dice : KinematicBody2D
         AnimatedSprite.Frame = Mathf.RoundToInt((float)GD.RandRange(0, AnimatedSprite.Frames.GetFrameCount(AnimatedSprite.Animation) - 1));
     }
 
-    public override void _UnhandledInput(InputEvent @event)
-    {
-        if (!isRolling && !broken && Player.currentPlayer is not null && Player.currentPlayer.GetWorkingDices().Contains(this) && @event.IsActionPressed("Interact"))
-        {
-            Launch();
-        }
-    }
-
     public void Launch()
     {
         isRolling = true;
@@ -108,7 +100,7 @@ public class Dice : KinematicBody2D
         DicePickup pickup = pickupScene.Instance<DicePickup>();
 
         GetParent().AddChild(pickup);
-        pickup.GlobalPosition = GlobalPosition;
+        pickup.GlobalPosition = GlobalPosition + Vector2.Up;
 
         GetParent().RemoveChild(this);
         pickup.Dice = this;

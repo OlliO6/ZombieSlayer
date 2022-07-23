@@ -5,4 +5,5 @@
 [node name="Heart" type="TextureRect"]
 margin_right = 16.0
 margin_bottom = 8.0
+mouse_filter = 2
 texture = ExtResource( 1 )

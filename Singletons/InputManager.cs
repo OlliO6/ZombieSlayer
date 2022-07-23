@@ -26,7 +26,7 @@ public class InputManager : Node
         return Input.GetVector("MoveLeft", "MoveRight", "MoveUp", "MoveDown", deadzone);
     }
 
-    public override void _Input(InputEvent @event)
+    public override void _UnhandledInput(InputEvent @event)
     {
         if (@event.IsAction("Attack"))
         {

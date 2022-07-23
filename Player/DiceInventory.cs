@@ -23,6 +23,8 @@ public class DiceInventory : Node2D
         dice.GetParent()?.RemoveChild(dice);
 
         (dice.broken ? BrokenDices : WorkingDices).AddChild(dice);
+
+        dice.Visible = false;
     }
     public IEnumerable<Dice> GetWorkingDices() => WorkingDices.GetChildren<Dice>();
     public IEnumerable<Dice> GetBrokenDices() => BrokenDices.GetChildren<Dice>();

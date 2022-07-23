@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://UI/Ingame/Heart.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/Ingame/IngameUI.cs" type="Script" id=2]
@@ -6,20 +6,24 @@
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=4]
 [ext_resource path="res://Weapons/Guns/Rifle/RifleIcon.png" type="Texture" id=5]
 [ext_resource path="res://UI/Ingame/WeaponField.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/DiceMenu/DiceMenu.tscn" type="PackedScene" id=7]
 
 [node name="IngameUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 theme = ExtResource( 4 )
 script = ExtResource( 2 )
 heartScene = ExtResource( 1 )
 heartContainer = NodePath("MarginContainer/VBoxContainer/HeartContainer")
 coinLabel = NodePath("MarginContainer/VBoxContainer/CoinDisplay/Label")
 weaponFields = NodePath("CenterContainer/MarginContainer/WeaponFieldsContainer")
+maxHealth = 6
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
 custom_constants/margin_right = 4
 custom_constants/margin_top = 4
 custom_constants/margin_left = 4
@@ -28,27 +32,55 @@ custom_constants/margin_bottom = 4
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 48.0
-margin_bottom = 36.0
+margin_right = 252.0
+margin_bottom = 146.0
+mouse_filter = 2
 
 [node name="HeartContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
-margin_right = 44.0
-margin_bottom = 8.0
+margin_right = 248.0
+mouse_filter = 2
 custom_constants/vseparation = 1
 custom_constants/hseparation = 1
 columns = 5
 
 [node name="CoinDisplay" parent="MarginContainer/VBoxContainer" instance=ExtResource( 3 )]
 margin_left = 0.0
-margin_top = 12.0
-margin_right = 44.0
-margin_bottom = 25.0
+margin_right = 248.0
+margin_bottom = 17.0
 
-[node name="Control" parent="MarginContainer/VBoxContainer/CoinDisplay" index="0"]
-margin_bottom = 13.0
+[node name="DiceMenu" parent="MarginContainer/VBoxContainer" instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 21.0
+margin_right = 248.0
+margin_bottom = 142.0
+size_flags_vertical = 3
 
-[node name="Label" parent="MarginContainer/VBoxContainer/CoinDisplay" index="1"]
-margin_bottom = 13.0
+[node name="Control" parent="MarginContainer/VBoxContainer/DiceMenu" index="0"]
+margin_right = 248.0
+margin_bottom = 121.0
+
+[node name="HBoxContainer" parent="MarginContainer/VBoxContainer/DiceMenu" index="1"]
+margin_right = 248.0
+margin_bottom = 121.0
+
+[node name="ScrollContainer" parent="MarginContainer/VBoxContainer/DiceMenu/HBoxContainer" index="0"]
+margin_right = 34.0
+margin_bottom = 121.0
+
+[node name="VSeparator" parent="MarginContainer/VBoxContainer/DiceMenu/HBoxContainer" index="1"]
+margin_left = 38.0
+margin_right = 42.0
+margin_bottom = 121.0
+
+[node name="CenterContainer" parent="MarginContainer/VBoxContainer/DiceMenu/HBoxContainer" index="2"]
+margin_left = 46.0
+margin_right = 108.0
+margin_bottom = 121.0
+
+[node name="GridContainer" parent="MarginContainer/VBoxContainer/DiceMenu/HBoxContainer/CenterContainer" index="0"]
+margin_top = 40.0
+margin_bottom = 80.0
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_left = 0.5
@@ -58,10 +90,12 @@ anchor_bottom = 1.0
 margin_left = -86.0
 margin_top = -24.0
 margin_right = 86.0
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
 margin_right = 186.0
 margin_bottom = 26.0
+mouse_filter = 2
 custom_constants/margin_right = 4
 custom_constants/margin_top = 4
 custom_constants/margin_left = 4
@@ -72,6 +106,7 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 182.0
 margin_bottom = 22.0
+mouse_filter = 2
 custom_constants/separation = 2
 alignment = 1
 
@@ -110,4 +145,4 @@ margin_right = 158.0
 margin_left = 160.0
 margin_right = 178.0
 
-[editable path="MarginContainer/VBoxContainer/CoinDisplay"]
+[editable path="MarginContainer/VBoxContainer/DiceMenu"]
