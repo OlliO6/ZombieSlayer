@@ -34,14 +34,22 @@ public class DiceField : NinePatchRect
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        DiceContainer diceContainer = GetParentOrNull<DiceContainer>();
+        DiceMenu diceMenu = GetOwnerOrNull<DiceMenu>();
 
-        if (diceContainer is not null)
+        if (diceMenu is not null)
         {
-            Connect(nameof(ShowDiceScenes), diceContainer, nameof(DiceContainer.ShowDiceScenes));
+            Connect(nameof(ShowDiceScenes), diceMenu, nameof(DiceMenu.ShowDiceScenes));
         }
 
         SetTexture();
+    }
+
+    public override void _GuiInput(InputEvent @event)
+    {
+        if (@event is InputEventMouseButton mouseInput && mouseInput.IsPressed())
+        {
+            Selected = !Selected;
+        }
     }
 
     private void SetTexture()
