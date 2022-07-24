@@ -73,6 +73,8 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         CurrentHealth = MaxHealth;
         Coins = startCoins;
         MagnetAreaSize = startMagnetSize;
+
+        DebugOverlay.AddWatcher(this, nameof(MagnetAreaSize), showTargetName: false);
     }
 
     public override void _PhysicsProcess(float delta)

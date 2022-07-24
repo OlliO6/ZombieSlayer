@@ -22,6 +22,7 @@ default_bus_layout="res://BusLayout.tres"
 InputManager="*res://Singletons/InputManager.cs"
 SceneManager="*res://Singletons/SceneManager.tscn"
 OptionsManager="*res://Singletons/OptionsManager.cs"
+DebugOverlay="*res://Singletons/Debug/DebugOverlay.tscn"
 
 [display]
 
@@ -29,6 +30,11 @@ window/size/width=256
 window/size/height=150
 window/size/test_width=1024
 window/size/test_height=600
+<<<<<<< Updated upstream
+=======
+window/vsync/use_vsync=false
+mouse_cursor/tooltip_position_offset=Vector2( 0, 0 )
+>>>>>>> Stashed changes
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
