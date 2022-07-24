@@ -65,22 +65,32 @@ margin_right = 248.0
 margin_bottom = 121.0
 
 [node name="ScrollContainer" parent="MarginContainer/VBoxContainer/DiceMenu/HBoxContainer" index="0"]
-margin_right = 34.0
+margin_bottom = 121.0
+
+[node name="DiceContainer" parent="MarginContainer/VBoxContainer/DiceMenu/HBoxContainer/ScrollContainer" index="0"]
+margin_bottom = 121.0
+
+[node name="DiceField" parent="MarginContainer/VBoxContainer/DiceMenu/HBoxContainer/ScrollContainer/DiceContainer" index="0"]
+margin_top = 59.0
+margin_bottom = 77.0
+
+[node name="DiceField2" parent="MarginContainer/VBoxContainer/DiceMenu/HBoxContainer/ScrollContainer/DiceContainer" index="1"]
+margin_top = 81.0
+margin_bottom = 99.0
+
+[node name="DiceField3" parent="MarginContainer/VBoxContainer/DiceMenu/HBoxContainer/ScrollContainer/DiceContainer" index="2"]
+margin_top = 103.0
 margin_bottom = 121.0
 
 [node name="VSeparator" parent="MarginContainer/VBoxContainer/DiceMenu/HBoxContainer" index="1"]
-margin_left = 38.0
-margin_right = 42.0
 margin_bottom = 121.0
 
 [node name="CenterContainer" parent="MarginContainer/VBoxContainer/DiceMenu/HBoxContainer" index="2"]
-margin_left = 46.0
-margin_right = 108.0
 margin_bottom = 121.0
 
-[node name="GridContainer" parent="MarginContainer/VBoxContainer/DiceMenu/HBoxContainer/CenterContainer" index="0"]
-margin_top = 40.0
-margin_bottom = 80.0
+[node name="VBoxContainer" parent="MarginContainer/VBoxContainer/DiceMenu/HBoxContainer/CenterContainer" index="0"]
+margin_top = 26.0
+margin_bottom = 95.0
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_left = 0.5

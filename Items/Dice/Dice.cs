@@ -29,8 +29,9 @@ public class Dice : KinematicBody2D
         AnimatedSprite.Frame = Mathf.RoundToInt((float)GD.RandRange(0, AnimatedSprite.Frames.GetFrameCount(AnimatedSprite.Animation) - 1));
     }
 
-    public void Launch()
+    public void Throw()
     {
+        Visible = true;
         isRolling = true;
 
         RandomNumberGenerator rng = new();

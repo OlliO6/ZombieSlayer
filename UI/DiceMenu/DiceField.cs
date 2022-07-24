@@ -11,18 +11,38 @@ public class DiceField : NinePatchRect
         get => _selected;
         set
         {
-            _selected = value;
-            SelectFrame.SetDeferred("visible", value);
+            SelectFrame?.SetDeferred("visible", value);
 
-            if (value) EmitSignal(nameof(ShowDiceScenes), dice);
+            if (value == Selected) return;
+
+            _selected = value;
+
+            EmitSignal(value ? nameof(OnSelected) : nameof(OnDeselected), this);
+        }
+    }
+
+    [Export]
+    public bool Watched
+    {
+        get => _watched;
+        set
+        {
+            _watched = value;
+
+            GetNode<ColorRect>("ColorRect")?.SetDeferred("modulate", value ? new("747474") : Colors.White);
+
+            if (value) EmitSignal(nameof(OnWatched), this);
         }
     }
 
     public Dice dice;
+    public DiceMenu diceMenu;
 
-    private bool _selected;
+    private bool _selected, _watched;
 
-    [Signal] public delegate void ShowDiceScenes(Dice from);
+    [Signal] public delegate void OnSelected(DiceField from);
+    [Signal] public delegate void OnDeselected(DiceField from);
+    [Signal] public delegate void OnWatched(DiceField from);
 
     #region SelectFrame Reference
 
@@ -34,11 +54,12 @@ public class DiceField : NinePatchRect
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        DiceMenu diceMenu = GetOwnerOrNull<DiceMenu>();
-
         if (diceMenu is not null)
         {
-            Connect(nameof(ShowDiceScenes), diceMenu, nameof(DiceMenu.ShowDiceScenes));
+            GD.Print("Connected");
+            Connect(nameof(OnSelected), diceMenu, nameof(DiceMenu.OnDiceFieldSelected));
+            Connect(nameof(OnDeselected), diceMenu, nameof(DiceMenu.OnDiceFieldDeselected));
+            Connect(nameof(OnWatched), diceMenu, nameof(DiceMenu.OnDiceFieldWatched));
         }
 
         SetTexture();
@@ -46,9 +67,15 @@ public class DiceField : NinePatchRect
 
     public override void _GuiInput(InputEvent @event)
     {
-        if (@event is InputEventMouseButton mouseInput && mouseInput.IsPressed())
+        if (@event is InputEventMouseButton mouseInput && mouseInput.IsPressed() && mouseInput.ButtonIndex is (int)ButtonList.Left)
         {
-            Selected = !Selected;
+            if (Watched)
+            {
+                Selected = !Selected;
+                return;
+            }
+
+            Watched = true;
         }
     }
 

@@ -72,9 +72,9 @@ public class ShopItem : Control
 
         SceneState sceneState = SceneToBuy.GetState();
 
-        GD.Print(sceneState.GetNodePropertyName(0, 1));
+        int propCount = sceneState.GetNodePropertyCount(0);
 
-        if (sceneState.GetNodePropertyValue(0, 1) is CSharpScript script)
+        if (propCount > 1 && sceneState.GetNodePropertyValue(0, 1) is CSharpScript script)
         {
             return script.Call("GetDescription") as string;
         }
