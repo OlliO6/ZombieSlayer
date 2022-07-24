@@ -3,7 +3,7 @@ using System.Linq;
 using Additions;
 
 [Tool]
-public class DiceField : NinePatchRect
+public class DiceField : NinePatchRect, ISelectable
 {
     [Export]
     public bool Selected

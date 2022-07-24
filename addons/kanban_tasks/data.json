@@ -26,20 +26,21 @@
     {
       "title": "Todo",
       "tasks": [
-
+        3,
+        4
       ]
     },
     {
       "title": "Doing",
       "tasks": [
-        2,
         0
       ]
     },
     {
       "title": "Done",
       "tasks": [
-        1
+        1,
+        2
       ]
     }
   ],
@@ -58,6 +59,16 @@
       "category": 0,
       "title": "Dice Inventory",
       "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Maybe zoom out",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Zombie spawn animation",
+      "details": "so you dont get hit when a zombie spawns inside you"
     }
   ]
 }

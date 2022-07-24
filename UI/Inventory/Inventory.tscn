@@ -16,8 +16,8 @@
 [ext_resource path="res://UI/Theme/SmallRect.png" type="Texture" id=14]
 [ext_resource path="res://Items/Dice/Dice.png" type="Texture" id=15]
 [ext_resource path="res://UI/Inventory/DiceContainer.cs" type="Script" id=16]
-[ext_resource path="res://UI/DiceMenu/DiceSceneField.tscn" type="PackedScene" id=17]
 [ext_resource path="res://UI/DiceMenu/DiceField.tscn" type="PackedScene" id=18]
+[ext_resource path="res://UI/Inventory/StatsPanel.tscn" type="PackedScene" id=19]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 content_margin_left = 4.0
@@ -146,8 +146,6 @@ scroll_horizontal_enabled = false
 [node name="DiceContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer"]
 script = ExtResource( 16 )
 diceFieldScene = ExtResource( 18 )
-diceSceneFieldScene = ExtResource( 17 )
-_DiceScenesContainer = NodePath("../../Stats/DiceStats/DiceScenesContainer")
 
 [node name="DiceField" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer"]
 visible = false
@@ -269,55 +267,12 @@ margin_left = 4.0
 margin_right = 8.0
 margin_bottom = 88.0
 
-[node name="Stats" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="StatsPanel" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource( 19 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 12.0
 margin_right = 195.0
 margin_bottom = 88.0
-size_flags_horizontal = 3
-
-[node name="DiceStats" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Stats"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="DiceScenesContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Stats/DiceStats"]
-margin_right = 74.0
-columns = 3
-
-[node name="DiceSceneField2" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Stats/DiceStats/DiceScenesContainer" instance=ExtResource( 17 )]
-modulate = Color( 1, 1, 1, 0.5 )
-
-[node name="DiceSceneField3" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Stats/DiceStats/DiceScenesContainer" instance=ExtResource( 17 )]
-modulate = Color( 1, 1, 1, 0.5 )
-margin_left = 22.0
-margin_right = 40.0
-
-[node name="DiceSceneField4" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Stats/DiceStats/DiceScenesContainer" instance=ExtResource( 17 )]
-modulate = Color( 1, 1, 1, 0.5 )
-margin_left = 44.0
-margin_right = 62.0
-
-[node name="DiceSceneField5" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Stats/DiceStats/DiceScenesContainer" instance=ExtResource( 17 )]
-modulate = Color( 1, 1, 1, 0.5 )
-margin_top = 22.0
-margin_bottom = 40.0
-
-[node name="DiceSceneField7" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Stats/DiceStats/DiceScenesContainer" instance=ExtResource( 17 )]
-modulate = Color( 1, 1, 1, 0.5 )
-margin_left = 22.0
-margin_top = 22.0
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="DiceSceneField6" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Stats/DiceStats/DiceScenesContainer" instance=ExtResource( 17 )]
-modulate = Color( 1, 1, 1, 0.5 )
-margin_left = 44.0
-margin_top = 22.0
-margin_right = 62.0
-margin_bottom = 40.0
-
-[node name="WeaponStats" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Stats"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_top = 92.0
@@ -429,4 +384,5 @@ upgradeType = ExtResource( 9 )
 [connection signal="OnOpened" from="." to="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer" method="OnInventoryOpened"]
 [connection signal="OnOpened" from="." to="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer/WeaponContainer" method="OnInventoryOpened"]
 [connection signal="OnOpened" from="." to="Panel/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer/MarginContainer/UpgradeContainer" method="OnInventoryOpened"]
+[connection signal="OnSelectionChanged" from="." to="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/StatsPanel" method="OnInventorySelectionChanged"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Top Bar/CloseButton" to="." method="Close"]

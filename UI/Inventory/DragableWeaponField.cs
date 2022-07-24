@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[Tool]
 public class DragableWeaponField : WeaponField
 {
     public WeaponBase weapon;
@@ -26,6 +27,15 @@ public class DragableWeaponField : WeaponField
         {
             this.weapon = weaponBase;
             this.fromIndex = index;
+        }
+    }
+
+    public override void _Ready()
+    {
+        if (Owner is Inventory inventory)
+        {
+            Connect(nameof(OnSelected), inventory, nameof(Inventory.SelectionChanged), new(true));
+            Connect(nameof(OnDeselected), inventory, nameof(Inventory.SelectionChanged), new(false));
         }
     }
 
@@ -75,5 +85,13 @@ public class DragableWeaponField : WeaponField
         weapons.MoveChild(weapons.GetChild(fromIndex), toIndex);
 
         weapons.WeaponsChanged();
+    }
+
+    public override void _GuiInput(InputEvent @event)
+    {
+        if (!Disabled && @event is InputEventMouseButton mouseInput && mouseInput.IsPressed() && mouseInput.ButtonIndex is (int)ButtonList.Left)
+        {
+            Selected = !Selected;
+        }
     }
 }

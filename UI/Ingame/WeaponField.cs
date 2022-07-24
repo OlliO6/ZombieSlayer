@@ -3,7 +3,7 @@ using Godot;
 using System;
 
 [Tool]
-public class WeaponField : NinePatchRect
+public class WeaponField : NinePatchRect, ISelectable
 {
     [Export]
     public bool Selected
@@ -12,7 +12,10 @@ public class WeaponField : NinePatchRect
         set
         {
             _selected = value;
-            SelectFrame.SetDeferred("visible", value);
+
+            SelectFrame?.SetDeferred("visible", value);
+
+            EmitSignal(value ? nameof(OnSelected) : nameof(OnDeselected), this);
         }
     }
     [Export]
@@ -22,11 +25,14 @@ public class WeaponField : NinePatchRect
         set
         {
             _icon = value;
-            IconRect.SetDeferred("texture", value);
+            IconRect?.SetDeferred("texture", value);
         }
     }
 
     public int Index => GetIndex();
+
+    [Signal] public delegate void OnSelected(DiceField from);
+    [Signal] public delegate void OnDeselected(DiceField from);
 
     private bool _selected;
     private Texture _icon;
