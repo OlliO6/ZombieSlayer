@@ -125,9 +125,14 @@ public class DiceMenu : Control
         {
             DiceField diceField = diceFieldScene.Instance<DiceField>();
 
+            diceField.watchable = true;
             diceField.Selected = false;
+            diceField.Watched = false;
             diceField.dice = dice;
-            diceField.diceMenu = this;
+
+            diceField.Connect(nameof(DiceField.OnSelected), this, nameof(OnDiceFieldSelected));
+            diceField.Connect(nameof(DiceField.OnDeselected), this, nameof(OnDiceFieldDeselected));
+            diceField.Connect(nameof(DiceField.OnWatched), this, nameof(OnDiceFieldWatched));
 
             DiceContainer.AddChild(diceField);
         }

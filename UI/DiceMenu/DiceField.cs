@@ -24,19 +24,20 @@ public class DiceField : NinePatchRect
     [Export]
     public bool Watched
     {
-        get => _watched;
+        get => watchable ? _watched : false;
         set
         {
-            _watched = value;
+            _watched = watchable ? value : false;
 
-            GetNode<ColorRect>("ColorRect")?.SetDeferred("modulate", value ? new("747474") : Colors.White);
+            GetNode<ColorRect>("ColorRect")?.SetDeferred("modulate", Watched ? new("747474") : Colors.White);
 
-            if (value) EmitSignal(nameof(OnWatched), this);
+            if (Watched) EmitSignal(nameof(OnWatched), this);
         }
     }
 
+    [Export] public bool watchable;
+
     public Dice dice;
-    public DiceMenu diceMenu;
 
     private bool _selected, _watched;
 
@@ -54,14 +55,6 @@ public class DiceField : NinePatchRect
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        if (diceMenu is not null)
-        {
-            GD.Print("Connected");
-            Connect(nameof(OnSelected), diceMenu, nameof(DiceMenu.OnDiceFieldSelected));
-            Connect(nameof(OnDeselected), diceMenu, nameof(DiceMenu.OnDiceFieldDeselected));
-            Connect(nameof(OnWatched), diceMenu, nameof(DiceMenu.OnDiceFieldWatched));
-        }
-
         SetTexture();
     }
 
@@ -69,7 +62,7 @@ public class DiceField : NinePatchRect
     {
         if (@event is InputEventMouseButton mouseInput && mouseInput.IsPressed() && mouseInput.ButtonIndex is (int)ButtonList.Left)
         {
-            if (Watched)
+            if (!watchable || Watched)
             {
                 Selected = !Selected;
                 return;
