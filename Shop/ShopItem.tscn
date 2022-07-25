@@ -17,7 +17,6 @@ margin_top = 42.0
 margin_right = 100.0
 margin_bottom = 58.0
 rect_min_size = Vector2( 100, 16 )
-hint_tooltip = "Move faster"
 theme = ExtResource( 4 )
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 2 )
@@ -38,14 +37,14 @@ stretch_mode = 4
 [node name="Label" type="Label" parent="HBoxContainer"]
 margin_left = 20.0
 margin_top = 2.0
-margin_right = 66.0
+margin_right = 58.0
 margin_bottom = 15.0
 size_flags_horizontal = 3
 text = "10"
 
 [node name="AddButton" type="Button" parent="HBoxContainer"]
-margin_left = 70.0
-margin_right = 82.0
+margin_left = 62.0
+margin_right = 78.0
 margin_bottom = 17.0
 focus_mode = 0
 enabled_focus_mode = 0
@@ -53,7 +52,7 @@ text = "+"
 flat = true
 
 [node name="RemoveButton" type="Button" parent="HBoxContainer"]
-margin_left = 86.0
+margin_left = 82.0
 margin_right = 98.0
 margin_bottom = 17.0
 focus_mode = 0

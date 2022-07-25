@@ -145,12 +145,7 @@ script = ExtResource( 1 )
 MaxHealth = 4
 movementSpeed = 35.0
 invincibilityTime = 2.0
-<<<<<<< HEAD
-startMagnetSize = 5.0
-=======
-startCoins = 500
 startMagnetSize = 1.0
->>>>>>> Inventory
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

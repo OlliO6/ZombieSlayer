@@ -29,7 +29,7 @@ void fragment(){
 [sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
 shader = SubResource( 3 )
-shader_param/flash = false
+shader_param/flash = true
 shader_param/flashColor = Color( 1, 1, 1, 1 )
 
 [sub_resource type="CircleShape2D" id=1]
@@ -84,6 +84,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 2, 3, 4, 5, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material:shader_param/flash")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -143,7 +155,7 @@ input_2/name = "Dead"
 input_2/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=14]
-graph_offset = Vector2( -385, 77 )
+graph_offset = Vector2( -442, 57.5 )
 nodes/Animation/node = SubResource( 11 )
 nodes/Animation/position = Vector2( -380, -20 )
 "nodes/Animation 2/node" = SubResource( 9 )
@@ -172,6 +184,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -6 )
 hframes = 2
 vframes = 3
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -196,11 +209,11 @@ tree_root = SubResource( 14 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/Damage/active = false
-parameters/State/current = 0
+parameters/State/current = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource( 5 )
-volume_db = -31.1164
+volume_db = -29.7052
 bus = "SFX"
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]

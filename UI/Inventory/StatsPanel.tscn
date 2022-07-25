@@ -4,7 +4,7 @@
 [ext_resource path="res://UI/DiceMenu/DiceSceneField.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=3]
 [ext_resource path="res://UI/Inventory/WeaponStats.cs" type="Script" id=4]
-[ext_resource path="res://UI/Theme/PixelSmall.tres" type="DynamicFont" id=5]
+[ext_resource path="res://UI/Fonts/PondeSmall.tres" type="DynamicFont" id=5]
 [ext_resource path="res://UI/Inventory/DiceStats.cs" type="Script" id=6]
 [ext_resource path="res://UI/Theme/SmallRect.png" type="Texture" id=7]
 
@@ -176,9 +176,9 @@ margin_bottom = 17.0
 custom_constants/separation = 0
 
 [node name="StatsLabel" type="Label" parent="WeaponStats/VBoxContainer"]
-margin_top = 77.0
+margin_top = 75.0
 margin_right = 256.0
-margin_bottom = 94.0
+margin_bottom = 96.0
 size_flags_vertical = 6
 custom_fonts/font = ExtResource( 5 )
 text = "Shoot Speed: 5

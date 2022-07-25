@@ -6,16 +6,8 @@
 [ext_resource path="res://UI/Fonts/Ponde.tres" type="DynamicFont" id=4]
 [ext_resource path="res://UI/Theme/BrownRect.png" type="Texture" id=5]
 [ext_resource path="res://UI/Theme/SmallRect.png" type="Texture" id=6]
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
 [ext_resource path="res://UI/Theme/Seperator.png" type="Texture" id=7]
 [ext_resource path="res://UI/Fonts/PondeSmall.tres" type="DynamicFont" id=8]
->>>>>>> Stashed changes
-=======
-[ext_resource path="res://UI/Theme/Seperator.png" type="Texture" id=7]
-[ext_resource path="res://UI/Theme/PixelSmall.tres" type="DynamicFont" id=8]
->>>>>>> Inventory
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 3 )
