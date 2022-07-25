@@ -1,9 +1,0 @@
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\bin\Debug\ZombieSlayer.dll
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\bin\Debug\ZombieSlayer.pdb
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\obj\Debug\ZombieSlayer.csproj.AssemblyReference.cache
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\obj\Debug\ZombieSlayer.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\obj\Debug\ZombieSlayer.AssemblyInfoInputs.cache
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\obj\Debug\ZombieSlayer.AssemblyInfo.cs
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\obj\Debug\ZombieSlayer.csproj.CoreCompileInputs.cache
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\obj\Debug\ZombieSlayer.dll
-C:\Users\olive\OneDrive\Dokumente\Godot\Godot games\ZombieSlayer\.mono\temp\obj\Debug\ZombieSlayer.pdb
