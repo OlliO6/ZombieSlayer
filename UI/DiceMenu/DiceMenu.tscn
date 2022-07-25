@@ -1,0 +1,233 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://UI/DiceMenu/DiceMenu.cs" type="Script" id=1]
+[ext_resource path="res://UI/DiceMenu/DiceSceneField.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/Theme/PixelSmall.tres" type="DynamicFont" id=3]
+[ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=4]
+[ext_resource path="res://UI/DiceMenu/DiceField.tscn" type="PackedScene" id=7]
+
+
+[sub_resource type="Animation" id=4]
+resource_name = "Close"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 0.5, 0.420448 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0.392157 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer:anchor_left")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 2, 0.420448 ),
+"update": 0,
+"values": [ 0.0, -0.5 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Open"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.392157 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer:anchor_left")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 0.5, 0.420448 ),
+"update": 0,
+"values": [ -0.5, 0.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0.392157 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer:anchor_left")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[node name="DiceMenu" type="MarginContainer"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 4 )
+script = ExtResource( 1 )
+diceFieldScene = ExtResource( 7 )
+diceSceneFieldScene = ExtResource( 2 )
+_DiceContainer = NodePath("HBoxContainer/ScrollContainer/DiceContainer")
+_DiceScenesContainer = NodePath("HBoxContainer/CenterContainer/VBoxContainer/DiceScenesContainer")
+_ThrowAllButton = NodePath("HBoxContainer/CenterContainer/VBoxContainer/ThrowAllButton")
+_ThrowSelectedButton = NodePath("HBoxContainer/CenterContainer/VBoxContainer/ThrowSelectedButton")
+
+[node name="Control" type="Control" parent="."]
+margin_right = 256.0
+margin_bottom = 150.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 300, 250 )
+color = Color( 0, 0, 0, 0.392157 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+pause_mode = 2
+margin_right = 256.0
+margin_bottom = 150.0
+mouse_filter = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
+margin_right = 18.0
+margin_bottom = 150.0
+scroll_horizontal_enabled = false
+
+[node name="DiceContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer"]
+margin_right = 18.0
+margin_bottom = 150.0
+size_flags_vertical = 3
+alignment = 2
+
+[node name="DiceField" parent="HBoxContainer/ScrollContainer/DiceContainer" instance=ExtResource( 7 )]
+margin_top = 88.0
+margin_bottom = 106.0
+
+[node name="DiceField2" parent="HBoxContainer/ScrollContainer/DiceContainer" instance=ExtResource( 7 )]
+margin_top = 110.0
+margin_bottom = 128.0
+
+[node name="DiceField3" parent="HBoxContainer/ScrollContainer/DiceContainer" instance=ExtResource( 7 )]
+margin_top = 132.0
+margin_bottom = 150.0
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+margin_left = 22.0
+margin_right = 26.0
+margin_bottom = 150.0
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+margin_left = 30.0
+margin_right = 104.0
+margin_bottom = 150.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterContainer"]
+margin_top = 54.0
+margin_right = 74.0
+margin_bottom = 96.0
+
+[node name="DiceScenesContainer" type="GridContainer" parent="HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 74.0
+columns = 3
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 4.0
+margin_right = 74.0
+margin_bottom = 8.0
+
+[node name="ThrowSelectedButton" type="Button" parent="HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 12.0
+margin_right = 74.0
+margin_bottom = 25.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 3 )
+disabled = true
+enabled_focus_mode = 0
+text = "Trhow selected"
+
+[node name="ThrowAllButton" type="Button" parent="HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 29.0
+margin_right = 74.0
+margin_bottom = 42.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 3 )
+disabled = true
+enabled_focus_mode = 0
+text = "Trhow all"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+anims/Close = SubResource( 4 )
+anims/Open = SubResource( 5 )
+anims/RESET = SubResource( 6 )

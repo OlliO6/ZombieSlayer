@@ -1,94 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Items/Coin/Coin.png" type="Texture" id=1]
+[ext_resource path="res://Items/PickupBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Items/Coin/Coin.cs" type="Script" id=2]
-[ext_resource path="res://Sounds/Pickup_coin.wav" type="AudioStream" id=3]
 [ext_resource path="res://Items/Coin/CoinShadow.png" type="Texture" id=4]
 
-[sub_resource type="AudioStreamRandomPitch" id=3]
-audio_stream = ExtResource( 3 )
-
-[sub_resource type="Animation" id=4]
-resource_name = "Collect"
-length = 0.5
-tracks/0/type = "audio"
-tracks/0/path = NodePath("AudioStreamPlayer")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": SubResource( 3 )
-} ],
-"times": PoolRealArray( 0 )
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 0.31864, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -5 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 0.366021, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-tracks/4/type = "method"
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0.5 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "queue_free"
-} ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Shadow:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 0.353553, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=5]
 resource_name = "Idle"
 length = 0.8
 loop = true
@@ -117,37 +33,16 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 3.0
-
-[node name="Coin" type="Area2D"]
-collision_layer = 32
-collision_mask = 4
+[node name="Coin" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 amount = 1
 minLaunchVelocity = Vector3( -10, -10, -25 )
 maxLaunchVelocity = Vector3( 10, 10, -40 )
 launchGravity = 80.0
 
-[node name="Shadow" type="Sprite" parent="."]
+[node name="Shadow" type="Sprite" parent="." index="0"]
 texture = ExtResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
-hframes = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" parent="." index="2"]
 autoplay = "Idle"
-anims/Collect = SubResource( 4 )
-anims/Idle = SubResource( 1 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = SubResource( 3 )
-bus = "SFX"
-
-[connection signal="OnCollected" from="." to="AnimationPlayer" method="play" binds= [ "Collect" ]]
-[connection signal="OnCollected" from="." to="CollisionShape2D" method="set_disabled" flags=3 binds= [ true ]]
-[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+anims/Idle = SubResource( 5 )

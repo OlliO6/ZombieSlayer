@@ -1,16 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://UI/Ingame/Heart.png" type="Texture" id=1]
-[ext_resource path="res://UI/TiledTexture.shader" type="Shader" id=2]
-
-[sub_resource type="ShaderMaterial" id=1]
-resource_local_to_scene = true
-shader = ExtResource( 2 )
-shader_param/frames = Vector2( 2, 1 )
-shader_param/currentFrame = Vector2( 0, 0 )
+[ext_resource path="res://UI/Ingame/FullHeart.png" type="Texture" id=1]
 
 [node name="Heart" type="TextureRect"]
-material = SubResource( 1 )
 margin_right = 16.0
 margin_bottom = 8.0
+mouse_filter = 2
 texture = ExtResource( 1 )

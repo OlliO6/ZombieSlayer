@@ -51,4 +51,6 @@ public class Coin : PickupBase
             isLaunching = false;
         }
     }
+
+    public override bool IsAttractable() => !isLaunching || launchVelocity.z > -5;
 }

@@ -1,6 +1,7 @@
 using Additions;
 using Godot;
-using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 {
@@ -65,11 +66,36 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     #endregion
 
+    #region Weapons Reference
+
+    private WeaponSwitcher storerForWeapons;
+    public WeaponSwitcher Weapons => this.LazyGetNode(ref storerForWeapons, "WeaponPivot/WeaponSwitcher");
+
+    #endregion
+
+    #region Upgrades Reference
+
+    private Node storerForUpgrades;
+    public Node Upgrades => this.LazyGetNode(ref storerForUpgrades, "Upgrades");
+
+    #endregion
+
+    #region DiceInventory Reference
+
+    private DiceInventory storerForDiceInventory;
+    public DiceInventory DiceInventory => this.LazyGetNode(ref storerForDiceInventory, "DiceInventory");
+
+    #endregion
+
     public bool isInvincible;
+
+    public override void _EnterTree()
+    {
+        currentPlayer = this;
+    }
 
     public override void _Ready()
     {
-        currentPlayer = this;
         CurrentHealth = MaxHealth;
         Coins = startCoins;
         MagnetAreaSize = startMagnetSize;
@@ -133,19 +159,14 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         SceneManager.LoadMenu();
     }
 
-    public void ChangeWeapon(PackedScene weaponScene)
-    {
-        Node weaponHolder = GetNode("WeaponPivot");
-        weaponHolder.GetChild(0)?.QueueFree();
 
-        weaponHolder.AddChild(weaponScene.Instance());
-    }
-    public void AddDice(Dice dice)
-    {
-        GetNode("DiceHolder").AddChild(dice);
-    }
-    public bool HasDice()
-    {
-        return GetNode("DiceHolder").GetChildCount() > 0;
-    }
+    public void AddDice(Dice dice) => DiceInventory.AddDice(dice);
+    public IEnumerable<Dice> GetWorkingDices() => DiceInventory.GetWorkingDices();
+    public IEnumerable<Dice> GetBrokenDices() => DiceInventory.GetBrokenDices();
+
+    public void AddUpgrade(Upgrade upgrade) => Upgrades.AddChild(upgrade);
+    public IEnumerable<Upgrade> GetUpgrades() => Upgrades.GetChildren<Upgrade>();
+
+    public void AddWeapon(WeaponBase weapon) => Weapons.AddWeapon(weapon);
+    public IEnumerable<WeaponBase> GetWeapons() => Weapons.GetChildren<WeaponBase>();
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://UI/Ingame/IngameUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/PauseMenu/PauseMenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Player/MagnetArea.cs" type="Script" id=8]
+[ext_resource path="res://Weapons/Guns/Rifle/Rifle.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Player/WeaponSwitcher.cs" type="Script" id=10]
+[ext_resource path="res://UI/Inventory/Inventory.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Player/DiceInventory.cs" type="Script" id=13]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.16228
@@ -34,7 +38,7 @@ shader_param/blinkSpeed = 16.0
 extents = Vector2( 3, 4 )
 
 [sub_resource type="CircleShape2D" id=13]
-radius = 5.0
+radius = 1.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "Idle"
@@ -52,7 +56,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("DiceHolder:position")
+tracks/1/path = NodePath("DiceInventory:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -67,7 +71,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=12]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("DiceHolder:position")
+tracks/0/path = NodePath("DiceInventory:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -96,7 +100,7 @@ tracks/0/keys = {
 "values": [ 1, 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("DiceHolder:position")
+tracks/1/path = NodePath("DiceInventory:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -133,7 +137,7 @@ nodes/MovementState/node = SubResource( 6 )
 nodes/MovementState/position = Vector2( 120, 140 )
 nodes/RunSpeed/node = SubResource( 7 )
 nodes/RunSpeed/position = Vector2( -140, 260 )
-node_connections = [ "output", 0, "MovementState", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed", "RunSpeed", 0, "Animation 2" ]
+node_connections = [ "output", 0, "MovementState", "RunSpeed", 0, "Animation 2", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed" ]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
@@ -141,7 +145,12 @@ script = ExtResource( 1 )
 MaxHealth = 4
 movementSpeed = 35.0
 invincibilityTime = 2.0
+<<<<<<< HEAD
 startMagnetSize = 5.0
+=======
+startCoins = 500
+startMagnetSize = 1.0
+>>>>>>> Inventory
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -152,6 +161,30 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -5 )
 hframes = 2
 
+[node name="Upgrades" type="Node" parent="."]
+
+[node name="WeaponPivot" type="Position2D" parent="."]
+position = Vector2( 0, -5 )
+rotation = -0.0837758
+script = ExtResource( 4 )
+
+[node name="WeaponSwitcher" type="Node2D" parent="WeaponPivot"]
+script = ExtResource( 10 )
+
+[node name="Pistol" parent="WeaponPivot/WeaponSwitcher" instance=ExtResource( 3 )]
+
+[node name="Rifle" parent="WeaponPivot/WeaponSwitcher" instance=ExtResource( 9 )]
+
+[node name="DiceInventory" type="Node2D" parent="."]
+position = Vector2( 0, -5 )
+script = ExtResource( 13 )
+
+[node name="WorkingDices" type="Node2D" parent="DiceInventory"]
+position = Vector2( 0, 4 )
+
+[node name="BrokenDices" type="Node2D" parent="DiceInventory"]
+position = Vector2( 0, 4 )
+
 [node name="HurtArea" parent="." instance=ExtResource( 5 )]
 collision_layer = 4
 collision_mask = 10
@@ -160,21 +193,13 @@ collision_mask = 10
 position = Vector2( 0, -3 )
 shape = SubResource( 9 )
 
-[node name="WeaponPivot" type="Position2D" parent="."]
-position = Vector2( 0, -5 )
-rotation = -0.0837758
-script = ExtResource( 4 )
-
-[node name="Pistol" parent="WeaponPivot" instance=ExtResource( 3 )]
-
-[node name="DiceHolder" type="Node2D" parent="."]
-position = Vector2( 0, -5 )
-
 [node name="MagnetArea" type="Area2D" parent="."]
+position = Vector2( 0, -1 )
 collision_layer = 0
 collision_mask = 32
 monitorable = false
 script = ExtResource( 8 )
+attractionSpeed = 40.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea"]
 shape = SubResource( 13 )
@@ -199,17 +224,21 @@ smoothing_enabled = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="UI" parent="UI" instance=ExtResource( 6 )]
+[node name="IngameUI" parent="UI" instance=ExtResource( 6 )]
 
 [node name="PauseMenu" parent="UI" instance=ExtResource( 7 )]
+
+[node name="Inventory" parent="UI" instance=ExtResource( 11 )]
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="OnCoinsAmountChanged" from="." to="UI/UI" method="OnCoinsAmountChanged"]
-[connection signal="OnHealthChanged" from="." to="UI/UI" method="OnPlayerHealthChanged"]
+[connection signal="OnCoinsAmountChanged" from="." to="UI/IngameUI" method="OnCoinsAmountChanged"]
+[connection signal="OnHealthChanged" from="." to="UI/IngameUI" method="OnPlayerHealthChanged"]
 [connection signal="OnInvincibilityEnded" from="." to="HurtArea/CollisionShape2D" method="set_disabled" flags=3 binds= [ false ]]
 [connection signal="OnInvincibilityStarted" from="." to="HurtArea/CollisionShape2D" method="set_disabled" flags=3 binds= [ true ]]
+[connection signal="OnWeaponChanged" from="WeaponPivot/WeaponSwitcher" to="UI/IngameUI" method="OnWeaponChanged"]
+[connection signal="OnInventoryPressed" from="UI/PauseMenu" to="UI/Inventory" method="Open"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="OnInvincibilityTimeEnded"]
 
 [editable path="HurtArea"]

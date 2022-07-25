@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/Theme/BrownRect.png" type="Texture" id=2]
+[ext_resource path="res://UI/Theme/SmallRect.png" type="Texture" id=3]
+[ext_resource path="res://UI/Inventory/DragableWeaponField.cs" type="Script" id=4]
+
+[node name="DragableWeaponField" type="NinePatchRect"]
+margin_right = 18.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 18, 18 )
+mouse_filter = 0
+texture = ExtResource( 3 )
+region_rect = Rect2( 1, 1, 6, 6 )
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+script = ExtResource( 4 )
+
+[node name="Icon" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+mouse_filter = 2
+
+[node name="SelectFrame" type="NinePatchRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 1.0
+margin_bottom = 1.0
+texture = ExtResource( 2 )
+draw_center = false
+region_rect = Rect2( 4, 4, 8, 8 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2

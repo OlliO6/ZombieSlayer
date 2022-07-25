@@ -4,10 +4,10 @@ using System;
 
 public class GunBase : WeaponBase
 {
-    [Export] private PackedScene bulletScene;
-    [Export] private Vector2 bulletSpeedRange;
-    [Export] private float bulletSpread;
-    [Export] private int bulletDamage;
+    [Export] public PackedScene bulletScene;
+    [Export] public Vector2 bulletSpeedRange;
+    [Export] public float bulletSpread;
+    [Export] public int bulletDamage;
 
     #region InstantiatePoint Reference
 

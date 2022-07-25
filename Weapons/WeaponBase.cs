@@ -2,8 +2,11 @@ using Godot;
 using System;
 using Additions;
 
-public class WeaponBase : Node
+public class WeaponBase : Node2D
 {
+    [Export(PropertyHint.File, "*tscn,*scn")] public string weaponPickup;
+    [Export] public Texture icon;
+
     #region AnimationPlayer Reference
 
     private AnimationPlayer storerForAnimationPlayer;
@@ -11,25 +14,39 @@ public class WeaponBase : Node
 
     #endregion
 
-    protected bool attackInput;
+    public bool disabled;
 
-    public override void _Input(InputEvent @event)
+    public override void _Ready()
     {
-        if (!@event.IsAction("Attack")) return;
+        InputManager.instance.Connect(nameof(InputManager.OnAttackInputStarted), this, nameof(OnAttackInputStarted));
+        InputManager.instance.Connect(nameof(InputManager.OnAttackInputEnded), this, nameof(OnAttackInputEnded));
+    }
 
-        if (@event.IsPressed())
-        {
-            attackInput = true;
-            AttackInputStarted();
-            return;
-        }
-        attackInput = false;
-        AttackInputEnded();
+    public virtual void Disable()
+    {
+        Visible = false;
+        disabled = true;
+    }
+    public virtual void Enable()
+    {
+        Visible = true;
+        disabled = false;
     }
 
     public override void _Process(float delta)
     {
-        if (attackInput) AttackInputProcess();
+        if (InputManager.attackInput && !disabled) AttackInputProcess();
+    }
+
+    [TroughtSignal]
+    private void OnAttackInputStarted()
+    {
+        if (!disabled) AttackInputStarted();
+    }
+    [TroughtSignal]
+    private void OnAttackInputEnded()
+    {
+        if (!disabled) AttackInputEnded();
     }
 
     protected virtual void AttackInputStarted() { }

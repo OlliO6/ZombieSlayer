@@ -3,6 +3,8 @@ using System;
 
 public class PauseMenu : Control
 {
+    [Signal] public delegate void OnInventoryPressed();
+
     private bool paused;
 
     public override void _UnhandledInput(InputEvent @event)
@@ -31,8 +33,12 @@ public class PauseMenu : Control
     }
 
     [TroughtSignal]
-    private void OnMenuButtonPressed()
+    private void OnMenuButtonPressed() => SceneManager.LoadMenu();
+
+    [TroughtSignal]
+    private void OnInventoryButtonPressed()
     {
-        SceneManager.LoadMenu();
+        Unpause();
+        EmitSignal(nameof(OnInventoryPressed));
     }
 }

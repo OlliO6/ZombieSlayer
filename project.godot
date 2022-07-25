@@ -12,6 +12,7 @@ config_version=4
 
 config/name="ZombieSlayer"
 run/main_scene="res://UI/Menu/Menu.tscn"
+config/icon="res://ZombieIcon.png"
 
 [audio]
 
@@ -30,17 +31,25 @@ window/size/width=256
 window/size/height=150
 window/size/test_width=1024
 window/size/test_height=600
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 window/vsync/use_vsync=false
 mouse_cursor/tooltip_position_offset=Vector2( 0, 0 )
 >>>>>>> Stashed changes
+=======
+mouse_cursor/tooltip_position_offset=Vector2( 1, 1 )
+>>>>>>> Inventory
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/BetterFileSystem/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/BetterFileSystem/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg" )
+
+[gui]
+
+timers/tooltip_delay_sec=0.2
 
 [importer_defaults]
 
@@ -115,6 +124,16 @@ Pause={
 Interact={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Inventory={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":73,"unicode":0,"echo":false,"script":null)
+ ]
+}
+DiceMenu={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":82,"unicode":0,"echo":false,"script":null)
  ]
 }
 

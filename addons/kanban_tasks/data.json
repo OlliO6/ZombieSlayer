@@ -1,0 +1,74 @@
+{
+  "categories": [
+    {
+      "title": "Task",
+      "color": "6394ed"
+    }
+  ],
+  "columns": [
+    {
+      "stages": [
+        0
+      ]
+    },
+    {
+      "stages": [
+        1
+      ]
+    },
+    {
+      "stages": [
+        2
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "title": "Todo",
+      "tasks": [
+        3,
+        4
+      ]
+    },
+    {
+      "title": "Doing",
+      "tasks": [
+        0
+      ]
+    },
+    {
+      "title": "Done",
+      "tasks": [
+        1,
+        2
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "category": 0,
+      "title": "Broken dices",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Inventory Menu",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Dice Inventory",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Maybe zoom out",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Zombie spawn animation",
+      "details": "so you dont get hit when a zombie spawns inside you"
+    }
+  ]
+}
