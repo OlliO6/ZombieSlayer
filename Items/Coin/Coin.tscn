@@ -46,3 +46,7 @@ texture = ExtResource( 4 )
 [node name="AnimationPlayer" parent="." index="2"]
 autoplay = "Idle"
 anims/Idle = SubResource( 5 )
+
+[node name="VisibilityDisabler" parent="." index="5"]
+position = Vector2( 2.08616e-07, 2.08616e-07 )
+scale = Vector2( 0.4, 0.4 )

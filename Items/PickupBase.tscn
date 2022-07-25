@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Items/PickupBase.cs" type="Script" id=1]
 [ext_resource path="res://Items/Coin/Coin.png" type="Texture" id=2]
 [ext_resource path="res://Sounds/Pickup_coin.wav" type="AudioStream" id=3]
+[ext_resource path="res://BasicStuff/VisibilityDisabler.tscn" type="PackedScene" id=4]
 
 [sub_resource type="AudioStreamRandomPitch" id=3]
 audio_stream = ExtResource( 3 )
@@ -143,11 +144,16 @@ anims/Collect = SubResource( 4 )
 anims/RESET = SubResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource( 3 )
 bus = "SFX"
+
+[node name="VisibilityDisabler" parent="." instance=ExtResource( 4 )]
+position = Vector2( 2.98023e-08, 0 )
+scale = Vector2( 0.5, 0.5 )
 
 [connection signal="OnCollected" from="." to="AnimationPlayer" method="play" binds= [ "Collect" ]]
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]
