@@ -56,6 +56,7 @@ public class DiceField : NinePatchRect, ISelectable
     public override void _Ready()
     {
         SetTexture();
+        GetNode<ColorRect>("ColorRect").SelfModulate = (dice is null ? true : dice.broken) ? new("747474") : Colors.White;
     }
 
     public override void _GuiInput(InputEvent @event)

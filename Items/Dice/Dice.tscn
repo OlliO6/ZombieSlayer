@@ -137,6 +137,8 @@ tracks/1/keys = {
 collision_layer = 32
 script = ExtResource( 3 )
 scenes = [  ]
+baseRepairCost = 40
+repairCostPerScene = 10
 pickupScene = ExtResource( 8 )
 minLaunchVelocity = Vector3( -15, -15, -25 )
 maxLaunchVelocity = Vector3( 15, 15, -30 )
@@ -154,6 +156,7 @@ speed_scale = 0.0
 playing = true
 
 [node name="Broken" type="Sprite" parent="."]
+visible = false
 modulate = Color( 1, 1, 1, 0 )
 self_modulate = Color( 1, 1, 1, 0.776471 )
 position = Vector2( -1, 0 )

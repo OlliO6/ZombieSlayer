@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://UI/Inventory/Inventory.cs" type="Script" id=1]
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://UI/Theme/SmallRect.png" type="Texture" id=14]
 [ext_resource path="res://Items/Dice/Dice.png" type="Texture" id=15]
 [ext_resource path="res://UI/Inventory/DiceContainer.cs" type="Script" id=16]
+[ext_resource path="res://UI/Ingame/CoinDisplay.tscn" type="PackedScene" id=17]
 [ext_resource path="res://UI/DiceMenu/DiceField.tscn" type="PackedScene" id=18]
 [ext_resource path="res://UI/Inventory/StatsPanel.tscn" type="PackedScene" id=19]
 
@@ -47,6 +48,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
+_DiceContainer = NodePath("Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer")
+_CoinLabel = NodePath("Panel/MarginContainer/VBoxContainer/Top Bar/CoinDisplay/Label")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 show_behind_parent = true
@@ -76,18 +79,10 @@ margin_right = 238.0
 margin_bottom = 137.0
 custom_constants/separation = 0
 
-[node name="Top Bar" type="Control" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Top Bar" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
 margin_right = 233.0
-margin_bottom = 12.0
-rect_min_size = Vector2( 0, 12 )
-
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/Top Bar"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -36.0
-margin_right = 36.0
 margin_bottom = 13.0
-text = "Inventory"
+rect_min_size = Vector2( 0, 12 )
 
 [node name="CloseButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/Top Bar"]
 margin_right = 48.0
@@ -104,8 +99,28 @@ shortcut = ExtResource( 4 )
 text = "Close"
 flat = true
 
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/Top Bar"]
+margin_left = 94.0
+margin_right = 166.0
+margin_bottom = 13.0
+size_flags_horizontal = 6
+text = "Inventory"
+
+[node name="CoinDisplay" parent="Panel/MarginContainer/VBoxContainer/Top Bar" instance=ExtResource( 17 )]
+margin_left = 213.0
+margin_top = 0.0
+margin_right = 233.0
+margin_bottom = 13.0
+
+[node name="Control" parent="Panel/MarginContainer/VBoxContainer/Top Bar/CoinDisplay" index="0"]
+margin_bottom = 13.0
+
+[node name="Label" parent="Panel/MarginContainer/VBoxContainer/Top Bar/CoinDisplay" index="1"]
+margin_top = 0.0
+margin_bottom = 13.0
+
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer"]
-margin_top = 12.0
+margin_top = 13.0
 margin_right = 233.0
 margin_bottom = 16.0
 
@@ -126,21 +141,21 @@ alignment = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_right = 199.0
-margin_bottom = 92.0
+margin_bottom = 93.0
 size_flags_vertical = 3
 custom_constants/margin_right = 2
-custom_constants/margin_top = 2
+custom_constants/margin_top = 6
 custom_constants/margin_left = 2
 custom_constants/margin_bottom = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
 margin_left = 2.0
-margin_top = 2.0
+margin_top = 6.0
 margin_right = 197.0
-margin_bottom = 90.0
+margin_bottom = 91.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-margin_bottom = 88.0
+margin_bottom = 85.0
 scroll_horizontal_enabled = false
 
 [node name="DiceContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer"]
@@ -264,18 +279,18 @@ texture = ExtResource( 15 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 margin_left = 4.0
-margin_right = 8.0
-margin_bottom = 88.0
+margin_right = 7.0
+margin_bottom = 85.0
 
 [node name="StatsPanel" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource( 19 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 12.0
+margin_left = 11.0
 margin_right = 195.0
-margin_bottom = 88.0
+margin_bottom = 85.0
 
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 92.0
+margin_top = 93.0
 margin_right = 199.0
 margin_bottom = 96.0
 
@@ -386,3 +401,5 @@ upgradeType = ExtResource( 9 )
 [connection signal="OnOpened" from="." to="Panel/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer/MarginContainer/UpgradeContainer" method="OnInventoryOpened"]
 [connection signal="OnSelectionChanged" from="." to="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/StatsPanel" method="OnInventorySelectionChanged"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Top Bar/CloseButton" to="." method="Close"]
+
+[editable path="Panel/MarginContainer/VBoxContainer/Top Bar/CoinDisplay"]

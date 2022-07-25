@@ -6,6 +6,7 @@ public class Dice : KinematicBody2D
 {
     [Export] public PackedScene[] scenes;
     [Export] public bool broken;
+    [Export] public int baseRepairCost, repairCostPerScene;
 
     [Export] private PackedScene pickupScene;
 
@@ -147,4 +148,6 @@ public class Dice : KinematicBody2D
             }
         }
     }
+
+    public int GetRepairCost() => baseRepairCost + (scenes.Count((PackedScene scene) => scene is not null) * repairCostPerScene);
 }

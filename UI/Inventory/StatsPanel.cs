@@ -1,22 +1,26 @@
 using Godot;
-using System;
+using System.Linq;
+using System.Collections.Generic;
 using Additions;
 
 public class StatsPanel : Control
 {
     #region DiceStats Reference
 
-    private Control storerForDiceStats;
-    public Control DiceStats => this.LazyGetNode(ref storerForDiceStats, "DiceStats");
+    private DiceStats storerForDiceStats;
+    public DiceStats DiceStats => this.LazyGetNode(ref storerForDiceStats, "DiceStats");
 
     #endregion
 
     #region WeaponStats Reference
 
-    private Control storerForWeaponStats;
-    public Control WeaponStats => this.LazyGetNode(ref storerForWeaponStats, "WeaponStats");
+    private WeaponStats storerForWeaponStats;
+    public WeaponStats WeaponStats => this.LazyGetNode(ref storerForWeaponStats, "WeaponStats");
 
     #endregion
+
+    Inventory Inventory => Owner.LazyObjectCast(ref _inventory);
+    Inventory _inventory;
 
     [TroughtSignal]
     private void OnInventorySelectionChanged(Node to) => ShowStats(to);
@@ -40,12 +44,12 @@ public class StatsPanel : Control
     private void ShowWeaponStats(WeaponBase weapon)
     {
         DiceStats.Hide();
-        WeaponStats.Show();
+        WeaponStats.ShowStats(weapon);
     }
 
     private void ShowDiceStats(Dice dice)
     {
-        DiceStats.Show();
+        DiceStats.ShowStats(dice);
         WeaponStats.Hide();
     }
 
@@ -53,5 +57,35 @@ public class StatsPanel : Control
     {
         DiceStats.Hide();
         WeaponStats.Hide();
+    }
+
+
+    [TroughtSignal]
+    private void OnRepairDiceClicked()
+    {
+        if (Inventory is null || Player.currentPlayer is null) return;
+
+        Dice dice = (Inventory.Selection as DiceField).dice;
+
+        int cost = dice.GetRepairCost();
+
+        if (dice is null || Player.currentPlayer.Coins < cost) return;
+
+        Player.currentPlayer.Coins -= cost;
+
+        dice.broken = false;
+
+        Player.currentPlayer.AddDice(dice);
+
+        Inventory.EmitSignal(nameof(Inventory.OnOpened));
+
+        Inventory.CoinLabel.Text = Player.currentPlayer.Coins.ToString();
+
+        IEnumerable<DiceField> matchingContainers = Inventory.DiceContainer.GetChildren<DiceField>().Where((DiceField diceField) => diceField.dice == dice);
+
+        foreach (DiceField diceField in matchingContainers)
+        {
+            diceField.Selected = true;
+        }
     }
 }

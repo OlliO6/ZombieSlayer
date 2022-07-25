@@ -11,6 +11,8 @@ public class WeaponField : NinePatchRect, ISelectable
         get => _selected;
         set
         {
+            if (value == Selected) return;
+
             _selected = value;
 
             SelectFrame?.SetDeferred("visible", value);

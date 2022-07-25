@@ -7,13 +7,13 @@
 [ext_resource path="res://UI/Theme/BrownRect.png" type="Texture" id=5]
 [ext_resource path="res://UI/Theme/SmallRect.png" type="Texture" id=6]
 [ext_resource path="res://UI/Theme/Seperator.png" type="Texture" id=7]
-[ext_resource path="res://UI/Theme/PondeSmall.tres" type="DynamicFont" id=8]
+[ext_resource path="res://UI/Theme/PixelSmall.tres" type="DynamicFont" id=8]
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 8, 8 )
-margin_left = 2.0
-margin_right = 2.0
+margin_left = 4.0
+margin_right = 4.0
 margin_top = 2.0
 margin_bottom = 2.0
 modulate_color = Color( 1, 1, 1, 0.392157 )
@@ -21,8 +21,8 @@ modulate_color = Color( 1, 1, 1, 0.392157 )
 [sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 8, 8 )
-margin_left = 2.0
-margin_right = 2.0
+margin_left = 4.0
+margin_right = 4.0
 margin_top = 2.0
 margin_bottom = 2.0
 modulate_color = Color( 0.886275, 0.886275, 0.886275, 1 )
@@ -30,16 +30,16 @@ modulate_color = Color( 0.886275, 0.886275, 0.886275, 1 )
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 8, 8 )
-margin_left = 2.0
-margin_right = 2.0
+margin_left = 4.0
+margin_right = 4.0
 margin_top = 2.0
 margin_bottom = 2.0
 
 [sub_resource type="StyleBoxTexture" id=4]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 8, 8 )
-margin_left = 2.0
-margin_right = 2.0
+margin_left = 4.0
+margin_right = 4.0
 margin_top = 2.0
 margin_bottom = 2.0
 modulate_color = Color( 0.733333, 0.733333, 0.733333, 1 )
@@ -173,6 +173,7 @@ CheckButton/styles/hover = null
 CheckButton/styles/hover_pressed = null
 CheckButton/styles/normal = null
 CheckButton/styles/pressed = null
+HSeparator/constants/separation = 3
 HSeparator/styles/separator = SubResource( 22 )
 HSlider/icons/grabber = ExtResource( 3 )
 HSlider/icons/grabber_disabled = null
@@ -199,6 +200,7 @@ VScrollBar/styles/grabber_highlight = SubResource( 20 )
 VScrollBar/styles/grabber_pressed = SubResource( 21 )
 VScrollBar/styles/scroll = SubResource( 16 )
 VScrollBar/styles/scroll_focus = SubResource( 16 )
+VSeparator/constants/separation = 3
 VSeparator/styles/separator = SubResource( 22 )
 VSlider/icons/grabber = null
 VSlider/icons/grabber_disabled = null

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Additions;
 
 public class Inventory : Control
 {
@@ -7,9 +8,37 @@ public class Inventory : Control
     [Signal] public delegate void OnClosed();
     [Signal] public delegate void OnSelectionChanged(Node to);
 
+    #region DiceContainer Reference
+
+    private DiceContainer storerForDiceContainer;
+    public DiceContainer DiceContainer => this.LazyGetNode(ref storerForDiceContainer, _DiceContainer);
+    [Export] private NodePath _DiceContainer = "DiceContainer";
+
+    #endregion
+    #region CoinLabel Reference
+
+    private Label storerForCoinLabel;
+    public Label CoinLabel => this.LazyGetNode(ref storerForCoinLabel, _CoinLabel);
+    [Export] private NodePath _CoinLabel = "CoinLabel";
+
+    #endregion
+
     private bool isOpen;
 
-    public ISelectable selection;
+    private ISelectable selection;
+
+    public ISelectable Selection
+    {
+        get => selection;
+        set
+        {
+            if (IsInstanceValid(Selection as Node)) Selection.Selected = false;
+
+            selection = value;
+
+            EmitSignal(nameof(OnSelectionChanged), value as Node);
+        }
+    }
 
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -27,6 +56,9 @@ public class Inventory : Control
         isOpen = true;
         GetTree().Paused = true;
         Visible = true;
+        Selection = null;
+
+        CoinLabel.Text = Player.currentPlayer is null ? "0" : Player.currentPlayer.Coins.ToString();
 
         EmitSignal(nameof(OnOpened));
     }
@@ -46,17 +78,13 @@ public class Inventory : Control
 
         if (selected)
         {
-            ISelectable prevSelected = selection;
-            selection = selectable;
-            if (prevSelected is not null) prevSelected.Selected = false;
-            EmitSignal(nameof(OnSelectionChanged), selection);
+            Selection = selectable;
             return;
         }
 
-        if (selection == selectable)
+        if (Selection == selectable)
         {
-            selection = null;
-            EmitSignal(nameof(OnSelectionChanged), selection);
+            Selection = null;
         }
     }
 }

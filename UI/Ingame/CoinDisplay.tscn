@@ -29,6 +29,7 @@ margin_right = 16.0
 margin_bottom = 11.0
 mouse_filter = 2
 texture = ExtResource( 2 )
+stretch_mode = 4
 
 [node name="Label" type="Label" parent="."]
 margin_left = 12.0

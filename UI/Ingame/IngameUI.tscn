@@ -18,7 +18,70 @@ heartScene = ExtResource( 1 )
 heartContainer = NodePath("MarginContainer/VBoxContainer/HeartContainer")
 coinLabel = NodePath("MarginContainer/VBoxContainer/CoinDisplay/Label")
 weaponFields = NodePath("CenterContainer/MarginContainer/WeaponFieldsContainer")
-maxHealth = 6
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -86.0
+margin_top = -24.0
+margin_right = 100.0
+margin_bottom = 2.0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+margin_right = 186.0
+margin_bottom = 26.0
+mouse_filter = 2
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="WeaponFieldsContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 182.0
+margin_bottom = 22.0
+mouse_filter = 2
+custom_constants/separation = 2
+alignment = 1
+
+[node name="WeaponField" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+
+[node name="WeaponField2" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+margin_left = 20.0
+margin_right = 38.0
+Icon = ExtResource( 5 )
+
+[node name="WeaponField3" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+margin_left = 40.0
+margin_right = 58.0
+
+[node name="WeaponField4" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+margin_left = 60.0
+margin_right = 78.0
+
+[node name="WeaponField5" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+margin_left = 80.0
+margin_right = 98.0
+
+[node name="WeaponField6" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+margin_left = 100.0
+margin_right = 118.0
+
+[node name="WeaponField7" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+margin_left = 120.0
+margin_right = 138.0
+
+[node name="WeaponField8" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+margin_left = 140.0
+margin_right = 158.0
+
+[node name="WeaponField9" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+margin_left = 160.0
+margin_right = 178.0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -89,70 +152,8 @@ margin_bottom = 121.0
 margin_bottom = 121.0
 
 [node name="VBoxContainer" parent="MarginContainer/VBoxContainer/DiceMenu/HBoxContainer/CenterContainer" index="0"]
-margin_top = 26.0
-margin_bottom = 95.0
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -86.0
-margin_top = -24.0
-margin_right = 86.0
-mouse_filter = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
-margin_right = 186.0
-margin_bottom = 26.0
-mouse_filter = 2
-custom_constants/margin_right = 4
-custom_constants/margin_top = 4
-custom_constants/margin_left = 4
-custom_constants/margin_bottom = 4
-
-[node name="WeaponFieldsContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 182.0
-margin_bottom = 22.0
-mouse_filter = 2
-custom_constants/separation = 2
-alignment = 1
-
-[node name="WeaponField" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
-
-[node name="WeaponField2" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
-margin_left = 20.0
-margin_right = 38.0
-Icon = ExtResource( 5 )
-
-[node name="WeaponField3" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
-margin_left = 40.0
-margin_right = 58.0
-
-[node name="WeaponField4" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
-margin_left = 60.0
+margin_top = 42.0
 margin_right = 78.0
-
-[node name="WeaponField5" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
-margin_left = 80.0
-margin_right = 98.0
-
-[node name="WeaponField6" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
-margin_left = 100.0
-margin_right = 118.0
-
-[node name="WeaponField7" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
-margin_left = 120.0
-margin_right = 138.0
-
-[node name="WeaponField8" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
-margin_left = 140.0
-margin_right = 158.0
-
-[node name="WeaponField9" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
-margin_left = 160.0
-margin_right = 178.0
+margin_bottom = 79.0
 
 [editable path="MarginContainer/VBoxContainer/DiceMenu"]

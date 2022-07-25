@@ -40,5 +40,6 @@ public class DiceContainer : VBoxContainer
 
             AddChild(diceField);
         }
+        Update();
     }
 }
