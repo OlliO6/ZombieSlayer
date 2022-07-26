@@ -1,5 +1,5 @@
 using Godot;
-using System;
+using System.Collections.Generic;
 using Additions;
 
 public class WeaponStats : Control
@@ -18,13 +18,15 @@ public class WeaponStats : Control
     [Export] private NodePath _TypeLabel = "TypeLabel";
 
     #endregion
-    #region StatsLabel Reference
+    #region StatLabelContainer Reference
 
-    private Label storerForOtherStatsLabel;
-    public Label StatsLabel => this.LazyGetNode(ref storerForOtherStatsLabel, _OtherStatsLabel);
-    [Export] private NodePath _OtherStatsLabel = "StatsLabel";
+    private Container storerForLabelContainer;
+    public Container StatLabelContainer => this.LazyGetNode(ref storerForLabelContainer, _LabelContainer);
+    [Export] private NodePath _LabelContainer = "StatLabelContainer";
 
     #endregion
+
+    private Font font = GD.Load<Font>("res://UI/Fonts/PondeSmall.tres");
 
     public void ShowStats(WeaponBase weapon)
     {
@@ -34,7 +36,7 @@ public class WeaponStats : Control
 
         TypeLabel.Text = $"{GetWeaponType(NameLabel.Text)}";
 
-        StatsLabel.Text = GetWeaponStats(NameLabel.Text, weapon);
+        ShowWeaponStats(NameLabel.Text, weapon);
     }
 
     private string GetWeaponType(string weapon)
@@ -47,16 +49,17 @@ public class WeaponStats : Control
         return "Unknown";
     }
 
-    private string GetWeaponStats(string weaponName, WeaponBase weapon)
+    private void ShowWeaponStats(string weaponName, WeaponBase weapon)
     {
-        System.Text.StringBuilder sb = new();
+        Dictionary<string, object> stats = new();
+        Dictionary<string, string> tooltips = new();
+
+        RemoveLabels();
 
         switch (weapon)
         {
             case GunBase gun:
-                sb.AppendLine($"Shoot Speed: {(1 / gun.AnimationPlayer.GetAnimation("Shoot").Length).ToString("0.0").Replace(',', '.').TrimEnd('0').RStrip(".")}");
-                sb.AppendLine($"Damage: {gun.bulletDamage}");
-                sb.AppendLine($"Spread: {gun.bulletSpread}");
+                AddGunBaseStats(gun);
                 break;
         }
 
@@ -64,6 +67,54 @@ public class WeaponStats : Control
         {
         }
 
-        return sb.ToString();
+        AddLabels();
+
+        void AddGunBaseStats(GunBase gun)
+        {
+            float bulletsPerSecond = 1 / gun.AnimationPlayer.GetAnimation("Shoot").Length;
+            stats.Add("Shoot Speed", bulletsPerSecond);
+            stats.Add("Damage", gun.GetBulletDamageAmount());
+            stats.Add("Spread", gun.bulletSpread);
+            stats.Add("DPS", (int)stats["Damage"] * bulletsPerSecond);
+            tooltips.Add("DPS", "Best possible damage per second");
+        }
+
+
+
+        void RemoveLabels()
+        {
+            foreach (Label label in StatLabelContainer.GetChildren())
+                label.QueueFree();
+        }
+        void AddLabels()
+        {
+            foreach (KeyValuePair<string, object> stat in stats)
+            {
+                Label label = new()
+                {
+                    Text = $"{stat.Key}: {StatToString(stat.Value)}",
+                    Align = Label.AlignEnum.Center,
+                    MouseFilter = MouseFilterEnum.Stop,
+                    HintTooltip = tooltips.ContainsKey(stat.Key) ? tooltips[stat.Key] : ""
+                };
+
+                label.Set("custom_fonts/font", font);
+
+                StatLabelContainer.AddChild(label);
+            }
+        }
+
+        string StatToString(object stat)
+        {
+            switch (stat)
+            {
+                case string _string: return _string;
+                case float _float: return FloatToFormattedString(_float);
+            }
+
+            return stat.ToString();
+        }
     }
+
+    private string FloatToFormattedString(float value) => value.ToString("0.0").Replace(',', '.').TrimEnd('0').RStrip(".");
 }

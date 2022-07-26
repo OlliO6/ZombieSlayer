@@ -179,9 +179,9 @@ node_connections = [ "output", 0, "Damage", "Damage", 0, "State", "Damage", 1, "
 [node name="Zombie" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 3 )
-MaxHealth = 24
+MaxHealth = 36
 coinScene = ExtResource( 5 )
-movementSpeedRandomness = 0.8
+movementSpeedRange = Vector2( 6, 20 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 4 )
@@ -189,6 +189,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -6 )
 hframes = 2
 vframes = 3
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

@@ -1,13 +1,11 @@
 using Godot;
-using System;
 using Additions;
 
 public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
 {
     [Export] private PackedScene coinScene;
     [Export] private int coinsAmount = 2;
-    [Export] private float maxMovementSpeed = 20;
-    [Export(PropertyHint.Range, "0,1")] private float movementSpeedRandomness = 0.5f;
+    [Export] private Vector2 movementSpeedRange;
 
     public int DamageAmount => 1;
 
@@ -39,10 +37,10 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
     public override void _Ready()
     {
         CurrentHealth = MaxHealth;
-        movementSpeed = maxMovementSpeed * (1 - (GD.Randf() * movementSpeedRandomness));
+        movementSpeed = Random.FloatRange(movementSpeedRange);
 
         AnimTree.SetParam("State/current", 1);
-        float weight = Mathf.InverseLerp(maxMovementSpeed * (1 - movementSpeedRandomness), maxMovementSpeed, movementSpeed);
+        float weight = Mathf.InverseLerp(movementSpeedRange.x, movementSpeedRange.y, movementSpeed);
         AnimTree.SetParam("RunSpeed/scale", Mathf.Lerp(0.6f, 1, weight));
     }
 

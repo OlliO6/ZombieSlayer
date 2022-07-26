@@ -7,7 +7,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 {
     public static Player currentPlayer;
     [Export] public float movementSpeed, invincibilityTime;
-    [Export] public int extraDamage = 0;
+    [Export] public float damageMultiplier = 1;
     [Export] public int startCoins = 0;
     [Export] private float startMagnetSize = 4;
 
@@ -18,7 +18,6 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         get => storerForCurrentHealth;
         set
         {
-            GD.Print($"CurrentHealth: {value}; MaxHealth: {MaxHealth};");
             storerForCurrentHealth = value;
             EmitSignal(nameof(OnHealthChanged));
             if (value <= 0) Die();

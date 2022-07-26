@@ -33,14 +33,15 @@
     {
       "title": "Doing",
       "tasks": [
-        0
+        5
       ]
     },
     {
       "title": "Done",
       "tasks": [
         1,
-        2
+        2,
+        0
       ]
     }
   ],
@@ -69,6 +70,11 @@
       "category": 0,
       "title": "Zombie spawn animation",
       "details": "so you dont get hit when a zombie spawns inside you"
+    },
+    {
+      "category": 0,
+      "title": "Weapon balancing",
+      "details": "So the damage upgrade can be a multiplier wich is gonna be much better than an adder"
     }
   ]
 }

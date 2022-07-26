@@ -7,7 +7,7 @@ public class GunBase : WeaponBase
     [Export] public PackedScene bulletScene;
     [Export] public Vector2 bulletSpeedRange;
     [Export] public float bulletSpread;
-    [Export] public int bulletDamage;
+    [Export] public int baseBulletDamage;
 
     #region InstantiatePoint Reference
 
@@ -18,6 +18,8 @@ public class GunBase : WeaponBase
     #endregion
 
     protected Bullet lastBullet;
+
+    public virtual int GetBulletDamageAmount() => Mathf.RoundToInt(baseBulletDamage * (Player.currentPlayer is null ? 1 : Player.currentPlayer.damageMultiplier));
 
     public override void Attack()
     {
@@ -32,10 +34,7 @@ public class GunBase : WeaponBase
 
         lastBullet.speed = (float)GD.RandRange(bulletSpeedRange.x, bulletSpeedRange.y);
 
-        lastBullet.DamageAmount = bulletDamage;
-
-        if (Player.currentPlayer is not null)
-            lastBullet.DamageAmount += Player.currentPlayer.extraDamage;
+        lastBullet.DamageAmount = GetBulletDamageAmount();
 
         AnimationPlayer.Play("Shoot");
     }

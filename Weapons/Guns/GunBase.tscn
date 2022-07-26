@@ -108,7 +108,6 @@ weaponPickup = "res://Items/WeaponPickUps/PistolPickup.tscn"
 bulletScene = ExtResource( 3 )
 bulletSpeedRange = Vector2( 90, 100 )
 bulletSpread = 3.0
-bulletDamage = 5
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 2 )
