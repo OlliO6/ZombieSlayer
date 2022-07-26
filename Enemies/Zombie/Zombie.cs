@@ -34,6 +34,20 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
 
     #endregion
 
+    #region FlashTween Reference
+
+    #region AudioPlayer Reference
+
+    private AudioStreamPlayer storerForAudioPlayer;
+    public AudioStreamPlayer AudioPlayer => this.LazyGetNode(ref storerForAudioPlayer, "AudioPlayer");
+
+    #endregion
+
+    private Tween storerForFlashTween;
+    public Tween FlashTween => this.LazyGetNode(ref storerForFlashTween, "FlashTween");
+
+    #endregion
+
     public override void _Ready()
     {
         CurrentHealth = MaxHealth;
@@ -41,12 +55,16 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
 
         AnimTree.SetParam("State/current", 1);
         float weight = Mathf.InverseLerp(movementSpeedRange.x, movementSpeedRange.y, movementSpeed);
-        AnimTree.SetParam("RunSpeed/scale", Mathf.Lerp(0.6f, 1, weight));
+        float runSpeedScale = Mathf.Lerp(0.6f, 1, weight);
+
+        AnimTree.SetParam("RunSpeed/scale", runSpeedScale);
+
+        FlashTween.Connect("tween_all_completed", AnimTree, "set", new("parameters/RunSpeed/scale", runSpeedScale));
     }
 
     public override void _PhysicsProcess(float delta)
     {
-        if (dead || (bool)AnimTree.GetParam("Damage/active")) return;
+        if (dead || FlashTween.IsActive()) return;
 
         Vector2 dirToPlayer = GetDirectionToPlayer();
 
@@ -70,7 +88,11 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
 
         CurrentHealth -= amount;
 
-        AnimTree.SetParam("Damage/active", true);
+        FlashTween.InterpolateProperty(Sprite.Material, "shader_param/flashStrenght", 0.9f, 0f, 0.15f, Tween.TransitionType.Cubic, Tween.EaseType.In);
+        FlashTween.Start();
+        AnimTree.SetParam("RunSpeed/scale", 0);
+
+        AudioPlayer.Play();
 
         if (CurrentHealth <= 0) Die();
     }
