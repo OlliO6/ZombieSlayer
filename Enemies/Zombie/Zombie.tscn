@@ -6,28 +6,11 @@
 [ext_resource path="res://Sounds/Hit_hurt.wav" type="AudioStream" id=4]
 [ext_resource path="res://Items/Coin/Coin.tscn" type="PackedScene" id=5]
 [ext_resource path="res://BasicStuff/VisibilityDisabler.tscn" type="PackedScene" id=6]
-
-[sub_resource type="Shader" id=3]
-code = "shader_type canvas_item;
-
-uniform vec4 flashColor : hint_color;
-uniform float flashStrenght : hint_range(0,1) = 0.5;
-
-void fragment(){
-	vec4 fullColor = texture(TEXTURE, UV);
-	
-	vec3 color = fullColor.rgb;
-	float alpha = fullColor.a;
-	
-	color = mix(fullColor.rgb, flashColor.rgb, flashStrenght);
-	
-	COLOR.rgb = color;
-	COLOR.a = alpha;
-}"
+[ext_resource path="res://Shaders/Flash.gdshader" type="Shader" id=7]
 
 [sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
-shader = SubResource( 3 )
+shader = ExtResource( 7 )
 shader_param/flashColor = Color( 1, 1, 1, 1 )
 shader_param/flashStrenght = 0.0
 
@@ -42,6 +25,7 @@ extents = Vector2( 3, 5 )
 
 [sub_resource type="Animation" id=15]
 resource_name = "Die"
+length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -49,10 +33,24 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.9 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 2, 3, 4, 5, 5 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "DeleteEverythingButSprite"
+} ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -151,7 +149,6 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -6 )
 hframes = 2
 vframes = 3
-frame = 1
 
 [node name="FlashTween" type="Tween" parent="."]
 
@@ -189,7 +186,7 @@ parameters/State/current = 1
 
 [node name="VisibilityDisabler" parent="." instance=ExtResource( 6 )]
 
-[connection signal="OnDied" from="." to="CollisionShape2D" method="set_disabled" flags=3 binds= [ true ]]
-[connection signal="OnDied" from="." to="DamagingHurtArea/CollisionShape2D" method="set_disabled" flags=3 binds= [ true ]]
+[connection signal="Died" from="." to="CollisionShape2D" method="set_disabled" flags=3 binds= [ true ]]
+[connection signal="Died" from="." to="DamagingHurtArea/CollisionShape2D" method="set_disabled" flags=3 binds= [ true ]]
 
 [editable path="DamagingHurtArea"]

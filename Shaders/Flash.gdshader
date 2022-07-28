@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform vec4 flashColor : hint_color;
-uniform float flashStrenght : hint_range(0,1) = 0.5;
+uniform float flashStrenght : hint_range(0,1) = 0.0;
 
 void fragment(){
 	vec4 fullColor = texture(TEXTURE, UV);

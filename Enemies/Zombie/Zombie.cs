@@ -14,9 +14,8 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
     public int CurrentHealth { get; set; }
     [Export] public int MaxHealth { get; set; }
 
-
-    [Signal] public delegate void OnDamaged();
-    [Signal] public delegate void OnDied();
+    [Signal] public delegate void Damaged();
+    [Signal] public delegate void Died();
 
     private bool dead;
 
@@ -84,26 +83,31 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
     public void GetDamage(int amount)
     {
         GD.Print($"Zombie got {amount} damage");
-        EmitSignal(nameof(OnDamaged));
 
         CurrentHealth -= amount;
 
-        FlashTween.InterpolateProperty(Sprite.Material, "shader_param/flashStrenght", 0.9f, 0f, 0.15f, Tween.TransitionType.Cubic, Tween.EaseType.In);
+        FlashTween.InterpolateProperty(Sprite, "material:shader_param/flashStrenght", 0.9f, 0f, 0.15f, Tween.TransitionType.Cubic, Tween.EaseType.In);
         FlashTween.Start();
         AnimTree.SetParam("RunSpeed/scale", 0);
 
         AudioPlayer.Play();
 
+        EmitSignal(nameof(Damaged));
+
         if (CurrentHealth <= 0) Die();
     }
     public void Die()
     {
-        EmitSignal(nameof(OnDied));
         dead = true;
+
+        // better y sort
+        Sprite.Offset += Vector2.Down * 4;
+        Position += Vector2.Up * 4;
 
         AnimTree.SetParam("State/current", 2);
 
         SpawnCoins();
+        EmitSignal(nameof(Died));
     }
 
     private void SpawnCoins()
@@ -117,5 +121,16 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
             coin.GlobalPosition = GlobalPosition;
             coin.Launch();
         }
+    }
+
+    public void DeleteEverythingButSprite()
+    {
+        Vector2 spritePos = Sprite.GlobalPosition;
+        RemoveChild(Sprite);
+        GetParent().AddChild(Sprite);
+        Sprite.GlobalPosition = spritePos;
+        Sprite.Material = null;
+
+        QueueFree();
     }
 }

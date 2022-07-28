@@ -145,4 +145,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+batching/precision/uv_contract=true
 environment/default_clear_color=Color( 0.243137, 0.286275, 0.219608, 1 )
