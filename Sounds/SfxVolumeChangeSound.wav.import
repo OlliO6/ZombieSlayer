@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/SfxVolumeChangeSound.wav-20a6cbaf499d425eab1c9c642b8e9daf.sample"
+
+[deps]
+
+source_file="res://Sounds/SfxVolumeChangeSound.wav"
+dest_files=[ "res://.import/SfxVolumeChangeSound.wav-20a6cbaf499d425eab1c9c642b8e9daf.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=true
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

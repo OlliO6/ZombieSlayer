@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/DiceJump.wav-de1fac2bcde252fb97456f0242efad41.sample"
+path="res://.import/TextProgress.wav-f43adf26ee9bc924c2c95d64c2b5b57b.sample"
 
 [deps]
 
-source_file="res://Sounds/DiceJump.wav"
-dest_files=[ "res://.import/DiceJump.wav-de1fac2bcde252fb97456f0242efad41.sample" ]
+source_file="res://Sounds/TextProgress.wav"
+dest_files=[ "res://.import/TextProgress.wav-f43adf26ee9bc924c2c95d64c2b5b57b.sample" ]
 
 [params]
 

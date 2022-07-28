@@ -11,7 +11,7 @@ dest_files=[ "res://.import/shoot.wav-0005afc1a9faa5087b9d506dd8f620b1.sample" ]
 
 [params]
 
-force/8_bit=true
+force/8_bit=false
 force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100

@@ -8,13 +8,3 @@ script = ExtResource( 1 )
 minWaveInterval = 10.0
 waveIntervalMultiplierRange = Vector2( 0.8, 1.5 )
 enemies = [ ExtResource( 3 ) ]
-
-[node name="WaveTimer" type="Timer" parent="."]
-one_shot = true
-autostart = true
-
-[node name="SpawnTimer" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="timeout" from="WaveTimer" to="." method="StartWave"]
-[connection signal="timeout" from="SpawnTimer" to="." method="SpawnEnemy"]

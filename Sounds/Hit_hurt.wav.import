@@ -11,7 +11,7 @@ dest_files=[ "res://.import/Hit_hurt.wav-862fa294c5cfa12a6b606b2a247be0c0.sample
 
 [params]
 
-force/8_bit=true
+force/8_bit=false
 force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100

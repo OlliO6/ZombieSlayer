@@ -15,7 +15,9 @@ public class OptionsManager : Node
     public static int musicVolume = 7;
     public static bool fullscreen = false;
 
-    public void UpdateOptions()
+    public static void UpdateOptions() => instance._UpdateOptions();
+
+    private void _UpdateOptions()
     {
         OS.WindowFullscreen = fullscreen;
 

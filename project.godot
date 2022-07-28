@@ -11,7 +11,9 @@ config_version=4
 [application]
 
 config/name="ZombieSlayer"
-run/main_scene="res://UI/Menu/Menu.tscn"
+run/main_scene="res://BootSplash/BootSplash.tscn"
+boot_splash/image="res://BootSplash/SplashScreen.png"
+boot_splash/use_filter=false
 config/icon="res://ZombieIcon.png"
 
 [audio]
@@ -72,7 +74,7 @@ wav={
 "edit/loop": false,
 "edit/normalize": false,
 "edit/trim": false,
-"force/8_bit": true,
+"force/8_bit": false,
 "force/max_rate": false,
 "force/max_rate_hz": 44100,
 "force/mono": true
@@ -127,6 +129,11 @@ Inventory={
 DiceMenu={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":82,"unicode":0,"echo":false,"script":null)
+ ]
+}
+SkipBootSplash={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
  ]
 }
 

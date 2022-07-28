@@ -26,7 +26,7 @@ public class OptionsMenu : Control
     {
         OptionsManager.fullscreen = toggled;
 
-        OptionsManager.instance.UpdateOptions();
+        OptionsManager.UpdateOptions();
     }
 
     [TroughtSignal]
@@ -34,7 +34,7 @@ public class OptionsMenu : Control
     {
         OptionsManager.sfxVolume = (int)value;
 
-        OptionsManager.instance.UpdateOptions();
+        OptionsManager.UpdateOptions();
         GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
     }
 
@@ -43,6 +43,6 @@ public class OptionsMenu : Control
     {
         OptionsManager.musicVolume = (int)value;
 
-        OptionsManager.instance.UpdateOptions();
+        OptionsManager.UpdateOptions();
     }
 }

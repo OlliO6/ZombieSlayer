@@ -1,0 +1,227 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=2]
+[ext_resource path="res://BootSplash/BootSplash.cs" type="Script" id=3]
+[ext_resource path="res://Sounds/TextProgress.wav" type="AudioStream" id=4]
+[ext_resource path="res://BootSplash/SplashScreenAnimated.png" type="Texture" id=5]
+[ext_resource path="res://BasicStuff/AnimatedLabel.cs" type="Script" id=6]
+[ext_resource path="res://Sounds/BootShining.wav" type="AudioStream" id=7]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform int pixelSize = 1;
+
+void fragment()
+{
+	
+	ivec2 size = textureSize(TEXTURE, 0);
+	
+	int xRes = size.x;
+	int yRes = size.y;
+	
+	float xFactor = float(xRes) / float(pixelSize);
+	float yFactor = float(yRes) / float(pixelSize);
+	
+	float grid_uv_x;
+	float grid_uv_y;
+	
+	if (pixelSize == 1)
+	{
+		grid_uv_x = UV.x;
+		grid_uv_y = UV.y;
+	}
+	else
+	{
+		grid_uv_x = round(UV.x * xFactor) / xFactor;
+		grid_uv_y = round(UV.y * yFactor) / yFactor;
+	}
+	
+	vec4 text = texture(TEXTURE, vec2(grid_uv_x, grid_uv_y));
+	
+	COLOR = text;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/pixelSize = 30
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 5 )
+region = Rect2( 256, 0, 256, 150 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 150, 256, 150 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 5 )
+region = Rect2( 256, 150, 256, 150 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 300, 256, 150 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 5 )
+region = Rect2( 256, 300, 256, 150 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 450, 256, 150 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 5 )
+region = Rect2( 256, 450, 256, 150 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 600, 256, 150 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 5 )
+region = Rect2( 256, 600, 256, 150 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 256, 150 )
+
+[sub_resource type="SpriteFrames" id=17]
+animations = [ {
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ), SubResource( 18 ) ],
+"loop": true,
+"name": "Glow",
+"speed": 12.0
+} ]
+
+[sub_resource type="AudioStreamRandomPitch" id=1]
+audio_stream = ExtResource( 4 )
+
+[sub_resource type="Animation" id=28]
+resource_name = "Boot"
+length = 3.0
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 2.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "LoadMenu"
+} ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Control/AnimatedLabel")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.082, 0 ],
+"method": "AnimateText"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Control:material:shader_param/pixelSize")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.6, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1, 1, 30 ]
+}
+tracks/3/type = "audio"
+tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 7 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Control/AnimatedSprite:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Control/AnimatedSprite:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+
+[node name="BootSpalsh" type="CanvasLayer"]
+script = ExtResource( 3 )
+
+[node name="Control" type="Control" parent="."]
+material = SubResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
+use_parent_material = true
+frames = SubResource( 17 )
+animation = "Glow"
+centered = false
+
+[node name="AnimatedLabel" type="Label" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 99.0
+text = "Made With Godot"
+align = 1
+valign = 1
+uppercase = true
+percent_visible = 0.0
+script = ExtResource( 6 )
+sound = SubResource( 1 )
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="Control/AnimatedLabel"]
+volume_db = -9.996
+pitch_scale = 0.26
+bus = "SFX"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = 11.946
+bus = "SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Boot"
+anims/Boot = SubResource( 28 )
+anims/RESET = SubResource( 2 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="OnBootAnimationFinished"]

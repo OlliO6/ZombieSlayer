@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/DiceJump.wav-de1fac2bcde252fb97456f0242efad41.sample"
+path="res://.import/BootShining.wav-ddaf088d2685c228e9ab2f7cc0cffaca.sample"
 
 [deps]
 
-source_file="res://Sounds/DiceJump.wav"
-dest_files=[ "res://.import/DiceJump.wav-de1fac2bcde252fb97456f0242efad41.sample" ]
+source_file="res://Sounds/BootShining.wav"
+dest_files=[ "res://.import/BootShining.wav-ddaf088d2685c228e9ab2f7cc0cffaca.sample" ]
 
 [params]
 

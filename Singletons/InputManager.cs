@@ -41,5 +41,28 @@ public class InputManager : Node
             EmitSignal(nameof(AttackInputEnded));
             return;
         }
+
+        if (@event is InputEventKey keyInput)
+        {
+            if (keyInput.Pressed)
+            {
+                if (keyInput.Scancode is (uint)KeyList.F11)
+                {
+                    ToggleFullscreen();
+                    return;
+                }
+
+                return;
+            }
+
+            return;
+        }
+    }
+
+    private void ToggleFullscreen()
+    {
+        OptionsManager.fullscreen = !OptionsManager.fullscreen;
+
+        OptionsManager.UpdateOptions();
     }
 }

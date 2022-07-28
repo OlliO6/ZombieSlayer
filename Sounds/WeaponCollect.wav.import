@@ -11,7 +11,7 @@ dest_files=[ "res://.import/WeaponCollect.wav-f76a0a3422b32ce36a7e83f93e4e8527.s
 
 [params]
 
-force/8_bit=true
+force/8_bit=false
 force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100

@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/DiceJump.wav-de1fac2bcde252fb97456f0242efad41.sample"
+path="res://.import/SplashWord.wav-8182de05b42224e2c3e5318fc9c270fa.sample"
 
 [deps]
 
-source_file="res://Sounds/DiceJump.wav"
-dest_files=[ "res://.import/DiceJump.wav-de1fac2bcde252fb97456f0242efad41.sample" ]
+source_file="res://Sounds/SplashWord.wav"
+dest_files=[ "res://.import/SplashWord.wav-8182de05b42224e2c3e5318fc9c270fa.sample" ]
 
 [params]
 

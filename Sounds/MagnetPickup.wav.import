@@ -11,7 +11,7 @@ dest_files=[ "res://.import/MagnetPickup.wav-2c741d6c11f29dbe5863d00cfb3176ab.sa
 
 [params]
 
-force/8_bit=true
+force/8_bit=false
 force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100

@@ -11,7 +11,7 @@ dest_files=[ "res://.import/DiceLoose.wav-b688e5ca0659e67b4341c50f6ba70d31.sampl
 
 [params]
 
-force/8_bit=true
+force/8_bit=false
 force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100
