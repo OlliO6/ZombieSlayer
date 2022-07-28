@@ -7,12 +7,12 @@ public interface IKillable
 public interface IDamageable
 {
     public void GetDamage(int amount);
+    public bool AllowDamageFrom(IDamageDealer from);
 }
 public interface IDamageDealer
 {
     public int DamageAmount { get; }
-
-    public void DamageReceived(IDamageable to);
+    public bool AllowDamageTo(IDamageable to);
 }
 public interface IHealth
 {

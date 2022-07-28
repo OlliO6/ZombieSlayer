@@ -225,16 +225,12 @@ smoothing_enabled = true
 
 [node name="Inventory" parent="UI" instance=ExtResource( 11 )]
 
-[node name="InvincibilityTimer" type="Timer" parent="."]
-one_shot = true
-
 [connection signal="CoinsAmountChanged" from="." to="UI/IngameUI" method="OnCoinsAmountChanged"]
 [connection signal="HealthChanged" from="." to="UI/IngameUI" method="OnPlayerHealthChanged"]
 [connection signal="InvincibilityEnded" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ true ]]
-[connection signal="InvincibilityEnded" from="." to="HurtArea" method="Check"]
+[connection signal="InvincibilityEnded" from="." to="HurtArea" method="Check" flags=3]
 [connection signal="InvincibilityStarted" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ false ]]
 [connection signal="WeaponChanged" from="WeaponPivot/WeaponSwitcher" to="UI/IngameUI" method="OnWeaponChanged"]
 [connection signal="InventoryPressed" from="UI/PauseMenu" to="UI/Inventory" method="Open"]
-[connection signal="timeout" from="InvincibilityTimer" to="." method="OnInvincibilityTimeEnded"]
 
 [editable path="HurtArea"]

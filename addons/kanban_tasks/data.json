@@ -27,7 +27,8 @@
       "title": "Todo",
       "tasks": [
         3,
-        4
+        4,
+        6
       ]
     },
     {
@@ -75,6 +76,11 @@
       "category": 0,
       "title": "Weapon balancing",
       "details": "So the damage upgrade can be a multiplier wich is gonna be much better than an adder"
+    },
+    {
+      "category": 0,
+      "title": "Bullets go trough enemies upgrade",
+      "details": "but bullets will deal less damage"
     }
   ]
 }

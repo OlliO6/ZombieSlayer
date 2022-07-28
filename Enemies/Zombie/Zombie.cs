@@ -80,6 +80,8 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
         return (Player.currentPlayer.GlobalPosition - GlobalPosition).Normalized();
     }
 
+    public bool AllowDamageFrom(IDamageDealer from) => true;
+
     public void GetDamage(int amount)
     {
         GD.Print($"Zombie got {amount} damage");
@@ -96,6 +98,7 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
 
         if (CurrentHealth <= 0) Die();
     }
+
     public void Die()
     {
         dead = true;

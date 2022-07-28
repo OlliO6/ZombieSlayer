@@ -1,11 +1,12 @@
 using Godot;
-using System;
+using System.Threading;
 using Additions;
 
 public class HurtArea : Area2D
 {
     [Export] private bool damageFromAreas = true, damageFromBodies = false;
 
+    [Signal] public delegate void ApplyingDamage();
     [Signal] public delegate void DamageApplied();
 
     #region DamageReceiver Reference
@@ -60,8 +61,9 @@ public class HurtArea : Area2D
 
     private void ApplyDamage(IDamageDealer dealer)
     {
+        if (!DamageReceiver.AllowDamageFrom(dealer) || !dealer.AllowDamageTo(DamageReceiver)) return;
+
         DamageReceiver.GetDamage(dealer.DamageAmount);
-        dealer.DamageReceived(DamageReceiver);
 
         EmitSignal(nameof(DamageApplied));
     }

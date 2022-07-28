@@ -130,10 +130,17 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         }
     }
 
+    public bool AllowDamageFrom(IDamageDealer from)
+    {
+        return true;
+    }
+
     public void GetDamage(int amount)
     {
         if (isInvincible)
             return;
+
+        CurrentHealth -= amount;
 
         GD.Print($"Player got {amount} damage");
 
@@ -141,16 +148,13 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         EmitSignal(nameof(InvincibilityStarted));
         Sprite.SetShaderParam("blinking", true);
 
-        CurrentHealth -= amount;
-
-        GetNode<Timer>("InvincibilityTimer").Start(invincibilityTime);
-    }
-    [TroughtSignal]
-    private void OnInvincibilityTimeEnded()
-    {
-        isInvincible = false;
-        EmitSignal(nameof(InvincibilityEnded));
-        Sprite.SetShaderParam("blinking", false);
+        new TimerAwaiter(this, invincibilityTime,
+                onCompleted: () =>
+                {
+                    isInvincible = false;
+                    EmitSignal(nameof(InvincibilityEnded));
+                    Sprite.SetShaderParam("blinking", false);
+                });
     }
 
     public void Die()

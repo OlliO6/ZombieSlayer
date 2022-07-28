@@ -1,12 +1,11 @@
 using Additions;
 using Godot;
-using System;
 
 public class GunBase : WeaponBase
 {
     [Export] public PackedScene bulletScene;
     [Export] public Vector2 bulletSpeedRange;
-    [Export] public float bulletSpread;
+    [Export] public float bulletSpread, bulletLivetime = 3;
     [Export] public int baseBulletDamage;
 
     #region InstantiatePoint Reference
@@ -27,14 +26,15 @@ public class GunBase : WeaponBase
 
         lastBullet = bulletScene.Instance<Bullet>();
 
-        GetTree().CurrentScene.AddChild(lastBullet);
-        lastBullet.GlobalTransform = InstantiatePoint.GlobalTransform;
-
-        lastBullet.Rotate(Mathf.Deg2Rad((float)GD.RandRange(-bulletSpread, bulletSpread)));
+        lastBullet.Rotate(Mathf.Deg2Rad(Random.NormallyDistributedFloat(deviation: bulletSpread)));
 
         lastBullet.speed = (float)GD.RandRange(bulletSpeedRange.x, bulletSpeedRange.y);
-
         lastBullet.DamageAmount = GetBulletDamageAmount();
+        GD.Print(bulletLivetime);
+        lastBullet.maxLivetime = bulletLivetime;
+
+        GetTree().CurrentScene.AddChild(lastBullet);
+        lastBullet.GlobalTransform = InstantiatePoint.GlobalTransform;
 
         AnimationPlayer.Play("Shoot");
     }

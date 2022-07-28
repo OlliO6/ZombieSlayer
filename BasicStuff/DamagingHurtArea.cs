@@ -1,13 +1,29 @@
 using Godot;
-using System;
+using System.Threading;
 
 public class DamagingHurtArea : HurtArea, IDamageDealer
 {
+    [Signal] public delegate void DealingDamage(Node from, Node to);
     [Signal] public delegate void DamageDealed(Node to);
     [Export] public int DamageAmount { get; set; }
 
-    public void DamageReceived(IDamageable to)
+    private CancellationTokenSource dealDamageCancellation;
+
+    public void CancelDamage()
     {
-        EmitSignal(nameof(DamageDealed), to as Node);
+        dealDamageCancellation.Cancel();
+    }
+
+    bool IDamageDealer.AllowDamageTo(IDamageable to)
+    {
+        dealDamageCancellation = new();
+
+        EmitSignal(nameof(DealingDamage), this, to as Node);
+
+        if (dealDamageCancellation.Token.IsCancellationRequested) return false;
+
+        EmitSignal(nameof(DamageDealed));
+
+        return true;
     }
 }

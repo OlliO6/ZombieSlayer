@@ -71,6 +71,7 @@ weaponPickup = "res://Items/WeaponPickUps/RiflePickup.tscn"
 icon = ExtResource( 5 )
 bulletSpeedRange = Vector2( 140, 150 )
 bulletSpread = 4.0
+bulletLivetime = 0.072
 baseBulletDamage = 5
 
 [node name="Sprite" parent="." index="0"]

@@ -6,6 +6,8 @@ public class Bullet : Area2D, IKillable, IDamageDealer
 {
     [Export] public int DamageAmount { get; set; }
     [Export] public float maxLivetime = 3;
+    [Export] private bool goTroughAllTargets = false;
+    [Export] public int goThroughTargetsCount = 0;
 
     public float speed;
 
@@ -20,13 +22,8 @@ public class Bullet : Area2D, IKillable, IDamageDealer
 
     public override void _Ready()
     {
-        Timer timer = new Timer();
-        this.AddChild(timer);
-        timer.Connect("timeout", this, nameof(DieInstant));
-        timer.Start(maxLivetime);
+        new TimerAwaiter(this, maxLivetime, onCompleted: DieInstant);
     }
-
-
 
     public override void _PhysicsProcess(float delta)
     {
@@ -50,8 +47,16 @@ public class Bullet : Area2D, IKillable, IDamageDealer
         AnimationPlayer.Play("Die");
     }
 
-    public virtual void DamageReceived(IDamageable to)
+    public bool AllowDamageTo(IDamageable to)
     {
-        Die();
+        if (!goTroughAllTargets && goThroughTargetsCount <= 0)
+        {
+            Die();
+            return true;
+        }
+
+        goThroughTargetsCount--;
+
+        return !dead;
     }
 }
