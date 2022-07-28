@@ -6,6 +6,8 @@ public class HurtArea : Area2D
 {
     [Export] private bool damageFromAreas = true, damageFromBodies = false;
 
+    [Signal] public delegate void DamageApplied();
+
     #region DamageReceiver Reference
 
     private IDamageable storerForDamageReceiver;
@@ -30,9 +32,37 @@ public class HurtArea : Area2D
         if (body is IDamageDealer dealer) ApplyDamage(dealer);
     }
 
+    public void Check()
+    {
+        if (damageFromAreas)
+        {
+            foreach (Area2D area in GetOverlappingAreas())
+            {
+                if (area is IDamageDealer dealer)
+                {
+                    ApplyDamage(dealer);
+                    return;
+                }
+            }
+        }
+        if (damageFromBodies)
+        {
+            foreach (PhysicsBody2D body in GetOverlappingBodies())
+            {
+                if (body is IDamageDealer dealer)
+                {
+                    ApplyDamage(dealer);
+                    return;
+                }
+            }
+        }
+    }
+
     private void ApplyDamage(IDamageDealer dealer)
     {
         DamageReceiver.GetDamage(dealer.DamageAmount);
         dealer.DamageReceived(DamageReceiver);
+
+        EmitSignal(nameof(DamageApplied));
     }
 }

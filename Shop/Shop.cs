@@ -6,10 +6,10 @@ public class Shop : Area2D
     [Export] private NodePath shopMenu;
     bool playerInArea;
 
-    [Signal] public delegate void OnMenuOpen();
-    [Signal] public delegate void OnMenuClose();
-    [Signal] public delegate void OnPlayerEntered();
-    [Signal] public delegate void OnPlayerExited();
+    [Signal] public delegate void MenuOpened();
+    [Signal] public delegate void MenuClosed();
+    [Signal] public delegate void PlayerEntered();
+    [Signal] public delegate void PlayerExited();
 
     [TroughtSignal]
     private void OnAreaEntered(Area2D area)
@@ -17,7 +17,7 @@ public class Shop : Area2D
         if (Player.currentPlayer is null) return;
 
         playerInArea = true;
-        EmitSignal(nameof(OnPlayerEntered));
+        EmitSignal(nameof(PlayerEntered));
     }
 
     private void OnAreaExited(Area2D area)
@@ -25,7 +25,7 @@ public class Shop : Area2D
         if (Player.currentPlayer is null) return;
 
         playerInArea = false;
-        EmitSignal(nameof(OnPlayerExited));
+        EmitSignal(nameof(PlayerExited));
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -44,7 +44,7 @@ public class Shop : Area2D
         shop.Visible = true;
         shop.OnUpdateRatio();
 
-        EmitSignal(nameof(OnMenuOpen));
+        EmitSignal(nameof(MenuOpened));
     }
     public void CloseMenu()
     {
@@ -52,6 +52,6 @@ public class Shop : Area2D
 
         GetNode<CanvasItem>(shopMenu).Visible = false;
 
-        EmitSignal(nameof(OnMenuClose));
+        EmitSignal(nameof(MenuClosed));
     }
 }

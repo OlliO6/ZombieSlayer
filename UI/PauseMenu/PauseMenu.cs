@@ -3,7 +3,7 @@ using System;
 
 public class PauseMenu : Control
 {
-    [Signal] public delegate void OnInventoryPressed();
+    [Signal] public delegate void InventoryPressed();
 
     private bool paused;
 
@@ -39,6 +39,6 @@ public class PauseMenu : Control
     private void OnInventoryButtonPressed()
     {
         Unpause();
-        EmitSignal(nameof(OnInventoryPressed));
+        EmitSignal(nameof(InventoryPressed));
     }
 }

@@ -155,5 +155,5 @@ bus = "SFX"
 position = Vector2( 2.98023e-08, 0 )
 scale = Vector2( 0.5, 0.5 )
 
-[connection signal="OnCollected" from="." to="AnimationPlayer" method="play" binds= [ "Collect" ]]
+[connection signal="Collected" from="." to="AnimationPlayer" method="play" binds= [ "Collect" ]]
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]

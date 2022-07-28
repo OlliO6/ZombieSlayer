@@ -89,7 +89,7 @@ public class IngameUI : Control
             WeaponBase weapon = weapons[i];
 
             field.Visible = true;
-            field.Selected = i == index;
+            field.IsSelected = i == index;
 
             if (weapon is null)
             {

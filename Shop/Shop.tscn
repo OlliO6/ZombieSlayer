@@ -1,9 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Shop/Shop.png" type="Texture" id=1]
 [ext_resource path="res://Shop/Shop.cs" type="Script" id=2]
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=3]
 [ext_resource path="res://Shop/ShopMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Weapons/Guns/Rifle/RifleIcon.png" type="Texture" id=5]
+[ext_resource path="res://Player/Upgrades/Icons/Magnet.png" type="Texture" id=6]
+[ext_resource path="res://Player/Upgrades/Icons/SpeedUpgrade.png" type="Texture" id=7]
+[ext_resource path="res://Player/Upgrades/Icons/DamageUp.png" type="Texture" id=8]
+[ext_resource path="res://Items/Health/HealthIcon.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 2 )
@@ -102,8 +107,41 @@ visible = false
 margin_left = 48.0
 margin_right = 148.0
 
-[connection signal="OnPlayerEntered" from="." to="AnimationPlayer" method="play" binds= [ "ShowText" ]]
-[connection signal="OnPlayerExited" from="." to="AnimationPlayer" method="play" binds= [ "HideText" ]]
+[node name="VBoxContainer" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer" index="0"]
+margin_bottom = 84.0
+
+[node name="SpeedUp" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" index="0"]
+hint_tooltip = "Move faster"
+
+[node name="Icon" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/SpeedUp/HBoxContainer" index="0"]
+texture = ExtResource( 7 )
+
+[node name="Label" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/SpeedUp/HBoxContainer" index="1"]
+text = "4"
+
+[node name="Icon" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Magnet/HBoxContainer" index="0"]
+texture = ExtResource( 6 )
+
+[node name="Label" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Magnet/HBoxContainer" index="1"]
+text = "5"
+
+[node name="Icon" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/RiflePickUp/HBoxContainer" index="0"]
+texture = ExtResource( 5 )
+
+[node name="Label" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/RiflePickUp/HBoxContainer" index="1"]
+text = "20"
+
+[node name="Icon" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/DamageUp/HBoxContainer" index="0"]
+texture = ExtResource( 8 )
+
+[node name="Label" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/DamageUp/HBoxContainer" index="1"]
+text = "8"
+
+[node name="Icon" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Heart/HBoxContainer" index="0"]
+texture = ExtResource( 9 )
+
+[connection signal="PlayerEntered" from="." to="AnimationPlayer" method="play" binds= [ "ShowText" ]]
+[connection signal="PlayerExited" from="." to="AnimationPlayer" method="play" binds= [ "HideText" ]]
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="area_exited" from="." to="." method="OnAreaExited"]
 [connection signal="pressed" from="CanvasLayer/ShopMenu/MarginContainer/Panel/BackButton" to="." method="CloseMenu"]

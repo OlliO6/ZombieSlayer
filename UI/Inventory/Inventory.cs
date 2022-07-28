@@ -4,9 +4,9 @@ using Additions;
 
 public class Inventory : Control
 {
-    [Signal] public delegate void OnOpened();
-    [Signal] public delegate void OnClosed();
-    [Signal] public delegate void OnSelectionChanged(Node to);
+    [Signal] public delegate void Opened();
+    [Signal] public delegate void Closed();
+    [Signal] public delegate void SelectionChanged(Node to);
 
     #region DiceContainer Reference
 
@@ -32,11 +32,11 @@ public class Inventory : Control
         get => selection;
         set
         {
-            if (IsInstanceValid(Selection as Node)) Selection.Selected = false;
+            if (IsInstanceValid(Selection as Node)) Selection.IsSelected = false;
 
             selection = value;
 
-            EmitSignal(nameof(OnSelectionChanged), value as Node);
+            EmitSignal(nameof(FieldSelected), value as Node);
         }
     }
 
@@ -60,7 +60,7 @@ public class Inventory : Control
 
         CoinLabel.Text = Player.currentPlayer is null ? "0" : Player.currentPlayer.Coins.ToString();
 
-        EmitSignal(nameof(OnOpened));
+        EmitSignal(nameof(Opened));
     }
 
     private void Close()
@@ -69,12 +69,12 @@ public class Inventory : Control
         GetTree().Paused = false;
         Visible = false;
 
-        EmitSignal(nameof(OnClosed));
+        EmitSignal(nameof(Closed));
     }
 
-    public void SelectionChanged(Node to, bool selected)
+    public void FieldSelected(Node field, bool selected)
     {
-        if (to is not ISelectable selectable) return;
+        if (field is not ISelectable selectable) return;
 
         if (selected)
         {

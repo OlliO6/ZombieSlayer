@@ -18,8 +18,8 @@ public class WeaponBase : Node2D
 
     public override void _Ready()
     {
-        InputManager.instance.Connect(nameof(InputManager.OnAttackInputStarted), this, nameof(OnAttackInputStarted));
-        InputManager.instance.Connect(nameof(InputManager.OnAttackInputEnded), this, nameof(OnAttackInputEnded));
+        InputManager.instance.Connect(nameof(InputManager.AttackInputStarted), this, nameof(OnAttackInputStarted));
+        InputManager.instance.Connect(nameof(InputManager.AttackInputEnded), this, nameof(OnAttackInputEnded));
     }
 
     public virtual void Disable()

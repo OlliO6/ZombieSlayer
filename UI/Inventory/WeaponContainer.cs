@@ -17,7 +17,7 @@ public class WeaponContainer : HBoxContainer
         {
             DragableWeaponField field = GetChild<DragableWeaponField>(i);
 
-            field.Selected = false;
+            field.IsSelected = false;
 
             if (i >= weapons.Count)
             {

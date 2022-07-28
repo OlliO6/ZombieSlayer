@@ -18,7 +18,7 @@ public class WeaponSwitcher : Node2D
     }
     private WeaponBase _currentWeapon;
 
-    [Signal] public delegate void OnWeaponChanged(int to);
+    [Signal] public delegate void WeaponChanged(int to);
 
     public override void _Ready()
     {
@@ -114,7 +114,7 @@ public class WeaponSwitcher : Node2D
 
         CurrentWeapon = GetChild<WeaponBase>(currentIndex);
 
-        EmitSignal(nameof(OnWeaponChanged), currentIndex);
+        EmitSignal(nameof(WeaponChanged), currentIndex);
     }
 
     public void AddWeapon(WeaponBase weapon)

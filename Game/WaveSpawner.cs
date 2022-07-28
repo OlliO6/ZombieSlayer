@@ -9,7 +9,7 @@ public class WaveSpawner : Node
     [Export] private float enemyCountMultiplier = 3, enemyCountPower = 0.8f;
     [Export] private PackedScene[] enemies;
 
-    [Signal] public delegate void OnWaveStarted();
+    [Signal] public delegate void WaveStarted();
 
     public int currentWave;
 
@@ -24,7 +24,7 @@ public class WaveSpawner : Node
     private void StartWave()
     {
         currentWave++;
-        EmitSignal(nameof(OnWaveStarted));
+        EmitSignal(nameof(WaveStarted));
 
         int targetEnemyCount = Mathf.RoundToInt(Mathf.Pow(currentWave * enemyCountMultiplier, enemyCountPower));
 

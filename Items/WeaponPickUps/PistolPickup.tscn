@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Weapons/Guns/Pistol/PistolIcon.png" type="Texture" id=1]
 [ext_resource path="res://Items/WeaponPickUps/WeaponPickUp.cs" type="Script" id=2]
 [ext_resource path="res://Items/InteractionPickupBase.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Weapons/Guns/Pistol/Pistol.tscn" type="PackedScene" id=4]
@@ -11,10 +10,6 @@ radius = 5.0
 [node name="PistolPickup" instance=ExtResource( 3 )]
 script = ExtResource( 2 )
 weaponScene = ExtResource( 4 )
-
-[node name="Sprite" parent="." index="0"]
-texture = ExtResource( 1 )
-hframes = 1
 
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource( 1 )

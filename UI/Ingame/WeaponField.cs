@@ -6,18 +6,18 @@ using System;
 public class WeaponField : NinePatchRect, ISelectable
 {
     [Export]
-    public bool Selected
+    public bool IsSelected
     {
         get => _selected;
         set
         {
-            if (value == Selected) return;
+            if (value == IsSelected) return;
 
             _selected = value;
 
             SelectFrame?.SetDeferred("visible", value);
 
-            EmitSignal(value ? nameof(OnSelected) : nameof(OnDeselected), this);
+            EmitSignal(value ? nameof(Selected) : nameof(Deselected), this);
         }
     }
     [Export]
@@ -33,8 +33,8 @@ public class WeaponField : NinePatchRect, ISelectable
 
     public int Index => GetIndex();
 
-    [Signal] public delegate void OnSelected(DiceField from);
-    [Signal] public delegate void OnDeselected(DiceField from);
+    [Signal] public delegate void Selected(DiceField from);
+    [Signal] public delegate void Deselected(DiceField from);
 
     private bool _selected;
     private Texture _icon;

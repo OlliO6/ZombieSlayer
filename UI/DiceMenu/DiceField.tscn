@@ -30,6 +30,7 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]
+self_modulate = Color( 0.454902, 0.454902, 0.454902, 1 )
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0

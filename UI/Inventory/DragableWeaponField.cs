@@ -34,8 +34,8 @@ public class DragableWeaponField : WeaponField
     {
         if (Owner is Inventory inventory)
         {
-            Connect(nameof(OnSelected), inventory, nameof(Inventory.SelectionChanged), new(true));
-            Connect(nameof(OnDeselected), inventory, nameof(Inventory.SelectionChanged), new(false));
+            Connect(nameof(Selected), inventory, nameof(Inventory.FieldSelected), new(true));
+            Connect(nameof(Deselected), inventory, nameof(Inventory.FieldSelected), new(false));
         }
     }
 
@@ -91,7 +91,7 @@ public class DragableWeaponField : WeaponField
     {
         if (!Disabled && @event is InputEventMouseButton mouseInput && mouseInput.IsPressed() && mouseInput.ButtonIndex is (int)ButtonList.Left)
         {
-            Selected = !Selected;
+            IsSelected = !IsSelected;
         }
     }
 }

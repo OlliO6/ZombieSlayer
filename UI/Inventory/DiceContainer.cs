@@ -28,14 +28,14 @@ public class DiceContainer : VBoxContainer
             DiceField diceField = diceFieldScene.Instance<DiceField>();
 
             diceField.watchable = false;
-            diceField.Watched = false;
-            diceField.Selected = false;
+            diceField.IsWatched = false;
+            diceField.IsSelected = false;
             diceField.dice = dice;
 
             if (Owner is Inventory inventory)
             {
-                diceField.Connect(nameof(DiceField.OnSelected), inventory, nameof(Inventory.SelectionChanged), new(true));
-                diceField.Connect(nameof(DiceField.OnDeselected), inventory, nameof(Inventory.SelectionChanged), new(false));
+                diceField.Connect(nameof(DiceField.Selected), inventory, nameof(Inventory.FieldSelected), new(true));
+                diceField.Connect(nameof(DiceField.Deselected), inventory, nameof(Inventory.FieldSelected), new(false));
             }
 
             AddChild(diceField);

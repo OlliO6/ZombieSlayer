@@ -33,7 +33,7 @@ public class ShopItem : Control
         }
     }
 
-    [Signal] public delegate void OnCurrentAmountChanged();
+    [Signal] public delegate void AmountChanged();
 
     public int currentAmount;
     public int currentPrice;
@@ -58,7 +58,7 @@ public class ShopItem : Control
 
     public override void _Ready()
     {
-        if (Owner is not null) Connect(nameof(OnCurrentAmountChanged), Owner, "OnUpdateRatio");
+        if (Owner is not null) Connect(nameof(AmountChanged), Owner, "OnUpdateRatio");
         priceLabel = GetNode<Label>("HBoxContainer/Label");
 
         UpdateShopItem();
@@ -100,7 +100,7 @@ public class ShopItem : Control
         currentPrice += GetPrice();
         buyCount++;
 
-        EmitSignal(nameof(OnCurrentAmountChanged));
+        EmitSignal(nameof(AmountChanged));
         UpdateShopItem();
     }
     [TroughtSignal]
@@ -110,7 +110,7 @@ public class ShopItem : Control
         buyCount--;
         currentPrice -= GetPrice();
 
-        EmitSignal(nameof(OnCurrentAmountChanged));
+        EmitSignal(nameof(AmountChanged));
         UpdateShopItem();
     }
 

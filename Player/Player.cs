@@ -19,7 +19,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         set
         {
             storerForCurrentHealth = value;
-            EmitSignal(nameof(OnHealthChanged));
+            EmitSignal(nameof(HealthChanged));
             if (value <= 0) Die();
         }
     }
@@ -31,17 +31,17 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         set
         {
             coins = value;
-            EmitSignal(nameof(OnCoinsAmountChanged), value);
+            EmitSignal(nameof(CoinsAmountChanged), value);
         }
     }
     private int coins;
 
     public float MagnetAreaSize { get => MagnetArea.Size; set => MagnetArea.Size = value; }
 
-    [Signal] public delegate void OnCoinsAmountChanged(int amount);
-    [Signal] public delegate void OnInvincibilityStarted();
-    [Signal] public delegate void OnInvincibilityEnded();
-    [Signal] public delegate void OnHealthChanged();
+    [Signal] public delegate void CoinsAmountChanged(int amount);
+    [Signal] public delegate void InvincibilityStarted();
+    [Signal] public delegate void InvincibilityEnded();
+    [Signal] public delegate void HealthChanged();
 
 
     #region AnimationTree Reference
@@ -138,7 +138,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         GD.Print($"Player got {amount} damage");
 
         isInvincible = true;
-        EmitSignal(nameof(OnInvincibilityStarted));
+        EmitSignal(nameof(InvincibilityStarted));
         Sprite.SetShaderParam("blinking", true);
 
         CurrentHealth -= amount;
@@ -149,7 +149,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     private void OnInvincibilityTimeEnded()
     {
         isInvincible = false;
-        EmitSignal(nameof(OnInvincibilityEnded));
+        EmitSignal(nameof(InvincibilityEnded));
         Sprite.SetShaderParam("blinking", false);
     }
 

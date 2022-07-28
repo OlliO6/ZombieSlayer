@@ -3,9 +3,9 @@ using System;
 
 public class InteractionPickupBase : Area2D
 {
-    [Signal] public delegate void OnCollected();
-    [Signal] public delegate void OnPlayerEntered();
-    [Signal] public delegate void OnPlayerExited();
+    [Signal] public delegate void Collected();
+    [Signal] public delegate void PlayerEntered();
+    [Signal] public delegate void PlayerExited();
 
     protected bool playerInArea;
     protected bool collected;
@@ -19,7 +19,7 @@ public class InteractionPickupBase : Area2D
 
         playerInArea = true;
         GD.Print("OnPlayerEntered");
-        EmitSignal(nameof(OnPlayerEntered));
+        EmitSignal(nameof(PlayerEntered));
     }
 
     [TroughtSignal]
@@ -29,7 +29,7 @@ public class InteractionPickupBase : Area2D
 
         playerInArea = false;
         GD.Print("OnPlayerExited");
-        EmitSignal(nameof(OnPlayerExited));
+        EmitSignal(nameof(PlayerExited));
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -41,7 +41,7 @@ public class InteractionPickupBase : Area2D
             collected = true;
             Collect();
             GD.Print("OnCollected");
-            EmitSignal(nameof(OnCollected));
+            EmitSignal(nameof(Collected));
         }
     }
 

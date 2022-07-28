@@ -22,5 +22,5 @@ public interface IHealth
 
 public interface ISelectable
 {
-    public bool Selected { get; set; }
+    public bool IsSelected { get; set; }
 }

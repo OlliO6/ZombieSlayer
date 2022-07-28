@@ -193,8 +193,8 @@ align = 1
 position = Vector2( 2.98023e-08, 0 )
 scale = Vector2( 0.5, 0.5 )
 
-[connection signal="OnCollected" from="." to="AnimationPlayer" method="play" binds= [ "Collect" ]]
-[connection signal="OnPlayerEntered" from="." to="AnimationPlayer" method="play" binds= [ "ShowText" ]]
-[connection signal="OnPlayerExited" from="." to="AnimationPlayer" method="play" binds= [ "HideText" ]]
+[connection signal="Collected" from="." to="AnimationPlayer" method="play" binds= [ "Collect" ]]
+[connection signal="PlayerEntered" from="." to="AnimationPlayer" method="play" binds= [ "ShowText" ]]
+[connection signal="PlayerExited" from="." to="AnimationPlayer" method="play" binds= [ "HideText" ]]
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="area_exited" from="." to="." method="OnAreaExited"]

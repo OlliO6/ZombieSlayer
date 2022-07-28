@@ -3,7 +3,7 @@ using System;
 
 public class PickupBase : Area2D
 {
-    [Signal] public delegate void OnCollected();
+    [Signal] public delegate void Collected();
 
     protected bool collected;
 
@@ -17,7 +17,7 @@ public class PickupBase : Area2D
 
         collected = true;
         Collect();
-        EmitSignal(nameof(OnCollected));
+        EmitSignal(nameof(Collected));
     }
 
     public virtual void Collect() { }

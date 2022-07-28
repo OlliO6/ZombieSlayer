@@ -7,9 +7,9 @@ public class DiceMenu : Control
 {
     [Export] private PackedScene diceFieldScene, diceSceneFieldScene;
 
-    [Signal] public delegate void OnOpened();
-    [Signal] public delegate void OnOpenStarted();
-    [Signal] public delegate void OnClosed();
+    [Signal] public delegate void Opened();
+    [Signal] public delegate void OpenStarted();
+    [Signal] public delegate void Closed();
 
     private bool isOpen;
     private int slectedCount;
@@ -70,7 +70,7 @@ public class DiceMenu : Control
     {
         if (GetTree().Paused == true) return;
 
-        EmitSignal(nameof(OnOpenStarted));
+        EmitSignal(nameof(OpenStarted));
 
         AnimationPlayer.Stop();
         AnimationPlayer.Play("Open");
@@ -83,14 +83,14 @@ public class DiceMenu : Control
 
         isOpen = true;
         GetTree().Paused = true;
-        EmitSignal(nameof(OnOpened));
+        EmitSignal(nameof(Opened));
     }
 
     private void Close()
     {
         isOpen = false;
         GetTree().Paused = false;
-        EmitSignal(nameof(OnClosed));
+        EmitSignal(nameof(Closed));
 
         float animationPosition = AnimationPlayer.CurrentAnimationLength - AnimationPlayer.CurrentAnimationPosition;
         AnimationPlayer.Play("Close");
@@ -101,7 +101,7 @@ public class DiceMenu : Control
 
     public override void _Ready()
     {
-        Connect(nameof(OnOpenStarted), this, nameof(UpdateDices));
+        Connect(nameof(OpenStarted), this, nameof(UpdateDices));
         ThrowAllButton.Connect("pressed", this, nameof(OnThrowAllPressed));
         ThrowSelectedButton.Connect("pressed", this, nameof(OnThrowSelectedPressed));
     }
@@ -126,13 +126,13 @@ public class DiceMenu : Control
             DiceField diceField = diceFieldScene.Instance<DiceField>();
 
             diceField.watchable = true;
-            diceField.Selected = false;
-            diceField.Watched = false;
+            diceField.IsSelected = false;
+            diceField.IsWatched = false;
             diceField.dice = dice;
 
-            diceField.Connect(nameof(DiceField.OnSelected), this, nameof(OnDiceFieldSelected));
-            diceField.Connect(nameof(DiceField.OnDeselected), this, nameof(OnDiceFieldDeselected));
-            diceField.Connect(nameof(DiceField.OnWatched), this, nameof(OnDiceFieldWatched));
+            diceField.Connect(nameof(DiceField.Selected), this, nameof(OnDiceFieldSelected));
+            diceField.Connect(nameof(DiceField.Deselected), this, nameof(OnDiceFieldDeselected));
+            diceField.Connect(nameof(DiceField.WatchStarted), this, nameof(OnDiceFieldWatched));
 
             DiceContainer.AddChild(diceField);
         }
@@ -177,7 +177,7 @@ public class DiceMenu : Control
     {
         Dice dice = diceField is null ? null : diceField.dice;
 
-        if (watchedField is not null) watchedField.Watched = false;
+        if (watchedField is not null) watchedField.IsWatched = false;
         watchedField = diceField;
 
         foreach (DiceSceneField sceneField in DiceScenesContainer.GetChildren())
@@ -222,7 +222,7 @@ public class DiceMenu : Control
 
         foreach (DiceField diceField in DiceContainer.GetChildren())
         {
-            if (diceField.Selected) diceField.dice.Throw();
+            if (diceField.IsSelected) diceField.dice.Throw();
         }
     }
 }

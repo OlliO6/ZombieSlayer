@@ -6,32 +6,32 @@ using Additions;
 public class DiceField : NinePatchRect, ISelectable
 {
     [Export]
-    public bool Selected
+    public bool IsSelected
     {
         get => _selected;
         set
         {
             SelectFrame?.SetDeferred("visible", value);
 
-            if (value == Selected) return;
+            if (value == IsSelected) return;
 
             _selected = value;
 
-            EmitSignal(value ? nameof(OnSelected) : nameof(OnDeselected), this);
+            EmitSignal(value ? nameof(Selected) : nameof(Deselected), this);
         }
     }
 
     [Export]
-    public bool Watched
+    public bool IsWatched
     {
         get => watchable ? _watched : false;
         set
         {
             _watched = watchable ? value : false;
 
-            GetNode<ColorRect>("ColorRect")?.SetDeferred("modulate", Watched ? new("747474") : Colors.White);
+            GetNode<ColorRect>("ColorRect")?.SetDeferred("modulate", IsWatched ? new("747474") : Colors.White);
 
-            if (Watched) EmitSignal(nameof(OnWatched), this);
+            if (IsWatched) EmitSignal(nameof(WatchStarted), this);
         }
     }
 
@@ -41,9 +41,9 @@ public class DiceField : NinePatchRect, ISelectable
 
     private bool _selected, _watched;
 
-    [Signal] public delegate void OnSelected(DiceField from);
-    [Signal] public delegate void OnDeselected(DiceField from);
-    [Signal] public delegate void OnWatched(DiceField from);
+    [Signal] public delegate void Selected(DiceField from);
+    [Signal] public delegate void Deselected(DiceField from);
+    [Signal] public delegate void WatchStarted(DiceField from);
 
     #region SelectFrame Reference
 
@@ -63,13 +63,13 @@ public class DiceField : NinePatchRect, ISelectable
     {
         if (@event is InputEventMouseButton mouseInput && mouseInput.IsPressed() && mouseInput.ButtonIndex is (int)ButtonList.Left)
         {
-            if (!watchable || Watched)
+            if (!watchable || IsWatched)
             {
-                Selected = !Selected;
+                IsSelected = !IsSelected;
                 return;
             }
 
-            Watched = true;
+            IsWatched = true;
         }
     }
 

@@ -7,8 +7,8 @@ public class InputManager : Node
 
     public static bool attackInput;
 
-    [Signal] public delegate void OnAttackInputStarted();
-    [Signal] public delegate void OnAttackInputEnded();
+    [Signal] public delegate void AttackInputStarted();
+    [Signal] public delegate void AttackInputEnded();
 
     public override void _Ready()
     {
@@ -33,12 +33,12 @@ public class InputManager : Node
             if (@event.IsPressed())
             {
                 attackInput = true;
-                EmitSignal(nameof(OnAttackInputStarted));
+                EmitSignal(nameof(AttackInputStarted));
                 return;
             }
 
             attackInput = false;
-            EmitSignal(nameof(OnAttackInputEnded));
+            EmitSignal(nameof(AttackInputEnded));
             return;
         }
     }

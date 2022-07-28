@@ -77,7 +77,7 @@ public class StatsPanel : Control
 
         Player.currentPlayer.AddDice(dice);
 
-        Inventory.EmitSignal(nameof(Inventory.OnOpened));
+        Inventory.EmitSignal(nameof(Inventory.Opened));
 
         Inventory.CoinLabel.Text = Player.currentPlayer.Coins.ToString();
 
@@ -85,7 +85,7 @@ public class StatsPanel : Control
 
         foreach (DiceField diceField in matchingContainers)
         {
-            diceField.Selected = true;
+            diceField.IsSelected = true;
         }
     }
 }
