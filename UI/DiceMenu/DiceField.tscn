@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://UI/TiledTexture.shader" type="Shader" id=1]
+[ext_resource path="res://Shaders/CuttetTexture.shader" type="Shader" id=1]
 [ext_resource path="res://UI/Theme/SmallRect.png" type="Texture" id=2]
 [ext_resource path="res://Items/Dice/Dice.png" type="Texture" id=3]
 [ext_resource path="res://UI/DiceMenu/DiceField.cs" type="Script" id=4]
@@ -10,7 +10,7 @@
 resource_local_to_scene = true
 shader = ExtResource( 1 )
 shader_param/frames = Vector2( 3, 2 )
-shader_param/currentFrame = Vector2( 1, 1 )
+shader_param/currentFrame = Vector2( 0, 0 )
 
 [node name="DiceField" type="NinePatchRect"]
 margin_right = 18.0

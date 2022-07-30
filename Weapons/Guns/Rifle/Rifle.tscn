@@ -66,6 +66,7 @@ tracks/3/keys = {
 }
 
 [node name="Rifle" instance=ExtResource( 3 )]
+rotation = 0.195259
 script = ExtResource( 2 )
 weaponPickup = "res://Items/WeaponPickUps/RiflePickup.tscn"
 icon = ExtResource( 5 )

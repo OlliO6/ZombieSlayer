@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Weapons/Guns/Pistol/PistolIcon.png" type="Texture" id=2]
 [ext_resource path="res://Sounds/WeaponCollect.wav" type="AudioStream" id=3]
 [ext_resource path="res://Items/InteractionPickupBase.cs" type="Script" id=4]
 [ext_resource path="res://BasicStuff/VisibilityDisabler.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Shaders/Materials/StandartSpriteMat.material" type="Material" id=6]
 
 [sub_resource type="Animation" id=4]
 resource_name = "Collect"
@@ -159,6 +160,7 @@ collision_mask = 4
 script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 6 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

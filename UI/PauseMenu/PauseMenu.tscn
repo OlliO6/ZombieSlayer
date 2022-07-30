@@ -28,7 +28,7 @@ margin_right = 168.0
 margin_bottom = 115.0
 
 [node name="ContinueButton" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_right = 76.0
+margin_right = 80.0
 margin_bottom = 17.0
 focus_mode = 0
 enabled_focus_mode = 0
@@ -36,7 +36,7 @@ text = "Continue"
 
 [node name="InventoryButton" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 21.0
-margin_right = 76.0
+margin_right = 80.0
 margin_bottom = 38.0
 focus_mode = 0
 enabled_focus_mode = 0
@@ -44,7 +44,7 @@ text = "Inventory"
 
 [node name="OptionsButton" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 42.0
-margin_right = 76.0
+margin_right = 80.0
 margin_bottom = 59.0
 focus_mode = 0
 enabled_focus_mode = 0
@@ -52,7 +52,7 @@ text = "Options"
 
 [node name="MenuButton" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 63.0
-margin_right = 76.0
+margin_right = 80.0
 margin_bottom = 80.0
 focus_mode = 0
 enabled_focus_mode = 0

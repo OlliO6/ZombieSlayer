@@ -11,28 +11,17 @@
 [ext_resource path="res://Weapons/Guns/Rifle/Rifle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player/WeaponSwitcher.cs" type="Script" id=10]
 [ext_resource path="res://UI/Inventory/Inventory.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Shaders/Player.shader" type="Shader" id=12]
 [ext_resource path="res://Player/DiceInventory.cs" type="Script" id=13]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.16228
 
-[sub_resource type="Shader" id=10]
-code = "shader_type canvas_item;
-
-uniform bool blinking = true;
-uniform float blinkSpeed = 8;
-
-void fragment(){
-	if (blinking && sin(TIME * blinkSpeed) > 0.0){
-		return;
-	}
-}"
-
 [sub_resource type="ShaderMaterial" id=11]
 resource_local_to_scene = true
-shader = SubResource( 10 )
+shader = ExtResource( 12 )
 shader_param/blinking = false
-shader_param/blinkSpeed = 16.0
+shader_param/blinkSpeed = 18.0
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 3, 4 )
@@ -137,7 +126,7 @@ nodes/MovementState/node = SubResource( 6 )
 nodes/MovementState/position = Vector2( 120, 140 )
 nodes/RunSpeed/node = SubResource( 7 )
 nodes/RunSpeed/position = Vector2( -140, 260 )
-node_connections = [ "output", 0, "MovementState", "RunSpeed", 0, "Animation 2", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed" ]
+node_connections = [ "output", 0, "MovementState", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed", "RunSpeed", 0, "Animation 2" ]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4

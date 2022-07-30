@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
+[ext_resource path="res://Shaders/Materials/StandartSpriteMat.material" type="Material" id=1]
 [ext_resource path="res://Weapons/Guns/Pistol/Pistol.cs" type="Script" id=2]
 [ext_resource path="res://Bullets/PlayerBullets/PlayerBullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sounds/shoot.wav" type="AudioStream" id=4]
@@ -110,6 +111,7 @@ bulletSpeedRange = Vector2( 90, 100 )
 bulletSpread = 3.0
 
 [node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 1 )
 position = Vector2( 0, 2 )
 offset = Vector2( 6, -2 )
 hframes = 3

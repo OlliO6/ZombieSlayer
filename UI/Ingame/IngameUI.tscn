@@ -152,8 +152,7 @@ margin_bottom = 121.0
 margin_bottom = 121.0
 
 [node name="VBoxContainer" parent="MarginContainer/VBoxContainer/DiceMenu/HBoxContainer/CenterContainer" index="0"]
-margin_top = 42.0
-margin_right = 78.0
-margin_bottom = 79.0
+margin_top = 40.0
+margin_bottom = 81.0
 
 [editable path="MarginContainer/VBoxContainer/DiceMenu"]

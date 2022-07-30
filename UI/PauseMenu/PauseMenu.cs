@@ -18,6 +18,8 @@ public class PauseMenu : Control
 
     private void Unpause()
     {
+        if (GetNode<Control>("OptionsMenu").Visible) return;
+
         paused = false;
         GetTree().Paused = false;
         Visible = false;

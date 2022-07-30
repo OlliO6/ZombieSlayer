@@ -6,7 +6,7 @@
 [ext_resource path="res://Sounds/DiceJump.wav" type="AudioStream" id=4]
 [ext_resource path="res://Sounds/DiceLoose.wav" type="AudioStream" id=5]
 [ext_resource path="res://Sounds/DiceWin.wav" type="AudioStream" id=6]
-[ext_resource path="res://Player/Upgrades/Icons/SpeedUpgrade.png" type="Texture" id=7]
+[ext_resource path="res://Shaders/Materials/StandartSpriteMat.material" type="Material" id=7]
 [ext_resource path="res://Items/Dice/DicePickup.tscn" type="PackedScene" id=8]
 
 [sub_resource type="AtlasTexture" id=2]
@@ -51,18 +51,6 @@ random_pitch = 1.5
 [sub_resource type="Animation" id=11]
 resource_name = "Break"
 length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath("Broken:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 0.466517, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
 
 [sub_resource type="Animation" id=10]
 resource_name = "BreakComplete"
@@ -93,40 +81,16 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("Broken:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 0.435275, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
 
 [sub_resource type="Animation" id=12]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Broken:modulate")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -146,21 +110,16 @@ launchGravity = 80.0
 bounciness = 0.85
 
 [node name="Shadow" type="Sprite" parent="."]
+material = ExtResource( 7 )
 texture = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = ExtResource( 7 )
 frames = SubResource( 1 )
 animation = "Roll"
 frame = 3
 speed_scale = 0.0
 playing = true
-
-[node name="Broken" type="Sprite" parent="."]
-visible = false
-modulate = Color( 1, 1, 1, 0 )
-self_modulate = Color( 1, 1, 1, 0.776471 )
-position = Vector2( -1, 0 )
-texture = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2.5 )

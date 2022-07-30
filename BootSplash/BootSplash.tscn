@@ -12,6 +12,49 @@ code = "shader_type canvas_item;
 
 uniform int pixelSize = 1;
 
+const int ML = 0;
+const float THRESHOLD = 0.05;
+const float AA_SCALE = 10.0;
+
+vec4 texelGet ( sampler2D tg_tex, ivec2 tg_coord, int tg_lod ) {
+	vec2 tg_texel = 1.0 / vec2(textureSize(tg_tex, 0));
+	vec2 tg_getpos = (vec2(tg_coord) * tg_texel) + (tg_texel * 0.5);
+	return texture(tg_tex, tg_getpos, float(tg_lod));
+}
+
+vec4 diag(vec4 sum, vec2 uv, vec2 p1, vec2 p2, sampler2D iChannel0, float LINE_THICKNESS) {
+	vec4 v1 = texelGet(iChannel0,ivec2(uv+vec2(p1.x,p1.y)),ML),
+		v2 = texelGet(iChannel0,ivec2(uv+vec2(p2.x,p2.y)),ML);
+	if (length(v1-v2) < THRESHOLD) {
+		vec2 dir = p2-p1,
+			lp = uv-(floor(uv+p1)+.5);
+		dir = normalize(vec2(dir.y,-dir.x));
+		float l = clamp((LINE_THICKNESS-dot(lp,dir))*AA_SCALE,0.,1.);
+		sum = mix(sum,v1,l);
+	}
+	return sum;
+}
+        
+vec4 GetColor(vec2 uv, sampler2D text , vec2 pixel_size)
+{
+	//line thickness
+	float LINE_THICKNESS = 0.4;
+	vec2 ip = uv;
+	ip = uv * (1.0 / pixel_size);
+
+	//start with nearest pixel as 'background'
+	vec4 s = texelGet(text, ivec2(ip), ML);
+
+	//draw anti aliased diagonal lines of surrounding pixels as 'foreground'
+	s = diag(s,ip,vec2(-1,0),vec2(0,1), text, LINE_THICKNESS);
+	s = diag(s,ip,vec2(0,1),vec2(1,0), text, LINE_THICKNESS);
+	s = diag(s,ip,vec2(1,0),vec2(0,-1), text, LINE_THICKNESS);
+	s = diag(s,ip,vec2(0,-1),vec2(-1,0), text, LINE_THICKNESS);
+	
+	return s;
+}
+
+uniform bool useScaling = false;
 void fragment()
 {
 	
@@ -37,14 +80,15 @@ void fragment()
 		grid_uv_y = round(UV.y * yFactor) / yFactor;
 	}
 	
-	vec4 text = texture(TEXTURE, vec2(grid_uv_x, grid_uv_y));
+	vec4 text = useScaling ? GetColor(vec2(grid_uv_x, grid_uv_y), TEXTURE, TEXTURE_PIXEL_SIZE) : texture(TEXTURE, UV);
 	
 	COLOR = text;
 }"
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 3 )
-shader_param/pixelSize = 30
+shader_param/pixelSize = 1
+shader_param/useScaling = false
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 5 )
@@ -195,6 +239,8 @@ theme = ExtResource( 2 )
 use_parent_material = true
 frames = SubResource( 17 )
 animation = "Glow"
+frame = 24
+playing = true
 centered = false
 
 [node name="AnimatedLabel" type="Label" parent="Control"]
@@ -211,7 +257,7 @@ sound = SubResource( 1 )
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="Control/AnimatedLabel"]
 volume_db = -9.996
-pitch_scale = 0.26
+pitch_scale = 0.52
 bus = "SFX"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -223,5 +269,3 @@ bus = "SFX"
 autoplay = "Boot"
 anims/Boot = SubResource( 28 )
 anims/RESET = SubResource( 2 )
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="OnBootAnimationFinished"]

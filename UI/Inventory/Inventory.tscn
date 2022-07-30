@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://UI/Inventory/Inventory.cs" type="Script" id=1]
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=2]
@@ -12,9 +12,6 @@
 [ext_resource path="res://Player/Upgrades/MagnetUpgrade.cs" type="Script" id=10]
 [ext_resource path="res://UI/Inventory/UpgradeContainer.cs" type="Script" id=11]
 [ext_resource path="res://UI/Inventory/WeaponContainer.cs" type="Script" id=12]
-[ext_resource path="res://UI/TiledTexture.shader" type="Shader" id=13]
-[ext_resource path="res://UI/Theme/SmallRect.png" type="Texture" id=14]
-[ext_resource path="res://Items/Dice/Dice.png" type="Texture" id=15]
 [ext_resource path="res://UI/Inventory/DiceContainer.cs" type="Script" id=16]
 [ext_resource path="res://UI/Ingame/CoinDisplay.tscn" type="PackedScene" id=17]
 [ext_resource path="res://UI/DiceMenu/DiceField.tscn" type="PackedScene" id=18]
@@ -25,21 +22,6 @@ content_margin_left = 4.0
 content_margin_right = 4.0
 content_margin_top = 0.0
 content_margin_bottom = 0.0
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 13 )
-shader_param/frames = Vector2( 3, 2 )
-shader_param/currentFrame = Vector2( 1, 1 )
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 13 )
-shader_param/frames = Vector2( 3, 2 )
-shader_param/currentFrame = Vector2( 2, 0 )
-
-[sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 13 )
-shader_param/frames = Vector2( 3, 2 )
-shader_param/currentFrame = Vector2( 0, 1 )
 
 [node name="Inventory" type="Control"]
 pause_mode = 2
@@ -155,121 +137,6 @@ scroll_horizontal_enabled = false
 script = ExtResource( 16 )
 diceFieldScene = ExtResource( 18 )
 
-[node name="DiceField" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer"]
-visible = false
-margin_right = 18.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 18, 18 )
-texture = ExtResource( 14 )
-region_rect = Rect2( 1, 1, 6, 6 )
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer/DiceField"]
-material = SubResource( 2 )
-margin_left = 4.6
-margin_top = 5.25
-margin_right = 28.6
-margin_bottom = 21.25
-texture = ExtResource( 15 )
-
-[node name="DiceField2" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer"]
-visible = false
-margin_right = 18.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 18, 18 )
-texture = ExtResource( 14 )
-region_rect = Rect2( 1, 1, 6, 6 )
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer/DiceField2"]
-material = SubResource( 3 )
-margin_left = 4.6
-margin_top = 5.25
-margin_right = 28.6
-margin_bottom = 21.25
-texture = ExtResource( 15 )
-
-[node name="DiceField3" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer"]
-visible = false
-margin_right = 18.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 18, 18 )
-texture = ExtResource( 14 )
-region_rect = Rect2( 1, 1, 6, 6 )
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer/DiceField3"]
-material = SubResource( 4 )
-margin_left = 4.6
-margin_top = 5.25
-margin_right = 28.6
-margin_bottom = 21.25
-texture = ExtResource( 15 )
-
-[node name="DiceField4" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer"]
-visible = false
-margin_right = 18.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 18, 18 )
-texture = ExtResource( 14 )
-region_rect = Rect2( 1, 1, 6, 6 )
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer/DiceField4"]
-material = SubResource( 2 )
-margin_left = 4.6
-margin_top = 5.25
-margin_right = 28.6
-margin_bottom = 21.25
-texture = ExtResource( 15 )
-
-[node name="DiceField5" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer"]
-visible = false
-margin_right = 18.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 18, 18 )
-texture = ExtResource( 14 )
-region_rect = Rect2( 1, 1, 6, 6 )
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer/DiceField5"]
-material = SubResource( 2 )
-margin_left = 4.6
-margin_top = 5.25
-margin_right = 28.6
-margin_bottom = 21.25
-texture = ExtResource( 15 )
-
 [node name="VSeparator" type="VSeparator" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 margin_left = 4.0
 margin_right = 7.0
@@ -296,60 +163,48 @@ custom_constants/margin_top = 2
 custom_constants/margin_left = 2
 custom_constants/margin_bottom = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2"]
+[node name="WeaponContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 197.0
 margin_bottom = 20.0
-custom_constants/separation = 0
-
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
-visible = false
-margin_right = 195.0
-margin_bottom = 13.0
-text = "Weapons"
-align = 1
-
-[node name="WeaponContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
-margin_right = 195.0
-margin_bottom = 18.0
 custom_constants/separation = 2
 alignment = 1
 script = ExtResource( 12 )
 
-[node name="DragableWeaponField" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+[node name="DragableWeaponField" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/WeaponContainer" instance=ExtResource( 3 )]
 margin_left = 8.0
 margin_right = 26.0
 
-[node name="DragableWeaponField2" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+[node name="DragableWeaponField2" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/WeaponContainer" instance=ExtResource( 3 )]
 margin_left = 28.0
 margin_right = 46.0
 
-[node name="DragableWeaponField3" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+[node name="DragableWeaponField3" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/WeaponContainer" instance=ExtResource( 3 )]
 margin_left = 48.0
 margin_right = 66.0
 
-[node name="DragableWeaponField4" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+[node name="DragableWeaponField4" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/WeaponContainer" instance=ExtResource( 3 )]
 margin_left = 68.0
 margin_right = 86.0
 
-[node name="DragableWeaponField5" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+[node name="DragableWeaponField5" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/WeaponContainer" instance=ExtResource( 3 )]
 margin_left = 88.0
 margin_right = 106.0
 
-[node name="DragableWeaponField6" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+[node name="DragableWeaponField6" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/WeaponContainer" instance=ExtResource( 3 )]
 margin_left = 108.0
 margin_right = 126.0
 
-[node name="DragableWeaponField7" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+[node name="DragableWeaponField7" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/WeaponContainer" instance=ExtResource( 3 )]
 margin_left = 128.0
 margin_right = 146.0
 
-[node name="DragableWeaponField8" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+[node name="DragableWeaponField8" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/WeaponContainer" instance=ExtResource( 3 )]
 margin_left = 148.0
 margin_right = 166.0
 
-[node name="DragableWeaponField9" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer/WeaponContainer" instance=ExtResource( 3 )]
+[node name="DragableWeaponField9" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/WeaponContainer" instance=ExtResource( 3 )]
 margin_left = 168.0
 margin_right = 186.0
 
@@ -390,7 +245,7 @@ Icon = ExtResource( 6 )
 upgradeType = ExtResource( 9 )
 
 [connection signal="Opened" from="." to="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/DiceContainer" method="OnInventoryOpened"]
-[connection signal="Opened" from="." to="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer/WeaponContainer" method="OnInventoryOpened"]
+[connection signal="Opened" from="." to="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/WeaponContainer" method="OnInventoryOpened"]
 [connection signal="Opened" from="." to="Panel/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer/MarginContainer/UpgradeContainer" method="OnInventoryOpened"]
 [connection signal="SelectionChanged" from="." to="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/StatsPanel" method="OnInventorySelectionChanged"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Top Bar/CloseButton" to="." method="Close"]

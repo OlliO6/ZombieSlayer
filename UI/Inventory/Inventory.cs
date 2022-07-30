@@ -36,7 +36,7 @@ public class Inventory : Control
 
             selection = value;
 
-            EmitSignal(nameof(FieldSelected), value as Node);
+            EmitSignal(nameof(SelectionChanged), value as Node);
         }
     }
 
@@ -51,7 +51,7 @@ public class Inventory : Control
 
     private void Open()
     {
-        if (GetTree().Paused == true) return;
+        if (GetTree().Paused) return;
 
         isOpen = true;
         GetTree().Paused = true;

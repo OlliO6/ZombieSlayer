@@ -132,7 +132,7 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
         RemoveChild(Sprite);
         GetParent().AddChild(Sprite);
         Sprite.GlobalPosition = spritePos;
-        Sprite.Material = null;
+        // Sprite.Material = null;
 
         QueueFree();
     }

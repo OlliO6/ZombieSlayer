@@ -2,9 +2,9 @@
 
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Items/Coin/Coin.png" type="Texture" id=2]
-[ext_resource path="res://UI/TiledTexture.shader" type="Shader" id=3]
+[ext_resource path="res://Shaders/CuttetTexture.shader" type="Shader" id=3]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 3 )
 shader_param/frames = Vector2( 2, 1 )
 shader_param/currentFrame = Vector2( 0, 0 )
@@ -24,7 +24,7 @@ rect_min_size = Vector2( 8, 8 )
 mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
-material = SubResource( 1 )
+material = SubResource( 2 )
 margin_right = 16.0
 margin_bottom = 11.0
 mouse_filter = 2

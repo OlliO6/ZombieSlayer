@@ -65,6 +65,7 @@ tracks/3/keys = {
 }
 
 [node name="Pistol" instance=ExtResource( 3 )]
+rotation = 0.124638
 icon = ExtResource( 4 )
 baseBulletDamage = 8
 

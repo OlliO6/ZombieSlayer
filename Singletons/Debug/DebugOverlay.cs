@@ -7,12 +7,16 @@ public class DebugOverlay : CanvasLayer
 {
     public static DebugOverlay instance;
 
+    private bool fpsShown = true;
+
     [Export]
-    public bool ShowFps
+    public bool IsShowingFps
     {
-        get => Labels.GetNode<CanvasItem>("FPSLabel").Visible;
+        get => fpsShown;
         set
         {
+            fpsShown = value;
+
             if (Labels is null)
             {
                 ToSignal(this, "ready").OnCompleted(() =>
