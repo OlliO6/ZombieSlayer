@@ -1,5 +1,5 @@
-using Godot;
 using Additions;
+using Godot;
 
 public class WaveSpawner : Node
 {
@@ -17,7 +17,7 @@ public class WaveSpawner : Node
 
     public override void _Ready()
     {
-        new TimerAwaiter(this, startDelay,
+        new TimeAwaiter(this, startDelay,
                 onCompleted: () => StartWave());
     }
 
@@ -30,7 +30,7 @@ public class WaveSpawner : Node
 
         SpawnEnemies(targetEnemyCount);
 
-        new TimerAwaiter(this, targetEnemyCount * Random.FloatRange(waveIntervalMultiplierRange.x, waveIntervalMultiplierRange.y) + minWaveInterval,
+        new TimeAwaiter(this, targetEnemyCount * Random.FloatRange(waveIntervalMultiplierRange.x, waveIntervalMultiplierRange.y) + minWaveInterval,
                 onCompleted: () => { StartWave(); });
     }
 
@@ -38,7 +38,7 @@ public class WaveSpawner : Node
     {
         for (int i = 0; i < count; i++)
         {
-            await new TimerAwaiter(this, Random.FloatRange(spawnIntervalRange.x, spawnIntervalRange.y),
+            await new TimeAwaiter(this, Random.FloatRange(spawnIntervalRange.x, spawnIntervalRange.y),
                     onCompleted: () => { SpawnEnemy(); });
         }
     }

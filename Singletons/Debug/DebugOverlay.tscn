@@ -11,19 +11,59 @@ default_font = ExtResource( 1 )
 pause_mode = 2
 layer = 100
 script = ExtResource( 3 )
-ShowFps = true
+_Labels = NodePath("MarginContainer/HBoxContainer/DebugLabels")
+_Logs = NodePath("MarginContainer/MarginContainer/Logs")
 
-[node name="DebugLabels" type="VBoxContainer" parent="."]
-anchor_top = 0.01
+[node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 theme = SubResource( 2 )
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 254.0
+margin_bottom = 148.0
+mouse_filter = 2
 custom_constants/separation = 0
 
-[node name="FPSLabel" type="Label" parent="DebugLabels"]
-margin_right = 256.0
+[node name="DebugLabels" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_right = 252.0
+margin_bottom = 146.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/separation = 0
+
+[node name="FPSLabel" type="Label" parent="MarginContainer/HBoxContainer/DebugLabels"]
+margin_right = 252.0
 margin_bottom = 5.0
 text = "FPS:60"
 align = 1
 script = ExtResource( 4 )
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+margin_left = 2.0
+margin_top = 148.0
+margin_right = 2.0
+margin_bottom = 148.0
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer"]
+visible = false
+color = Color( 0, 0, 0, 0.392157 )
+
+[node name="Logs" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 10
+theme = SubResource( 2 )
+custom_constants/separation = 0
+
+[node name="Tween" type="Tween" parent="MarginContainer/MarginContainer/Logs"]

@@ -1,5 +1,5 @@
+using Additions;
 using Godot;
-using System;
 
 public class InputManager : Node
 {
@@ -17,14 +17,20 @@ public class InputManager : Node
         GD.Randomize();
     }
 
-    public static Vector2 GetMovementInput() => instance._GetMovementInput();
+    public static void GetMovementInput(out Vector2 inputVector, out float lenght) => instance._GetMovementInput(out inputVector, out lenght);
 
-    private Vector2 _GetMovementInput()
+    private void _GetMovementInput(out Vector2 inputVector, out float lenght)
     {
         const float deadzone = 0.2f;
 
-        return Input.GetVector("MoveLeft", "MoveRight", "MoveUp", "MoveDown", deadzone);
+        var vector = new Vector2(
+                Input.GetActionRawStrength("MoveRight") - Input.GetActionRawStrength("MoveLeft"),
+                Input.GetActionRawStrength("MoveDown") - Input.GetActionRawStrength("MoveUp"));
+
+        lenght = vector.Length().Clamp01();
+        inputVector = lenght > deadzone ? (lenght is >= 1 ? vector.Normalized() : vector) : Vector2.Zero;
     }
+
 
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -61,8 +67,7 @@ public class InputManager : Node
 
     private void ToggleFullscreen()
     {
-        OptionsManager.fullscreen = !OptionsManager.fullscreen;
-
+        OptionsManager.IsFullscreen = !OptionsManager.IsFullscreen;
         OptionsManager.UpdateOptions();
     }
 }

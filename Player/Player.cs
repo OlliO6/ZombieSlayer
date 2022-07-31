@@ -1,7 +1,7 @@
-using Additions;
-using Godot;
 using System.Collections.Generic;
 using System.Linq;
+using Additions;
+using Godot;
 
 public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 {
@@ -31,6 +31,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         set
         {
             coins = value;
+            DebugOverlay.Log(this, $"Has {value} coins.");
             EmitSignal(nameof(CoinsAmountChanged), value);
         }
     }
@@ -104,10 +105,12 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     public override void _PhysicsProcess(float delta)
     {
-        Vector2 inputVector = InputManager.GetMovementInput();
+        InputManager.GetMovementInput(out Vector2 inputVector, out float lenght);
+
+        DebugOverlay.LogP(this, inputVector.ToString());
 
         Move(inputVector, delta);
-        Animate(inputVector);
+        Animate(inputVector, lenght);
     }
 
     private void Move(Vector2 inputVector, float delta)
@@ -115,14 +118,12 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         MoveAndSlide(inputVector * movementSpeed);
     }
 
-    private void Animate(Vector2 inputVector)
+    private void Animate(Vector2 inputVector, float lenght)
     {
-        float lenght = inputVector.Length();
-
         if (lenght > 0.2f)
         {
             AnimationTree.Set("parameters/MovementState/current", 1);
-            AnimationTree.Set("parameters/RunSpeed/scale", lenght.Clamp01());
+            AnimationTree.Set("parameters/RunSpeed/scale", Mathf.Lerp(0.3f, 1, lenght));
         }
         else
         {
@@ -130,25 +131,22 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         }
     }
 
-    public bool AllowDamageFrom(IDamageDealer from)
-    {
-        return true;
-    }
+    public bool AllowDamageFrom(IDamageDealer from) => true;
 
     public void GetDamage(int amount)
     {
         if (isInvincible)
             return;
 
-        CurrentHealth -= amount;
+        DebugOverlay.Log(this, $"Got {amount} damage.");
 
-        GD.Print($"Player got {amount} damage");
+        CurrentHealth -= amount;
 
         isInvincible = true;
         EmitSignal(nameof(InvincibilityStarted));
         Sprite.SetShaderParam("blinking", true);
 
-        new TimerAwaiter(this, invincibilityTime,
+        new TimeAwaiter(this, invincibilityTime,
                 onCompleted: () =>
                 {
                     isInvincible = false;
