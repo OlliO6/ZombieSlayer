@@ -1,5 +1,5 @@
-using Godot;
 using System;
+using Godot;
 
 public class OptionsMenu : Control
 {
@@ -10,6 +10,8 @@ public class OptionsMenu : Control
     private CheckButton upscaleToggle;
     public override void _Ready()
     {
+        OptionsManager.instance.Connect(nameof(OptionsManager.OptionsChanged), this, nameof(ReloadOptions));
+
         fullscreenToggle = GetNode<CheckButton>(_fullscreenToggle);
         sfxSlider = GetNode<Slider>(_sfxVolumeSlider);
         musicSlider = GetNode<Slider>(_musicVolumeSlider);
@@ -21,20 +23,19 @@ public class OptionsMenu : Control
         upscaleToggle.Connect("toggled", this, nameof(SetUseUpscaling));
     }
 
-    [TroughtSignal]
-    private void OnOptionsPressed()
+    private void ReloadOptions()
     {
-        Visible = true;
+        if (!Visible) return;
 
         fullscreenToggle.SetBlockSignals(true);
         sfxSlider.SetBlockSignals(true);
         musicSlider.SetBlockSignals(true); ;
         upscaleToggle.SetBlockSignals(true);
 
-        fullscreenToggle.Pressed = OptionsManager.fullscreen;
-        sfxSlider.Value = OptionsManager.sfxVolume;
-        musicSlider.Value = OptionsManager.musicVolume;
-        upscaleToggle.Pressed = OptionsManager.useUpscaling;
+        fullscreenToggle.Pressed = OptionsManager.IsFullscreen;
+        sfxSlider.Value = OptionsManager.SfxVolume;
+        musicSlider.Value = OptionsManager.MusicVolune;
+        upscaleToggle.Pressed = OptionsManager.IsUpscaling;
 
         fullscreenToggle.SetBlockSignals(false);
         sfxSlider.SetBlockSignals(false);
@@ -43,35 +44,33 @@ public class OptionsMenu : Control
     }
 
     [TroughtSignal]
+    private void OnOptionsPressed()
+    {
+        Visible = true;
+
+        ReloadOptions();
+    }
+
+    [TroughtSignal]
     private void OnBackPressed()
     {
         Visible = false;
+
+        OptionsManager.SaveOptions();
     }
 
-    private void SetFullscreen(bool value)
-    {
-        OptionsManager.fullscreen = value;
-        OptionsManager.UpdateOptions();
-    }
+    [TroughtSignal]
+    private void OnRevertPressed() => OptionsManager.SetToUserFile();
 
+    [TroughtSignal]
+    private void OnResetPressed() => OptionsManager.ResetOptions();
+
+    private void SetFullscreen(bool value) => OptionsManager.IsFullscreen = value;
+    private void SetMusicVolume(float value) => OptionsManager.MusicVolune = value;
+    private void SetUseUpscaling(bool value) => OptionsManager.IsUpscaling = value;
     private void SetSfxVolume(float value)
     {
-        OptionsManager.sfxVolume = value;
-        OptionsManager.UpdateOptions();
-
+        OptionsManager.SfxVolume = value;
         GetNode<AudioStreamPlayer>("SfxSoundPlayer").Play();
-    }
-
-    private void SetMusicVolume(float value)
-    {
-        OptionsManager.musicVolume = value;
-        OptionsManager.UpdateOptions();
-    }
-
-    private void SetUseUpscaling(bool value)
-    {
-        OptionsManager.useUpscaling = value;
-
-        OptionsManager.UpdateShaders();
     }
 }

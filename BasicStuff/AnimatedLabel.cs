@@ -1,7 +1,7 @@
-using Godot;
-using System.Threading;
 using System.Collections.Generic;
+using System.Threading;
 using Additions;
+using Godot;
 
 [Tool]
 public class AnimatedLabel : Label
@@ -51,7 +51,7 @@ public class AnimatedLabel : Label
 
             VisibleCharacters++;
             AudioPlayer.Play();
-            await new TimerAwaiter(this, delayPerChar);
+            await new TimeAwaiter(this, delayPerChar);
         }
     }
 
@@ -73,7 +73,7 @@ public class AnimatedLabel : Label
             Text += $"{words[i]} ";
             AudioPlayer.Play();
 
-            await new TimerAwaiter(this, delayPerWord);
+            await new TimeAwaiter(this, delayPerWord);
         }
     }
 

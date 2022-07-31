@@ -1,6 +1,6 @@
-using Godot;
 using System;
 using Additions;
+using Godot;
 
 public class Bullet : Area2D, IKillable, IDamageDealer
 {
@@ -22,7 +22,7 @@ public class Bullet : Area2D, IKillable, IDamageDealer
 
     public override void _Ready()
     {
-        new TimerAwaiter(this, maxLivetime, onCompleted: DieInstant);
+        new TimeAwaiter(this, maxLivetime, onCompleted: DieInstant);
     }
 
     public override void _PhysicsProcess(float delta)
