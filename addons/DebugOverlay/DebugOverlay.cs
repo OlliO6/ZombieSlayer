@@ -1,7 +1,6 @@
 #if DEBUG
 using System.Collections.Generic;
 using System.Linq;
-using Additions;
 using Godot;
 
 namespace Additions.Debugging
@@ -9,12 +8,13 @@ namespace Additions.Debugging
     public class DebugOverlay : CanvasLayer
     {
         public static DebugOverlay instance;
+        public static Queue<string> outputLines = new();
 
         [Export] public bool turnOffCommonLogs;
         [Export] public bool removeNameUniqeness;
 
         private bool fpsShown = true;
-        private bool overlayIsOpen;
+        private bool overlayIsOpen, isConsoleOpen;
         private bool gameWasPaused;
 
         #region Labels Reference
@@ -41,6 +41,14 @@ namespace Additions.Debugging
 
         #endregion
 
+        #region Console Reference
+
+        private Console storerForConsole;
+        public Console Console => this.LazyGetNode(ref storerForConsole, _Console);
+        [Export] private NodePath _Console = "Console";
+
+        #endregion
+
         [Export]
         public bool IsShowingFps
         {
@@ -63,20 +71,12 @@ namespace Additions.Debugging
 
         public override void _Ready()
         {
-            if (OS.IsDebugBuild())
-            {
-                instance = this;
-                return;
-            }
-
-            instance = null;
-            QueueFree();
+            instance = this;
+            AddOutputLine(ColorizeText($"Ö--------<{(Engine.EditorHint ? "Editor Debug" : "Debug Export")}> started--------", Color.ColorN("white", 0.5f)), true);
         }
 
         public override void _ExitTree()
         {
-            if (!OS.IsDebugBuild()) return;
-
             PackedScene scene = new();
             scene.Pack(this);
             ResourceSaver.Save(Filename, scene);
@@ -85,29 +85,51 @@ namespace Additions.Debugging
         public override void _Input(InputEvent @event)
         {
             if (!@event.IsPressed()) return;
-
             if (@event is not InputEventKey keyInput) return;
+
+            if (keyInput.Scancode is (uint)KeyList.Escape)
+            {
+                if (isConsoleOpen)
+                {
+                    CloseConsole();
+                    return;
+                }
+                if (overlayIsOpen)
+                {
+                    HideMenu();
+                    return;
+                }
+                return;
+            }
 
             if (keyInput.Scancode is (uint)KeyList.D && keyInput.Alt)
             {
-                ToggleOverlay();
+                if (overlayIsOpen)
+                    HideMenu();
+                else
+                    ShowMenu();
                 return;
+            }
+
+            if (keyInput.Scancode is (uint)KeyList.C && keyInput.Alt)
+            {
+                if (isConsoleOpen)
+                    CloseConsole();
+                else
+                    OpenConsole();
             }
         }
 
-        private void ToggleOverlay()
-        {
-            if (overlayIsOpen)
-                HideMenu();
-            else
-                ShowMenu();
-        }
+        internal static void AddOutputLine(string line, bool uncommon) => outputLines.Enqueue((uncommon ? "#UNCOMMON#:" : "#COMMON#:") + line);
+        // Weird string fotmatting so that its not doing a , instead of a . in deutschland :{
+        internal string ColorizeText(string what, Color color) => $"[tint r={color.r.ToString(System.Globalization.CultureInfo.InvariantCulture)} g={color.g.ToString(System.Globalization.CultureInfo.InvariantCulture)} b={color.b.ToString(System.Globalization.CultureInfo.InvariantCulture)} a={color.a.ToString(System.Globalization.CultureInfo.InvariantCulture)}]{what}[/tint]";
+
         public void ShowMenu()
         {
             if (overlayIsOpen) return;
 
             overlayIsOpen = true;
-            gameWasPaused = GetTree().Paused;
+            if (!isConsoleOpen) gameWasPaused = GetTree().Paused;
             GetTree().Paused = true;
             Menu.Show();
             Menu.LoadState();
@@ -117,9 +139,27 @@ namespace Additions.Debugging
             if (!overlayIsOpen) return;
 
             overlayIsOpen = false;
-            if (!gameWasPaused) GetTree().Paused = false;
+            if (!gameWasPaused && !isConsoleOpen) GetTree().Paused = false;
             Menu.stepCancellation.Cancel();
             Menu.Hide();
+        }
+        public void OpenConsole()
+        {
+            if (isConsoleOpen) return;
+
+            isConsoleOpen = true;
+            if (!overlayIsOpen) gameWasPaused = GetTree().Paused;
+            GetTree().Paused = true;
+            Console.Show();
+            Console.Setup();
+        }
+        public void CloseConsole()
+        {
+            if (!isConsoleOpen) return;
+
+            isConsoleOpen = false;
+            if (!gameWasPaused && !overlayIsOpen) GetTree().Paused = false;
+            Console.Hide();
         }
 
         internal void AddWatcher(Godot.Object target, string property, bool autoRemove, bool showTargetName, Color? color, string optionalName)
@@ -147,19 +187,21 @@ namespace Additions.Debugging
 
         internal async void LogT(Godot.Object target, string message, float time, bool uncommon, Color? color, string optionalName, bool alsoPrint)
         {
+            string name = optionalName is "" ? GetTargetName(target) : optionalName;
+            string output = $"{(target is null ? "" : ($"{(name is "" or null ? "Thing" : removeNameUniqeness ? RemoveNameUniqeness(name) : name)}: "))}{message}";
+            Color outputColor = GetTargetColor(target, color, uncommon);
+
+            AddOutputLine(ColorizeText(output, outputColor), uncommon);
+
             if (turnOffCommonLogs && !uncommon) return;
 
-            string name = optionalName is "" ? GetTargetName(target) : optionalName;
 
-            Label label = new Label()
-            {
-                Text = $"{(target is null ? "" : ($"{(name is "" or null ? "Thing" : removeNameUniqeness ? RemoveNameUniqeness(name) : name)}: "))}{message}"
-            };
+            Label label = new Label() { Text = output };
 
             if (alsoPrint) GD.Print(label.Text);
 
             Logs.AddChild(label);
-            label.Modulate = GetTargetColor(target, color, uncommon);
+            label.Modulate = outputColor;
             Tween tween = Logs.GetChild<Tween>(0);
             tween.InterpolateProperty(label, "modulate:a", 1, 0, time, Tween.TransitionType.Expo, Tween.EaseType.In);
             tween.Start();

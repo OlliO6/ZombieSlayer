@@ -1,26 +1,31 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://UI/Fonts/ConsolasSmall.tres" type="DynamicFont" id=1]
+[ext_resource path="res://addons/DebugOverlay/Fonts/ConsolasSmall.tres" type="DynamicFont" id=1]
 [ext_resource path="res://addons/DebugOverlay/Menu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/DebugOverlay/DebugOverlay.cs" type="Script" id=3]
 [ext_resource path="res://addons/DebugOverlay/FPSLabel.cs" type="Script" id=4]
-[ext_resource path="res://UI/Fonts/ConsolasBig.tres" type="DynamicFont" id=6]
+[ext_resource path="res://addons/DebugOverlay/Fonts/ConsolasBig.tres" type="DynamicFont" id=5]
+[ext_resource path="res://addons/DebugOverlay/Console.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/DebugOverlay/DebugMenu.cs" type="Script" id=7]
+[ext_resource path="res://addons/DebugOverlay/Console.cs" type="Script" id=8]
 
 [sub_resource type="Theme" id=2]
 default_font = ExtResource( 1 )
 
 [sub_resource type="Theme" id=1]
-default_font = ExtResource( 6 )
+default_font = ExtResource( 5 )
 
 [node name="Debug" type="CanvasLayer"]
 pause_mode = 2
 layer = 100
 script = ExtResource( 3 )
+IsShowingFps = true
 turnOffCommonLogs = true
 removeNameUniqeness = true
 _Labels = NodePath("MarginContainer/HBoxContainer/DebugLabels")
 _Logs = NodePath("MarginContainer/MarginContainer/Logs")
-_Menu = NodePath("ViewportContainer/Viewport/DebugMenu")
+_Menu = NodePath("DebugMenu")
+_Console = NodePath("Console")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -48,8 +53,9 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="FPSLabel" type="Label" parent="MarginContainer/HBoxContainer/DebugLabels"]
+margin_top = -1.0
 margin_right = 252.0
-margin_bottom = 5.0
+margin_bottom = 3.08752
 text = "FPS: 60"
 align = 1
 script = ExtResource( 4 )
@@ -76,20 +82,36 @@ custom_constants/separation = 0
 
 [node name="Tween" type="Tween" parent="MarginContainer/MarginContainer/Logs"]
 
-[node name="ViewportContainer" type="ViewportContainer" parent="."]
+[node name="DebugMenu" type="Control" parent="." instance=ExtResource( 2 )]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 768.0
+margin_bottom = 450.0
+rect_min_size = Vector2( 1024, 600 )
 rect_scale = Vector2( 0.25, 0.25 )
-mouse_filter = 2
-
-[node name="Viewport" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 1024, 600 )
-own_world = true
-transparent_bg = true
-handle_input_locally = false
-hdr = false
-usage = 0
-render_target_update_mode = 3
-
-[node name="DebugMenu" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
 theme = SubResource( 1 )
+script = ExtResource( 7 )
+_ExitButton = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/ExitButton")
+_PrintCommonLogsToggle = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer/PrintCommonToggle")
+_NoUniqueNamesToggle = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer/NoUniqueNamesToggle")
+_ShowFpsToggle = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer/ShowFpsToggle")
+screenshotDir = "C:\\Users\\olive\\Pictures\\Screenshots/ZombieSlayer"
+dateInScreenShot = true
+
+[node name="Console" type="MarginContainer" parent="." instance=ExtResource( 6 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 544.0
+margin_bottom = 231.0
+rect_min_size = Vector2( 1024, 600 )
+rect_scale = Vector2( 0.25, 0.25 )
+custom_constants/margin_right = 150
+custom_constants/margin_top = 50
+custom_constants/margin_left = 150
+custom_constants/margin_bottom = 50
+script = ExtResource( 8 )
+_output = NodePath("MarginContainer/VBoxContainer/RichTextLabel")
+_CommandLine = NodePath("MarginContainer/VBoxContainer/LineEdit")
+
+[connection signal="StateLoaded" from="DebugMenu" to="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer/AudioServerControl" method="UpdateLayout"]

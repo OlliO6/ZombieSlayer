@@ -134,8 +134,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         if (isInvincible)
             return;
 
-        Debug.AddWatcher(this, "position:x");
-        Debug.Log(this, $"Got {amount} damage");
+        Debug.LogU(this, $"Got {amount} damage");
 
         CurrentHealth -= amount;
 

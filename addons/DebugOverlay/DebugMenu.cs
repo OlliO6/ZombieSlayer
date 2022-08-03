@@ -179,34 +179,21 @@ namespace Additions.Debugging
         }
 
         [TroughtSignal]
-        public void Quit()
-        {
-            GetTree().Quit();
-        }
+        public void Quit() => GetTree().Quit();
 
         [TroughtSignal]
-        public void Exit()
-        {
-            Overlay.HideMenu();
-        }
+        public void Exit() => Overlay.HideMenu();
+
+        [TroughtSignal] private void OpenConsole() => Overlay.OpenConsole();
 
         [TroughtSignal]
-        public void TogglePrintCommonLogs(bool toggled)
-        {
-            Overlay.turnOffCommonLogs = !toggled;
-        }
+        public void TogglePrintCommonLogs(bool toggled) => Overlay.turnOffCommonLogs = !toggled;
 
         [TroughtSignal]
-        public void ToggleNoUniqueNames(bool toggled)
-        {
-            Overlay.removeNameUniqeness = toggled;
-        }
+        public void ToggleNoUniqueNames(bool toggled) => Overlay.removeNameUniqeness = toggled;
 
         [TroughtSignal]
-        private void ToggleShowFps(bool toggled)
-        {
-            Overlay.IsShowingFps = toggled;
-        }
+        private void ToggleShowFps(bool toggled) => Overlay.IsShowingFps = toggled;
 
         [TroughtSignal]
         private void PrintStrays()
