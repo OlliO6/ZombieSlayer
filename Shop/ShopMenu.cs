@@ -1,7 +1,7 @@
-using Godot;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using Additions;
+using Godot;
 
 public class ShopMenu : Control
 {
@@ -89,7 +89,8 @@ public class ShopMenu : Control
         Player.currentPlayer.AddDice(dice);
 
         OnUpdateRatio();
-        GetNode<Button>(backButton).EmitSignal("pressed");
+
+        Debug.LogU(this, "Selled Dice");
     }
 
     private void AddScenesToDice(Dice dice, List<PackedScene> scenes)

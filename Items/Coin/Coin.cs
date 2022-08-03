@@ -1,7 +1,8 @@
-using Godot;
 using System;
 using Additions;
+using Godot;
 
+[Additions.Debugging.DefaultColor("gold")]
 public class Coin : PickupBase
 {
     [Export] public int amount;

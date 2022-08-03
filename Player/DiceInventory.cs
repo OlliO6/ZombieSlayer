@@ -1,6 +1,6 @@
-using Godot;
 using System.Collections.Generic;
 using Additions;
+using Godot;
 
 public class DiceInventory : Node2D
 {
@@ -20,6 +20,8 @@ public class DiceInventory : Node2D
 
     public void AddDice(Dice dice)
     {
+        Debug.Log(this, "Added Dice");
+
         dice.GetParent()?.RemoveChild(dice);
 
         (dice.broken ? BrokenDices : WorkingDices).AddChild(dice);

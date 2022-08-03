@@ -1,5 +1,5 @@
+using Additions;
 using Godot;
-using System;
 
 public class InteractionPickupBase : Area2D
 {
@@ -18,7 +18,6 @@ public class InteractionPickupBase : Area2D
         if (!IsCollectable()) return;
 
         playerInArea = true;
-        GD.Print("OnPlayerEntered");
         EmitSignal(nameof(PlayerEntered));
     }
 
@@ -28,7 +27,6 @@ public class InteractionPickupBase : Area2D
         if (collected || !playerInArea) return;
 
         playerInArea = false;
-        GD.Print("OnPlayerExited");
         EmitSignal(nameof(PlayerExited));
     }
 
@@ -40,8 +38,8 @@ public class InteractionPickupBase : Area2D
         {
             collected = true;
             Collect();
-            GD.Print("OnCollected");
             EmitSignal(nameof(Collected));
+            Debug.LogU(this, "Collected");
         }
     }
 

@@ -1,5 +1,5 @@
+using Additions;
 using Godot;
-using System;
 
 public class PickupBase : Area2D
 {
@@ -18,6 +18,8 @@ public class PickupBase : Area2D
         collected = true;
         Collect();
         EmitSignal(nameof(Collected));
+
+        Debug.Log(this, "Collected");
     }
 
     public virtual void Collect() { }

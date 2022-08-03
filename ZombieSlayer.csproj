@@ -1,10 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Godot.NET.Sdk/3.3.0">
-  <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
-    <LangVersion>9.0</LangVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="addons\BetterFileSystem\**" />
-  </ItemGroup>
+  	<PropertyGroup>
+		<TargetFramework>net472</TargetFramework>
+		<LangVersion>9.0</LangVersion>
+  	</PropertyGroup>
+
+	<Choose>
+		<When Condition="$(DefineConstants.Contains(TOOLS))">
+			<ItemGroup>
+				<!-- In editor -->
+			</ItemGroup>
+		</When>
+		
+		<Otherwise>
+			<ItemGroup>
+				<!-- Not in editor -->
+				<Compile Remove="addons\BetterFileSystem\**" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+
 </Project>

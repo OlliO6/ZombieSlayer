@@ -1,11 +1,10 @@
-using Godot;
-using System;
 using Additions;
+using Godot;
 
+[Additions.Debugging.DefaultColor(nameof(Colors.HotPink))]
 public class SceneManager : Node
 {
     public static SceneManager instance;
-
     private PackedScene menuScene = GD.Load<PackedScene>("res://UI/Menu/Menu.tscn");
 
     #region AnimationPlayer Reference
@@ -30,6 +29,7 @@ public class SceneManager : Node
     private async void _ChangeScence(PackedScene scene)
     {
         AnimationPlayer.Play("FadeStart");
+        GetTree().Paused = true;
 
         await ToSignal(AnimationPlayer, "animation_finished");
 
@@ -37,5 +37,7 @@ public class SceneManager : Node
 
         AnimationPlayer.Play("FadeEnd");
         GetTree().Paused = false;
+
+        Debug.LogU(this, $"Loaded {scene.ResourcePath.GetFile().BaseName()}");
     }
 }

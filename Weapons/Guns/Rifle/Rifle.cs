@@ -1,10 +1,10 @@
 using Godot;
-using System;
 
 public class Rifle : GunBase
 {
     protected override void AttackInputProcess()
     {
-        Attack();
+        if (AnimationPlayer.CurrentAnimation is not "Shoot")
+            Attack();
     }
 }

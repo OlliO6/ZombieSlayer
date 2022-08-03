@@ -1,0 +1,19 @@
+[gd_scene format=2]
+
+[node name="AudioBusControl" type="VBoxContainer"]
+margin_right = 702.0
+margin_bottom = 37.0
+
+[node name="Label" type="Label" parent="."]
+margin_right = 702.0
+margin_bottom = 14.0
+text = "Master Volume"
+align = 1
+
+[node name="Slider" type="HSlider" parent="."]
+margin_top = 18.0
+margin_right = 702.0
+margin_bottom = 34.0
+focus_mode = 0
+max_value = 1.0
+step = 0.0

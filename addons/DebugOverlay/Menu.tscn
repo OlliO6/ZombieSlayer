@@ -1,0 +1,244 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://UI/Fonts/ConsolasBigger.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI/Fonts/ConsolasBig.tres" type="DynamicFont" id=2]
+[ext_resource path="res://addons/DebugOverlay/DebugMenu.cs" type="Script" id=3]
+[ext_resource path="res://addons/DebugOverlay/AudioServerControl.cs" type="Script" id=5]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 2 )
+
+[sub_resource type="InputEventAction" id=4]
+action = "ui_cancel"
+
+[sub_resource type="ShortCut" id=3]
+shortcut = SubResource( 4 )
+
+[node name="DebugMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 768.0
+margin_bottom = 450.0
+rect_min_size = Vector2( 1024, 600 )
+theme = SubResource( 1 )
+script = ExtResource( 3 )
+_ExitButton = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/ExitButton")
+_PrintCommonLogsToggle = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer/PrintCommonToggle")
+_NoUniqueNamesToggle = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer/NoUniqueNamesToggle")
+_ShowFpsToggle = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer/ShowFpsToggle")
+screenshotDir = "C:\\Users\\olive\\Pictures\\Screenshots/ZombieSlayer"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.588235 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+modulate = Color( 1, 1, 1, 0.8 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 1008.0
+margin_bottom = 584.0
+custom_constants/separation = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 992.0
+margin_bottom = 32.0
+
+[node name="AudioServerControl" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 702.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+script = ExtResource( 5 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 706.0
+margin_right = 856.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_vertical = 0
+custom_constants/separation = 0
+
+[node name="PhysicFrameButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
+margin_right = 111.0
+margin_bottom = 32.0
+hint_tooltip = "Continue one physics frame."
+size_flags_horizontal = 8
+text = "Physic Step"
+
+[node name="10xPhysicsButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
+margin_left = 111.0
+margin_right = 150.0
+margin_bottom = 32.0
+hint_tooltip = "Continue one frame."
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.0
+action_mode = 0
+text = "10x"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 860.0
+margin_right = 992.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_vertical = 0
+custom_constants/separation = 0
+
+[node name="OneFrameButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+margin_right = 93.0
+margin_bottom = 32.0
+hint_tooltip = "Continue one frame."
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+action_mode = 0
+text = "Idle Step"
+
+[node name="10xIdleButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+margin_left = 93.0
+margin_right = 132.0
+margin_bottom = 32.0
+hint_tooltip = "Continue one frame."
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.0
+action_mode = 0
+text = "10x"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 992.0
+margin_bottom = 568.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 215.0
+margin_bottom = 520.0
+size_flags_vertical = 3
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+margin_right = 215.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+shortcut_in_tooltip = false
+shortcut = SubResource( 3 )
+text = "Exit Overlay"
+
+[node name="PrintStrayButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+margin_top = 54.0
+margin_right = 215.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+shortcut_in_tooltip = false
+shortcut = SubResource( 3 )
+text = "Print Stray Nodes"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+margin_top = 250.0
+margin_right = 215.0
+margin_bottom = 378.0
+size_flags_vertical = 6
+
+[node name="ShowFpsToggle" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer"]
+margin_right = 215.0
+margin_bottom = 40.0
+pressed = true
+text = "Show fps"
+
+[node name="PrintCommonToggle" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer"]
+margin_top = 44.0
+margin_right = 215.0
+margin_bottom = 84.0
+pressed = true
+text = "Common logs"
+
+[node name="NoUniqueNamesToggle" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer"]
+margin_top = 88.0
+margin_right = 215.0
+margin_bottom = 128.0
+hint_tooltip = "If on the names of the Objects logging and watched will be made ununique."
+pressed = true
+text = "No unique names"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 219.0
+margin_right = 223.0
+margin_bottom = 520.0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 227.0
+margin_right = 992.0
+margin_bottom = 520.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 8
+custom_constants/margin_left = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
+margin_left = 8.0
+margin_top = 210.0
+margin_right = 757.0
+margin_bottom = 310.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_vertical = 6
+custom_constants/separation = 12
+
+[node name="LogHistoryButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+visible = false
+margin_right = 133.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+text = "Log History"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+margin_right = 504.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+custom_constants/separation = 0
+
+[node name="ScreenshotButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer"]
+margin_right = 390.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "Screenshot"
+
+[node name="ScreenshotIUButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer"]
+margin_left = 390.0
+margin_right = 504.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.29
+custom_fonts/font = ExtResource( 1 )
+text = "With UI"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+margin_left = 516.0
+margin_right = 749.0
+margin_bottom = 100.0
+size_flags_horizontal = 7
+size_flags_stretch_ratio = 0.46
+custom_fonts/font = ExtResource( 1 )
+text = "Quit Game"
+
+[connection signal="StateLoaded" from="." to="MarginContainer/VBoxContainer/HBoxContainer/AudioServerControl" method="UpdateLayout"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer2/PhysicFrameButton" to="." method="FrameStep" binds= [ 1, true ]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer2/10xPhysicsButton" to="." method="FrameStep" binds= [ 10, true ]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/OneFrameButton" to="." method="FrameStep" binds= [ 1, false ]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/10xIdleButton" to="." method="FrameStep" binds= [ 10, false ]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/ExitButton" to="." method="Exit"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/PrintStrayButton" to="." method="PrintStrays"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer/ShowFpsToggle" to="." method="ToggleShowFps"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer/PrintCommonToggle" to="." method="TogglePrintCommonLogs"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer/NoUniqueNamesToggle" to="." method="ToggleNoUniqueNames"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer/ScreenshotButton" to="." method="TakeScreenshot" binds= [ true ]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer/ScreenshotIUButton" to="." method="TakeScreenshot" binds= [ false ]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/QuitButton" to="." method="Quit"]

@@ -25,7 +25,7 @@ default_bus_layout="res://BusLayout.tres"
 InputManager="*res://Singletons/InputManager.cs"
 SceneManager="*res://Singletons/SceneManager.tscn"
 OptionsManager="*res://Singletons/Options/OptionsManager.cs"
-DebugOverlay="*res://Singletons/Debug/DebugOverlay.tscn"
+Debug="*res://addons/DebugOverlay/DebugOverlay.tscn"
 
 [display]
 
@@ -39,7 +39,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/kanban_tasks/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/BetterFileSystem/plugin.cfg", "res://addons/DebugOverlay/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg" )
 
 [gui]
 

@@ -22,11 +22,7 @@ public class GunBase : WeaponBase
 
     public override void Attack()
     {
-        if (AnimationPlayer.CurrentAnimation == "Shoot") return;
-
         lastBullet = bulletScene.Instance<Bullet>();
-
-        lastBullet.Rotate(Mathf.Deg2Rad(Random.NormallyDistributedFloat(deviation: bulletSpread)));
 
         lastBullet.speed = (float)GD.RandRange(bulletSpeedRange.x, bulletSpeedRange.y);
         lastBullet.DamageAmount = GetBulletDamageAmount();
@@ -35,7 +31,9 @@ public class GunBase : WeaponBase
 
         GetTree().CurrentScene.AddChild(lastBullet);
         lastBullet.GlobalTransform = InstantiatePoint.GlobalTransform;
+        lastBullet.Rotate(Mathf.Deg2Rad(Random.NormallyDistributedFloat(deviation: bulletSpread)));
 
+        AnimationPlayer.Stop();
         AnimationPlayer.Play("Shoot");
     }
 }

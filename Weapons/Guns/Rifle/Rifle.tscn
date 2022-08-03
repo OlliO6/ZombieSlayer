@@ -66,13 +66,11 @@ tracks/3/keys = {
 }
 
 [node name="Rifle" instance=ExtResource( 3 )]
-rotation = 0.195259
 script = ExtResource( 2 )
 weaponPickup = "res://Items/WeaponPickUps/RiflePickup.tscn"
 icon = ExtResource( 5 )
 bulletSpeedRange = Vector2( 140, 150 )
-bulletSpread = 4.0
-bulletLivetime = 0.072
+bulletSpread = 6.0
 baseBulletDamage = 5
 
 [node name="Sprite" parent="." index="0"]

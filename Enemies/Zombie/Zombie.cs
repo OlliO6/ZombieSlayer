@@ -1,6 +1,7 @@
-using Godot;
 using Additions;
+using Godot;
 
+[Additions.Debugging.DefaultColor("LightGreen")]
 public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
 {
     [Export] private PackedScene coinScene;
@@ -84,7 +85,7 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
 
     public void GetDamage(int amount)
     {
-        GD.Print($"Zombie got {amount} damage");
+        Debug.Log(this, $"Got {amount} damage");
 
         CurrentHealth -= amount;
 
@@ -102,6 +103,8 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
     public void Die()
     {
         dead = true;
+
+        Debug.LogU(this, "Died");
 
         // better y sort
         Sprite.Offset += Vector2.Down * 4;
@@ -132,7 +135,6 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
         RemoveChild(Sprite);
         GetParent().AddChild(Sprite);
         Sprite.GlobalPosition = spritePos;
-        // Sprite.Material = null;
 
         QueueFree();
     }

@@ -1,7 +1,7 @@
-using Godot;
 using System;
+using Godot;
 
-public class Menu : Node
+public class Menu : CanvasLayer
 {
     [Export] private PackedScene gameScene;
 

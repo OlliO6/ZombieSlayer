@@ -1,6 +1,6 @@
-using Godot;
-using Additions;
 using System;
+using Additions;
+using Godot;
 
 public class WeaponSwitcher : Node2D
 {
@@ -132,6 +132,8 @@ public class WeaponSwitcher : Node2D
 
     public void DropWeapon(WeaponBase weapon)
     {
+        if (weapon is null) return;
+
         if (weapon.weaponPickup is not null)
         {
             WeaponPickUp pickup = GD.Load<PackedScene>(weapon.weaponPickup).Instance<WeaponPickUp>();
@@ -148,5 +150,7 @@ public class WeaponSwitcher : Node2D
         RemoveChild(weapon);
         weapon.QueueFree();
         WeaponsChanged();
+
+        Debug.Log(this, $"Dropped weapon '{weapon.Filename.GetFile().BaseName()}'");
     }
 }

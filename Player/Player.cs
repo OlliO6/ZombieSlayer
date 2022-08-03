@@ -3,6 +3,7 @@ using System.Linq;
 using Additions;
 using Godot;
 
+[Additions.Debugging.DefaultColor(nameof(Colors.LightBlue), nameof(Colors.DeepSkyBlue))]
 public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 {
     public static Player currentPlayer;
@@ -31,7 +32,6 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         set
         {
             coins = value;
-            DebugOverlay.Log(this, $"Has {value} coins.");
             EmitSignal(nameof(CoinsAmountChanged), value);
         }
     }
@@ -99,15 +99,11 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         CurrentHealth = MaxHealth;
         Coins = startCoins;
         MagnetAreaSize = startMagnetSize;
-
-        DebugOverlay.AddWatcher(this, nameof(MagnetAreaSize), showTargetName: false);
     }
 
     public override void _PhysicsProcess(float delta)
     {
         InputManager.GetMovementInput(out Vector2 inputVector, out float lenght);
-
-        DebugOverlay.LogP(this, inputVector.ToString());
 
         Move(inputVector, delta);
         Animate(inputVector, lenght);
@@ -138,7 +134,8 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         if (isInvincible)
             return;
 
-        DebugOverlay.Log(this, $"Got {amount} damage.");
+        Debug.AddWatcher(this, "position:x");
+        Debug.Log(this, $"Got {amount} damage");
 
         CurrentHealth -= amount;
 
@@ -157,6 +154,8 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     public void Die()
     {
+        Debug.LogU(this, $"Died");
+
         SceneManager.LoadMenu();
     }
 
