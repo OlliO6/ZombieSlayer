@@ -23,6 +23,8 @@ public class WaveSpawner : Node
 
     private void StartWave()
     {
+        Debug.LogU(this, $"Wave {currentWave} started");
+
         currentWave++;
         EmitSignal(nameof(WaveStarted));
 
@@ -62,6 +64,5 @@ public class WaveSpawner : Node
     private void OnEnemyDied()
     {
         enemyCount--;
-        GD.Print(enemyCount);
     }
 }

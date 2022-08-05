@@ -1,6 +1,7 @@
 #if DEBUG
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Godot;
 
 namespace Additions.Debugging
@@ -8,24 +9,50 @@ namespace Additions.Debugging
     public class Commands : Node
     {
         public Dictionary<string, Command> availableCommands;
+        public Dictionary<string, Godot.Object> availablePointers;
+
+        private Console Console => DebugOverlay.instance.Console;
+
+        static void Main()
+        {
+            new Console();
+            System.Console.ReadLine();
+        }
+
         public override void _Ready()
         {
-            // Assembly assembly = typeof(Commands).Assembly;
+            Assembly assembly = typeof(Commands).Assembly;
 
-            // foreach (TypeInfo type in assembly.DefinedTypes)
-            // {
-            //     type.GetCustomAttribute<>()
-            // }
+            foreach (TypeInfo type in assembly.DefinedTypes) //TODO attribute that makes new commands
+            {
+                // type.GetCustomAttribute<>() 
+            }
 
             availableCommands = new()
             {
                 {
+                    "help",
+                    new Command(this, nameof(Help), new ArgType[] { }, "Show available commands")
+                },
+                {
                     "print",
-                    new Command(this, nameof(PrintLine), new ArgType[] { ArgType.String })
+                    new Command(this, nameof(PrintLine), new ArgType[] { ArgType.String }, "Print something to the console")
                 },
                 {
                     "log",
-                    new Command(this, nameof(PrintLine), new ArgType[] { ArgType.String })
+                    new Command(this, nameof(PrintLine), new ArgType[] { ArgType.String }, "Same as print")
+                },
+                {
+                    "screenshotdir",
+                    new Command(this, nameof(ScreenshotDir), new ArgType[] { }, "Open the folder where your screenshot are saved")
+                },
+                {
+                    "setscreenshotdir",
+                    new Command(this, nameof(SetScreenshotDir), new ArgType[] { ArgType.String }, "Set the directory where you want your screenshots to be saved")
+                },
+                {
+                    "dateinscreenshot",
+                    new Command(this, nameof(DateInScreenshot), new ArgType[] { ArgType.Bool }, "Control if the date will be shown in new screenshots")
                 }
             };
 
@@ -54,9 +81,7 @@ namespace Additions.Debugging
                 }
                 command = "";
                 foreach (string item in splitted) command += item;
-                GD.Print(command);
                 command = command.Remove(0, 9).Remove(command.Length - 18);
-                GD.Print(command);
             }
 
             command = command.StripEdges();
@@ -64,6 +89,8 @@ namespace Additions.Debugging
             string[] parts = command.Split(' ').Where((part) => part is not " " and not "").ToArray();
 
             if (parts.Length is 0) return;
+
+            parts[0] = parts[0].ToLower();
 
             if (!availableCommands.ContainsKey(parts[0]))
             {
@@ -81,7 +108,31 @@ namespace Additions.Debugging
                 return;
             }
 
-            cm.target.Callv(cm.method, new Godot.Collections.Array(args));
+            object[] typedArgs = new object[args.Length];
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                switch (cm.argTypes[i])
+                {
+                    case ArgType.Int:
+                        typedArgs[i] = int.Parse(args[i]);
+                        break;
+
+                    case ArgType.Float:
+                        typedArgs[i] = float.Parse(args[i]);
+                        break;
+
+                    case ArgType.Bool:
+                        typedArgs[i] = args[i] is "true" ? true : false;
+                        break;
+
+                    case ArgType.String:
+                        typedArgs[i] = args[i];
+                        break;
+                }
+            }
+
+            cm.target.Callv(cm.method, new Godot.Collections.Array(typedArgs));
 
             bool ArgsValid()
             {
@@ -124,10 +175,64 @@ namespace Additions.Debugging
             }
         }
 
-        public void PrintLine(string what)
+        #region Generic Commands
+
+        private void PrintLine(string what)
         {
             DebugOverlay.AddOutputLine(what, true);
         }
+
+        private void Help()
+        {
+            DebugOverlay.AddOutputLine("Available Commands:\n", true);
+
+            foreach (var command in availableCommands)
+            {
+                if (command.Value.target == this && command.Value.method == nameof(Help)) continue;
+                DebugOverlay.AddOutputLine($"- {command.Key} {ArgTypesToString(command.Value.argTypes)} {(command.Value.description is "" ? "" : DebugOverlay.ColorizeText($"<{command.Value.description}>", Colors.Gray))}", true);
+            }
+            DebugOverlay.AddOutputLine("", true);
+        }
+
+        private void ScreenshotDir()
+        {
+            DebugOverlay.AddOutputLine($"Your screenshot directory is here [url]{DebugOverlay.instance.Menu.screenshotDir}[/url]", true);
+        }
+
+        private async void SetScreenshotDir(string path)
+        {
+            Directory dir = new();
+
+            if (!dir.DirExists(path))
+            {
+                string input = await Console.ReadLine($"{DebugOverlay.ColorizeText("directory {path} doesn't exists. Create it now?", Colors.Gray)}", "yes", "no");
+
+                if (input is not "yes") return;
+
+                Error error = dir.MakeDirRecursive(path);
+
+                if (error is not Error.Ok)
+                {
+                    DebugOverlay.AddOutputLine($"Couldn't create the directory {DebugOverlay.instance.Menu.screenshotDir}, Eroor: {error}", true);
+                    return;
+                }
+
+                DebugOverlay.instance.Menu.screenshotDir = path;
+                DebugOverlay.AddOutputLine($"Succesfully created and set the screenshot directory to [url]{DebugOverlay.instance.Menu.screenshotDir}[/url]", true);
+                return;
+            }
+
+            DebugOverlay.instance.Menu.screenshotDir = path;
+            DebugOverlay.AddOutputLine($"Succesfully set the screenshot directory to [url]{DebugOverlay.instance.Menu.screenshotDir}[/url]", true);
+        }
+
+        private void DateInScreenshot(bool show)
+        {
+            DebugOverlay.instance.Menu.dateInScreenShot = show;
+            DebugOverlay.AddOutputLine($"The date will now be {(show ? "shown" : "hidden")} in screenshots", true);
+        }
+
+        #endregion Generic commands
     }
 
     public struct Command
@@ -135,12 +240,14 @@ namespace Additions.Debugging
         public Godot.Object target;
         public string method;
         public ArgType[] argTypes;
+        public string description;
 
-        public Command(Godot.Object target, string method, ArgType[] argTypes)
+        public Command(Godot.Object target, string method, ArgType[] argTypes, string description = "")
         {
             this.target = target;
             this.method = method;
             this.argTypes = argTypes;
+            this.description = description;
         }
     }
 

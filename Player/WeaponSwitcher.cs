@@ -42,7 +42,6 @@ public class WeaponSwitcher : Node2D
         {
             if (mouseButtonInput.ButtonIndex is (int)ButtonList.WheelUp)
             {
-                GD.Print("WheelUp");
                 currentIndex++;
 
                 if (currentIndex > GetChildCount() - 1) currentIndex = 0;
@@ -52,7 +51,6 @@ public class WeaponSwitcher : Node2D
             }
             if (mouseButtonInput.ButtonIndex is (int)ButtonList.WheelDown)
             {
-                GD.Print("WheelDown");
 
                 currentIndex--;
 
@@ -110,7 +108,7 @@ public class WeaponSwitcher : Node2D
 
     public void WeaponsChanged()
     {
-        GD.Print(currentIndex);
+        Debug.Log(this, $"Switched weapon to {(IsInstanceValid(CurrentWeapon) ? CurrentWeapon.Name : CurrentWeapon)}");
 
         CurrentWeapon = GetChild<WeaponBase>(currentIndex);
 
@@ -119,6 +117,8 @@ public class WeaponSwitcher : Node2D
 
     public void AddWeapon(WeaponBase weapon)
     {
+        Debug.LogU(this, $"Added weapon {weapon.Name}");
+
         AddChild(weapon);
         MoveChild(weapon, currentIndex);
 

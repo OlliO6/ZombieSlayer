@@ -26,7 +26,6 @@ public class GunBase : WeaponBase
 
         lastBullet.speed = (float)GD.RandRange(bulletSpeedRange.x, bulletSpeedRange.y);
         lastBullet.DamageAmount = GetBulletDamageAmount();
-        GD.Print(bulletLivetime);
         lastBullet.maxLivetime = bulletLivetime;
 
         GetTree().CurrentScene.AddChild(lastBullet);

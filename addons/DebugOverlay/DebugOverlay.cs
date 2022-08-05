@@ -5,7 +5,7 @@ using Godot;
 
 namespace Additions.Debugging
 {
-    public class DebugOverlay : CanvasLayer
+    public class DebugOverlay : CanvasLayer // TODO Attribute that determines the log name for some classes
     {
         public static DebugOverlay instance;
         public static Queue<string> outputLines = new();
@@ -24,7 +24,6 @@ namespace Additions.Debugging
         [Export] private NodePath _Labels = "Labels";
 
         #endregion
-
         #region Logs Reference
 
         private Container storerForLogs;
@@ -32,7 +31,6 @@ namespace Additions.Debugging
         [Export] private NodePath _Logs = "Logs";
 
         #endregion
-
         #region Menu Reference
 
         private DebugMenu storerForMenu;
@@ -40,7 +38,6 @@ namespace Additions.Debugging
         [Export] private NodePath _Menu = "Menu";
 
         #endregion
-
         #region Console Reference
 
         private Console storerForConsole;
@@ -95,6 +92,11 @@ namespace Additions.Debugging
             {
                 if (isConsoleOpen)
                 {
+                    if (Console.isReading)
+                    {
+                        Console.CancelReading();
+                        return;
+                    }
                     CloseConsole();
                     return;
                 }

@@ -10,8 +10,8 @@ namespace Additions.Debugging
     {
         [Export] private NodePath _ExitButton, _PrintCommonLogsToggle, _NoUniqueNamesToggle, _ShowFpsToggle;
 
-        [Export(PropertyHint.GlobalDir)] private string screenshotDir;
-        [Export] private bool dateInScreenShot = true;
+        [Export(PropertyHint.GlobalDir)] internal string screenshotDir;
+        [Export] internal bool dateInScreenShot = true;
 
         [Signal] public delegate void StateLoaded();
 
@@ -68,7 +68,7 @@ namespace Additions.Debugging
         {
             const float UiHideTime = 0.2f;
 
-            Dictionary<Control, bool> prevVisibiliy = new();
+            Dictionary<CanvasLayer, bool> prevVisibiliy = new();
             if (noCanvasLayers) HideAllCanvasLayersChilds(ref prevVisibiliy);
             HideDebug();
 
@@ -135,7 +135,7 @@ namespace Additions.Debugging
             string fileDir = screenshotDir.PlusFile(fileName);
 
             image.SavePng(fileDir);
-            Debug.Log(this, $"Screenshot saved to {fileDir}");
+            Debug.Log(this, $"Saved screenshot");
 
             await new TimeAwaiter(this, UiHideTime);
 
@@ -143,35 +143,26 @@ namespace Additions.Debugging
 
             void HideDebug()
             {
-                foreach (Control child in Overlay.GetChildren<Control>())
-                {
-                    prevVisibiliy.Add(child, child.Visible);
-                    child.Hide();
-                }
+                prevVisibiliy.Add(Overlay, Overlay.Visible);
+                Overlay.Hide();
             }
 
-            void HideAllCanvasLayersChilds(ref Dictionary<Control, bool> prevVisibiliy)
+            void HideAllCanvasLayersChilds(ref Dictionary<CanvasLayer, bool> prevVisibiliy)
             {
-                GD.Print("HIDING");
                 List<CanvasLayer> canvasLayers = new();
                 GetTree().Root.GetAllChildren(ref canvasLayers);
-
-                GD.Print(canvasLayers.Count);
 
                 foreach (CanvasLayer canvasLayer in canvasLayers)
                 {
                     if (canvasLayer == Overlay) continue;
 
-                    foreach (Control child in canvasLayer.GetChildren<Control>())
-                    {
-                        prevVisibiliy.Add(child, child.Visible);
-                        child.Hide();
-                    }
+                    prevVisibiliy.Add(canvasLayer, canvasLayer.Visible);
+                    canvasLayer.Hide();
                 }
             }
-            void ResetCanvasLayerChildsVisibility(Dictionary<Control, bool> prevVisibiliy)
+            void ResetCanvasLayerChildsVisibility(Dictionary<CanvasLayer, bool> prevVisibiliy)
             {
-                foreach (KeyValuePair<Control, bool> item in prevVisibiliy)
+                foreach (KeyValuePair<CanvasLayer, bool> item in prevVisibiliy)
                 {
                     item.Key.Visible = item.Value;
                 }

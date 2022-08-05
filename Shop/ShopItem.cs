@@ -1,6 +1,6 @@
-using Godot;
 using System;
 using Additions;
+using Godot;
 
 [Tool]
 public class ShopItem : Control
@@ -27,7 +27,6 @@ public class ShopItem : Control
         get => _icon;
         set
         {
-            GD.Print(value, IconRect);
             _icon = value;
             IconRect?.SetDeferred("texture", value);
         }

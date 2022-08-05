@@ -1,6 +1,9 @@
 #if DEBUG
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using Godot;
 
 namespace Additions.Debugging
@@ -19,6 +22,8 @@ namespace Additions.Debugging
             }
         }
 
+        public bool isReading;
+        private CancellationTokenSource readCancellation;
         private int currentHistoryIndex = 0;
 
         #region Output Reference
@@ -83,11 +88,20 @@ namespace Additions.Debugging
         private void OnCommandEntered(string command)
         {
             CommandLine.Clear();
+
+            if (isReading) return;
+
             Commands.Execute(command);
             RefreshOutput();
 
             commandHistory.Insert(1, command);
             CurrentHistoryIndex = 0;
+        }
+
+        [TroughtSignal]
+        private void OnMetaClicked(string meta)
+        {
+            OS.ShellOpen(meta);
         }
 
         public void RefreshOutput()
@@ -131,6 +145,41 @@ namespace Additions.Debugging
         {
             DebugOverlay.outputLines = new();
             RefreshOutput();
+        }
+
+        internal void CancelReading()
+        {
+            isReading = false;
+            readCancellation.Cancel();
+        }
+
+        internal async Task<string> ReadLine(string message, params string[] options)
+        {
+            readCancellation = new();
+            CancellationToken token = readCancellation.Token;
+
+            DebugOverlay.AddOutputLine($"{message}\n{DebugOverlay.ColorizeText(string.Join(" ", options), Colors.Wheat)}", true);
+            RefreshOutput();
+
+            isReading = true;
+
+            SignalAwaiter signalAwaiter = ToSignal(CommandLine, "text_entered");
+            await signalAwaiter;
+
+            if (token.IsCancellationRequested) return "";
+
+            string input = (string)signalAwaiter.GetResult()[0];
+
+            if (!options.Contains(input))
+            {
+                if (input is "" or " ") return "";
+
+                DebugOverlay.AddOutputLine(DebugOverlay.ColorizeText("Invalid input", Colors.Gray), true);
+                RefreshOutput();
+                return "";
+            }
+
+            return input;
         }
     }
 }

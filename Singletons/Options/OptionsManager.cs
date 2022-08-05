@@ -1,4 +1,4 @@
-using System;
+using Additions;
 using Godot;
 
 public class OptionsManager : Node
@@ -100,7 +100,11 @@ public class OptionsManager : Node
     }
 
     public static void ResetOptions() => CurrentOptions = GD.Load<OptionSet>(DefaultOptionsPath).Duplicate() as OptionSet;
-    public static void SaveOptions() => ResourceSaver.Save(UserOptionsPath, CurrentOptions);
+    public static void SaveOptions()
+    {
+        Debug.LogU(instance, "Saving Options");
+        ResourceSaver.Save(UserOptionsPath, CurrentOptions);
+    }
 
     public static void UpdateOptions()
     {

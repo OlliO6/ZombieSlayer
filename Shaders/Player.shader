@@ -13,7 +13,7 @@ vec4 GetColor(vec2 uv, sampler2D text , vec2 pixel_size)
 void fragment()
 {
 	if (blinking && sin(TIME * blinkSpeed) > 0.0){
-		return;
+		discard;
 	}
 	COLOR = GetColor(UV, TEXTURE, TEXTURE_PIXEL_SIZE);
 }

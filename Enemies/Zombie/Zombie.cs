@@ -34,14 +34,14 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
 
     #endregion
 
-    #region FlashTween Reference
-
     #region AudioPlayer Reference
 
     private AudioStreamPlayer storerForAudioPlayer;
     public AudioStreamPlayer AudioPlayer => this.LazyGetNode(ref storerForAudioPlayer, "AudioPlayer");
 
     #endregion
+
+    #region FlashTween Reference
 
     private Tween storerForFlashTween;
     public Tween FlashTween => this.LazyGetNode(ref storerForFlashTween, "FlashTween");
@@ -85,8 +85,6 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
 
     public void GetDamage(int amount)
     {
-        Debug.Log(this, $"Got {amount} damage");
-
         CurrentHealth -= amount;
 
         FlashTween.InterpolateProperty(Sprite, "material:shader_param/flashStrenght", 0.9f, 0f, 0.15f, Tween.TransitionType.Cubic, Tween.EaseType.In);
@@ -104,7 +102,7 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
     {
         dead = true;
 
-        Debug.LogU(this, "Died");
+        Debug.Log(this, "Died");
 
         // better y sort
         Sprite.Offset += Vector2.Down * 4;

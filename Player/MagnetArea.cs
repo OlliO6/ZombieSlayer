@@ -1,6 +1,6 @@
-using Godot;
 using System.Collections.Generic;
 using Additions;
+using Godot;
 
 public class MagnetArea : Area2D
 {
@@ -20,7 +20,6 @@ public class MagnetArea : Area2D
         {
             _size = value;
             (Collider.Shape as CircleShape2D).Radius = value * radiusMultiplier;
-            GD.Print(value * radiusMultiplier);
         }
     }
     private float _size;

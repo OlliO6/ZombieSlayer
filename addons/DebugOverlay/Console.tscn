@@ -17,7 +17,6 @@ shadow_size = 15
 script = ExtResource( 1 )
 
 [node name="Console" type="MarginContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 544.0
@@ -88,7 +87,7 @@ margin_bottom = 28.0
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 margin_top = 32.0
 margin_right = 480.0
-margin_bottom = 225.0
+margin_bottom = 223.0
 focus_mode = 2
 size_flags_vertical = 3
 custom_colors/default_color = Color( 1, 1, 1, 1 )
@@ -100,12 +99,12 @@ override_selected_font_color = true
 custom_effects = [ SubResource( 1 ) ]
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
-margin_top = 229.0
+margin_top = 227.0
 margin_right = 480.0
-margin_bottom = 233.0
+margin_bottom = 231.0
 
 [node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer"]
-margin_top = 237.0
+margin_top = 235.0
 margin_right = 480.0
 margin_bottom = 261.0
 size_flags_stretch_ratio = 0.19
@@ -119,4 +118,5 @@ script = ExtResource( 3 )
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="OnBackPressed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/HideCButton" to="." method="OnHideCommonStuffToggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ClearButton" to="." method="ClearOutput"]
+[connection signal="meta_clicked" from="MarginContainer/VBoxContainer/RichTextLabel" to="." method="OnMetaClicked"]
 [connection signal="text_entered" from="MarginContainer/VBoxContainer/LineEdit" to="." method="OnCommandEntered"]

@@ -16,7 +16,7 @@ void fragment()
 	vec2 calculatedUV = UV + ((tileSize) * vec2(currentFrame));
 	
 	if (calculatedUV.x > tileSize.x || calculatedUV.x < 0.0 || calculatedUV.y > tileSize.y || calculatedUV.y < 0.0)
-		return;
+		discard;
 	
 	COLOR = GetColor(calculatedUV, TEXTURE, TEXTURE_PIXEL_SIZE);
 }
