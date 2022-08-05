@@ -7,11 +7,11 @@
 [ext_resource path="res://Shop/Shop.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Game/WaveSpawner.tscn" type="PackedScene" id=8]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
+[sub_resource type="ConvexPolygonShape2D" id=3]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="TileSet" id=2]
-0/name = "GrassVariant.png 0"
+0/name = "GrassVariantion"
 0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
 0/material = ExtResource( 3 )
@@ -44,14 +44,14 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 1/navigation_offset = Vector2( 0, 0 )
 1/shape_offset = Vector2( 0, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape = SubResource( 1 )
+1/shape = SubResource( 3 )
 1/shape_one_way = false
 1/shape_one_way_margin = 1.0
 1/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 1 ),
+"shape": SubResource( 3 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/DebugOverlay/RichTextColorEfx.gd" type="Script" id=1]
 [ext_resource path="res://addons/DebugOverlay/Console.cs" type="Script" id=2]
+[ext_resource path="res://addons/DebugOverlay/Commands.cs" type="Script" id=3]
 
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.207843, 0.207843, 0.207843, 1 )
@@ -93,8 +94,6 @@ size_flags_vertical = 3
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 0.529412, 0.596078, 0.647059, 1 )
 bbcode_enabled = true
-bbcode_text = "--------<[tint r=1 r=1 g=1 a=0.2]dasdsadsADSADSA[/tint]>--------"
-text = "--------<dasdsadsADSADSA>--------"
 scroll_following = true
 selection_enabled = true
 override_selected_font_color = true
@@ -114,6 +113,10 @@ clear_button_enabled = true
 placeholder_text = "Command Line"
 caret_blink = true
 
+[node name="Commands" type="Node" parent="."]
+script = ExtResource( 3 )
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="OnBackPressed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/HideCButton" to="." method="OnHideCommonStuffToggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ClearButton" to="." method="ClearOutput"]
+[connection signal="text_entered" from="MarginContainer/VBoxContainer/LineEdit" to="." method="OnCommandEntered"]

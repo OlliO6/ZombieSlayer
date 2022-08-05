@@ -1,4 +1,5 @@
 #if DEBUG
+using System.Collections.Generic;
 using System.Text;
 using Godot;
 
@@ -7,7 +8,18 @@ namespace Additions.Debugging
     public class Console : MarginContainer
     {
         public bool removeCommonStuff;
+        public List<string> commandHistory = new() { "" };
+        public int CurrentHistoryIndex
+        {
+            get => currentHistoryIndex;
+            set
+            {
+                currentHistoryIndex = value.Clamp(0, commandHistory.Count - 1);
+                CommandLine.Text = commandHistory[currentHistoryIndex];
+            }
+        }
 
+        private int currentHistoryIndex = 0;
 
         #region Output Reference
 
@@ -23,6 +35,42 @@ namespace Additions.Debugging
         [Export] private NodePath _CommandLine = "CommandLine";
 
         #endregion
+        #region Commands Reference
+
+        private Commands storerForCommands;
+        public Commands Commands => this.LazyGetNode(ref storerForCommands, "Commands");
+
+        #endregion
+
+        public override void _Input(InputEvent @event)
+        {
+            if (@event.IsPressed() && @event is InputEventKey keyInput)
+            {
+                if (keyInput.Scancode is (uint)KeyList.Up)
+                {
+                    CurrentHistoryIndex++;
+                    GetTree().SetInputAsHandled();
+                    return;
+                }
+                if (keyInput.Scancode is (uint)KeyList.Down)
+                {
+                    CurrentHistoryIndex--;
+                    GetTree().SetInputAsHandled();
+                    return;
+                }
+            }
+        }
+
+        public void Setup()
+        {
+            CurrentHistoryIndex = 0;
+            CommandLine.Clear();
+            CommandLine.GrabClickFocus();
+            RefreshOutput();
+        }
+
+        [TroughtSignal]
+        private void OnBackPressed() => (Owner as DebugOverlay)?.CloseConsole();
 
         [TroughtSignal]
         private void OnHideCommonStuffToggled(bool toggled)
@@ -31,15 +79,16 @@ namespace Additions.Debugging
             RefreshOutput();
         }
 
-        public void Setup()
+        [TroughtSignal]
+        private void OnCommandEntered(string command)
         {
             CommandLine.Clear();
-            CommandLine.GrabClickFocus();
+            Commands.Execute(command);
             RefreshOutput();
-        }
 
-        [TroughtSignal]
-        private void OnBackPressed() => (Owner as DebugOverlay)?.CloseConsole();
+            commandHistory.Insert(1, command);
+            CurrentHistoryIndex = 0;
+        }
 
         public void RefreshOutput()
         {

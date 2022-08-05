@@ -1,7 +1,7 @@
-using Additions;
-using Godot;
 using System;
 using System.Collections.Generic;
+using Additions;
+using Godot;
 
 public class DiceMenu : Control
 {
@@ -68,7 +68,7 @@ public class DiceMenu : Control
 
     private async void Open()
     {
-        if (GetTree().Paused == true) return;
+        if (GetTree().Paused == true || isOpen) return;
 
         EmitSignal(nameof(OpenStarted));
 
@@ -88,6 +88,8 @@ public class DiceMenu : Control
 
     private void Close()
     {
+        if (!isOpen) return;
+
         isOpen = false;
         GetTree().Paused = false;
         EmitSignal(nameof(Closed));

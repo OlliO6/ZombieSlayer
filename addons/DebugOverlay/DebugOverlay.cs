@@ -72,7 +72,11 @@ namespace Additions.Debugging
         public override void _Ready()
         {
             instance = this;
-            AddOutputLine(ColorizeText($"Ö--------<{(Engine.EditorHint ? "Editor Debug" : "Debug Export")}> started--------", Color.ColorN("white", 0.5f)), true);
+#if TOOLS
+            AddOutputLine(ColorizeText($"{ProjectSettings.GetSetting("application/config/name")} <Debug Editor> started", Color.ColorN("white", 0.5f)), true);
+#else
+            AddOutputLine(ColorizeText($"{ProjectSettings.GetSetting("application/config/name")} <Debug Export> started", Color.ColorN("white", 0.5f)), true);
+#endif
         }
 
         public override void _ExitTree()
@@ -122,7 +126,7 @@ namespace Additions.Debugging
 
         internal static void AddOutputLine(string line, bool uncommon) => outputLines.Enqueue((uncommon ? "#UNCOMMON#:" : "#COMMON#:") + line);
         // Weird string fotmatting so that its not doing a , instead of a . in deutschland :{
-        internal string ColorizeText(string what, Color color) => $"[tint r={color.r.ToString(System.Globalization.CultureInfo.InvariantCulture)} g={color.g.ToString(System.Globalization.CultureInfo.InvariantCulture)} b={color.b.ToString(System.Globalization.CultureInfo.InvariantCulture)} a={color.a.ToString(System.Globalization.CultureInfo.InvariantCulture)}]{what}[/tint]";
+        internal static string ColorizeText(string what, Color color) => $"[tint r={color.r.ToString(System.Globalization.CultureInfo.InvariantCulture)} g={color.g.ToString(System.Globalization.CultureInfo.InvariantCulture)} b={color.b.ToString(System.Globalization.CultureInfo.InvariantCulture)} a={color.a.ToString(System.Globalization.CultureInfo.InvariantCulture)}]{what}[/tint]";
 
         public void ShowMenu()
         {

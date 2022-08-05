@@ -55,7 +55,7 @@ custom_constants/separation = 0
 [node name="FPSLabel" type="Label" parent="MarginContainer/HBoxContainer/DebugLabels"]
 margin_top = -1.0
 margin_right = 252.0
-margin_bottom = 3.08752
+margin_bottom = 3.02821
 text = "FPS: 60"
 align = 1
 script = ExtResource( 4 )

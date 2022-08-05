@@ -1,6 +1,6 @@
-using Godot;
 using System.Threading;
 using Additions;
+using Godot;
 
 public class HurtArea : Area2D
 {
