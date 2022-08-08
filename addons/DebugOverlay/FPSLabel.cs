@@ -1,14 +1,12 @@
 #if DEBUG
+namespace Additions.Debugging;
 using Godot;
 
-namespace Additions.Debugging
+public class FPSLabel : Label
 {
-    public class FPSLabel : Label
+    public override void _Process(float delta)
     {
-        public override void _Process(float delta)
-        {
-            Text = $"FPS: {Engine.GetFramesPerSecond()}";
-        }
+        Text = $"FPS: {Engine.GetFramesPerSecond()}";
     }
 }
 #endif

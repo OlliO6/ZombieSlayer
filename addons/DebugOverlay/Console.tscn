@@ -2,10 +2,10 @@
 
 [ext_resource path="res://addons/DebugOverlay/RichTextColorEfx.gd" type="Script" id=1]
 [ext_resource path="res://addons/DebugOverlay/Console.cs" type="Script" id=2]
-[ext_resource path="res://addons/DebugOverlay/Commands.cs" type="Script" id=3]
+[ext_resource path="res://addons/DebugOverlay/CommandHandling.cs" type="Script" id=3]
 
 [sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+bg_color = Color( 0.172549, 0.168627, 0.168627, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -13,7 +13,7 @@ border_width_bottom = 2
 border_color = Color( 0.627451, 0.627451, 0.627451, 1 )
 shadow_size = 15
 
-[sub_resource type="RichTextEffect" id=1]
+[sub_resource type="RichTextEffect" id=6]
 script = ExtResource( 1 )
 
 [node name="Console" type="MarginContainer"]
@@ -28,19 +28,21 @@ custom_constants/margin_bottom = 50
 script = ExtResource( 2 )
 _output = NodePath("MarginContainer/VBoxContainer/RichTextLabel")
 _CommandLine = NodePath("MarginContainer/VBoxContainer/LineEdit")
+_HideCommonBtn = NodePath("MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/HideCommonButton")
+_HideTimeBtn = NodePath("MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/HideTimeButton")
 
 [node name="Panel" type="Panel" parent="."]
 margin_left = 150.0
 margin_top = 50.0
 margin_right = 650.0
-margin_bottom = 331.0
+margin_bottom = 325.0
 custom_styles/panel = SubResource( 5 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_left = 150.0
 margin_top = 50.0
 margin_right = 650.0
-margin_bottom = 331.0
+margin_bottom = 325.0
 rect_min_size = Vector2( 500, 0 )
 rect_pivot_offset = Vector2( -6.799, 0 )
 custom_constants/margin_right = 10
@@ -52,7 +54,7 @@ custom_constants/margin_bottom = 10
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 490.0
-margin_bottom = 271.0
+margin_bottom = 265.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_right = 480.0
@@ -63,13 +65,26 @@ margin_right = 42.0
 margin_bottom = 20.0
 text = "Back"
 
-[node name="HideCButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 171.0
-margin_right = 307.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 144.0
+margin_right = 334.0
+margin_bottom = 20.0
+size_flags_horizontal = 6
+
+[node name="HideCommonButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+margin_right = 108.0
+margin_bottom = 20.0
+size_flags_horizontal = 10
+toggle_mode = true
+text = "Hide Common "
+
+[node name="HideTimeButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+margin_left = 112.0
+margin_right = 190.0
 margin_bottom = 20.0
 size_flags_horizontal = 6
 toggle_mode = true
-text = "Hide Common stuff"
+text = "Hide Time"
 
 [node name="ClearButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 436.0
@@ -87,7 +102,7 @@ margin_bottom = 28.0
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 margin_top = 32.0
 margin_right = 480.0
-margin_bottom = 223.0
+margin_bottom = 217.0
 focus_mode = 2
 size_flags_vertical = 3
 custom_colors/default_color = Color( 1, 1, 1, 1 )
@@ -96,17 +111,17 @@ bbcode_enabled = true
 scroll_following = true
 selection_enabled = true
 override_selected_font_color = true
-custom_effects = [ SubResource( 1 ) ]
+custom_effects = [ SubResource( 6 ) ]
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
-margin_top = 227.0
+margin_top = 221.0
 margin_right = 480.0
-margin_bottom = 231.0
+margin_bottom = 225.0
 
 [node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer"]
-margin_top = 235.0
+margin_top = 229.0
 margin_right = 480.0
-margin_bottom = 261.0
+margin_bottom = 255.0
 size_flags_stretch_ratio = 0.19
 clear_button_enabled = true
 placeholder_text = "Command Line"
@@ -116,7 +131,9 @@ caret_blink = true
 script = ExtResource( 3 )
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="OnBackPressed"]
-[connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/HideCButton" to="." method="OnHideCommonStuffToggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/HideCommonButton" to="." method="OnHideCommonStuffToggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/HideTimeButton" to="." method="OnHideTimeToggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ClearButton" to="." method="ClearOutput"]
 [connection signal="meta_clicked" from="MarginContainer/VBoxContainer/RichTextLabel" to="." method="OnMetaClicked"]
+[connection signal="text_changed" from="MarginContainer/VBoxContainer/LineEdit" to="." method="LineEdited"]
 [connection signal="text_entered" from="MarginContainer/VBoxContainer/LineEdit" to="." method="OnCommandEntered"]

@@ -9,7 +9,6 @@
 default_font = ExtResource( 1 )
 
 [node name="DebugMenu" type="Control"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 768.0
@@ -185,43 +184,60 @@ size_flags_vertical = 6
 custom_constants/separation = 12
 
 [node name="ConsolButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
-margin_right = 89.0
+margin_right = 213.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.66
 custom_fonts/font = ExtResource( 2 )
 text = "Console"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
-margin_left = 101.0
-margin_right = 536.0
+margin_left = 225.0
+margin_right = 549.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="ScreenshotButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer"]
-margin_right = 337.0
+margin_right = 235.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 text = "Screenshot"
 
 [node name="ScreenshotIUButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer"]
-margin_left = 337.0
-margin_right = 435.0
+margin_left = 235.0
+margin_right = 324.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.29
 custom_fonts/font = ExtResource( 2 )
 text = "With UI"
 
-[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
-margin_left = 548.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+margin_left = 561.0
 margin_right = 749.0
 margin_bottom = 100.0
-size_flags_horizontal = 7
-size_flags_stretch_ratio = 0.46
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.58
+custom_constants/separation = 0
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer2"]
+margin_right = 116.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 text = "Quit Game"
+
+[node name="CrashButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer2"]
+margin_left = 116.0
+margin_right = 188.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.61
+custom_fonts/font = ExtResource( 2 )
+text = "Crash"
 
 [connection signal="StateLoaded" from="." to="MarginContainer/VBoxContainer/HBoxContainer/AudioServerControl" method="UpdateLayout"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer2/PhysicFrameButton" to="." method="FrameStep" binds= [ 1, true ]]
@@ -236,4 +252,5 @@ text = "Quit Game"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/ConsolButton" to="." method="OpenConsole"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer/ScreenshotButton" to="." method="TakeScreenshot" binds= [ true ]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer/ScreenshotIUButton" to="." method="TakeScreenshot" binds= [ false ]]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/QuitButton" to="." method="Quit"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer2/QuitButton" to="." method="Quit"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer2/CrashButton" to="." method="Crash"]

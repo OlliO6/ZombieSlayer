@@ -1,19 +1,17 @@
 #if TOOLS
+namespace Additions.Debugging;
 using Godot;
 
-namespace Additions.Debugging
+[Tool]
+public class Plugin : EditorPlugin
 {
-    [Tool]
-    public class Plugin : EditorPlugin
+    public override void _EnterTree()
     {
-        public override void _EnterTree()
-        {
-            AddAutoloadSingleton("Debug", "res://addons/DebugOverlay/DebugOverlay.tscn");
-        }
-        public override void _ExitTree()
-        {
-            RemoveAutoloadSingleton("Debug");
-        }
+        AddAutoloadSingleton("Debug", "res://addons/DebugOverlay/DebugOverlay.tscn");
+    }
+    public override void _ExitTree()
+    {
+        RemoveAutoloadSingleton("Debug");
     }
 }
 #endif

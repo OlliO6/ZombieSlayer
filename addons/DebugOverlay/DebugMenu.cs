@@ -1,197 +1,193 @@
 #if DEBUG
+namespace Additions.Debugging;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using Godot;
 
-namespace Additions.Debugging
+[LogName("Debug")]
+public class DebugMenu : Control
 {
-    public class DebugMenu : Control
+    [Export] private NodePath _ExitButton, _PrintCommonLogsToggle, _NoUniqueNamesToggle, _ShowFpsToggle;
+
+    [Export(PropertyHint.GlobalDir)] internal string screenshotDir;
+    [Export] internal bool dateInScreenShot = true;
+
+    [Signal] public delegate void StateLoaded();
+
+    public CancellationTokenSource stepCancellation = new();
+    private Button printCommonLogsToggle, noUniqueNamesToggle, showFpsToggle;
+    DebugOverlay Overlay => Owner.LazyObjectCast(ref storerForOverlay);
+    DebugOverlay storerForOverlay;
+
+    public override void _Ready()
     {
-        [Export] private NodePath _ExitButton, _PrintCommonLogsToggle, _NoUniqueNamesToggle, _ShowFpsToggle;
+        printCommonLogsToggle = GetNode<Button>(_PrintCommonLogsToggle);
+        noUniqueNamesToggle = GetNode<Button>(_NoUniqueNamesToggle);
+        showFpsToggle = GetNode<Button>(_ShowFpsToggle);
 
-        [Export(PropertyHint.GlobalDir)] internal string screenshotDir;
-        [Export] internal bool dateInScreenShot = true;
+        RectSize = RectMinSize;
+    }
 
-        [Signal] public delegate void StateLoaded();
+    public void LoadState()
+    {
+        printCommonLogsToggle.SetPressedNoSignal(!Overlay.turnOffCommonLogs);
+        noUniqueNamesToggle.SetPressedNoSignal(Overlay.removeNameUniqeness);
+        showFpsToggle.SetPressedNoSignal(Overlay.IsShowingFps);
 
-        public CancellationTokenSource stepCancellation = new();
-        private Button printCommonLogsToggle, noUniqueNamesToggle, showFpsToggle;
-        DebugOverlay Overlay => Owner.LazyObjectCast(ref storerForOverlay);
-        DebugOverlay storerForOverlay;
+        GetNode<Control>(_ExitButton).GrabFocus();
+        EmitSignal(nameof(StateLoaded));
+    }
 
-        public override void _Ready()
+    [TroughtSignal]
+    public async void FrameStep(int times, bool physics)
+    {
+        await ToSignal(GetTree(), physics ? "physics_frame" : "idle_frame");
+        stepCancellation.Cancel();
+        stepCancellation = new();
+        var token = stepCancellation.Token;
+
+        GetTree().Paused = false;
+
+        for (int i = 0; i < times; i++) await ToSignal(GetTree(), physics ? "physics_frame" : "idle_frame");
+
+        if (token.IsCancellationRequested) return;
+        GetTree().Paused = true;
+    }
+
+    [TroughtSignal]
+    public async void TakeScreenshot(bool noCanvasLayers)
+    {
+        const float UiHideTime = 0.2f;
+
+        Dictionary<CanvasLayer, bool> prevVisibiliy = new();
+        if (noCanvasLayers) HideAllCanvasLayersChilds(ref prevVisibiliy);
+        HideDebug();
+
+        await ToSignal(GetTree(), "idle_frame");
+        await ToSignal(GetTree(), "idle_frame");
+
+        Image image = GetTree().Root.GetTexture().GetData();
+        image.FlipY();
+
+        Directory dir = new();
+
+        if (!dir.DirExists(screenshotDir))
         {
-            printCommonLogsToggle = GetNode<Button>(_PrintCommonLogsToggle);
-            noUniqueNamesToggle = GetNode<Button>(_NoUniqueNamesToggle);
-            showFpsToggle = GetNode<Button>(_ShowFpsToggle);
-
-            RectSize = RectMinSize;
+            dir.MakeDirRecursive(screenshotDir);
         }
 
-        public void LoadState()
+        string fileName = "Screenshot";
+
+        if (dateInScreenShot)
         {
-            printCommonLogsToggle.SetBlockSignals(true);
-            noUniqueNamesToggle.SetBlockSignals(true);
-            showFpsToggle.SetBlockSignals(true);
+            var dateDict = OS.GetDate();
+            StringBuilder date = new();
 
-            printCommonLogsToggle.Pressed = !Overlay.turnOffCommonLogs;
-            noUniqueNamesToggle.Pressed = Overlay.removeNameUniqeness;
-            showFpsToggle.Pressed = Overlay.IsShowingFps;
+            date.Append(dateDict["day"]).Append(".")
+                    .Append(dateDict["month"]).Append(".")
+                    .Append(dateDict["year"]);
 
-            printCommonLogsToggle.SetBlockSignals(false);
-            noUniqueNamesToggle.SetBlockSignals(false);
-            showFpsToggle.SetBlockSignals(false);
+            fileName += $"({date.ToString()})";
+        }
+        fileName += ".png";
 
-            GetNode<Control>(_ExitButton).GrabFocus();
-            EmitSignal(nameof(StateLoaded));
+        #region Make file name unique 
+
+        dir.Open(screenshotDir);
+        dir.ListDirBegin();
+        List<string> fileNames = new();
+        string currentFile = dir.GetNext();
+
+        while (currentFile is not "")
+        {
+            if (!dir.CurrentIsDir())
+                fileNames.Add(currentFile);
+
+            currentFile = dir.GetNext();
         }
 
-        [TroughtSignal]
-        public async void FrameStep(int times, bool physics)
+        int number = 0;
+
+        while (fileNames.Contains(NumberisedFileName(fileName, number)))
         {
-            await ToSignal(GetTree(), physics ? "physics_frame" : "idle_frame");
-            stepCancellation.Cancel();
-            stepCancellation = new();
-            var token = stepCancellation.Token;
-
-            GetTree().Paused = false;
-
-            for (int i = 0; i < times; i++) await ToSignal(GetTree(), physics ? "physics_frame" : "idle_frame");
-
-            if (token.IsCancellationRequested) return;
-            GetTree().Paused = true;
+            number++;
         }
 
-        [TroughtSignal]
-        public async void TakeScreenshot(bool noCanvasLayers)
+        fileName = NumberisedFileName(fileName, number);
+
+        string NumberisedFileName(string fileName, int number)
         {
-            const float UiHideTime = 0.2f;
-
-            Dictionary<CanvasLayer, bool> prevVisibiliy = new();
-            if (noCanvasLayers) HideAllCanvasLayersChilds(ref prevVisibiliy);
-            HideDebug();
-
-            await ToSignal(GetTree(), "idle_frame");
-            await ToSignal(GetTree(), "idle_frame");
-
-            Image image = GetTree().Root.GetTexture().GetData();
-            image.FlipY();
-
-            Directory dir = new();
-
-            if (!dir.DirExists(screenshotDir))
-            {
-                dir.MakeDirRecursive(screenshotDir);
-            }
-
-            string fileName = "Screenshot";
-
-            if (dateInScreenShot)
-            {
-                var dateDict = OS.GetDate();
-                StringBuilder date = new();
-
-                date.Append(dateDict["day"]).Append(".")
-                        .Append(dateDict["month"]).Append(".")
-                        .Append(dateDict["year"]);
-
-                fileName += $"({date.ToString()})";
-            }
-            fileName += ".png";
-
-            #region Make file name unique 
-
-            dir.Open(screenshotDir);
-            dir.ListDirBegin();
-            List<string> fileNames = new();
-            string currentFile = dir.GetNext();
-
-            while (currentFile is not "")
-            {
-                if (!dir.CurrentIsDir())
-                    fileNames.Add(currentFile);
-
-                currentFile = dir.GetNext();
-            }
-
-            int number = 0;
-
-            while (fileNames.Contains(NumberisedFileName(fileName, number)))
-            {
-                number++;
-            }
-
-            fileName = NumberisedFileName(fileName, number);
-
-            string NumberisedFileName(string fileName, int number)
-            {
-                if (number <= 0) return fileName;
-                return $"{fileName.RStrip(".png")}_{number}.png";
-            }
-
-            #endregion Make file name unique
-
-            string fileDir = screenshotDir.PlusFile(fileName);
-
-            image.SavePng(fileDir);
-            Debug.Log(this, $"Saved screenshot");
-
-            await new TimeAwaiter(this, UiHideTime);
-
-            ResetCanvasLayerChildsVisibility(prevVisibiliy);
-
-            void HideDebug()
-            {
-                prevVisibiliy.Add(Overlay, Overlay.Visible);
-                Overlay.Hide();
-            }
-
-            void HideAllCanvasLayersChilds(ref Dictionary<CanvasLayer, bool> prevVisibiliy)
-            {
-                List<CanvasLayer> canvasLayers = new();
-                GetTree().Root.GetAllChildren(ref canvasLayers);
-
-                foreach (CanvasLayer canvasLayer in canvasLayers)
-                {
-                    if (canvasLayer == Overlay) continue;
-
-                    prevVisibiliy.Add(canvasLayer, canvasLayer.Visible);
-                    canvasLayer.Hide();
-                }
-            }
-            void ResetCanvasLayerChildsVisibility(Dictionary<CanvasLayer, bool> prevVisibiliy)
-            {
-                foreach (KeyValuePair<CanvasLayer, bool> item in prevVisibiliy)
-                {
-                    item.Key.Visible = item.Value;
-                }
-            }
+            if (number <= 0) return fileName;
+            return $"{fileName.RStrip(".png")}_{number}.png";
         }
 
-        [TroughtSignal]
-        public void Quit() => GetTree().Quit();
+        #endregion Make file name unique
 
-        [TroughtSignal]
-        public void Exit() => Overlay.HideMenu();
+        string fileDir = screenshotDir.PlusFile(fileName);
 
-        [TroughtSignal] private void OpenConsole() => Overlay.OpenConsole();
+        Debug.LogU(this, "Saved screenshot");
 
-        [TroughtSignal]
-        public void TogglePrintCommonLogs(bool toggled) => Overlay.turnOffCommonLogs = !toggled;
+        await new TimeAwaiter(this, UiHideTime);
 
-        [TroughtSignal]
-        public void ToggleNoUniqueNames(bool toggled) => Overlay.removeNameUniqeness = toggled;
+        image.SavePng(fileDir);
 
-        [TroughtSignal]
-        private void ToggleShowFps(bool toggled) => Overlay.IsShowingFps = toggled;
+        ResetCanvasLayerChildsVisibility(prevVisibiliy);
 
-        [TroughtSignal]
-        private void PrintStrays()
+        void HideDebug()
         {
-            PrintStrayNodes();
-            Debug.LogU(this, "Printed stray nodes");
+            prevVisibiliy.Add(Overlay, Overlay.Visible);
+            Overlay.Hide();
         }
+
+        void HideAllCanvasLayersChilds(ref Dictionary<CanvasLayer, bool> prevVisibiliy)
+        {
+            List<CanvasLayer> canvasLayers = new();
+            GetTree().Root.GetAllChildren(ref canvasLayers);
+
+            foreach (CanvasLayer canvasLayer in canvasLayers)
+            {
+                if (canvasLayer == Overlay) continue;
+
+                prevVisibiliy.Add(canvasLayer, canvasLayer.Visible);
+                canvasLayer.Hide();
+            }
+        }
+        void ResetCanvasLayerChildsVisibility(Dictionary<CanvasLayer, bool> prevVisibiliy)
+        {
+            foreach (KeyValuePair<CanvasLayer, bool> item in prevVisibiliy)
+            {
+                item.Key.Visible = item.Value;
+            }
+        }
+    }
+
+    [TroughtSignal]
+    public void Quit() => GetTree().Quit();
+
+    [TroughtSignal]
+    public void Crash() => OS.Crash("Crashed from debug overlay");
+
+    [TroughtSignal]
+    public void Exit() => Overlay.HideMenu();
+
+    [TroughtSignal]
+    private void OpenConsole() => Overlay.OpenConsole();
+
+    [TroughtSignal]
+    public void TogglePrintCommonLogs(bool toggled) => Overlay.turnOffCommonLogs = !toggled;
+
+    [TroughtSignal]
+    public void ToggleNoUniqueNames(bool toggled) => Overlay.removeNameUniqeness = toggled;
+
+    [TroughtSignal]
+    private void ToggleShowFps(bool toggled) => Overlay.IsShowingFps = toggled;
+
+    [TroughtSignal]
+    private void PrintStrays()
+    {
+        PrintStrayNodes();
+        Debug.LogU(this, "Printed stray nodes");
     }
 }
 #endif

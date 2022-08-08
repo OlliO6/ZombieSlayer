@@ -1,7 +1,7 @@
-using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Godot;
 
 namespace BetterFileSystem
 {
@@ -125,6 +125,14 @@ namespace BetterFileSystem
         }
 
         #endregion
+
+        public override void _Input(InputEvent @event)
+        {
+            if (@event is InputEventKey keyInput && keyInput.Scancode is (uint)KeyList.P && keyInput.Control)
+            {
+                filterBar.GrabFocus();
+            }
+        }
 
         #region Scroll Fix
 
@@ -571,7 +579,7 @@ namespace BetterFileSystem
                 });
             }
         }
-        
+
         #endregion
     }
 }

@@ -1,4 +1,5 @@
 #if DEBUG
+namespace Additions.Debugging;
 using Godot;
 
 public class AudioServerControl : VBoxContainer
@@ -12,7 +13,6 @@ public class AudioServerControl : VBoxContainer
         {
             child.QueueFree();
         }
-
         for (int i = 0; i < AudioServer.BusCount; i++)
         {
             Node audioBusControl = audioBusCtrlScene.Instance();
