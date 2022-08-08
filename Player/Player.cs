@@ -69,7 +69,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     #region Weapons Reference
 
     private WeaponSwitcher storerForWeapons;
-    public WeaponSwitcher Weapons => this.LazyGetNode(ref storerForWeapons, "WeaponPivot/WeaponSwitcher");
+    public WeaponSwitcher Weapons => this.LazyGetNode(ref storerForWeapons, "WeaponSwitcher");
 
     #endregion
 

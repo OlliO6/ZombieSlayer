@@ -69,15 +69,15 @@ custom_constants/separation = 0
 [node name="FPSLabel" type="Label" parent="MarginContainer/HBoxContainer/DebugLabels"]
 margin_top = -1.0
 margin_right = 252.0
-margin_bottom = 3.13333
+margin_bottom = 3.07041
 text = "FPS: 60"
 align = 1
 script = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_left = 2.0
-margin_top = 142.0
-margin_right = 2.0
+margin_top = 138.0
+margin_right = 57.0
 margin_bottom = 142.0
 mouse_filter = 2
 size_flags_horizontal = 0
@@ -85,9 +85,13 @@ size_flags_vertical = 8
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer"]
 visible = false
+margin_right = 55.0
+margin_bottom = 4.0
 color = Color( 0, 0, 0, 0.392157 )
 
 [node name="Logs" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+margin_right = 55.0
+margin_bottom = 4.0
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 10

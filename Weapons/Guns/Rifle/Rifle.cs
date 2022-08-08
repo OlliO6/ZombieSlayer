@@ -4,7 +4,6 @@ public class Rifle : GunBase
 {
     protected override void AttackInputProcess()
     {
-        if (AnimationPlayer.CurrentAnimation is not "Shoot")
-            Attack();
+        if (!isAttacking) Attack();
     }
 }

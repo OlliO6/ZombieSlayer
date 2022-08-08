@@ -106,7 +106,6 @@ hue_variation_random = 1.0
 z_index = 1
 collision_layer = 24
 script = ExtResource( 1 )
-goThroughTargetsCount = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

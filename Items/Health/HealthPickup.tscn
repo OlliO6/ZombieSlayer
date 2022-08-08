@@ -6,6 +6,8 @@
 
 [node name="HealthPickup" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+amount = 1
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )
+hframes = 1

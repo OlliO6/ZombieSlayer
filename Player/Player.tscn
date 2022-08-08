@@ -3,7 +3,7 @@
 [ext_resource path="res://Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
 [ext_resource path="res://Weapons/Guns/Pistol/Pistol.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Player/WeaponPivot.cs" type="Script" id=4]
+[ext_resource path="res://Weapons/Swords/Dagger/Dagger.tscn" type="PackedScene" id=4]
 [ext_resource path="res://BasicStuff/HurtArea.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/Ingame/IngameUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/PauseMenu/PauseMenu.tscn" type="PackedScene" id=7]
@@ -148,17 +148,15 @@ hframes = 2
 
 [node name="Upgrades" type="Node" parent="."]
 
-[node name="WeaponPivot" type="Position2D" parent="."]
+[node name="WeaponSwitcher" type="Node2D" parent="."]
 position = Vector2( 0, -5 )
-rotation = -0.0837758
-script = ExtResource( 4 )
-
-[node name="WeaponSwitcher" type="Node2D" parent="WeaponPivot"]
 script = ExtResource( 10 )
 
-[node name="Pistol" parent="WeaponPivot/WeaponSwitcher" instance=ExtResource( 3 )]
+[node name="Pistol" parent="WeaponSwitcher" instance=ExtResource( 3 )]
 
-[node name="Rifle" parent="WeaponPivot/WeaponSwitcher" instance=ExtResource( 9 )]
+[node name="Rifle" parent="WeaponSwitcher" instance=ExtResource( 9 )]
+
+[node name="Dagger" parent="WeaponSwitcher" instance=ExtResource( 4 )]
 
 [node name="DiceInventory" type="Node2D" parent="."]
 position = Vector2( 0, -5 )
@@ -217,10 +215,10 @@ smoothing_enabled = true
 
 [connection signal="CoinsAmountChanged" from="." to="UI/IngameUI" method="OnCoinsAmountChanged"]
 [connection signal="HealthChanged" from="." to="UI/IngameUI" method="OnPlayerHealthChanged"]
-[connection signal="InvincibilityEnded" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ true ]]
 [connection signal="InvincibilityEnded" from="." to="HurtArea" method="Check" flags=3]
+[connection signal="InvincibilityEnded" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ true ]]
 [connection signal="InvincibilityStarted" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ false ]]
-[connection signal="WeaponChanged" from="WeaponPivot/WeaponSwitcher" to="UI/IngameUI" method="OnWeaponChanged"]
+[connection signal="WeaponChanged" from="WeaponSwitcher" to="UI/IngameUI" method="OnWeaponChanged"]
 [connection signal="InventoryPressed" from="UI/PauseMenu" to="UI/Inventory" method="Open"]
 
 [editable path="HurtArea"]

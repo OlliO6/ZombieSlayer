@@ -1,6 +1,6 @@
-using Godot;
 using System;
 using Additions;
+using Godot;
 
 public class WeaponBase : Node2D
 {
@@ -16,10 +16,13 @@ public class WeaponBase : Node2D
 
     public bool disabled;
 
+    public bool isAttacking;
+
     public override void _Ready()
     {
         InputManager.instance.Connect(nameof(InputManager.AttackInputStarted), this, nameof(OnAttackInputStarted));
         InputManager.instance.Connect(nameof(InputManager.AttackInputEnded), this, nameof(OnAttackInputEnded));
+        AnimationPlayer.Connect("animation_finished", this, nameof(AnimationFinished));
     }
 
     public virtual void Disable()
@@ -52,5 +55,14 @@ public class WeaponBase : Node2D
     protected virtual void AttackInputStarted() { }
     protected virtual void AttackInputEnded() { }
     protected virtual void AttackInputProcess() { }
-    public virtual void Attack() { }
+    public virtual void Attack() { isAttacking = true; }
+    protected virtual void AnimationFinished(string animation)
+    {
+        if (animation is "Attack")
+        {
+            isAttacking = false;
+            AttackFinished();
+        }
+    }
+    protected virtual void AttackFinished() { }
 }

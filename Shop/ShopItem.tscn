@@ -20,7 +20,7 @@ rect_min_size = Vector2( 100, 16 )
 theme = ExtResource( 4 )
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 2 )
-priceMultiplier = 1.1
+priceMultiplier = 0.9
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 1.0

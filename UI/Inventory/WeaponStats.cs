@@ -1,6 +1,6 @@
-using Godot;
 using System.Collections.Generic;
 using Additions;
+using Godot;
 
 public class WeaponStats : Control
 {
@@ -34,7 +34,7 @@ public class WeaponStats : Control
 
         NameLabel.Text = weapon.Filename.GetFile().BaseName();
 
-        TypeLabel.Text = $"{GetWeaponType(NameLabel.Text)}";
+        TypeLabel.Text = GetWeaponType(NameLabel.Text);
 
         ShowWeaponStats(NameLabel.Text, weapon);
     }
@@ -44,6 +44,7 @@ public class WeaponStats : Control
         switch (weapon)
         {
             case "Pistol" or "Rifle": return "Gun";
+            case "Dagger": return "Sword";
         }
 
         return "Unknown";
@@ -61,6 +62,10 @@ public class WeaponStats : Control
             case GunBase gun:
                 AddGunBaseStats(gun);
                 break;
+
+            case SwordBase sword:
+                AddSwordBaseStats(sword);
+                break;
         }
 
         switch (weaponName)
@@ -76,6 +81,14 @@ public class WeaponStats : Control
             stats.Add("Damage", gun.GetBulletDamageAmount());
             stats.Add("Spread", gun.bulletSpread);
             stats.Add("DPS", (int)stats["Damage"] * bulletsPerSecond);
+            tooltips.Add("DPS", "Best possible damage per second");
+        }
+        void AddSwordBaseStats(SwordBase sword)
+        {
+            float swingsPerSecond = 1 / sword.AnimationPlayer.GetAnimation("Attack").Length;
+            stats.Add("Attack Speed", swingsPerSecond);
+            stats.Add("Damage", sword.GetDamageAmount());
+            stats.Add("DPS", (int)stats["Damage"] * swingsPerSecond);
             tooltips.Add("DPS", "Best possible damage per second");
         }
 

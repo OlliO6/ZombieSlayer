@@ -115,6 +115,7 @@ material = ExtResource( 1 )
 position = Vector2( 0, 2 )
 offset = Vector2( 6, -2 )
 hframes = 3
+frame = 1
 
 [node name="MuzzleFlash" type="Particles2D" parent="."]
 position = Vector2( 10, -1 )
@@ -134,7 +135,6 @@ position = Vector2( 11, -1 )
 autoplay = "Idle"
 anims/Idle = SubResource( 1 )
 anims/Shoot = SubResource( 2 )
-next/Shoot = "Idle"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource( 6 )

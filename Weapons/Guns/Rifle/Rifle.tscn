@@ -1,17 +1,18 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Weapons/Guns/Rifle/Rifle.png" type="Texture" id=1]
 [ext_resource path="res://Weapons/Guns/Rifle/Rifle.cs" type="Script" id=2]
 [ext_resource path="res://Weapons/Guns/GunBase.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sounds/RifleShoot.wav" type="AudioStream" id=4]
 [ext_resource path="res://Weapons/Guns/Rifle/RifleIcon.png" type="Texture" id=5]
+[ext_resource path="res://Bullets/PlayerBullets/SmallPlayerBullet.tscn" type="PackedScene" id=6]
 
 [sub_resource type="AudioStreamRandomPitch" id=6]
 audio_stream = ExtResource( 4 )
 
 [sub_resource type="Animation" id=7]
 resource_name = "Shoot"
-length = 0.2
+length = 0.17
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -19,7 +20,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
+"times": PoolRealArray( 0, 0.09, 0.17 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2 ]
@@ -69,15 +70,16 @@ tracks/3/keys = {
 script = ExtResource( 2 )
 weaponPickup = "res://Items/WeaponPickUps/RiflePickup.tscn"
 icon = ExtResource( 5 )
+bulletScene = ExtResource( 6 )
 bulletSpeedRange = Vector2( 140, 150 )
-bulletSpread = 6.0
+bulletSpread = 5.0
 baseBulletDamage = 5
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2( 5, 1 )
 texture = ExtResource( 1 )
 offset = Vector2( 2, -3 )
-frame = 2
+frame = 0
 
 [node name="MuzzleFlash" parent="." index="1"]
 position = Vector2( 13, -1 )

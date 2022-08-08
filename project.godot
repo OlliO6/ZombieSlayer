@@ -152,8 +152,8 @@ SkipBootSplash={
 2d_physics/layer_1="World"
 2d_physics/layer_2="Enemy"
 2d_physics/layer_3="Player"
-2d_physics/layer_4="EnemyBullet"
-2d_physics/layer_5="PlayerBullet"
+2d_physics/layer_4="EnemyDealer"
+2d_physics/layer_5="PlayerDealer"
 2d_physics/layer_6="Item"
 
 [physics]

@@ -49,6 +49,8 @@ public class Bullet : Area2D, IKillable, IDamageDealer
 
     public bool AllowDamageTo(IDamageable to)
     {
+        if (dead) return false;
+
         if (!goTroughAllTargets && goThroughTargetsCount <= 0)
         {
             Die();
