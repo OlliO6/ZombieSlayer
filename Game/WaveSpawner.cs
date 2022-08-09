@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Additions;
 using Godot;
 
@@ -57,7 +59,17 @@ public class WaveSpawner : Node
 
         Node spawnPositions = GetNode(spawnPositionsHolder);
 
-        enemy.GlobalPosition = spawnPositions.GetChild<Node2D>(Random.IntRange(0, spawnPositions.GetChildCount() - 1)).GlobalPosition;
+        if (Player.currentPlayer is null)
+        {
+            enemy.GlobalPosition = spawnPositions.GetChild<Node2D>(Random.IntRange(0, spawnPositions.GetChildCount() - 1)).GlobalPosition;
+            return;
+        }
+
+        const float maxDistToPlayer = 90;
+        // Only consider positions that are a bit away from the player.
+        List<Node2D> possiblePositions = spawnPositions.GetChildren<Node2D>().Where((node) => Player.currentPlayer.GlobalPosition.DistanceTo(node.GlobalPosition) > maxDistToPlayer).ToList();
+
+        enemy.GlobalPosition = possiblePositions[Random.IntRange(0, possiblePositions.Count - 1)].GlobalPosition;
     }
 
     [TroughtSignal]
