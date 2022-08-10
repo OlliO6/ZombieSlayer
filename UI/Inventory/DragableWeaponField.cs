@@ -1,5 +1,5 @@
-using Godot;
 using System;
+using Godot;
 
 [Tool]
 public class DragableWeaponField : WeaponField
@@ -80,7 +80,7 @@ public class DragableWeaponField : WeaponField
     {
         if (Player.currentPlayer is null) return;
 
-        WeaponSwitcher weapons = Player.currentPlayer.Weapons;
+        WeaponSwitcher weapons = Player.currentPlayer.WeaponInv;
 
         weapons.MoveChild(weapons.GetChild(fromIndex), toIndex);
 

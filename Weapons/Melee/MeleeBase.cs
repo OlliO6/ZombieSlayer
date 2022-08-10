@@ -1,13 +1,15 @@
 using Additions;
 using Godot;
 
-public class SwordBase : WeaponBase
+public class MeleeBase : WeaponBase
 {
     [Export] public int[] comboDamageLevels;
     [Export] public int maxComboCount;
-    [Export] private float afterAttackTransitionTiem = 1, comboTime = 0.3f;
+    [Export] private float afterAttackTransitionTime = 1, comboTime = 0.3f;
     [Export] private string[] comboAnims;
+    [Export] private float[] extraTime;
 
+    protected float currentExtraTime;
     protected int currentCombo;
     protected SceneTreeTween tween;
 
@@ -29,7 +31,7 @@ public class SwordBase : WeaponBase
     {
         base.Attack();
 
-        if (tween is not null && tween.GetTotalElapsedTime() < comboTime)
+        if (tween is not null && tween.GetTotalElapsedTime() < comboTime + currentExtraTime)
         {
             currentCombo++;
             if (currentCombo > maxComboCount || currentCombo >= comboAnims.Length)
@@ -52,17 +54,6 @@ public class SwordBase : WeaponBase
         Vector2 mousePos = GetGlobalMousePosition();
         LookAt(mousePos);
 
-        if (currentCombo < maxComboCount && tween is not null && tween.GetTotalElapsedTime() < comboTime)
-        {
-            if (Scale == new Vector2(-1, 1))
-            {
-                Rotate(Mathf.Deg2Rad(180));
-                return;
-            }
-            Scale = new Vector2(1, 1);
-            return;
-        }
-
         if (GlobalPosition.x > mousePos.x)
         {
             Scale = new Vector2(-1, 1);
@@ -76,12 +67,12 @@ public class SwordBase : WeaponBase
     {
         if (animation == comboAnims[currentCombo])
         {
-            isAttacking = false;
+            currentExtraTime = currentCombo < extraTime.Length ? extraTime[currentCombo] : 0;
             AttackFinished();
         }
     }
 
-    protected override void AttackFinished()
+    protected override async void AttackFinished()
     {
         tween = CreateTween();
         Animation reset = AnimationPlayer.GetAnimation("RESET");
@@ -94,7 +85,10 @@ public class SwordBase : WeaponBase
         {
             string[] path = ((string)reset.TrackGetPath(i)).Split(':');
 
-            tween.TweenProperty(GetNode(path[0]), path[1], reset.TrackGetKeyValue(i, 0), afterAttackTransitionTiem);
+            tween.TweenProperty(GetNode(path[0]), path[1], reset.TrackGetKeyValue(i, 0), afterAttackTransitionTime);
         }
+
+        if (currentExtraTime != 0) await new TimeAwaiter(this, currentExtraTime);
+        isAttacking = false;
     }
 }

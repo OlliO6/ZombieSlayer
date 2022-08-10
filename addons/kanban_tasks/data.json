@@ -3,6 +3,10 @@
     {
       "title": "Task",
       "color": "6394ed"
+    },
+    {
+      "title": "Idea",
+      "color": "49b166"
     }
   ],
   "columns": [
@@ -28,7 +32,7 @@
       "tasks": [
         3,
         4,
-        6
+        5
       ]
     },
     {
@@ -42,8 +46,7 @@
       "tasks": [
         1,
         2,
-        0,
-        5
+        0
       ]
     }
   ],
@@ -64,7 +67,7 @@
       "details": ""
     },
     {
-      "category": 0,
+      "category": 1,
       "title": "Maybe zoom out",
       "details": ""
     },
@@ -72,11 +75,6 @@
       "category": 0,
       "title": "Zombie spawn animation",
       "details": "so you dont get hit when a zombie spawns inside you"
-    },
-    {
-      "category": 0,
-      "title": "Weapon balancing",
-      "details": "So the damage upgrade can be a multiplier wich is gonna be much better than an adder"
     },
     {
       "category": 0,

@@ -1,7 +1,7 @@
-using Godot;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using Additions;
+using Godot;
 
 public class StatsPanel : Control
 {
@@ -59,17 +59,15 @@ public class StatsPanel : Control
         WeaponStats.Hide();
     }
 
-
-    [TroughtSignal]
-    private void OnRepairDiceClicked()
+    public void OnRepairDiceClicked()
     {
         if (Inventory is null || Player.currentPlayer is null) return;
 
         Dice dice = (Inventory.Selection as DiceField).dice;
 
+        if (dice is null) return;
         int cost = dice.GetRepairCost();
-
-        if (dice is null || Player.currentPlayer.Coins < cost) return;
+        if (Player.currentPlayer.Coins < cost) return;
 
         Player.currentPlayer.Coins -= cost;
 
@@ -87,5 +85,24 @@ public class StatsPanel : Control
         {
             diceField.IsSelected = true;
         }
+    }
+
+    public void OnSellDiceClicked()
+    {
+        if (Inventory is null || Player.currentPlayer is null) return;
+
+        Dice dice = (Inventory.Selection as DiceField).dice;
+
+        int price = dice.GetSellPrice();
+
+        if (dice is null) return;
+
+        Player.currentPlayer.Coins += price;
+        dice.GetParent().RemoveChild(dice);
+        dice.QueueFree();
+
+        Inventory.EmitSignal(nameof(Inventory.Opened));
+        Inventory.CoinLabel.Text = Player.currentPlayer.Coins.ToString();
+        Inventory.Selection = null;
     }
 }

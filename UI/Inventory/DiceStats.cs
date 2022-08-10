@@ -1,7 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
 using Additions;
 using Godot;
-using System.Linq;
-using System.Collections.Generic;
 
 public class DiceStats : Control
 {
@@ -10,31 +10,36 @@ public class DiceStats : Control
     #region DiceScenesContainer Reference
 
     private GridContainer storerForDiceScenesContainer;
-    public GridContainer DiceScenesContainer => this.LazyGetNode(ref storerForDiceScenesContainer, _DiceScenesContainer);
-    [Export] private NodePath _DiceScenesContainer = "DiceScenesContainer";
+    public GridContainer DiceScenesContainer => this.LazyGetNode(ref storerForDiceScenesContainer, "%DiceScenesContainer");
 
     #endregion
     #region TypeLabel Reference
 
     private Label storerForTypeLabel;
-    public Label TypeLabel => this.LazyGetNode(ref storerForTypeLabel, _TypeLabel);
-    [Export] private NodePath _TypeLabel = "TypeLabel";
-
-    #endregion
-    #region RepairCostLabel Reference
-
-    private Label storerForRepairCostLabel;
-    public Label RepairCostLabel => this.LazyGetNode(ref storerForRepairCostLabel, _RepairCostLabel);
-    [Export] private NodePath _RepairCostLabel = "RepairCostLabel";
+    public Label TypeLabel => this.LazyGetNode(ref storerForTypeLabel, "%TypeLabel");
 
     #endregion
     #region RepairButton Reference
 
     private Button storerForRepairButton;
-    public Button RepairButton => this.LazyGetNode(ref storerForRepairButton, _RepairButton);
-    [Export] private NodePath _RepairButton = "RepairButton";
+    public Button RepairButton => this.LazyGetNode(ref storerForRepairButton, "%RepairButton");
 
     #endregion
+    #region SellButton Reference
+
+    private Button storerForSellButton;
+    public Button SellButton => this.LazyGetNode(ref storerForSellButton, "%SellButton");
+
+    #endregion
+
+    public override void _Ready()
+    {
+        if (GetParent() is StatsPanel statsPanel)
+        {
+            RepairButton.Connect("pressed", statsPanel, nameof(StatsPanel.OnRepairDiceClicked));
+            SellButton.Connect("pressed", statsPanel, nameof(StatsPanel.OnSellDiceClicked));
+        }
+    }
 
     public void ShowStats(Dice dice)
     {
@@ -44,14 +49,14 @@ public class DiceStats : Control
         TypeLabel.Text = $"{(dice.broken ? "Broken " : "")}{dice.Filename.GetFile().BaseName()}";
 
         int repairCost = dice.GetRepairCost();
+        int sellPrice = dice.GetSellPrice();
 
-        RepairCostLabel.Text = repairCost.ToString();
-
-        RepairCostLabel.Visible = dice.broken;
+        RepairButton.Text = $"Repair {repairCost}";
         RepairButton.Visible = dice.broken;
         RepairButton.Disabled = repairCost > (Player.currentPlayer is null ? 0 : Player.currentPlayer.Coins);
-    }
 
+        SellButton.Text = $"Sell {sellPrice}";
+    }
 
     private void ShowDiceScenes(Dice dice)
     {

@@ -142,20 +142,20 @@ _ThrowSelectedButton = NodePath("HBoxContainer/CenterContainer/VBoxContainer/Thr
 
 [node name="Control" type="Control" parent="."]
 margin_right = 256.0
-margin_bottom = 150.0
+margin_bottom = 144.0
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_min_size = Vector2( 300, 250 )
+rect_min_size = Vector2( 800, 500 )
 color = Color( 0, 0, 0, 0.392157 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 pause_mode = 2
 margin_right = 256.0
-margin_bottom = 150.0
+margin_bottom = 144.0
 mouse_filter = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]

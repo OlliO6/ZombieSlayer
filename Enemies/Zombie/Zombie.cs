@@ -119,9 +119,7 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
         for (int i = 0; i < coinsAmount; i++)
         {
             Coin coin = coinScene.Instance<Coin>();
-
             GetTree().CurrentScene.CallDeferred("add_child", coin);
-
             coin.GlobalPosition = GlobalPosition;
             coin.Launch();
         }
@@ -133,6 +131,11 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
         RemoveChild(Sprite);
         GetParent().AddChild(Sprite);
         Sprite.GlobalPosition = spritePos;
+
+        VisibilityDisabler visibilityDisabler = GetNode<VisibilityDisabler>("VisibilityDisabler");
+        RemoveChild(visibilityDisabler);
+        Sprite.AddChild(visibilityDisabler);
+        visibilityDisabler.Target = Sprite;
 
         QueueFree();
     }

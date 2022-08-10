@@ -1,12 +1,16 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Weapons/Swords/Dagger/DaggerIcon.png" type="Texture" id=1]
-[ext_resource path="res://Weapons/Swords/SwordBase.cs" type="Script" id=2]
+[ext_resource path="res://Weapons/Melee/Sword/SwordIcon.png" type="Texture" id=1]
+[ext_resource path="res://Weapons/Melee/MeleeBase.cs" type="Script" id=2]
 [ext_resource path="res://BasicStuff/DamagingArea.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Shaders/Materials/StandartSpriteMat.material" type="Material" id=4]
+[ext_resource path="res://Sounds/SwordSwing.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 2.54422, 7.63267 )
+
+[sub_resource type="AudioStreamRandomPitch" id=2]
+audio_stream = ExtResource( 5 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "Attack"
@@ -19,10 +23,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.025, 0.08, 0.15 ),
-"transitions": PoolRealArray( 0.812252, 1.27456, 0.554785, 1 ),
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 0.812252, 1 ),
 "update": 0,
-"values": [ -30.0, -39.0, 25.32, 121.8 ]
+"values": [ -30.0, 128.4 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:position")
@@ -31,10 +35,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.025, 0.07, 0.15 ),
-"transitions": PoolRealArray( 0.870551, 1.27456, 1.62451, 1 ),
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 0.870551, 1 ),
 "update": 0,
-"values": [ Vector2( 4, 0 ), Vector2( 5, -4 ), Vector2( 7, 0 ), Vector2( 2, 8 ) ]
+"values": [ Vector2( 4, 0 ), Vector2( 2, 5 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite/DamageDealer/CollisionShape2D:disabled")
@@ -43,13 +47,27 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.025, 0.15 ),
+"times": PoolRealArray( 0, 0.02, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
 }
+tracks/3/type = "audio"
+tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": SubResource( 2 )
+} ],
+"times": PoolRealArray( 0.02 )
+}
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=4]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:rotation_degrees")
@@ -100,7 +118,7 @@ tracks/3/keys = {
 "values": [ 0 ]
 }
 
-[node name="Sword" type="Node2D"]
+[node name="MeleeWeapon" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -122,8 +140,9 @@ disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 1 )
-anims/RESET = SubResource( 2 )
+anims/RESET = SubResource( 4 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = "SFX"
 
 [editable path="Sprite/DamageDealer"]

@@ -10,6 +10,6 @@ public abstract class CommandCollection : Object
     internal Console console;
 
     protected void AddOutputLine(string line) => DebugOverlay.AddOutputLine(line, true);
-    protected void ColorizeText(string text, Color color) => DebugOverlay.ColorizeText(text, color);
+    protected string ColorizeText(string text, Color color) => DebugOverlay.ColorizeText(text, color);
     protected void RefreshOutput() => console.RefreshOutput();
 }

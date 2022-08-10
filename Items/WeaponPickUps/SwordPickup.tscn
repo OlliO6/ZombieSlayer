@@ -2,8 +2,8 @@
 
 [ext_resource path="res://Items/WeaponPickUps/WeaponPickUp.cs" type="Script" id=1]
 [ext_resource path="res://Items/InteractionPickupBase.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Weapons/Melee/Dagger/Dagger.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Weapons/Melee/Dagger/Dagger.png" type="Texture" id=4]
+[ext_resource path="res://Weapons/Melee/Sword/Sword.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Weapons/Melee/Sword/SwordIcon.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.0
@@ -16,4 +16,5 @@ weaponScene = ExtResource( 3 )
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" parent="." index="2"]
+visible = true
 shape = SubResource( 1 )

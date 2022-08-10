@@ -1,6 +1,6 @@
-using Godot;
 using System.Linq;
 using Additions;
+using Godot;
 
 public class Dice : KinematicBody2D
 {
@@ -150,4 +150,5 @@ public class Dice : KinematicBody2D
     }
 
     public int GetRepairCost() => baseRepairCost + (scenes.Count((PackedScene scene) => scene is not null) * repairCostPerScene);
+    public int GetSellPrice() => Mathf.RoundToInt(GetRepairCost() * 0.5f);
 }

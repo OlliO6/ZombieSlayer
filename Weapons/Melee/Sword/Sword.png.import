@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DaggerIcon.png-a87ca41f09e577fd4c3da747bcf95641.stex"
+path="res://.import/Sword.png-b3648ff81da1292d96f12a34c5283ba9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapons/Swords/Dagger/DaggerIcon.png"
-dest_files=[ "res://.import/DaggerIcon.png-a87ca41f09e577fd4c3da747bcf95641.stex" ]
+source_file="res://Weapons/Melee/Sword/Sword.png"
+dest_files=[ "res://.import/Sword.png-b3648ff81da1292d96f12a34c5283ba9.stex" ]
 
 [params]
 

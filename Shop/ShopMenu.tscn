@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Items/Dice/Dice.tscn" type="PackedScene" id=2]
@@ -15,8 +15,10 @@
 [ext_resource path="res://UI/ui_cancel_shortcut.tres" type="ShortCut" id=13]
 [ext_resource path="res://Weapons/Guns/Rifle/RifleIcon.png" type="Texture" id=14]
 [ext_resource path="res://Items/Health/HealthIcon.png" type="Texture" id=15]
-[ext_resource path="res://Items/WeaponPickUps/DaggerPickup.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Weapons/Swords/Dagger/DaggerIcon.png" type="Texture" id=17]
+[ext_resource path="res://Items/WeaponPickUps/SwordPickup.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Weapons/Melee/Sword/SwordIcon.png" type="Texture" id=17]
+[ext_resource path="res://Weapons/Guns/Pistol/PistolIcon.png" type="Texture" id=18]
+[ext_resource path="res://Items/WeaponPickUps/PistolPickup.tscn" type="PackedScene" id=19]
 
 [node name="ShopMenu" type="Control"]
 pause_mode = 2
@@ -94,7 +96,7 @@ scroll_vertical = 30
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/CenterContainer/ScrollContainer"]
 margin_top = -30.0
 margin_right = 100.0
-margin_bottom = 89.0
+margin_bottom = 109.0
 custom_constants/separation = 1
 
 [node name="SpeedUp" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
@@ -114,11 +116,20 @@ SceneToBuy = ExtResource( 10 )
 Icon = ExtResource( 11 )
 startPrice = 6
 priceAdded = 3
-priceMultiplier = 10.0
+priceMultiplier = 0.93
 
-[node name="DamageUp" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+[node name="Pistol" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 40.0
 margin_bottom = 59.0
+SceneToBuy = ExtResource( 19 )
+Icon = ExtResource( 18 )
+startPrice = 7
+priceAdded = 4
+priceMultiplier = 0.91
+
+[node name="DamageUp" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 60.0
+margin_bottom = 79.0
 hint_tooltip = "Deal more damage"
 SceneToBuy = ExtResource( 9 )
 Icon = ExtResource( 8 )
@@ -127,24 +138,24 @@ priceAdded = 4
 priceMultiplier = 0.93
 
 [node name="Heart" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_top = 60.0
-margin_bottom = 79.0
+margin_top = 80.0
+margin_bottom = 99.0
 SceneToBuy = ExtResource( 7 )
 Icon = ExtResource( 15 )
 startPrice = 8
 priceAdded = 3
 
-[node name="RiflePickUp" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_top = 80.0
-margin_bottom = 99.0
+[node name="Rifle" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 100.0
+margin_bottom = 119.0
 SceneToBuy = ExtResource( 4 )
 Icon = ExtResource( 14 )
 startPrice = 14
 priceAdded = 6
 
-[node name="ShopItem" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_top = 100.0
-margin_bottom = 119.0
+[node name="Dagger" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 120.0
+margin_bottom = 139.0
 SceneToBuy = ExtResource( 16 )
 Icon = ExtResource( 17 )
 startPrice = 15

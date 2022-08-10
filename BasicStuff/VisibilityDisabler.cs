@@ -1,6 +1,6 @@
-using Godot;
-using Additions;
 using System.Collections.Generic;
+using Additions;
+using Godot;
 
 public class VisibilityDisabler : VisibilityNotifier2D
 {
@@ -8,34 +8,41 @@ public class VisibilityDisabler : VisibilityNotifier2D
 
     [Export] private NodePath optionalTarget = null;
 
-    public Node2D target;
-
+    private Node2D target;
     private List<Node> allChilds = new();
 
+    public Node2D Target
+    {
+        get => target;
+        set
+        {
+            target = value;
+
+            if (showAndHide)
+            {
+                Connect("screen_entered", Target, "show");
+                Connect("screen_exited", Target, "hide");
+            }
+
+            if (disableProcess || disablePhysicsProcess)
+            {
+                Connect("screen_entered", this, nameof(EnableProcess));
+                Connect("screen_exited", this, nameof(DisableProcess));
+            }
+
+            if (!IsOnScreen()) EmitSignal("screen_exited");
+        }
+    }
 
     public override void _Ready()
     {
-        target = optionalTarget is null ? Owner as Node2D : GetNode<Node2D>(optionalTarget);
-
-        if (showAndHide)
-        {
-            Connect("screen_entered", target, "show");
-            Connect("screen_exited", target, "hide");
-        }
-
-        if (disableProcess || disablePhysicsProcess)
-        {
-            Connect("screen_entered", this, nameof(EnableProcess));
-            Connect("screen_exited", this, nameof(DisableProcess));
-        }
-
-        if (!IsOnScreen()) EmitSignal("screen_exited");
+        Target = optionalTarget is null ? GetParent() as Node2D : GetNode<Node2D>(optionalTarget);
     }
 
     private void DisableProcess()
     {
-        if (disableProcess) target.SetProcess(false);
-        if (disablePhysicsProcess) target.SetPhysicsProcess(false);
+        if (disableProcess) Target.SetProcess(false);
+        if (disablePhysicsProcess) Target.SetPhysicsProcess(false);
 
         if (!recursive) return;
 
@@ -50,8 +57,8 @@ public class VisibilityDisabler : VisibilityNotifier2D
     }
     private void EnableProcess()
     {
-        if (disableProcess) target.SetProcess(true);
-        if (disablePhysicsProcess) target.SetPhysicsProcess(true);
+        if (disableProcess) Target.SetProcess(true);
+        if (disablePhysicsProcess) Target.SetPhysicsProcess(true);
 
         if (!recursive) return;
 

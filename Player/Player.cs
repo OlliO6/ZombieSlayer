@@ -51,35 +51,30 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     public AnimationTree AnimationTree => this.LazyGetNode(ref storerForAnimationTree, "AnimationTree");
 
     #endregion
-
     #region Sprite Reference
 
     private Sprite storerForSprite;
     public Sprite Sprite => this.LazyGetNode(ref storerForSprite, "Sprite");
 
     #endregion
-
     #region MagnetArea Reference
 
     private MagnetArea storerForMagnetArea;
     public MagnetArea MagnetArea => this.LazyGetNode(ref storerForMagnetArea, "MagnetArea");
 
     #endregion
-
-    #region Weapons Reference
+    #region WeaponInv Reference
 
     private WeaponSwitcher storerForWeapons;
-    public WeaponSwitcher Weapons => this.LazyGetNode(ref storerForWeapons, "WeaponSwitcher");
+    public WeaponSwitcher WeaponInv => this.LazyGetNode(ref storerForWeapons, "WeaponSwitcher");
 
     #endregion
-
-    #region Upgrades Reference
+    #region UpgradeHolder Reference
 
     private Node storerForUpgrades;
-    public Node Upgrades => this.LazyGetNode(ref storerForUpgrades, "Upgrades");
+    public Node UpgradeHolder => this.LazyGetNode(ref storerForUpgrades, "Upgrades");
 
     #endregion
-
     #region DiceInventory Reference
 
     private DiceInventory storerForDiceInventory;
@@ -92,6 +87,11 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     public override void _EnterTree()
     {
         currentPlayer = this;
+    }
+
+    public override void _ExitTree()
+    {
+        if (currentPlayer == this) currentPlayer = null;
     }
 
     public override void _Ready()
@@ -163,9 +163,9 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     public IEnumerable<Dice> GetWorkingDices() => DiceInventory.GetWorkingDices();
     public IEnumerable<Dice> GetBrokenDices() => DiceInventory.GetBrokenDices();
 
-    public void AddUpgrade(Upgrade upgrade) => Upgrades.AddChild(upgrade);
-    public IEnumerable<Upgrade> GetUpgrades() => Upgrades.GetChildren<Upgrade>();
+    public void AddUpgrade(Upgrade upgrade) => UpgradeHolder.AddChild(upgrade);
+    public IEnumerable<Upgrade> GetUpgrades() => UpgradeHolder.GetChildren<Upgrade>();
 
-    public void AddWeapon(WeaponBase weapon) => Weapons.AddWeapon(weapon);
-    public IEnumerable<WeaponBase> GetWeapons() => Weapons.GetChildren<WeaponBase>();
+    public void AddWeapon(WeaponBase weapon) => WeaponInv.AddWeapon(weapon);
+    public IEnumerable<WeaponBase> GetWeapons() => WeaponInv.GetChildren<WeaponBase>();
 }

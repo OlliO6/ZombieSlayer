@@ -63,7 +63,7 @@ public class WeaponStats : Control
                 AddGunBaseStats(gun);
                 break;
 
-            case SwordBase sword:
+            case MeleeBase sword:
                 AddSwordBaseStats(sword);
                 break;
         }
@@ -83,7 +83,7 @@ public class WeaponStats : Control
             stats.Add("DPS", (int)stats["Damage"] * bulletsPerSecond);
             tooltips.Add("DPS", "Best possible damage per second");
         }
-        void AddSwordBaseStats(SwordBase sword)
+        void AddSwordBaseStats(MeleeBase sword)
         {
             float swingsPerSecond = 1 / sword.AnimationPlayer.GetAnimation("Attack").Length;
             stats.Add("Attack Speed", swingsPerSecond);

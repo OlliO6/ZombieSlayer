@@ -59,9 +59,9 @@ public class DiceMenu : Control
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (@event.IsAction("DiceMenu"))
+        if (@event.IsActionPressed("DiceMenu"))
         {
-            if (@event.IsPressed()) Open();
+            if (!isOpen) Open();
             else Close();
         }
     }

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Dagger.png-5889be88b57c7d2d73232139dd1d0577.stex"
+path="res://.import/Wall.png-eebc2be8930904de9653c8c8d0084676.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapons/Swords/Dagger/Dagger.png"
-dest_files=[ "res://.import/Dagger.png-5889be88b57c7d2d73232139dd1d0577.stex" ]
+source_file="res://Tileset/Wall.png"
+dest_files=[ "res://.import/Wall.png-eebc2be8930904de9653c8c8d0084676.stex" ]
 
 [params]
 

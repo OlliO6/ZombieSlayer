@@ -29,7 +29,7 @@ anchor_right = 0.95
 anchor_bottom = 0.95
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
-_fullscreenToggle = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/Options/FullscreenToggle")
+_fullscreenToggle = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/Options/GraphicsFoldout/HBoxContainer/Content/FullscreenToggle")
 _sfxVolumeSlider = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/Options/AudioFoldout/HBoxContainer/Content/Sfx2/HSlider")
 _musicVolumeSlider = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/Options/AudioFoldout/HBoxContainer/Content/Music2/HSlider")
 _upscaleToggle = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/Options/GraphicsFoldout/HBoxContainer/Content/UpscaleToggle")
@@ -46,7 +46,7 @@ custom_constants/margin_bottom = 4
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 226.0
-margin_bottom = 131.0
+margin_bottom = 125.0
 custom_constants/separation = 0
 
 [node name="Top" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
@@ -113,31 +113,15 @@ size_flags_horizontal = 6
 size_flags_vertical = 7
 custom_constants/separation = 0
 
-[node name="FullscreenToggle" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/Options"]
-margin_right = 125.0
-margin_bottom = 16.0
-focus_mode = 0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/hover_pressed = SubResource( 6 )
-custom_styles/normal = SubResource( 7 )
-enabled_focus_mode = 0
-text = "Fullscreen"
-flat = true
-
 [node name="AudioFoldout" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/Options" instance=ExtResource( 5 )]
 margin_top = 16.0
 margin_bottom = 59.0
-IsCollapsed = false
 
 [node name="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/Options/AudioFoldout" index="0"]
 margin_bottom = 13.0
 text = "Audio"
 
 [node name="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/Options/AudioFoldout" index="1"]
-visible = true
 margin_top = 17.0
 margin_bottom = 43.0
 
@@ -191,14 +175,12 @@ scrollable = false
 [node name="GraphicsFoldout" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/Options" instance=ExtResource( 5 )]
 margin_top = 59.0
 margin_bottom = 92.0
-IsCollapsed = false
 
 [node name="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/Options/GraphicsFoldout" index="0"]
 margin_bottom = 13.0
 text = "Graphics"
 
 [node name="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/Options/GraphicsFoldout" index="1"]
-visible = true
 margin_top = 17.0
 margin_bottom = 33.0
 
@@ -208,7 +190,23 @@ margin_bottom = 16.0
 [node name="Content" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/Options/GraphicsFoldout/HBoxContainer" index="1"]
 margin_bottom = 16.0
 
-[node name="UpscaleToggle" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/Options/GraphicsFoldout/HBoxContainer/Content" index="0"]
+[node name="FullscreenToggle" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/Options/GraphicsFoldout/HBoxContainer/Content" index="0"]
+margin_left = -12.0
+margin_top = -76.0
+margin_right = 113.0
+margin_bottom = -60.0
+focus_mode = 0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/hover_pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+enabled_focus_mode = 0
+text = "Fullscreen"
+flat = true
+
+[node name="UpscaleToggle" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/Options/GraphicsFoldout/HBoxContainer/Content" index="1"]
 margin_right = 113.0
 margin_bottom = 16.0
 hint_tooltip = "If true a pixel art upscaling

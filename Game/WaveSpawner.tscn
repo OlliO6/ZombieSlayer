@@ -5,6 +5,7 @@
 
 [node name="WaveSpawner" type="Node"]
 script = ExtResource( 1 )
-minWaveInterval = 10.0
-waveIntervalMultiplierRange = Vector2( 0.8, 1.5 )
+startDelay = 5.0
+minWaveInterval = 15.0
+waveIntervalMultiplierRange = Vector2( 1.1, 1.4 )
 enemies = [ ExtResource( 3 ) ]

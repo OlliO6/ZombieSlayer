@@ -1,14 +1,12 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
-[ext_resource path="res://Weapons/Guns/Pistol/Pistol.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Weapons/Swords/Dagger/Dagger.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Weapons/Melee/Dagger/Dagger.tscn" type="PackedScene" id=3]
 [ext_resource path="res://BasicStuff/HurtArea.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/Ingame/IngameUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/PauseMenu/PauseMenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Player/MagnetArea.cs" type="Script" id=8]
-[ext_resource path="res://Weapons/Guns/Rifle/Rifle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player/WeaponSwitcher.cs" type="Script" id=10]
 [ext_resource path="res://UI/Inventory/Inventory.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Shaders/Player.shader" type="Shader" id=12]
@@ -126,7 +124,7 @@ nodes/MovementState/node = SubResource( 6 )
 nodes/MovementState/position = Vector2( 120, 140 )
 nodes/RunSpeed/node = SubResource( 7 )
 nodes/RunSpeed/position = Vector2( -140, 260 )
-node_connections = [ "output", 0, "MovementState", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed", "RunSpeed", 0, "Animation 2" ]
+node_connections = [ "output", 0, "MovementState", "RunSpeed", 0, "Animation 2", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed" ]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
@@ -134,7 +132,6 @@ script = ExtResource( 1 )
 MaxHealth = 4
 movementSpeed = 35.0
 invincibilityTime = 2.0
-startCoins = 200
 startMagnetSize = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -152,11 +149,7 @@ hframes = 2
 position = Vector2( 0, -5 )
 script = ExtResource( 10 )
 
-[node name="Pistol" parent="WeaponSwitcher" instance=ExtResource( 3 )]
-
-[node name="Rifle" parent="WeaponSwitcher" instance=ExtResource( 9 )]
-
-[node name="Dagger" parent="WeaponSwitcher" instance=ExtResource( 4 )]
+[node name="Dagger" parent="WeaponSwitcher" instance=ExtResource( 3 )]
 
 [node name="DiceInventory" type="Node2D" parent="."]
 position = Vector2( 0, -5 )
@@ -215,8 +208,8 @@ smoothing_enabled = true
 
 [connection signal="CoinsAmountChanged" from="." to="UI/IngameUI" method="OnCoinsAmountChanged"]
 [connection signal="HealthChanged" from="." to="UI/IngameUI" method="OnPlayerHealthChanged"]
-[connection signal="InvincibilityEnded" from="." to="HurtArea" method="Check" flags=3]
 [connection signal="InvincibilityEnded" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ true ]]
+[connection signal="InvincibilityEnded" from="." to="HurtArea" method="Check" flags=3]
 [connection signal="InvincibilityStarted" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ false ]]
 [connection signal="WeaponChanged" from="WeaponSwitcher" to="UI/IngameUI" method="OnWeaponChanged"]
 [connection signal="InventoryPressed" from="UI/PauseMenu" to="UI/Inventory" method="Open"]
