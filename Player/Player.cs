@@ -11,39 +11,12 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     [Export] public float damageMultiplier = 1;
     [Export] public int startCoins = 0;
     [Export] private float startMagnetSize = 4;
-
     [Export] public int MaxHealth { get; set; }
-
-    public int CurrentHealth
-    {
-        get => storerForCurrentHealth;
-        set
-        {
-            storerForCurrentHealth = value;
-            EmitSignal(nameof(HealthChanged));
-            if (value <= 0) Die();
-        }
-    }
-    private int storerForCurrentHealth;
-
-    public int Coins
-    {
-        get => coins;
-        set
-        {
-            coins = value;
-            EmitSignal(nameof(CoinsAmountChanged), value);
-        }
-    }
-    private int coins;
-
-    public float MagnetAreaSize { get => MagnetArea.Size; set => MagnetArea.Size = value; }
 
     [Signal] public delegate void CoinsAmountChanged(int amount);
     [Signal] public delegate void InvincibilityStarted();
     [Signal] public delegate void InvincibilityEnded();
     [Signal] public delegate void HealthChanged();
-
 
     #region AnimationTree Reference
 
@@ -81,8 +54,42 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     public DiceInventory DiceInventory => this.LazyGetNode(ref storerForDiceInventory, "DiceInventory");
 
     #endregion
+    #region Leveling Reference
+
+    private Leveling storerForLeveling;
+    public Leveling Leveling => this.LazyGetNode(ref storerForLeveling, "Leveling");
+
+    #endregion
 
     public bool isInvincible;
+
+    private int storerForCurrentHealth;
+    private int coins;
+
+    public int CurrentHealth
+    {
+        get => storerForCurrentHealth;
+        set
+        {
+            storerForCurrentHealth = value;
+            EmitSignal(nameof(HealthChanged));
+            if (value <= 0) Die();
+        }
+    }
+    public float MagnetAreaSize
+    {
+        get => MagnetArea.Size;
+        set => MagnetArea.Size = value;
+    }
+    public int Coins
+    {
+        get => coins;
+        set
+        {
+            coins = value;
+            EmitSignal(nameof(CoinsAmountChanged), value);
+        }
+    }
 
     public override void _EnterTree()
     {
@@ -162,10 +169,8 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     public void AddDice(Dice dice) => DiceInventory.AddDice(dice);
     public IEnumerable<Dice> GetWorkingDices() => DiceInventory.GetWorkingDices();
     public IEnumerable<Dice> GetBrokenDices() => DiceInventory.GetBrokenDices();
-
     public void AddUpgrade(Upgrade upgrade) => UpgradeHolder.AddChild(upgrade);
     public IEnumerable<Upgrade> GetUpgrades() => UpgradeHolder.GetChildren<Upgrade>();
-
     public void AddWeapon(WeaponBase weapon) => WeaponInv.AddWeapon(weapon);
     public IEnumerable<WeaponBase> GetWeapons() => WeaponInv.GetChildren<WeaponBase>();
 }

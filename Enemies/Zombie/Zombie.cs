@@ -2,21 +2,22 @@ using Additions;
 using Godot;
 
 [Additions.Debugging.DefaultColor("LightGreen")]
-public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
+public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
 {
     [Export] private PackedScene coinScene;
     [Export] private int coinsAmount = 2;
     [Export] private Vector2 movementSpeedRange;
 
-    public int DamageAmount => 1;
-
     public float movementSpeed;
+    public int DamageAmount => 1;
+    public int ExPoints => 5;
 
     public int CurrentHealth { get; set; }
     [Export] public int MaxHealth { get; set; }
 
     [Signal] public delegate void Damaged();
     [Signal] public delegate void Died();
+    public event System.Action OnDied;
 
     private bool dead;
 
@@ -110,8 +111,11 @@ public class Zombie : KinematicBody2D, IDamageable, IKillable, IHealth
 
         AnimTree.SetParam("State/current", 2);
 
+        if (Player.currentPlayer is not null) Player.currentPlayer.Leveling.ExPoints += ExPoints;
+
         SpawnCoins();
         EmitSignal(nameof(Died));
+        OnDied?.Invoke();
     }
 
     private void SpawnCoins()

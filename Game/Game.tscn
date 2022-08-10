@@ -191,7 +191,7 @@ position = Vector2( 108, 189 )
 position = Vector2( 25, 46 )
 
 [node name="SwordPickup" parent="." instance=ExtResource( 3 )]
-position = Vector2( 72, 32 )
+position = Vector2( 104, 24 )
 
 [node name="SwordPickup2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 112, 0 )
