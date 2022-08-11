@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://UI/Ingame/Heart.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/Ingame/IngameUI.cs" type="Script" id=2]
@@ -7,6 +7,28 @@
 [ext_resource path="res://Weapons/Guns/Rifle/RifleIcon.png" type="Texture" id=5]
 [ext_resource path="res://UI/Ingame/WeaponField.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/DiceMenu/DiceMenu.tscn" type="PackedScene" id=7]
+[ext_resource path="res://UI/Theme/BrownRect.png" type="Texture" id=8]
+[ext_resource path="res://UI/GradiantProgressBar.cs" type="Script" id=9]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.254902, 0.415686, 0.364706, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 8 )
+region_rect = Rect2( 4, 4, 8, 8 )
+margin_left = 2.0
+margin_right = 2.0
+margin_top = 2.0
+margin_bottom = 2.0
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.738819, 1 )
+colors = PoolColorArray( 0.254902, 0.415686, 0.364706, 1, 0.466667, 0.592157, 0.345098, 1, 0.746537, 0.902344, 0.468796, 1 )
 
 [node name="IngameUI" type="Control"]
 anchor_right = 1.0
@@ -15,9 +37,7 @@ mouse_filter = 2
 theme = ExtResource( 4 )
 script = ExtResource( 2 )
 heartScene = ExtResource( 1 )
-heartContainer = NodePath("MarginContainer/VBoxContainer/HeartContainer")
-coinLabel = NodePath("MarginContainer/VBoxContainer/CoinDisplay/Label")
-weaponFields = NodePath("CenterContainer/MarginContainer/WeaponFieldsContainer")
+maxHealth = 14
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_left = 0.5
@@ -39,7 +59,8 @@ custom_constants/margin_top = 4
 custom_constants/margin_left = 4
 custom_constants/margin_bottom = 4
 
-[node name="WeaponFieldsContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer"]
+[node name="WeaponContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer"]
+unique_name_in_owner = true
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 182.0
@@ -48,38 +69,38 @@ mouse_filter = 2
 custom_constants/separation = 2
 alignment = 1
 
-[node name="WeaponField" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+[node name="WeaponField" parent="CenterContainer/MarginContainer/WeaponContainer" instance=ExtResource( 6 )]
 
-[node name="WeaponField2" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+[node name="WeaponField2" parent="CenterContainer/MarginContainer/WeaponContainer" instance=ExtResource( 6 )]
 margin_left = 20.0
 margin_right = 38.0
 Icon = ExtResource( 5 )
 
-[node name="WeaponField3" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+[node name="WeaponField3" parent="CenterContainer/MarginContainer/WeaponContainer" instance=ExtResource( 6 )]
 margin_left = 40.0
 margin_right = 58.0
 
-[node name="WeaponField4" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+[node name="WeaponField4" parent="CenterContainer/MarginContainer/WeaponContainer" instance=ExtResource( 6 )]
 margin_left = 60.0
 margin_right = 78.0
 
-[node name="WeaponField5" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+[node name="WeaponField5" parent="CenterContainer/MarginContainer/WeaponContainer" instance=ExtResource( 6 )]
 margin_left = 80.0
 margin_right = 98.0
 
-[node name="WeaponField6" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+[node name="WeaponField6" parent="CenterContainer/MarginContainer/WeaponContainer" instance=ExtResource( 6 )]
 margin_left = 100.0
 margin_right = 118.0
 
-[node name="WeaponField7" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+[node name="WeaponField7" parent="CenterContainer/MarginContainer/WeaponContainer" instance=ExtResource( 6 )]
 margin_left = 120.0
 margin_right = 138.0
 
-[node name="WeaponField8" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+[node name="WeaponField8" parent="CenterContainer/MarginContainer/WeaponContainer" instance=ExtResource( 6 )]
 margin_left = 140.0
 margin_right = 158.0
 
-[node name="WeaponField9" parent="CenterContainer/MarginContainer/WeaponFieldsContainer" instance=ExtResource( 6 )]
+[node name="WeaponField9" parent="CenterContainer/MarginContainer/WeaponContainer" instance=ExtResource( 6 )]
 margin_left = 160.0
 margin_right = 178.0
 
@@ -92,24 +113,64 @@ custom_constants/margin_top = 4
 custom_constants/margin_left = 4
 custom_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 252.0
 margin_bottom = 140.0
 mouse_filter = 2
 
-[node name="HeartContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
-margin_right = 248.0
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_right = 54.0
+margin_bottom = 136.0
+mouse_filter = 2
+
+[node name="HeartContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 54.0
+margin_bottom = 32.0
 mouse_filter = 2
 custom_constants/vseparation = 1
 custom_constants/hseparation = 1
 columns = 5
 
-[node name="CoinDisplay" parent="MarginContainer/VBoxContainer" instance=ExtResource( 3 )]
+[node name="CoinDisplay" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
+unique_name_in_owner = true
 margin_left = 0.0
+margin_top = 36.0
+margin_right = 54.0
+margin_bottom = 49.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_left = 188.0
 margin_right = 248.0
-margin_bottom = 17.0
+margin_bottom = 13.0
+size_flags_horizontal = 10
+size_flags_vertical = 0
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 8.0
+margin_bottom = 13.0
+text = "1"
+
+[node name="XpProgress" type="ProgressBar" parent="MarginContainer/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 12.0
+margin_top = 4.0
+margin_right = 60.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 48, 0 )
+mouse_filter = 2
+size_flags_vertical = 6
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 2 )
+step = 1.0
+rounded = true
+allow_lesser = true
+percent_visible = false
+script = ExtResource( 9 )
+gradient = SubResource( 4 )
 
 [node name="DiceMenu" parent="." instance=ExtResource( 7 )]
 size_flags_vertical = 3

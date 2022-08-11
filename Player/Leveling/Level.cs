@@ -6,7 +6,7 @@ using Godot;
 [Additions.Debugging.DefaultColor(nameof(Colors.Aquamarine))]
 public class Level : Node
 {
-    [Export] public int xpToNextLevelUp = 100;
+    [Export] public int xpToLevelUp = 100;
 
     [Signal] public delegate void LevelReached();
 

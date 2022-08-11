@@ -111,7 +111,7 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
 
         AnimTree.SetParam("State/current", 2);
 
-        if (Player.currentPlayer is not null) Player.currentPlayer.Leveling.ExPoints += ExPoints;
+        if (Player.currentPlayer is not null) Player.currentPlayer.Leveling.CurrentXp += ExPoints;
 
         SpawnCoins();
         EmitSignal(nameof(Died));

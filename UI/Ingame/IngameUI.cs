@@ -1,22 +1,30 @@
-using Godot;
 using System.Collections.Generic;
 using System.Linq;
 using Additions;
+using Godot;
 
 [Tool]
 public class IngameUI : Control
 {
     [Export] private PackedScene heartScene;
-    [Export] private NodePath heartContainer, coinLabel, weaponFields;
-
     [Export] public int maxHealth;
     [Export] public int currentHealth;
+
+    private Label storerForCoinLabel, storerForLevelLabel;
+    private Control storerForWeaponContainer, storerForHeartContainer;
+    private ProgressBar storerForXpProgress;
+
+    private Texture emptyHeart = GD.Load<Texture>("res://UI/Ingame/EmptyHeart.png");
+    private Texture fullHeart = GD.Load<Texture>("res://UI/Ingame/FullHeart.png");
 
     [Export]
     private bool Updade { get => false; set => CallDeferred(nameof(UpdateHealthDisplay)); }
 
-    private Texture emptyHeart = GD.Load<Texture>("res://UI/Ingame/EmptyHeart.png");
-    private Texture fullHeart = GD.Load<Texture>("res://UI/Ingame/FullHeart.png");
+    public Label CoinLabel => this.LazyGetNode(ref storerForCoinLabel, "%CoinDisplay/Label");
+    public Control WeaponContainer => this.LazyGetNode(ref storerForWeaponContainer, "%WeaponContainer");
+    public Control HeartContainer => this.LazyGetNode(ref storerForHeartContainer, "%HeartContainer");
+    public ProgressBar XpProgress => this.LazyGetNode(ref storerForXpProgress, "%XpProgress");
+    public Label LevelLabel => this.LazyGetNode(ref storerForLevelLabel, "%LevelLabel");
 
     [TroughtSignal]
     private void OnPlayerHealthChanged()
@@ -29,23 +37,38 @@ public class IngameUI : Control
     [TroughtSignal]
     private void OnCoinsAmountChanged(int amount)
     {
-        GetNode<Label>(coinLabel).Text = amount.ToString();
+        CoinLabel.Text = amount.ToString();
+    }
+
+    [TroughtSignal]
+    private void OnXptChanged()
+    {
+        Leveling leveling = GetOwner<Player>().Leveling;
+
+        XpProgress.MaxValue = leveling.CurrentLevelNode.xpToLevelUp;
+        XpProgress.Value = XpProgress.MaxValue - (leveling.xpToNextLevel - leveling.CurrentXp);
+    }
+
+    [TroughtSignal]
+    private void OnLevelRaised()
+    {
+        Leveling leveling = GetOwner<Player>().Leveling;
+
+        LevelLabel.Text = (leveling.CurrentLevelIndex + 1).ToString();
     }
 
     private void UpdateHealthDisplay()
     {
-        Control container = GetNode<Control>(heartContainer);
-
         AdjustChildCount();
 
-        for (int i = 0; i < container.GetChildCount(); i++)
+        for (int i = 0; i < HeartContainer.GetChildCount(); i++)
         {
-            container.GetChild<TextureRect>(i).Texture = (i >= currentHealth) ? emptyHeart : fullHeart;
+            HeartContainer.GetChild<TextureRect>(i).Texture = (i >= currentHealth) ? emptyHeart : fullHeart;
         }
 
         void AdjustChildCount()
         {
-            int childCount = container.GetChildCount();
+            int childCount = HeartContainer.GetChildCount();
 
             if (childCount == maxHealth) return;
 
@@ -53,7 +76,7 @@ public class IngameUI : Control
             {
                 for (int i = maxHealth; i < childCount; i++)
                 {
-                    container.GetChild(i).QueueFree();
+                    HeartContainer.GetChild(i).QueueFree();
                 }
                 return;
             }
@@ -62,7 +85,7 @@ public class IngameUI : Control
             {
                 for (int i = 0; i < maxHealth - childCount; i++)
                 {
-                    container.AddChild(heartScene.Instance());
+                    HeartContainer.AddChild(heartScene.Instance());
                 }
                 return;
             }
@@ -74,11 +97,9 @@ public class IngameUI : Control
     {
         List<WeaponBase> weapons = Player.currentPlayer.GetWeapons().ToList();
 
-        Control container = GetNode<Control>(weaponFields);
-
-        for (int i = 0; i < container.GetChildCount(); i++)
+        for (int i = 0; i < WeaponContainer.GetChildCount(); i++)
         {
-            WeaponField field = container.GetChild<WeaponField>(i);
+            WeaponField field = WeaponContainer.GetChild<WeaponField>(i);
 
             if (i >= weapons.Count)
             {
