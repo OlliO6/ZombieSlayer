@@ -41,7 +41,7 @@ public class IngameUI : Control
     }
 
     [TroughtSignal]
-    private void OnXptChanged()
+    private void OnXpChanged()
     {
         Leveling leveling = GetOwner<Player>().Leveling;
 
@@ -50,11 +50,11 @@ public class IngameUI : Control
     }
 
     [TroughtSignal]
-    private void OnLevelRaised()
+    private void OnLevelChanged()
     {
         Leveling leveling = GetOwner<Player>().Leveling;
 
-        LevelLabel.Text = (leveling.CurrentLevelIndex + 1).ToString();
+        LevelLabel.Text = leveling.CurrentLevelIndex.ToString();
     }
 
     private void UpdateHealthDisplay()

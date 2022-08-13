@@ -7,7 +7,7 @@ using Godot;
 public class Leveling : Node
 {
     [Signal] public delegate void XpChanged();
-    [Signal] public delegate void LevelRaised();
+    [Signal] public delegate void LevelChanged();
 
     [Export] public int startLevelIndex = 0;
 
@@ -47,7 +47,7 @@ public class Leveling : Node
                     if (CurrentLevelIndex >= GetChildCount()) break;
 
                     GetChild<Level>(CurrentLevelIndex).ReachLevel();
-                    EmitSignal(nameof(LevelRaised));
+                    EmitSignal(nameof(LevelChanged));
                 }
                 break;
 
@@ -60,11 +60,16 @@ public class Leveling : Node
 
     public override void _Ready()
     {
+        CallDeferred(nameof(Reset));
+    }
+
+    public void Reset()
+    {
         CurrentXp = 0;
         CurrentLevelIndex = startLevelIndex;
         if (CurrentLevelIndex >= GetChildCount()) return;
 
         GetChild<Level>(CurrentLevelIndex).ReachLevel();
-        EmitSignal(nameof(LevelRaised));
+        EmitSignal(nameof(LevelChanged));
     }
 }

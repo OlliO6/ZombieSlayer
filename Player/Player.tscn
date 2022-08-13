@@ -126,7 +126,7 @@ nodes/MovementState/node = SubResource( 6 )
 nodes/MovementState/position = Vector2( 120, 140 )
 nodes/RunSpeed/node = SubResource( 7 )
 nodes/RunSpeed/position = Vector2( -140, 260 )
-node_connections = [ "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed", "RunSpeed", 0, "Animation 2", "output", 0, "MovementState" ]
+node_connections = [ "output", 0, "MovementState", "RunSpeed", 0, "Animation 2", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed" ]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
@@ -148,13 +148,17 @@ hframes = 2
 [node name="Leveling" type="Node" parent="."]
 script = ExtResource( 4 )
 
+[node name="Level0" type="Node" parent="Leveling"]
+script = ExtResource( 9 )
+xpToLevelUp = 10
+
 [node name="Level1" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
 xpToLevelUp = 10
 
 [node name="Level2" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
-xpToLevelUp = 10
+xpToLevelUp = 15
 
 [node name="Level3" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
@@ -162,7 +166,7 @@ xpToLevelUp = 15
 
 [node name="Level4" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
-xpToLevelUp = 15
+xpToLevelUp = 20
 
 [node name="Level5" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
@@ -170,7 +174,7 @@ xpToLevelUp = 20
 
 [node name="Level6" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
-xpToLevelUp = 20
+xpToLevelUp = 25
 
 [node name="Level7" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
@@ -178,7 +182,7 @@ xpToLevelUp = 25
 
 [node name="Level8" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
-xpToLevelUp = 25
+xpToLevelUp = 30
 
 [node name="Level9" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
@@ -186,7 +190,7 @@ xpToLevelUp = 30
 
 [node name="Level10" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
-xpToLevelUp = 30
+xpToLevelUp = 35
 
 [node name="Level11" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
@@ -194,7 +198,7 @@ xpToLevelUp = 35
 
 [node name="Level12" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
-xpToLevelUp = 35
+xpToLevelUp = 40
 
 [node name="Level13" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
@@ -202,7 +206,7 @@ xpToLevelUp = 40
 
 [node name="Level14" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
-xpToLevelUp = 40
+xpToLevelUp = 45
 
 [node name="Level15" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
@@ -210,7 +214,7 @@ xpToLevelUp = 45
 
 [node name="Level16" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
-xpToLevelUp = 45
+xpToLevelUp = 50
 
 [node name="Level17" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
@@ -218,13 +222,9 @@ xpToLevelUp = 50
 
 [node name="Level18" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
-xpToLevelUp = 50
-
-[node name="Level19" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
 xpToLevelUp = 55
 
-[node name="Level20" type="Node" parent="Leveling"]
+[node name="Level19" type="Node" parent="Leveling"]
 script = ExtResource( 9 )
 xpToLevelUp = 55
 
@@ -293,11 +293,12 @@ smoothing_enabled = true
 
 [connection signal="CoinsAmountChanged" from="." to="UI/IngameUI" method="OnCoinsAmountChanged"]
 [connection signal="HealthChanged" from="." to="UI/IngameUI" method="OnPlayerHealthChanged"]
-[connection signal="InvincibilityEnded" from="." to="HurtArea" method="Check" flags=3]
 [connection signal="InvincibilityEnded" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ true ]]
+[connection signal="InvincibilityEnded" from="." to="HurtArea" method="Check" flags=3]
 [connection signal="InvincibilityStarted" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ false ]]
-[connection signal="LevelRaised" from="Leveling" to="UI/IngameUI" method="OnLevelRaised"]
-[connection signal="XpChanged" from="Leveling" to="UI/IngameUI" method="OnXptChanged"]
+[connection signal="LevelChanged" from="Leveling" to="." method="OnLevelChanged"]
+[connection signal="LevelChanged" from="Leveling" to="UI/IngameUI" method="OnLevelChanged"]
+[connection signal="XpChanged" from="Leveling" to="UI/IngameUI" method="OnXpChanged"]
 [connection signal="WeaponChanged" from="WeaponSwitcher" to="UI/IngameUI" method="OnWeaponChanged"]
 [connection signal="InventoryPressed" from="UI/PauseMenu" to="UI/Inventory" method="Open"]
 

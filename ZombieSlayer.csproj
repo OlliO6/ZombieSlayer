@@ -7,17 +7,17 @@
 
 	<Choose>
 		<When Condition="$(DefineConstants.Contains(TOOLS))">
+			<!-- In editor -->
 			<ItemGroup>
-				<!-- In editor -->
+
 			</ItemGroup>
 		</When>
 		
 		<Otherwise>
+			<!-- Not in editor -->
 			<ItemGroup>
-				<!-- Not in editor -->
 				<Compile Remove="addons\BetterFileSystem\**" />
 			</ItemGroup>
 		</Otherwise>
 	</Choose>
-
 </Project>

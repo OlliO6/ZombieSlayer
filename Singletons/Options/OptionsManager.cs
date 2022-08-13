@@ -65,7 +65,6 @@ public class OptionsManager : Node
         get => CurrentOptions.useUpscaling;
         set
         {
-            if (value == IsUpscaling) return;
             CurrentOptions.useUpscaling = value;
             instance.UpdateShaders();
             instance.EmitSignal(nameof(OptionsChanged));

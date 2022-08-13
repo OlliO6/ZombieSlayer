@@ -424,6 +424,48 @@ size_flags_vertical = 3
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 0.529412, 0.596078, 0.647059, 1 )
 bbcode_enabled = true
+bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint]
+[00:01] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
+[00:03] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
+[00:03] [tint r=0.5 g=1 b=0.83 a=1]Level0: Reached[/tint]
+[00:03] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+[00:26] [tint r=0.5 g=1 b=0.83 a=1]Level1: Reached[/tint]
+[00:26] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+[00:30] [tint r=0.5 g=1 b=0.83 a=1]Level2: Reached[/tint]
+[00:30] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+[00:35] [tint r=0.5 g=1 b=0.83 a=1]Level3: Reached[/tint]
+[00:35] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+[00:40] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[00:40] [tint r=0.5 g=1 b=0.83 a=1]Level4: Reached[/tint]
+[00:40] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+[00:48] [tint r=0.5 g=1 b=0.83 a=1]Level5: Reached[/tint]
+[00:48] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+[00:54] [tint r=0.5 g=1 b=0.83 a=1]Level6: Reached[/tint]
+[00:54] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+[01:28] [tint r=0.5 g=1 b=0.83 a=1]Level7: Reached[/tint]
+[01:28] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+"
+text = "ZombieSlayer <Debug Editor> started
+[00:01] SceneManager: Loaded Menu
+[00:03] SceneManager: Loaded Game
+[00:03] Level0: Reached
+[00:03] EnemySpawner: Difficulty changed to Level0
+[00:26] Level1: Reached
+[00:26] EnemySpawner: Difficulty changed to Level0
+[00:30] Level2: Reached
+[00:30] EnemySpawner: Difficulty changed to Level0
+[00:35] Level3: Reached
+[00:35] EnemySpawner: Difficulty changed to Level0
+[00:40] Player: Got 1 damage
+[00:40] Level4: Reached
+[00:40] EnemySpawner: Difficulty changed to Level0
+[00:48] Level5: Reached
+[00:48] EnemySpawner: Difficulty changed to Level0
+[00:54] Level6: Reached
+[00:54] EnemySpawner: Difficulty changed to Level0
+[01:28] Level7: Reached
+[01:28] EnemySpawner: Difficulty changed to Level0
+"
 scroll_following = true
 selection_enabled = true
 override_selected_font_color = true

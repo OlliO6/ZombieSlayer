@@ -12,7 +12,7 @@ public class Watcher : Label
     //TODO dasuidias
     public Watcher() { }
 
-    public Watcher(Godot.Object target, string property, bool autoRemove = true, bool showTargetName = true, Color? color = null, string optionalName = "")
+    public Watcher(Godot.Object target, NodePath property, bool autoRemove = true, bool showTargetName = true, Color? color = null, string optionalName = "")
     {
         this.target = target;
         this.property = property;

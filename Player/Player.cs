@@ -7,13 +7,14 @@ using Godot;
 public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 {
     public static Player currentPlayer;
+
     [Export] public float movementSpeed, invincibilityTime;
     [Export] public float damageMultiplier = 1;
     [Export] public int startCoins = 0;
     [Export] private float startMagnetSize = 4;
-    [Export] public int MaxHealth { get; set; }
 
     [Signal] public delegate void CoinsAmountChanged(int amount);
+    [Signal] public delegate void LevelChanged(int to);
     [Signal] public delegate void InvincibilityStarted();
     [Signal] public delegate void InvincibilityEnded();
     [Signal] public delegate void HealthChanged();
@@ -66,6 +67,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     private int storerForCurrentHealth;
     private int coins;
 
+    [Export] public int MaxHealth { get; set; }
     public int CurrentHealth
     {
         get => storerForCurrentHealth;
@@ -165,6 +167,11 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         SceneManager.LoadMenu();
     }
 
+    [TroughtSignal]
+    private void OnLevelChanged()
+    {
+        EmitSignal(nameof(LevelChanged), Leveling.CurrentLevelIndex);
+    }
 
     public void AddDice(Dice dice) => DiceInventory.AddDice(dice);
     public IEnumerable<Dice> GetWorkingDices() => DiceInventory.GetWorkingDices();
