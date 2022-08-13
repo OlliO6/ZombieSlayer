@@ -17,7 +17,7 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
 
     [Signal] public delegate void Damaged();
     [Signal] public delegate void Died();
-    public event System.Action OnDied;
+    public event System.Action<IEnemy> EnemyDied;
 
     private bool dead;
 
@@ -115,7 +115,7 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
 
         SpawnCoins();
         EmitSignal(nameof(Died));
-        OnDied?.Invoke();
+        EnemyDied?.Invoke(this);
     }
 
     private void SpawnCoins()

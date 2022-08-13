@@ -190,11 +190,11 @@ public class DebugOverlay : CanvasLayer
         Save();
     }
 
-    internal void AddWatcher(Godot.Object target, string property, bool autoRemove, bool showTargetName, Color? color, string optionalName)
+    internal void AddWatcher(Godot.Object target, NodePath property, bool autoRemove, bool showTargetName, Color? color, string optionalName)
     {
         Labels.AddChild(new Watcher(target, property, autoRemove, showTargetName, color, optionalName));
     }
-    internal void RemoveWatcher(Godot.Object target, string property)
+    internal void RemoveWatcher(Godot.Object target, NodePath property)
     {
         IEnumerable<Watcher> matchingWatchers = Labels.GetChildren<Watcher>().Where((Watcher watcher) => watcher.target == target && watcher.property == property);
 
