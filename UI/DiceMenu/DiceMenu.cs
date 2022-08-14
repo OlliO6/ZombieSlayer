@@ -63,6 +63,13 @@ public class DiceMenu : Control
         {
             if (!isOpen) Open();
             else Close();
+
+            return;
+        }
+
+        if (@event.IsActionPressed("ui_cancel") && isOpen)
+        {
+            Close();
         }
     }
 
