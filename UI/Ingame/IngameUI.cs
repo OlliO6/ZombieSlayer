@@ -41,19 +41,9 @@ public class IngameUI : Control
     }
 
     [TroughtSignal]
-    private void OnXpChanged()
-    {
-        Leveling leveling = GetOwner<Player>().Leveling;
-
-        XpProgress.MaxValue = leveling.CurrentLevelNode.xpToLevelUp;
-        XpProgress.Value = XpProgress.MaxValue - (leveling.xpToNextLevel - leveling.CurrentXp);
-    }
-
-    [TroughtSignal]
     private void OnLevelChanged()
     {
         Leveling leveling = GetOwner<Player>().Leveling;
-
         LevelLabel.Text = leveling.CurrentLevelIndex.ToString();
     }
 
@@ -120,5 +110,10 @@ public class IngameUI : Control
 
             field.Icon = weapon.icon;
         }
+    }
+
+    public override void _Process(float delta)
+    {
+        XpProgress.Value = GetOwner<Player>().Leveling.interpolatedXp;
     }
 }

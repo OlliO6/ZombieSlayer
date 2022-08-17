@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Additions;
@@ -10,8 +11,11 @@ public class Leveling : Node
     [Signal] public delegate void LevelChanged();
 
     [Export] public int startLevelIndex = 0;
+    [Export] public float xpRaiseOneLvlTweenTime = 0.15f;
 
     public int xpToNextLevel;
+    public float interpolatedXp;
+    private SceneTreeTween tween;
     private int currentLevel;
     private int currentXp;
 
@@ -36,26 +40,37 @@ public class Leveling : Node
 
     private void SetXp(int to)
     {
-        int difference = to - currentXp;
-
-        switch (difference)
-        {
-            case > 0:
-                if (to >= xpToNextLevel)
-                {
-                    CurrentLevelIndex++;
-                    if (CurrentLevelIndex >= GetChildCount()) break;
-
-                    GetChild<Level>(CurrentLevelIndex).ReachLevel();
-                    EmitSignal(nameof(LevelChanged));
-                }
-                break;
-
-            case 0: return;
-        }
+        if (to == currentXp) return;
 
         currentXp = to;
+        StartTween();
         EmitSignal(nameof(XpChanged));
+    }
+
+    private void StartTween()
+    {
+        tween?.Kill();
+        tween = CreateTween();
+        float finalVal = (((float)(CurrentLevelNode.xpToLevelUp - ((float)xpToNextLevel - CurrentXp))) / (float)CurrentLevelNode.xpToLevelUp).Clamp01();
+        tween.TweenProperty(this, nameof(interpolatedXp), finalVal, (interpolatedXp - finalVal).Abs() * xpRaiseOneLvlTweenTime)
+                .SetEase(Tween.EaseType.Out)
+                .SetTrans(Tween.TransitionType.Sine)
+                .Connect("finished", this, nameof(TweenFinished));
+    }
+
+    private void TweenFinished()
+    {
+        // Check for level up
+        while (currentXp >= xpToNextLevel)
+        {
+            CurrentLevelIndex++;
+            if (CurrentLevelIndex >= GetChildCount()) break;
+
+            CurrentLevelNode.ReachLevel();
+            EmitSignal(nameof(LevelChanged));
+
+            StartTween();
+        }
     }
 
     public override void _Ready()
