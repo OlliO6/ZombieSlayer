@@ -1,0 +1,148 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Player/Leveling/Explanations/ExplanationsManager.cs" type="Script" id=1]
+[ext_resource path="res://Player/Leveling/Explanations/ShowHideExplanation.cs" type="Script" id=2]
+[ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=3]
+[ext_resource path="res://Player/Leveling/Explanations/MoveAndAttackExplanations.cs" type="Script" id=4]
+[ext_resource path="res://Shaders/Vigniette.shader" type="Shader" id=5]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 5 )
+shader_param/size = 0.324
+shader_param/smoothness = 0.523
+shader_param/color = Color( 0, 0, 0, 0.784314 )
+
+[node name="Explanations" type="MarginContainer"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource( 3 )
+script = ExtResource( 1 )
+
+[node name="Level0" type="Control" parent="."]
+visible = false
+margin_right = 256.0
+margin_bottom = 144.0
+mouse_filter = 2
+script = ExtResource( 4 )
+startDelay = 0.5
+minWalkDist = 20.0
+minZombieDist = 50.0
+moveFadeInTime = 1.0
+moveFadeOutTime = 1.0
+attackFadeInTime = 0.5
+attackFadeOutTime = 0.5
+
+[node name="MoveTutorial" type="Control" parent="Level0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Level0/MoveTutorial"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Level0/MoveTutorial"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 1
+text = "Move with 'wasd'"
+align = 1
+valign = 1
+
+[node name="AttackTutorial" type="Control" parent="Level0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Level0/AttackTutorial"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 1
+text = "Attack with 'left mouse'"
+align = 1
+valign = 1
+
+[node name="ColorRect" type="ColorRect" parent="Level0/AttackTutorial"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Level1" type="Control" parent="."]
+margin_right = 256.0
+margin_bottom = 144.0
+mouse_filter = 2
+script = ExtResource( 2 )
+fadeInTime = 0.5
+fadeOutTime = 0.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Level1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Level1/VBoxContainer"]
+margin_top = 47.0
+margin_right = 256.0
+margin_bottom = 76.0
+size_flags_vertical = 1
+text = "Level up by killing
+thats the goal"
+align = 1
+valign = 1
+
+[node name="Button" type="Button" parent="Level1/VBoxContainer"]
+margin_left = 116.0
+margin_top = 80.0
+margin_right = 140.0
+margin_bottom = 97.0
+focus_mode = 0
+size_flags_horizontal = 4
+enabled_focus_mode = 0
+text = "OK"
+
+[node name="ColorRect" type="ColorRect" parent="Level1"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Level3" type="Control" parent="."]
+visible = false
+margin_right = 256.0
+margin_bottom = 144.0
+mouse_filter = 2
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Level3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Level3/VBoxContainer"]
+margin_top = 47.0
+margin_right = 256.0
+margin_bottom = 76.0
+size_flags_vertical = 1
+text = "Move with 'wasd'
+Attack with 'mouse'"
+align = 1
+valign = 1
+
+[node name="Button" type="Button" parent="Level3/VBoxContainer"]
+margin_left = 116.0
+margin_top = 80.0
+margin_right = 140.0
+margin_bottom = 97.0
+focus_mode = 0
+size_flags_horizontal = 4
+enabled_focus_mode = 0
+text = "OK"
+
+[connection signal="pressed" from="Level1/VBoxContainer/Button" to="Level1" method="Finish"]

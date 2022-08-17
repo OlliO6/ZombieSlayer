@@ -29,7 +29,7 @@ public class MeleeBase : WeaponBase
 
     public override void Attack()
     {
-        base.Attack();
+        isAttacking = true;
 
         if (tween is not null && tween.GetTotalElapsedTime() < comboTime + currentExtraTime)
         {
@@ -90,5 +90,6 @@ public class MeleeBase : WeaponBase
 
         if (currentExtraTime != 0) await new TimeAwaiter(this, currentExtraTime);
         isAttacking = false;
+        EmitSignal(nameof(Attacked));
     }
 }

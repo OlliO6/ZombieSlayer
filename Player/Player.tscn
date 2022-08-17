@@ -3,12 +3,12 @@
 [ext_resource path="res://Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
 [ext_resource path="res://Weapons/Melee/Dagger/Dagger.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Player/Leveling/Leveling.cs" type="Script" id=4]
+[ext_resource path="res://Player/Leveling/Leveling.tscn" type="PackedScene" id=4]
 [ext_resource path="res://BasicStuff/HurtArea.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/Ingame/IngameUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/PauseMenu/PauseMenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Player/MagnetArea.cs" type="Script" id=8]
-[ext_resource path="res://Player/Leveling/Level.cs" type="Script" id=9]
+[ext_resource path="res://Player/Leveling/Explanations/Explanations.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player/WeaponSwitcher.cs" type="Script" id=10]
 [ext_resource path="res://UI/Inventory/Inventory.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Shaders/Player.shader" type="Shader" id=12]
@@ -126,7 +126,7 @@ nodes/MovementState/node = SubResource( 6 )
 nodes/MovementState/position = Vector2( 120, 140 )
 nodes/RunSpeed/node = SubResource( 7 )
 nodes/RunSpeed/position = Vector2( -140, 260 )
-node_connections = [ "output", 0, "MovementState", "RunSpeed", 0, "Animation 2", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed" ]
+node_connections = [ "output", 0, "MovementState", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed", "RunSpeed", 0, "Animation 2" ]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
@@ -145,88 +145,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -5 )
 hframes = 2
 
-[node name="Leveling" type="Node" parent="."]
-script = ExtResource( 4 )
-
-[node name="Level0" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 10
-
-[node name="Level1" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 10
-
-[node name="Level2" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 15
-
-[node name="Level3" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 15
-
-[node name="Level4" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 20
-
-[node name="Level5" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 20
-
-[node name="Level6" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 25
-
-[node name="Level7" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 25
-
-[node name="Level8" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 30
-
-[node name="Level9" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 30
-
-[node name="Level10" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 35
-
-[node name="Level11" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 35
-
-[node name="Level12" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 40
-
-[node name="Level13" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 40
-
-[node name="Level14" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 45
-
-[node name="Level15" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 45
-
-[node name="Level16" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 50
-
-[node name="Level17" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 50
-
-[node name="Level18" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 55
-
-[node name="Level19" type="Node" parent="Leveling"]
-script = ExtResource( 9 )
-xpToLevelUp = 55
+[node name="Leveling" parent="." instance=ExtResource( 4 )]
 
 [node name="Upgrades" type="Node" parent="."]
 
@@ -290,6 +209,8 @@ smoothing_enabled = true
 [node name="PauseMenu" parent="UI" instance=ExtResource( 7 )]
 
 [node name="Inventory" parent="UI" instance=ExtResource( 11 )]
+
+[node name="Explanations" parent="UI" instance=ExtResource( 9 )]
 
 [connection signal="CoinsAmountChanged" from="." to="UI/IngameUI" method="OnCoinsAmountChanged"]
 [connection signal="HealthChanged" from="." to="UI/IngameUI" method="OnPlayerHealthChanged"]

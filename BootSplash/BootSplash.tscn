@@ -88,7 +88,7 @@ void fragment()
 [sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 3 )
 shader_param/pixelSize = 1
-shader_param/useScaling = false
+shader_param/useScaling = true
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 5 )
@@ -239,8 +239,6 @@ theme = ExtResource( 2 )
 use_parent_material = true
 frames = SubResource( 17 )
 animation = "Glow"
-frame = 2
-playing = true
 centered = false
 
 [node name="AnimatedLabel" type="Label" parent="Control"]

@@ -22,7 +22,7 @@ public class GunBase : WeaponBase
 
     public override void Attack()
     {
-        base.Attack();
+        isAttacking = true;
 
         lastBullet = bulletScene.Instance<Bullet>();
 
@@ -36,6 +36,8 @@ public class GunBase : WeaponBase
 
         AnimationPlayer.Stop();
         AnimationPlayer.Play("Shoot");
+
+        EmitSignal(nameof(Attacked));
     }
 
     public override void _Process(float delta)

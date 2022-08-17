@@ -76,8 +76,8 @@ script = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_left = 2.0
-margin_top = 142.0
-margin_right = 2.0
+margin_top = 138.0
+margin_right = 47.0
 margin_bottom = 142.0
 mouse_filter = 2
 size_flags_horizontal = 0
@@ -85,9 +85,13 @@ size_flags_vertical = 8
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer"]
 visible = false
+margin_right = 45.0
+margin_bottom = 4.0
 color = Color( 0, 0, 0, 0.392157 )
 
 [node name="Logs" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+margin_right = 45.0
+margin_bottom = 4.0
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 10
@@ -287,15 +291,15 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="ScreenshotButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer"]
-margin_right = 230.0
+margin_right = 231.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 6 )
 text = "Screenshot"
 
 [node name="ScreenshotIUButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer"]
-margin_left = 230.0
-margin_right = 319.0
+margin_left = 231.0
+margin_right = 319.533
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.29
@@ -425,46 +429,28 @@ custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 0.529412, 0.596078, 0.647059, 1 )
 bbcode_enabled = true
 bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint]
-[00:01] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
-[00:03] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
-[00:03] [tint r=0.5 g=1 b=0.83 a=1]Level0: Reached[/tint]
-[00:03] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
-[00:26] [tint r=0.5 g=1 b=0.83 a=1]Level1: Reached[/tint]
-[00:26] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
-[00:30] [tint r=0.5 g=1 b=0.83 a=1]Level2: Reached[/tint]
-[00:30] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
-[00:35] [tint r=0.5 g=1 b=0.83 a=1]Level3: Reached[/tint]
-[00:35] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
-[00:40] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
-[00:40] [tint r=0.5 g=1 b=0.83 a=1]Level4: Reached[/tint]
-[00:40] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
-[00:48] [tint r=0.5 g=1 b=0.83 a=1]Level5: Reached[/tint]
-[00:48] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
-[00:54] [tint r=0.5 g=1 b=0.83 a=1]Level6: Reached[/tint]
-[00:54] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
-[01:28] [tint r=0.5 g=1 b=0.83 a=1]Level7: Reached[/tint]
-[01:28] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+[00:03] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
+[00:06] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
+[00:06] [tint r=0.5 g=1 b=0.83 a=1]Level0: Reached[/tint]
+[00:24] [tint r=0.5 g=1 b=0.83 a=1]Level1: Reached[/tint]
+[00:35] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
+[00:37] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
+[00:37] [tint r=0.5 g=1 b=0.83 a=1]Level0: Reached[/tint]
+[00:58] [tint r=0.88 g=1 b=1 a=1]WeaponSwitcher: Added weapon Dagger[/tint]
+[00:58] [tint r=0.88 g=1 b=1 a=1]SwordPickup: Collected[/tint]
+[01:02] [tint r=0.5 g=1 b=0.83 a=1]Level1: Reached[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
-[00:01] SceneManager: Loaded Menu
-[00:03] SceneManager: Loaded Game
-[00:03] Level0: Reached
-[00:03] EnemySpawner: Difficulty changed to Level0
-[00:26] Level1: Reached
-[00:26] EnemySpawner: Difficulty changed to Level0
-[00:30] Level2: Reached
-[00:30] EnemySpawner: Difficulty changed to Level0
-[00:35] Level3: Reached
-[00:35] EnemySpawner: Difficulty changed to Level0
-[00:40] Player: Got 1 damage
-[00:40] Level4: Reached
-[00:40] EnemySpawner: Difficulty changed to Level0
-[00:48] Level5: Reached
-[00:48] EnemySpawner: Difficulty changed to Level0
-[00:54] Level6: Reached
-[00:54] EnemySpawner: Difficulty changed to Level0
-[01:28] Level7: Reached
-[01:28] EnemySpawner: Difficulty changed to Level0
+[00:03] SceneManager: Loaded Menu
+[00:06] SceneManager: Loaded Game
+[00:06] Level0: Reached
+[00:24] Level1: Reached
+[00:35] SceneManager: Loaded Menu
+[00:37] SceneManager: Loaded Game
+[00:37] Level0: Reached
+[00:58] WeaponSwitcher: Added weapon Dagger
+[00:58] SwordPickup: Collected
+[01:02] Level1: Reached
 "
 scroll_following = true
 selection_enabled = true

@@ -44,12 +44,12 @@ public class EnemySpawner : Node
     private void OnLevelChanged(int to)
     {
         DifficultyIndex = to;
-        Debug.LogU(this, $"Difficulty changed to {difficultyLevel.Name}");
+        Debug.Log(this, $"Difficulty changed to {difficultyLevel.Name}");
     }
 
     public override void _Process(float delta)
     {
-        if (enemyCount >= difficultyLevel.Instantiater.maxEnemyCount && difficultyLevel.Instantiater.maxEnemyCount is not -1) return;
+        if (difficultyLevel is null || (enemyCount >= difficultyLevel.Instantiater.maxEnemyCount && difficultyLevel.Instantiater.maxEnemyCount is not -1)) return;
 
         timeToNextSpawn -= delta;
 

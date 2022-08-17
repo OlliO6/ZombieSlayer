@@ -73,13 +73,13 @@
     },
     {
       "category": 0,
-      "title": "Zombie spawn animation",
-      "details": "so you dont get hit when a zombie spawns inside you"
+      "title": "Bullets go trough enemies upgrade",
+      "details": "but bullets will deal less damage"
     },
     {
       "category": 0,
-      "title": "Bullets go trough enemies upgrade",
-      "details": "but bullets will deal less damage"
+      "title": "Enemy spawn position areas",
+      "details": "Maybe a dictionary or a enum with like nord, east or top, right.\nFor the tutorial, so zombies spawn near you but also for later stuff and general flexibility."
     }
   ]
 }

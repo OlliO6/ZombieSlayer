@@ -4,6 +4,8 @@ using Godot;
 
 public class WeaponBase : Node2D
 {
+    [Signal] public delegate void Attacked();
+
     [Export(PropertyHint.File, "*tscn,*scn")] public string weaponPickup;
     [Export] public Texture icon;
 
@@ -55,7 +57,7 @@ public class WeaponBase : Node2D
     protected virtual void AttackInputStarted() { }
     protected virtual void AttackInputEnded() { }
     protected virtual void AttackInputProcess() { }
-    public virtual void Attack() { isAttacking = true; }
+    public virtual void Attack() { isAttacking = true; EmitSignal(nameof(Attacked)); }
     protected virtual void AnimationFinished(string animation)
     {
         if (animation is "Attack")
