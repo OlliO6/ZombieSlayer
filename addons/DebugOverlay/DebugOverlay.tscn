@@ -70,7 +70,7 @@ custom_constants/separation = 0
 margin_top = -1.0
 margin_right = 252.0
 margin_bottom = 3.2
-text = "FPS: 60"
+text = "FPS: 144"
 align = 1
 script = ExtResource( 4 )
 

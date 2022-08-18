@@ -4,7 +4,8 @@ using Godot;
 
 public class WeaponBase : Node2D
 {
-    [Signal] public delegate void Attacked();
+    [Signal] public delegate void AttackStarted();
+    [Signal] public delegate void AttackFinished();
 
     [Export(PropertyHint.File, "*tscn,*scn")] public string weaponPickup;
     [Export] public Texture icon;
@@ -24,7 +25,7 @@ public class WeaponBase : Node2D
     {
         InputManager.instance.Connect(nameof(InputManager.AttackInputStarted), this, nameof(OnAttackInputStarted));
         InputManager.instance.Connect(nameof(InputManager.AttackInputEnded), this, nameof(OnAttackInputEnded));
-        AnimationPlayer.Connect("animation_finished", this, nameof(AnimationFinished));
+        AnimationPlayer.Connect("animation_finished", this, nameof(OnAnimationFinished));
     }
 
     public virtual void Disable()
@@ -57,14 +58,14 @@ public class WeaponBase : Node2D
     protected virtual void AttackInputStarted() { }
     protected virtual void AttackInputEnded() { }
     protected virtual void AttackInputProcess() { }
-    public virtual void Attack() { isAttacking = true; EmitSignal(nameof(Attacked)); }
-    protected virtual void AnimationFinished(string animation)
+    public virtual void Attack() { isAttacking = true; EmitSignal(nameof(AttackStarted)); }
+    protected virtual void OnAnimationFinished(string animation)
     {
         if (animation is "Attack")
         {
             isAttacking = false;
-            AttackFinished();
+            OnAttackFinished();
         }
     }
-    protected virtual void AttackFinished() { }
+    protected virtual void OnAttackFinished() { EmitSignal(nameof(AttackFinished)); }
 }

@@ -4,12 +4,17 @@ using Godot;
 
 public class ShowHideExplanation : Explanation
 {
-    [Export] private bool pause = true;
+    [Export] private bool pause = true, dontPausePlayer;
     [Export] private float fadeInTime = 0, fadeOutTime = 0;
 
     protected override void Start()
     {
-        if (pause) GetTree().Paused = true;
+        if (pause)
+        {
+            GetTree().Paused = true;
+            if (dontPausePlayer)
+                Player.currentPlayer.PauseMode = PauseModeEnum.Process;
+        }
 
         if (fadeInTime > 0)
         {
@@ -25,7 +30,12 @@ public class ShowHideExplanation : Explanation
 
     protected override void End()
     {
-        if (pause) GetTree().Paused = false;
+        if (pause)
+        {
+            GetTree().Paused = false;
+            if (dontPausePlayer)
+                Player.currentPlayer.PauseMode = PauseModeEnum.Inherit;
+        }
 
         if (fadeOutTime > 0)
         {

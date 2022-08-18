@@ -60,6 +60,9 @@ public class MoveAndAttackExplanations : Explanation
             await ToSignal(GetTree(), "physics_frame");
         }
 
+        GetTree().Paused = true;
+        player.PauseMode = PauseModeEnum.Process;
+
         // Fade in attack tutorial
         attackTutorial.Show();
         tween = CreateTween();
@@ -69,7 +72,7 @@ public class MoveAndAttackExplanations : Explanation
                 .SetEase(Tween.EaseType.InOut);
 
         // Wait for attack
-        await ToSignal(player.WeaponInv.CurrentWeapon, nameof(WeaponBase.Attacked));
+        await ToSignal(player.WeaponInv.CurrentWeapon, nameof(WeaponBase.AttackStarted));
 
         // Fade out attack tutorial
         tween.Kill();
@@ -80,6 +83,9 @@ public class MoveAndAttackExplanations : Explanation
 
         ToSignal(tween, "finished")
                 .OnCompleted(Finish);
+
+        GetTree().Paused = false;
+        player.PauseMode = PauseModeEnum.Inherit;
     }
 
     protected override void End()

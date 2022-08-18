@@ -61,7 +61,8 @@ public class HurtArea : Area2D
 
     private void ApplyDamage(IDamageDealer dealer)
     {
-        if (!DamageReceiver.AllowDamageFrom(dealer) || !dealer.AllowDamageTo(DamageReceiver)) return;
+        if (!DamageReceiver.AllowDamageFrom(dealer) || !dealer.AllowDamageTo(DamageReceiver))
+            return;
 
         DamageReceiver.GetDamage(dealer.DamageAmount);
 

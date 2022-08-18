@@ -37,7 +37,7 @@ public class GunBase : WeaponBase
         AnimationPlayer.Stop();
         AnimationPlayer.Play("Shoot");
 
-        EmitSignal(nameof(Attacked));
+        EmitSignal(nameof(AttackStarted));
     }
 
     public override void _Process(float delta)
@@ -58,12 +58,12 @@ public class GunBase : WeaponBase
         }
     }
 
-    protected override void AnimationFinished(string animation)
+    protected override void OnAnimationFinished(string animation)
     {
         if (animation is "Shoot")
         {
             isAttacking = false;
-            AttackFinished();
+            OnAttackFinished();
         }
     }
 }

@@ -3,7 +3,6 @@ using System.Linq;
 using Additions;
 using Godot;
 
-[Tool]
 public class IngameUI : Control
 {
     [Export] private PackedScene heartScene;
@@ -16,9 +15,6 @@ public class IngameUI : Control
 
     private Texture emptyHeart = GD.Load<Texture>("res://UI/Ingame/EmptyHeart.png");
     private Texture fullHeart = GD.Load<Texture>("res://UI/Ingame/FullHeart.png");
-
-    [Export]
-    private bool Updade { get => false; set => CallDeferred(nameof(UpdateHealthDisplay)); }
 
     public Label CoinLabel => this.LazyGetNode(ref storerForCoinLabel, "%CoinDisplay/Label");
     public Control WeaponContainer => this.LazyGetNode(ref storerForWeaponContainer, "%WeaponContainer");

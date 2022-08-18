@@ -44,6 +44,8 @@ public class MeleeBase : WeaponBase
         AnimationPlayer.Stop();
         AnimationPlayer.Play(comboAnims[currentCombo]);
         tween?.Kill();
+
+        EmitSignal(nameof(AttackStarted));
     }
 
     public override void _Process(float delta)
@@ -63,16 +65,16 @@ public class MeleeBase : WeaponBase
         Scale = new Vector2(1, 1);
     }
 
-    protected override void AnimationFinished(string animation)
+    protected override void OnAnimationFinished(string animation)
     {
         if (animation == comboAnims[currentCombo])
         {
             currentExtraTime = currentCombo < extraTime.Length ? extraTime[currentCombo] : 0;
-            AttackFinished();
+            OnAttackFinished();
         }
     }
 
-    protected override async void AttackFinished()
+    protected override async void OnAttackFinished()
     {
         tween = CreateTween();
         Animation reset = AnimationPlayer.GetAnimation("RESET");
@@ -90,6 +92,6 @@ public class MeleeBase : WeaponBase
 
         if (currentExtraTime != 0) await new TimeAwaiter(this, currentExtraTime);
         isAttacking = false;
-        EmitSignal(nameof(Attacked));
+        EmitSignal(nameof(AttackFinished));
     }
 }
