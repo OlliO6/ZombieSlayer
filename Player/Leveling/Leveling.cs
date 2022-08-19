@@ -54,7 +54,7 @@ public class Leveling : Node
         float finalVal = (((float)(CurrentLevelNode.xpToLevelUp - ((float)xpToNextLevel - CurrentXp))) / (float)CurrentLevelNode.xpToLevelUp).Clamp01();
         tween.TweenProperty(this, nameof(interpolatedXp), finalVal, (interpolatedXp - finalVal).Abs() * xpRaiseOneLvlTweenTime)
                 .SetEase(Tween.EaseType.Out)
-                .SetTrans(Tween.TransitionType.Sine)
+                .SetTrans(Tween.TransitionType.Cubic)
                 .Connect("finished", this, nameof(TweenFinished));
     }
 

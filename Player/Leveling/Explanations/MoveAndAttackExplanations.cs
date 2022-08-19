@@ -38,7 +38,7 @@ public class MoveAndAttackExplanations : Explanation
         while (walkDist < minWalkDist)
         {
             Vector2 prevPos = player.Position;
-            await ToSignal(GetTree(), "physics_frame");
+            await new TimeAwaiter(this, 0.1f);
             walkDist += prevPos.DistanceTo(player.Position);
         }
 
@@ -54,11 +54,16 @@ public class MoveAndAttackExplanations : Explanation
 
         // Wait until a zombie is close
         List<Zombie> zombies = new();
-        while (!zombies.Any((Zombie zombie) => (zombie.GlobalPosition.DistanceTo(player.GlobalPosition) < minZombieDist)))
+        while (zombies.Count is 0)
         {
             GetTree().CurrentScene.GetAllChildren<Zombie>(ref zombies);
-            await ToSignal(GetTree(), "physics_frame");
+            zombies = zombies.Where((Zombie zombie) => (zombie.GlobalPosition.DistanceTo(player.GlobalPosition) < minZombieDist)).ToList();
+            if (IsQueuedForDeletion()) return;
+            await new TimeAwaiter(this, 0.1f);
         }
+
+        float prevDmg = player.damageMultiplier;
+        player.damageMultiplier = 1000;
 
         GetTree().Paused = true;
         player.PauseMode = PauseModeEnum.Process;
@@ -73,6 +78,8 @@ public class MoveAndAttackExplanations : Explanation
 
         // Wait for attack
         await ToSignal(player.WeaponInv.CurrentWeapon, nameof(WeaponBase.AttackStarted));
+
+        player.damageMultiplier = prevDmg;
 
         // Fade out attack tutorial
         tween.Kill();

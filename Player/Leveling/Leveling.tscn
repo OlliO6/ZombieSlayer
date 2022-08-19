@@ -9,11 +9,11 @@ xpRaiseOneLvlTweenTime = 0.8
 
 [node name="Level0" type="Node" parent="."]
 script = ExtResource( 1 )
-xpToLevelUp = 10
+xpToLevelUp = 15
 
 [node name="Level1" type="Node" parent="."]
 script = ExtResource( 1 )
-xpToLevelUp = 20
+xpToLevelUp = 25
 
 [node name="Level2" type="Node" parent="."]
 script = ExtResource( 1 )
