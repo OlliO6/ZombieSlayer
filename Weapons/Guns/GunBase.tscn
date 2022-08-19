@@ -115,7 +115,6 @@ material = ExtResource( 1 )
 position = Vector2( 0, 2 )
 offset = Vector2( 6, -2 )
 hframes = 3
-frame = 1
 
 [node name="MuzzleFlash" type="Particles2D" parent="."]
 position = Vector2( 10, -1 )

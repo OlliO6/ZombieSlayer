@@ -9,7 +9,10 @@ public class Bullet : Area2D, IKillable, IDamageDealer
     [Export] private bool goTroughAllTargets = false;
     [Export] public int goThroughTargetsCount = 0;
 
+    public bool dead;
     public float speed;
+
+    public TimeAwaiter liveAwaiter;
 
     #region AnimationPlayer Reference
 
@@ -18,17 +21,15 @@ public class Bullet : Area2D, IKillable, IDamageDealer
 
     #endregion
 
-    protected bool dead;
-
     public override void _Ready()
     {
-        new TimeAwaiter(this, maxLivetime, onCompleted: DieInstant);
+        liveAwaiter = new TimeAwaiter(this, maxLivetime, onCompleted: DieInstant);
     }
 
     public override void _PhysicsProcess(float delta)
     {
         if (dead) return;
-        Position += speed * delta * Transform.x;
+        GlobalPosition += speed * delta * (GlobalTransform.x).Normalized();
     }
 
     [TroughtSignal]

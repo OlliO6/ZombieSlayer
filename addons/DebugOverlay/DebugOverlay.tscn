@@ -69,7 +69,7 @@ custom_constants/separation = 0
 [node name="FPSLabel" type="Label" parent="MarginContainer/HBoxContainer/DebugLabels"]
 margin_top = -1.0
 margin_right = 252.0
-margin_bottom = 3.2
+margin_bottom = 3.13333
 text = "FPS: 144"
 align = 1
 script = ExtResource( 4 )
@@ -425,56 +425,32 @@ custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 0.529412, 0.596078, 0.647059, 1 )
 bbcode_enabled = true
 bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint]
-[00:02] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
-[00:04] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
-[00:04] [tint r=0.5 g=1 b=0.83 a=1]Level0: Reached[/tint]
-[01:19] [tint r=0.5 g=1 b=0.83 a=1]Level1: Reached[/tint]
-[01:47] [tint r=0.5 g=1 b=0.83 a=1]Level2: Reached[/tint]
-[02:17] [tint r=0.5 g=1 b=0.83 a=1]Level3: Reached[/tint]
-[02:44] [tint r=0.5 g=1 b=0.83 a=1]Level4: Reached[/tint]
-[03:28] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
-[03:29] [tint r=0.5 g=1 b=0.83 a=1]Level5: Reached[/tint]
-[04:07] [tint r=0.5 g=1 b=0.83 a=1]Level6: Reached[/tint]
-[04:24] [tint r=0.5 g=1 b=0.83 a=1]Level7: Reached[/tint]
-[04:35] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
-[04:42] [tint r=0.5 g=1 b=0.83 a=1]Level8: Reached[/tint]
-[05:45] [tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
-[05:55] [tint r=0.88 g=1 b=1 a=1]DicePickup: Collected[/tint]
-[05:55] [tint r=0.88 g=1 b=1 a=1]WeaponSwitcher: Added weapon Pistol[/tint]
-[05:55] [tint r=0.88 g=1 b=1 a=1]PistolPickup: Collected[/tint]
-[06:10] [tint r=0.5 g=1 b=0.83 a=1]Level9: Reached[/tint]
-[06:32] [tint r=0.5 g=1 b=0.83 a=1]Level10: Reached[/tint]
-[07:14] [tint r=0.5 g=1 b=0.83 a=1]Level11: Reached[/tint]
-[07:40] [tint r=0.5 g=1 b=0.83 a=1]Level12: Reached[/tint]
-[07:43] [tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
-[07:52] [tint r=0.88 g=1 b=1 a=1]DicePickup: Collected[/tint]
-[tint r=1 g=0.84 b=0 a=1]Gave 80 coins to player[/tint]
+[00:01] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
+[00:03] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
+[00:03] [tint r=0.5 g=1 b=0.83 a=1]Level0: Reached[/tint]
+[00:06] [tint r=0.88 g=1 b=1 a=1]Dolphin: Speed: 96,35763
+Damage: 6
+Scale: (0,8183498, 0,8183498)[/tint]
+[00:08] [tint r=0.88 g=1 b=1 a=1]Dolphin: Speed: 90,25539
+Damage: 6
+Scale: (0,7964644, 0,7964644)[/tint]
+[00:11] [tint r=0.88 g=1 b=1 a=1]Dolphin: Speed: 93,33409
+Damage: 12
+Scale: (1,94545, 1,94545)[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
-[00:02] SceneManager: Loaded Menu
-[00:04] SceneManager: Loaded Game
-[00:04] Level0: Reached
-[01:19] Level1: Reached
-[01:47] Level2: Reached
-[02:17] Level3: Reached
-[02:44] Level4: Reached
-[03:28] Player: Got 1 damage
-[03:29] Level5: Reached
-[04:07] Level6: Reached
-[04:24] Level7: Reached
-[04:35] Player: Got 1 damage
-[04:42] Level8: Reached
-[05:45] ShopMenu: Selled Dice
-[05:55] DicePickup: Collected
-[05:55] WeaponSwitcher: Added weapon Pistol
-[05:55] PistolPickup: Collected
-[06:10] Level9: Reached
-[06:32] Level10: Reached
-[07:14] Level11: Reached
-[07:40] Level12: Reached
-[07:43] ShopMenu: Selled Dice
-[07:52] DicePickup: Collected
-Gave 80 coins to player
+[00:01] SceneManager: Loaded Menu
+[00:03] SceneManager: Loaded Game
+[00:03] Level0: Reached
+[00:06] Dolphin: Speed: 96,35763
+Damage: 6
+Scale: (0,8183498, 0,8183498)
+[00:08] Dolphin: Speed: 90,25539
+Damage: 6
+Scale: (0,7964644, 0,7964644)
+[00:11] Dolphin: Speed: 93,33409
+Damage: 12
+Scale: (1,94545, 1,94545)
 "
 scroll_following = true
 selection_enabled = true

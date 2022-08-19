@@ -41,7 +41,7 @@ public class WeaponBase : Node2D
 
     public override void _Process(float delta)
     {
-        if (InputManager.attackInput && !disabled) AttackInputProcess();
+        if (InputManager.attackInput && !disabled) AttackInputProcess(delta);
     }
 
     [TroughtSignal]
@@ -57,7 +57,7 @@ public class WeaponBase : Node2D
 
     protected virtual void AttackInputStarted() { }
     protected virtual void AttackInputEnded() { }
-    protected virtual void AttackInputProcess() { }
+    protected virtual void AttackInputProcess(float delta) { }
     public virtual void Attack() { isAttacking = true; EmitSignal(nameof(AttackStarted)); }
     protected virtual void OnAnimationFinished(string animation)
     {
