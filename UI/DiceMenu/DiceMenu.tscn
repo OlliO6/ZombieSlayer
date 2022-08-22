@@ -160,41 +160,41 @@ mouse_filter = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
 margin_right = 18.0
-margin_bottom = 150.0
+margin_bottom = 144.0
 scroll_horizontal_enabled = false
 
 [node name="DiceContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer"]
 margin_right = 18.0
-margin_bottom = 150.0
+margin_bottom = 144.0
 size_flags_vertical = 3
 alignment = 2
 
 [node name="DiceField" parent="HBoxContainer/ScrollContainer/DiceContainer" instance=ExtResource( 7 )]
-margin_top = 88.0
-margin_bottom = 106.0
+margin_top = 82.0
+margin_bottom = 100.0
 
 [node name="DiceField2" parent="HBoxContainer/ScrollContainer/DiceContainer" instance=ExtResource( 7 )]
-margin_top = 110.0
-margin_bottom = 128.0
+margin_top = 104.0
+margin_bottom = 122.0
 
 [node name="DiceField3" parent="HBoxContainer/ScrollContainer/DiceContainer" instance=ExtResource( 7 )]
-margin_top = 132.0
-margin_bottom = 150.0
+margin_top = 126.0
+margin_bottom = 144.0
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
 margin_left = 22.0
 margin_right = 25.0
-margin_bottom = 150.0
+margin_bottom = 144.0
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
 margin_left = 29.0
 margin_right = 107.0
-margin_bottom = 150.0
+margin_bottom = 144.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterContainer"]
-margin_top = 54.0
+margin_top = 51.0
 margin_right = 78.0
-margin_bottom = 95.0
+margin_bottom = 92.0
 
 [node name="DiceScenesContainer" type="GridContainer" parent="HBoxContainer/CenterContainer/VBoxContainer"]
 margin_right = 78.0

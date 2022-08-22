@@ -12,6 +12,7 @@ public class IngameUI : Control
     private Label storerForCoinLabel, storerForLevelLabel;
     private Control storerForWeaponContainer, storerForHeartContainer;
     private ProgressBar storerForXpProgress;
+    private AnimationPlayer storerForLevelUpAnim;
 
     private Texture emptyHeart = GD.Load<Texture>("res://UI/Ingame/EmptyHeart.png");
     private Texture fullHeart = GD.Load<Texture>("res://UI/Ingame/FullHeart.png");
@@ -21,6 +22,7 @@ public class IngameUI : Control
     public Control HeartContainer => this.LazyGetNode(ref storerForHeartContainer, "%HeartContainer");
     public ProgressBar XpProgress => this.LazyGetNode(ref storerForXpProgress, "%XpProgress");
     public Label LevelLabel => this.LazyGetNode(ref storerForLevelLabel, "%LevelLabel");
+    public AnimationPlayer LevelUpAnim => this.LazyGetNode(ref storerForLevelUpAnim, "%LevelUpAnim");
 
     [TroughtSignal]
     private void OnPlayerHealthChanged()
@@ -41,6 +43,8 @@ public class IngameUI : Control
     {
         Leveling leveling = GetOwner<Player>().Leveling;
         LevelLabel.Text = leveling.CurrentLevelIndex.ToString();
+
+        if (leveling.CurrentLevelIndex > leveling.startLevelIndex) LevelUpAnim.Play("LevelUp");
     }
 
     private void UpdateHealthDisplay()

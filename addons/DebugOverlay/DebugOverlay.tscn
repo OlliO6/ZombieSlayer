@@ -429,13 +429,19 @@ bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint
 [00:01] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
 [00:02] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
 [00:02] [tint r=0.5 g=1 b=0.83 a=1]Level0: Reached[/tint]
-[tint r=1 g=0.84 b=0 a=1]Gave 758943 coins to player[/tint]
+[00:08] [tint r=0.88 g=1 b=1 a=1]OptionsManager: Saving Options[/tint]
+[00:28] [tint r=0.5 g=1 b=0.83 a=1]Level1: Reached[/tint]
+[00:39] [tint r=0.5 g=1 b=0.83 a=1]Level2: Reached[/tint]
+[00:46] [tint r=0.5 g=1 b=0.83 a=1]Level3: Reached[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
 [00:01] SceneManager: Loaded Menu
 [00:02] SceneManager: Loaded Game
 [00:02] Level0: Reached
-Gave 758943 coins to player
+[00:08] OptionsManager: Saving Options
+[00:28] Level1: Reached
+[00:39] Level2: Reached
+[00:46] Level3: Reached
 "
 scroll_following = true
 selection_enabled = true

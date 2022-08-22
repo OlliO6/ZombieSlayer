@@ -74,6 +74,13 @@ public class GameCommands : CommandCollection
         AddOutputLine(ColorizeText($"Player don't has an {type.Name}", Colors.Orange));
     }
 
+    [Command("lvlup", "Increases player lavel.")]
+    void LvlUp()
+    {
+        if (!PlayerAvailable()) return;
+
+        CurrentPlayer.Leveling.CurrentXp += CurrentPlayer.Leveling.CurrentLevelNode.xpToLevelUp;
+    }
 
     private bool PlayerAvailable()
     {

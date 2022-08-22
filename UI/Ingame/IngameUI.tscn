@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://UI/Ingame/Heart.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/Ingame/IngameUI.cs" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://UI/DiceMenu/DiceMenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/Theme/BrownRect.png" type="Texture" id=8]
 [ext_resource path="res://UI/GradiantProgressBar.cs" type="Script" id=9]
+[ext_resource path="res://Sounds/LevelUp.wav" type="AudioStream" id=10]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.254902, 0.415686, 0.364706, 1 )
@@ -29,6 +30,51 @@ margin_bottom = 2.0
 [sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.738819, 1 )
 colors = PoolColorArray( 0.254902, 0.415686, 0.364706, 1, 0.466667, 0.592157, 0.345098, 1, 0.746537, 0.902344, 0.468796, 1 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "LevelUp"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("LevelUpAnim/CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.313726 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("LevelUpAnim/AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("LevelUpAnim/CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [node name="IngameUI" type="Control"]
 anchor_right = 1.0
@@ -143,6 +189,7 @@ margin_bottom = 17.0
 margin_left = 188.0
 margin_right = 248.0
 margin_bottom = 13.0
+mouse_filter = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
 
@@ -168,6 +215,23 @@ allow_lesser = true
 percent_visible = false
 script = ExtResource( 9 )
 gradient = SubResource( 4 )
+
+[node name="LevelUpAnim" type="AnimationPlayer" parent="MarginContainer/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+anims/LevelUp = SubResource( 5 )
+anims/RESET = SubResource( 6 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="MarginContainer/HBoxContainer/HBoxContainer/LevelUpAnim"]
+layer = 128
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/HBoxContainer/LevelUpAnim/CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 1, 1, 1, 0 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MarginContainer/HBoxContainer/HBoxContainer/LevelUpAnim"]
+stream = ExtResource( 10 )
 
 [node name="DiceMenu" parent="." instance=ExtResource( 7 )]
 size_flags_vertical = 3
