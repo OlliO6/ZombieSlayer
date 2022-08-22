@@ -28,7 +28,7 @@ public class Leveling : Node
     public int CurrentLevelIndex
     {
         get => currentLevel;
-        set
+        private set
         {
             currentLevel = value;
 

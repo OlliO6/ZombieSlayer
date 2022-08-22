@@ -4,7 +4,7 @@ using Godot;
 
 public class Bullet : Area2D, IKillable, IDamageDealer
 {
-    [Export] public int DamageAmount { get; set; }
+    [Export] public int damage;
     [Export] public float maxLivetime = 3;
     [Export] private bool goTroughAllTargets = false;
     [Export] public int goThroughTargetsCount = 0;
@@ -21,6 +21,8 @@ public class Bullet : Area2D, IKillable, IDamageDealer
 
     #endregion
 
+    public virtual int DamageAmount => damage;
+
     public override void _Ready()
     {
         liveAwaiter = new TimeAwaiter(this, maxLivetime, onCompleted: DieInstant);
@@ -29,7 +31,7 @@ public class Bullet : Area2D, IKillable, IDamageDealer
     public override void _PhysicsProcess(float delta)
     {
         if (dead) return;
-        GlobalPosition += speed * delta * (GlobalTransform.x).Normalized();
+        GlobalPosition += speed * delta * GlobalTransform.x.Normalized();
     }
 
     [TroughtSignal]
@@ -44,6 +46,7 @@ public class Bullet : Area2D, IKillable, IDamageDealer
     }
     public virtual void Die()
     {
+        if (dead) return;
         dead = true;
         AnimationPlayer.Play("Die");
     }
@@ -52,14 +55,16 @@ public class Bullet : Area2D, IKillable, IDamageDealer
     {
         if (dead) return false;
 
+        HitTarget();
+        return true;
+    }
+
+    public virtual void HitTarget()
+    {
+        goThroughTargetsCount--;
         if (!goTroughAllTargets && goThroughTargetsCount <= 0)
         {
             Die();
-            return true;
         }
-
-        goThroughTargetsCount--;
-
-        return !dead;
     }
 }

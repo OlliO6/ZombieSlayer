@@ -18,7 +18,7 @@ public class GunBase : WeaponBase
 
     protected Bullet lastBullet;
 
-    public virtual int GetBulletDamageAmount() => Mathf.RoundToInt(baseBulletDamage * (Player.currentPlayer is null ? 1 : Player.currentPlayer.damageMultiplier));
+    public virtual int GetBulletDamage() => Mathf.RoundToInt(baseBulletDamage * (Player.currentPlayer is null ? 1 : Player.currentPlayer.damageMultiplier));
 
     public override void Attack()
     {
@@ -27,7 +27,7 @@ public class GunBase : WeaponBase
         lastBullet = bulletScene.Instance<Bullet>();
 
         lastBullet.speed = (float)GD.RandRange(bulletSpeedRange.x, bulletSpeedRange.y);
-        lastBullet.DamageAmount = GetBulletDamageAmount();
+        lastBullet.damage = GetBulletDamage();
         lastBullet.maxLivetime = bulletLivetime;
 
         GetTree().CurrentScene.AddChild(lastBullet);

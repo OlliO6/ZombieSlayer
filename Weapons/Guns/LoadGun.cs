@@ -6,7 +6,7 @@ public class LoadGun : GunBase
 {
     [Signal] public delegate void LoadStarted();
     [Export] private float loadingTime, minProgress = 0.25f;
-    [Export] private Curve bulletSize, damage, speed, spread, livetime;
+    [Export] private Curve spread, power;
 
     bool isLoading;
     float loadProgress;
@@ -14,33 +14,28 @@ public class LoadGun : GunBase
 
     public override void Attack()
     {
+        if (!IsInstanceValid(lastBullet)) return;
         isAttacking = true;
         lastBullet.dead = false;
         lastBullet.liveAwaiter.Continue();
-
-        Debug.LogU(this, $@"Speed: {(float)GD.RandRange(bulletSpeedRange.x, bulletSpeedRange.y) * speed.Interpolate(loadProgress)}
-Damage: {GetBulletDamageAmount()}
-Scale: {Vector2.One * bulletSize.InterpolateBaked(loadProgress)}");
 
         Vector2 globPos = lastBullet.GlobalPosition;
         InstantiatePoint.RemoveChild(lastBullet);
         GetTree().CurrentScene.AddChild(lastBullet);
         lastBullet.GlobalPosition = globPos;
 
-        lastBullet.speed = (float)GD.RandRange(bulletSpeedRange.x, bulletSpeedRange.y) * speed.Interpolate(loadProgress);
-        lastBullet.DamageAmount = GetBulletDamageAmount();
+        lastBullet.speed = (float)GD.RandRange(bulletSpeedRange.x, bulletSpeedRange.y);
+        lastBullet.damage = GetBulletDamage();
         lastBullet.maxLivetime = bulletLivetime;
         lastBullet.GlobalTransform = InstantiatePoint.GlobalTransform;
         lastBullet.Rotate(Mathf.Deg2Rad(Random.NormallyDistributedFloat(deviation: bulletSpread * spread.Interpolate(loadProgress))));
-        lastBullet.Scale = Vector2.One * bulletSize.InterpolateBaked(loadProgress);
+        (lastBullet as LoadBullet).Power = power.InterpolateBaked(loadProgress);
 
         AnimationPlayer.Stop();
         AnimationPlayer.Play("Shoot");
 
         EmitSignal(nameof(AttackStarted));
     }
-
-    public override int GetBulletDamageAmount() => Mathf.RoundToInt(base.GetBulletDamageAmount() * damage.Interpolate(loadProgress));
 
     protected override void AttackInputProcess(float delta)
     {
@@ -66,7 +61,7 @@ Scale: {Vector2.One * bulletSize.InterpolateBaked(loadProgress)}");
         loadProgress += delta / loadingTime;
         loadProgress = loadProgress.Clamp01();
 
-        lastBullet.Scale = Vector2.One * bulletSize.InterpolateBaked(loadProgress);
+        (lastBullet as LoadBullet).Power = power.InterpolateBaked(loadProgress);
     }
 
     private void PauseBullet() => lastBullet.liveAwaiter.Pause();

@@ -79,7 +79,6 @@ baseBulletDamage = 5
 position = Vector2( 5, 1 )
 texture = ExtResource( 1 )
 offset = Vector2( 2, -3 )
-frame = 0
 
 [node name="MuzzleFlash" parent="." index="1"]
 position = Vector2( 13, -1 )

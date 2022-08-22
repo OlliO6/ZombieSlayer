@@ -78,7 +78,7 @@ public class WeaponStats : Control
         {
             float bulletsPerSecond = 1 / gun.AnimationPlayer.GetAnimation("Shoot").Length;
             stats.Add("Shoot Speed", bulletsPerSecond);
-            stats.Add("Damage", gun.GetBulletDamageAmount());
+            stats.Add("Damage", gun.GetBulletDamage());
             stats.Add("Spread", gun.bulletSpread);
             stats.Add("DPS", (int)stats["Damage"] * bulletsPerSecond);
             tooltips.Add("DPS", "Best possible damage per second");

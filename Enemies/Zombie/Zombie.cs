@@ -19,7 +19,7 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
     [Signal] public delegate void Died();
     public event System.Action<IEnemy> EnemyDied;
 
-    private bool dead;
+    private bool dead, isInvincible;
 
     #region AnimTree Reference
 
@@ -82,7 +82,7 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
         return (Player.currentPlayer.GlobalPosition - GlobalPosition).Normalized();
     }
 
-    public bool AllowDamageFrom(IDamageDealer from) => true;
+    public bool AllowDamageFrom(IDamageDealer from) => !isInvincible;
 
     public void GetDamage(int amount)
     {
@@ -97,6 +97,9 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
         EmitSignal(nameof(Damaged));
 
         if (CurrentHealth <= 0) Die();
+
+        isInvincible = true;
+        new TimeAwaiter(this, 0.075f, onCompleted: () => isInvincible = false);
     }
 
     public void Die()

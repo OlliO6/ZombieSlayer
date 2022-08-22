@@ -12,6 +12,7 @@ public class OptionsManager : Node
         GD.Load<Shader>("res://Shaders/Standart.shader"),
         GD.Load<Shader>("res://Shaders/Flash.shader"),
         GD.Load<Shader>("res://Shaders/Player.shader"),
+        GD.Load<Shader>("res://Shaders/CuttetTexture.shader"),
     };
     private static OptionSet currentOptions;
 
