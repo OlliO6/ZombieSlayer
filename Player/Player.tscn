@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://UI/Ingame/IngameUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/PauseMenu/PauseMenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Player/MagnetArea.cs" type="Script" id=8]
-[ext_resource path="res://Player/Leveling/Explanations/Explanations.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player/WeaponSwitcher.cs" type="Script" id=10]
 [ext_resource path="res://UI/Inventory/Inventory.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Shaders/Player.shader" type="Shader" id=12]
@@ -213,12 +212,10 @@ smoothing_enabled = true
 
 [node name="Inventory" parent="UI" instance=ExtResource( 11 )]
 
-[node name="Explanations" parent="UI" instance=ExtResource( 9 )]
-
 [connection signal="CoinsAmountChanged" from="." to="UI/IngameUI" method="OnCoinsAmountChanged"]
 [connection signal="HealthChanged" from="." to="UI/IngameUI" method="OnPlayerHealthChanged"]
-[connection signal="InvincibilityEnded" from="." to="HurtArea" method="Check" flags=3]
 [connection signal="InvincibilityEnded" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ true ]]
+[connection signal="InvincibilityEnded" from="." to="HurtArea" method="Check" flags=3]
 [connection signal="InvincibilityStarted" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ false ]]
 [connection signal="LevelChanged" from="Leveling" to="." method="OnLevelChanged"]
 [connection signal="LevelChanged" from="Leveling" to="UI/IngameUI" method="OnLevelChanged"]

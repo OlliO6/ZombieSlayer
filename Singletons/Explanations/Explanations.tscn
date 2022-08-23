@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Player/Leveling/Explanations/ExplanationsManager.cs" type="Script" id=1]
-[ext_resource path="res://Player/Leveling/Explanations/ShowHideExplanation.cs" type="Script" id=2]
-[ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=3]
-[ext_resource path="res://Player/Leveling/Explanations/MoveAndAttackExplanations.cs" type="Script" id=4]
+[ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
+[ext_resource path="res://Singletons/Explanations/ShowHideExplanation.cs" type="Script" id=2]
+[ext_resource path="res://Singletons/Explanations/MoveAndAttackExplanations.cs" type="Script" id=3]
+[ext_resource path="res://Singletons/Explanations/ExplanationsManager.cs" type="Script" id=4]
 [ext_resource path="res://Shaders/Vigniette.shader" type="Shader" id=5]
 
 [sub_resource type="ShaderMaterial" id=2]
@@ -12,20 +12,18 @@ shader_param/size = 0.324
 shader_param/smoothness = 0.523
 shader_param/color = Color( 0, 0, 0, 0.784314 )
 
-[node name="Explanations" type="MarginContainer"]
+[node name="Explanations" type="CanvasLayer"]
 pause_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-theme = ExtResource( 3 )
-script = ExtResource( 1 )
+layer = 5
+script = ExtResource( 4 )
 
-[node name="Level0" type="Control" parent="."]
+[node name="MoveAndAttack" type="Control" parent="."]
 visible = false
 margin_right = 256.0
 margin_bottom = 144.0
 mouse_filter = 2
-script = ExtResource( 4 )
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
 startDelay = 0.5
 minWalkDist = 20.0
 minZombieDist = 50.0
@@ -34,18 +32,18 @@ moveFadeOutTime = 1.0
 attackFadeInTime = 0.5
 attackFadeOutTime = 0.5
 
-[node name="MoveTutorial" type="Control" parent="Level0"]
+[node name="MoveTutorial" type="Control" parent="MoveAndAttack"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="Level0/MoveTutorial"]
+[node name="ColorRect" type="ColorRect" parent="MoveAndAttack/MoveTutorial"]
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="Level0/MoveTutorial"]
+[node name="Label" type="Label" parent="MoveAndAttack/MoveTutorial"]
 anchor_right = 1.0
 margin_top = 16.0
 size_flags_vertical = 1
@@ -53,18 +51,18 @@ text = "Move with 'wasd'"
 align = 1
 valign = 1
 
-[node name="AttackTutorial" type="Control" parent="Level0"]
+[node name="AttackTutorial" type="Control" parent="MoveAndAttack"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="Level0/AttackTutorial"]
+[node name="ColorRect" type="ColorRect" parent="MoveAndAttack/AttackTutorial"]
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="Level0/AttackTutorial"]
+[node name="Label" type="Label" parent="MoveAndAttack/AttackTutorial"]
 anchor_right = 1.0
 margin_top = 16.0
 size_flags_vertical = 1
@@ -72,28 +70,29 @@ text = "Attack with 'left mouse'"
 align = 1
 valign = 1
 
-[node name="Level1" type="Control" parent="."]
+[node name="Leveling" type="Control" parent="."]
 visible = false
 margin_right = 256.0
 margin_bottom = 144.0
 mouse_filter = 2
+theme = ExtResource( 1 )
 script = ExtResource( 2 )
 fadeInTime = 0.5
 fadeOutTime = 0.5
 
-[node name="ColorRect" type="ColorRect" parent="Level1"]
+[node name="ColorRect" type="ColorRect" parent="Leveling"]
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Level1"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Leveling"]
 anchor_right = 1.0
 margin_top = 16.0
 mouse_filter = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Level1/VBoxContainer"]
+[node name="Label" type="Label" parent="Leveling/VBoxContainer"]
 margin_right = 256.0
 margin_bottom = 29.0
 size_flags_vertical = 1
@@ -102,7 +101,7 @@ thats the goal"
 align = 1
 valign = 1
 
-[node name="Button" type="Button" parent="Level1/VBoxContainer"]
+[node name="Button" type="Button" parent="Leveling/VBoxContainer"]
 margin_left = 116.0
 margin_top = 33.0
 margin_right = 140.0
@@ -112,4 +111,4 @@ size_flags_horizontal = 4
 enabled_focus_mode = 0
 text = "OK"
 
-[connection signal="pressed" from="Level1/VBoxContainer/Button" to="Level1" method="Finish"]
+[connection signal="pressed" from="Leveling/VBoxContainer/Button" to="Leveling" method="Finish"]
