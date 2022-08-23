@@ -68,7 +68,7 @@ public class LoadGun : GunBase
 
     protected override void AttackInputEnded()
     {
-        if (isAttacking) return;
+        if (isAttacking || !isLoading) return;
 
         isLoading = false;
         if (loadProgress > minProgress)
