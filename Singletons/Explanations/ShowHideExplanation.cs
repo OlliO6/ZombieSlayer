@@ -1,3 +1,4 @@
+namespace Explanations;
 using System.Collections.Generic;
 using Additions;
 using Godot;
@@ -5,7 +6,7 @@ using Godot;
 public class ShowHideExplanation : Explanation
 {
     [Export] private bool pause = true, dontPausePlayer;
-    [Export] private float fadeInTime = 0, fadeOutTime = 0;
+    [Export] private float fadeInTime = 0.5f, fadeOutTime = 0.5f;
 
     protected override void Start()
     {
@@ -30,6 +31,8 @@ public class ShowHideExplanation : Explanation
 
     protected override void End()
     {
+        GD.Print("END");
+
         if (pause)
         {
             GetTree().Paused = false;
@@ -44,8 +47,12 @@ public class ShowHideExplanation : Explanation
                     .SetTrans(Tween.TransitionType.Sine)
                     .SetEase(Tween.EaseType.InOut);
 
-            ToSignal(tween, "finished")
-                    .OnCompleted(Hide);
+            SignalAwaiter awaiter = ToSignal(tween, "finished");
+            awaiter.OnCompleted(() =>
+            {
+                Hide();
+                GD.Print("dsakojpdfjasniokfusdhguijhbsdiuzfvadsfjkniasdiufjnxck");
+            });
             return;
         }
 

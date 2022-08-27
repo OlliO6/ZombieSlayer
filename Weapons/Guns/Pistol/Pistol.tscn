@@ -66,11 +66,10 @@ tracks/3/keys = {
 
 [node name="Pistol" instance=ExtResource( 3 )]
 icon = ExtResource( 4 )
-baseBulletDamage = 8
+baseBulletDamage = 7
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 1 )
-frame = 2
 
 [node name="InstantiatePoint" parent="." index="2"]
 position = Vector2( 10, 0 )

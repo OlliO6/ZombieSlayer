@@ -70,7 +70,7 @@ custom_constants/separation = 0
 [node name="FPSLabel" type="Label" parent="MarginContainer/HBoxContainer/DebugLabels"]
 margin_top = -1.0
 margin_right = 252.0
-margin_bottom = 3.13333
+margin_bottom = 3.2
 text = "FPS: 60"
 align = 1
 script = ExtResource( 4 )
@@ -78,7 +78,7 @@ script = ExtResource( 4 )
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_left = 2.0
 margin_top = 138.0
-margin_right = 59.0
+margin_right = 47.0
 margin_bottom = 142.0
 mouse_filter = 2
 size_flags_horizontal = 0
@@ -86,12 +86,12 @@ size_flags_vertical = 8
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer"]
 visible = false
-margin_right = 57.0
+margin_right = 45.0
 margin_bottom = 4.0
 color = Color( 0, 0, 0, 0.392157 )
 
 [node name="Logs" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
-margin_right = 57.0
+margin_right = 45.0
 margin_bottom = 4.0
 mouse_filter = 2
 size_flags_horizontal = 2
@@ -433,17 +433,19 @@ bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint
 [00:01] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
 [00:02] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
 [00:02] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
-[00:02] [tint r=0.88 g=1 b=1 a=1]Heal: Healed[/tint]
-[00:09] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
-[00:09] [tint r=0.88 g=1 b=1 a=1]Heal: Healed[/tint]
+[00:15] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[00:19] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[00:30] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
+[00:30] [tint r=0.88 g=1 b=1 a=1]Heal: Healed[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
 [00:01] SceneManager: Loaded Menu
 [00:02] SceneManager: Loaded Game
 [00:02] Level 0: Reached
-[00:02] Heal: Healed
-[00:09] Level 1: Reached
-[00:09] Heal: Healed
+[00:15] Player: Got 1 damage
+[00:19] Player: Got 1 damage
+[00:30] Level 1: Reached
+[00:30] Heal: Healed
 "
 scroll_following = true
 selection_enabled = true

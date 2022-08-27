@@ -17,14 +17,12 @@ public class LevelUpDisplay : PanelContainer
     public AnimationPlayer AnimationPlayer => this.LazyGetNode(ref storerForAnimationPlayer, "AnimationPlayer");
 
     #endregion
-
     #region Content Reference
 
     private Control storerForContent;
     public Control Content => this.LazyGetNode(ref storerForContent, "%Content");
 
     #endregion
-
     #region Title Reference
 
     private Label storerForTitle;
@@ -56,7 +54,9 @@ public class LevelUpDisplay : PanelContainer
 
         GetTree().Paused = true;
         AnimationPlayer.Play("Open");
-        Show();
+
+        ToSignal(GetTree(), "idle_frame")
+                .OnCompleted(Show);
 
         await ToSignal(AnimationPlayer, "animation_finished");
         open = true;
