@@ -430,26 +430,20 @@ custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 0.529412, 0.596078, 0.647059, 1 )
 bbcode_enabled = true
 bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint]
-[00:03] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
-[00:44] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
-[00:44] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
-[00:44] [tint r=0.88 g=1 b=1 a=1]Heal: Healed[/tint]
-[tint r=0.75 g=0.75 b=0.75 a=1][shake]Failed executing[/shake][/tint] [tint r=0.78 g=0.08 b=0.52 a=1]'givecoins 509823905723895'[/tint][tint r=0.75 g=0.75 b=0.75 a=1]. Use it like this: [/tint]givecoins int
-[tint r=0.75 g=0.75 b=0.75 a=1][shake]Failed executing[/shake][/tint] [tint r=0.78 g=0.08 b=0.52 a=1]'givecoins 50982390572389'[/tint][tint r=0.75 g=0.75 b=0.75 a=1]. Use it like this: [/tint]givecoins int
-[tint r=0.75 g=0.75 b=0.75 a=1][shake]Failed executing[/shake][/tint] [tint r=0.78 g=0.08 b=0.52 a=1]'givecoins 5098239057238'[/tint][tint r=0.75 g=0.75 b=0.75 a=1]. Use it like this: [/tint]givecoins int
-[tint r=0.75 g=0.75 b=0.75 a=1][shake]Failed executing[/shake][/tint] [tint r=0.78 g=0.08 b=0.52 a=1]'givecoins 509823905723'[/tint][tint r=0.75 g=0.75 b=0.75 a=1]. Use it like this: [/tint]givecoins int
-[tint r=1 g=0.84 b=0 a=1]Gave 509823905 coins to player[/tint]
+[00:01] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
+[00:02] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
+[00:02] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
+[00:02] [tint r=0.88 g=1 b=1 a=1]Heal: Healed[/tint]
+[00:09] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
+[00:09] [tint r=0.88 g=1 b=1 a=1]Heal: Healed[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
-[00:03] SceneManager: Loaded Menu
-[00:44] SceneManager: Loaded Game
-[00:44] Level 0: Reached
-[00:44] Heal: Healed
-Failed executing 'givecoins 509823905723895'. Use it like this: givecoins int
-Failed executing 'givecoins 50982390572389'. Use it like this: givecoins int
-Failed executing 'givecoins 5098239057238'. Use it like this: givecoins int
-Failed executing 'givecoins 509823905723'. Use it like this: givecoins int
-Gave 509823905 coins to player
+[00:01] SceneManager: Loaded Menu
+[00:02] SceneManager: Loaded Game
+[00:02] Level 0: Reached
+[00:02] Heal: Healed
+[00:09] Level 1: Reached
+[00:09] Heal: Healed
 "
 scroll_following = true
 selection_enabled = true

@@ -54,12 +54,12 @@ public class LevelUpDisplay : PanelContainer
     {
         if (open) return;
 
+        GetTree().Paused = true;
         AnimationPlayer.Play("Open");
         Show();
 
         await ToSignal(AnimationPlayer, "animation_finished");
         open = true;
-        GetTree().Paused = true;
         EmitSignal(nameof(Opened));
     }
 

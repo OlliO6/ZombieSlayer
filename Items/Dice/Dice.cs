@@ -93,7 +93,6 @@ public class Dice : KinematicBody2D
         }
 
         SpawnBrokenDicePickup();
-
         GetNode<AnimationPlayer>("AnimationPlayer").Play("Break");
     }
 
@@ -149,6 +148,6 @@ public class Dice : KinematicBody2D
         }
     }
 
-    public int GetRepairCost() => baseRepairCost + (scenes.Count((PackedScene scene) => scene is not null) * repairCostPerScene);
-    public int GetSellPrice() => Mathf.RoundToInt(GetRepairCost() * 0.5f);
+    public virtual int GetRepairCost() => baseRepairCost + (scenes.Count((PackedScene scene) => scene is not null) * repairCostPerScene);
+    public virtual int GetSellPrice() => Mathf.RoundToInt(GetRepairCost() * 0.5f);
 }

@@ -1,14 +1,17 @@
-using Godot;
 using System;
+using System.Linq;
 using Additions;
+using Godot;
 
 public class DicePickup : InteractionPickupBase
 {
+    bool isReady = false;
     public Dice Dice
     {
         get => DiceHolder.GetChildCount() > 0 ? DiceHolder.GetChild<Dice>(0) : null;
         set
         {
+            Debug.LogU(this, isReady.ToString());
             if (Dice is not null)
             {
                 DiceHolder.RemoveChild(Dice);
@@ -17,6 +20,7 @@ public class DicePickup : InteractionPickupBase
 
             DiceHolder.AddChild(value);
             value.Position = Vector2.Zero;
+            SetDiceEyeCount();
         }
     }
 
@@ -36,8 +40,9 @@ public class DicePickup : InteractionPickupBase
     {
         return Dice is not null;
     }
-    public override void _Ready()
-    {
 
+    private void SetDiceEyeCount()
+    {
+        Dice.AnimatedSprite.Frame = Dice.scenes.Count((PackedScene scene) => scene is not null) - 1;
     }
 }

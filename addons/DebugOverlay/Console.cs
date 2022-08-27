@@ -115,7 +115,7 @@ public class Console : MarginContainer
     {
         CommandLine.Clear();
 
-        if (isReading) return;
+        if (isReading || command is "") return;
 
         Commands.Execute(command);
         RefreshOutput();
