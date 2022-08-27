@@ -126,12 +126,12 @@ nodes/MovementState/node = SubResource( 6 )
 nodes/MovementState/position = Vector2( 120, 140 )
 nodes/RunSpeed/node = SubResource( 7 )
 nodes/RunSpeed/position = Vector2( -140, 260 )
-node_connections = [ "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed", "RunSpeed", 0, "Animation 2", "output", 0, "MovementState" ]
+node_connections = [ "output", 0, "MovementState", "RunSpeed", 0, "Animation 2", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed" ]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
 script = ExtResource( 1 )
-MaxHealth = 4
+MaxHealth = 2
 movementSpeed = 35.0
 invincibilityTime = 2.0
 startMagnetSize = 1.0
@@ -146,6 +146,7 @@ offset = Vector2( 0, -5 )
 hframes = 2
 
 [node name="Leveling" parent="." instance=ExtResource( 4 )]
+startLevelIndex = 0
 
 [node name="Upgrades" type="Node" parent="."]
 

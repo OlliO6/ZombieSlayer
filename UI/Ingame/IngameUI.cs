@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Additions;
 using Godot;
+using Leveling;
 
 public class IngameUI : Control
 {
@@ -22,7 +23,6 @@ public class IngameUI : Control
     public Control HeartContainer => this.LazyGetNode(ref storerForHeartContainer, "%HeartContainer");
     public ProgressBar XpProgress => this.LazyGetNode(ref storerForXpProgress, "%XpProgress");
     public Label LevelLabel => this.LazyGetNode(ref storerForLevelLabel, "%LevelLabel");
-    public AnimationPlayer LevelUpAnim => this.LazyGetNode(ref storerForLevelUpAnim, "%LevelUpAnim");
 
     [TroughtSignal]
     private void OnPlayerHealthChanged()
@@ -41,10 +41,11 @@ public class IngameUI : Control
     [TroughtSignal]
     private void OnLevelChanged()
     {
-        Leveling leveling = GetOwner<Player>().Leveling;
+        LevelingSystem leveling = GetOwner<Player>().Leveling;
         LevelLabel.Text = leveling.CurrentLevelIndex.ToString();
 
-        if (leveling.CurrentLevelIndex > leveling.startLevelIndex) LevelUpAnim.Play("LevelUp");
+        // Hide hearts when on lvl 0
+        HeartContainer.Visible = leveling.CurrentLevelIndex is 0 ? false : true;
     }
 
     private void UpdateHealthDisplay()

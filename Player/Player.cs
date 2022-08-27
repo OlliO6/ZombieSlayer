@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Additions;
 using Godot;
+using Leveling;
 
 [Additions.Debugging.DefaultColor(nameof(Colors.LightBlue), nameof(Colors.DeepSkyBlue))]
 public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
@@ -57,8 +58,8 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     #endregion
     #region Leveling Reference
 
-    private Leveling storerForLeveling;
-    public Leveling Leveling => this.LazyGetNode(ref storerForLeveling, "Leveling");
+    private LevelingSystem storerForLeveling;
+    public LevelingSystem Leveling => this.LazyGetNode(ref storerForLeveling, "Leveling");
 
     #endregion
 
@@ -105,9 +106,9 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     public override void _Ready()
     {
-        CurrentHealth = MaxHealth;
         Coins = startCoins;
         MagnetAreaSize = startMagnetSize;
+        Heal();
     }
 
     public override void _PhysicsProcess(float delta)
@@ -145,7 +146,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
         Debug.LogU(this, $"Got {amount} damage");
 
-        CurrentHealth -= amount;
+        if (Leveling.CurrentLevelIndex is not 0) CurrentHealth -= amount;
 
         isInvincible = true;
         EmitSignal(nameof(InvincibilityStarted));
@@ -172,6 +173,8 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     {
         EmitSignal(nameof(LevelChanged), Leveling.CurrentLevelIndex);
     }
+
+    public void Heal() => CurrentHealth = MaxHealth;
 
     public void AddDice(Dice dice) => DiceInventory.AddDice(dice);
     public IEnumerable<Dice> GetWorkingDices() => DiceInventory.GetWorkingDices();

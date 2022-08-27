@@ -38,7 +38,7 @@ public class OptionsManager : Node
         {
             CurrentOptions.fullscreen = value;
             OS.WindowFullscreen = value;
-            Input.MouseMode = Input.MouseModeEnum.Confined;
+            Input.MouseMode = value ? Input.MouseModeEnum.Confined : Input.MouseModeEnum.Visible;
             instance.EmitSignal(nameof(OptionsChanged));
         }
     }

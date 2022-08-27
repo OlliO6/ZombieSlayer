@@ -1,88 +1,209 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/Leveling/Level.cs" type="Script" id=1]
-[ext_resource path="res://Player/Leveling/Leveling.cs" type="Script" id=2]
+[ext_resource path="res://Player/Leveling/LevelingSystem.cs" type="Script" id=2]
+[ext_resource path="res://Player/Leveling/BuffTypes/Heal.cs" type="Script" id=3]
+[ext_resource path="res://Player/Leveling/BuffTypes/JustText.cs" type="Script" id=4]
+[ext_resource path="res://Sounds/LevelUp.wav" type="AudioStream" id=5]
 
-[node name="Leveling" type="Node"]
+[sub_resource type="Animation" id=1]
+resource_name = "LevelUp"
+length = 0.5
+tracks/0/type = "audio"
+tracks/0/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+
+[node name="Leveling" type="CanvasLayer"]
 script = ExtResource( 2 )
+startLevelIndex = 2
 xpRaiseOneLvlTweenTime = 0.8
 
-[node name="Level0" type="Node" parent="."]
-script = ExtResource( 1 )
-xpToLevelUp = 15
+[node name="Levels" type="Node" parent="."]
 
-[node name="Level1" type="Node" parent="."]
+[node name="Level 0" type="Node" parent="Levels"]
+script = ExtResource( 1 )
+xpToLevelUp = 0
+noMenu = true
+
+[node name="Heal" type="Node" parent="Levels/Level 0"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level 1" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 25
 
-[node name="Level2" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level 1"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Health" type="Node" parent="Levels/Level 1"]
+script = ExtResource( 4 )
+text = "Unlocked Health"
+
+[node name="Die" type="Node" parent="Levels/Level 1"]
+script = ExtResource( 4 )
+text = "You can now die"
+
+[node name="Level 2" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 25
 
-[node name="Level3" type="Node" parent="."]
+[node name="Level 3" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 30
 
-[node name="Level4" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level 3"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level 4" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 35
 
-[node name="Level5" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level 4"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level 5" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 20
 
-[node name="Level6" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level 5"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level 6" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 25
 
-[node name="Level7" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level 6"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level 7" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 25
 
-[node name="Level8" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level 7"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level 8" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 30
 
-[node name="Level9" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level 8"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level 9" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 30
 
-[node name="Level10" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level 9"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level 10" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 35
 
-[node name="Level11" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level 10"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level 11" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 35
 
-[node name="Level12" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level 11"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level12" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 40
 
-[node name="Level13" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level12"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level13" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 40
 
-[node name="Level14" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level13"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level14" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 45
 
-[node name="Level15" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level14"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level15" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 45
 
-[node name="Level16" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level15"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level16" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 50
 
-[node name="Level17" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level16"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level17" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 50
 
-[node name="Level18" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level17"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level18" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 55
 
-[node name="Level19" type="Node" parent="."]
+[node name="Heal" type="Node" parent="Levels/Level18"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="Level19" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 55
+
+[node name="Heal" type="Node" parent="Levels/Level19"]
+script = ExtResource( 3 )
+dontShow = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+pause_mode = 2
+anims/LevelUp = SubResource( 1 )
+anims/RESET = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
+stream = ExtResource( 5 )
+bus = "SFX"
