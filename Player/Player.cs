@@ -109,6 +109,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         Coins = startCoins;
         MagnetAreaSize = startMagnetSize;
         Heal();
+        ExplanationsManager.ConnectExplanationToSignal("UpgradeDices", this, nameof(InvincibilityStarted));
     }
 
     public override void _PhysicsProcess(float delta)
