@@ -5,12 +5,11 @@ using Godot;
 public class LoadGun : GunBase
 {
     [Signal] public delegate void LoadStarted();
-    [Export] private float loadingTime, minProgress = 0.25f;
-    [Export] private Curve spread, power;
+    [Export] public float loadingTime, minProgress = 0.25f;
+    [Export] public Curve spread, power;
 
     bool isLoading;
     float loadProgress;
-
 
     public override void Attack()
     {

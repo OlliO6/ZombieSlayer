@@ -44,6 +44,7 @@ public class WeaponStats : Control
         switch (weapon)
         {
             case "Pistol" or "Rifle": return "Gun";
+            case "Dolphin" or "Orca": return "Load Gun";
             case "Dagger": return "Sword";
         }
 
@@ -76,10 +77,13 @@ public class WeaponStats : Control
 
         void AddGunBaseStats(GunBase gun)
         {
-            float bulletsPerSecond = 1 / gun.AnimationPlayer.GetAnimation("Shoot").Length;
+            LoadGun loadGun = gun as LoadGun;
+            float timeBetweenShots = gun.AnimationPlayer.GetAnimation("Shoot").Length + (loadGun is null ? 0 : loadGun.loadingTime);
+            float bulletsPerSecond = 1 / timeBetweenShots;
+
             stats.Add("Shoot Speed", bulletsPerSecond);
             stats.Add("Damage", gun.GetBulletDamage());
-            stats.Add("Spread", gun.bulletSpread);
+            stats.Add("Spread", loadGun is null ? gun.bulletSpread : (loadGun.spread.InterpolateBaked(1) * loadGun.bulletSpread));
             stats.Add("DPS", (int)stats["Damage"] * bulletsPerSecond);
             tooltips.Add("DPS", "Best possible damage per second");
         }

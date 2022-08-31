@@ -10,8 +10,8 @@
 _data = [ Vector2( 0, 1 ), 0.0, -0.312122, 0, 0, Vector2( 1, 0 ), -1.33172, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=15]
-min_value = 0.5
-_data = [ Vector2( 0, 0.5 ), 0.0, 0.455, 0, 0, Vector2( 1, 1 ), 0.5, 0.0, 1, 0 ]
+min_value = 0.4
+_data = [ Vector2( 0, 0.4 ), 0.0, 0.455, 0, 0, Vector2( 1, 1 ), 0.6, 0.0, 1, 0 ]
 
 [sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0.352174, 1 )
@@ -133,8 +133,8 @@ weaponPickup = "res://Items/WeaponPickUps/DolphinPickup.tscn"
 icon = ExtResource( 1 )
 bulletScene = ExtResource( 5 )
 bulletSpread = 6.0
-baseBulletDamage = 15
-loadingTime = 1.5
+baseBulletDamage = 18
+loadingTime = 1.0
 minProgress = 0.0
 spread = SubResource( 14 )
 power = SubResource( 15 )
