@@ -52,7 +52,7 @@ public class ShopItem : Control
 
     public int GetPrice()
     {
-        return Mathf.RoundToInt(startPrice + (buyCount * priceAdded) * (priceMultiplier * buyCount));
+        return Mathf.RoundToInt((startPrice + priceAdded * buyCount) * priceMultiplier);
     }
 
     public override void _Ready()
