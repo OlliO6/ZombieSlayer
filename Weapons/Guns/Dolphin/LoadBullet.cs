@@ -9,7 +9,7 @@ public class LoadBullet : Bullet, IKillable, IDamageDealer
     [Export] private float dieAnimSpeed;
     [Export] public Curve damageOverPower, speedOverPower, scaleOverPower;
 
-    public override int DamageAmount => (damage * damageOverPower.InterpolateBaked(Power)).Floor();
+    public override int DamageAmount => (damage * damageOverPower.InterpolateBaked(Power)).Round();
     public float Speed => speed * speedOverPower.InterpolateBaked(Power);
 
     public float Power

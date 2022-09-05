@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://UI/Inventory/Inventory.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Shaders/Player.shader" type="Shader" id=12]
 [ext_resource path="res://Player/DiceInventory.cs" type="Script" id=13]
-[ext_resource path="res://Weapons/Guns/Dolphin/Dolphin.tscn" type="PackedScene" id=14]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.16228
@@ -126,7 +125,7 @@ nodes/MovementState/node = SubResource( 6 )
 nodes/MovementState/position = Vector2( 120, 140 )
 nodes/RunSpeed/node = SubResource( 7 )
 nodes/RunSpeed/position = Vector2( -140, 260 )
-node_connections = [ "output", 0, "MovementState", "RunSpeed", 0, "Animation 2", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed" ]
+node_connections = [ "RunSpeed", 0, "Animation 2", "MovementState", 0, "Animation", "MovementState", 1, "RunSpeed", "output", 0, "MovementState" ]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
@@ -155,8 +154,6 @@ position = Vector2( 0, -5 )
 script = ExtResource( 10 )
 
 [node name="Dagger" parent="WeaponSwitcher" instance=ExtResource( 3 )]
-
-[node name="Dolphin" parent="WeaponSwitcher" instance=ExtResource( 14 )]
 
 [node name="DiceInventory" type="Node2D" parent="."]
 position = Vector2( 0, -5 )
@@ -215,8 +212,8 @@ smoothing_enabled = true
 
 [connection signal="CoinsAmountChanged" from="." to="UI/IngameUI" method="OnCoinsAmountChanged"]
 [connection signal="HealthChanged" from="." to="UI/IngameUI" method="OnPlayerHealthChanged"]
-[connection signal="InvincibilityEnded" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ true ]]
 [connection signal="InvincibilityEnded" from="." to="HurtArea" method="Check" flags=3]
+[connection signal="InvincibilityEnded" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ true ]]
 [connection signal="InvincibilityStarted" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ false ]]
 [connection signal="LevelChanged" from="Leveling" to="." method="OnLevelChanged"]
 [connection signal="LevelChanged" from="Leveling" to="UI/IngameUI" method="OnLevelChanged"]
