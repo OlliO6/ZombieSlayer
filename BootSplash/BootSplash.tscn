@@ -239,6 +239,8 @@ theme = ExtResource( 2 )
 use_parent_material = true
 frames = SubResource( 17 )
 animation = "Glow"
+frame = 15
+playing = true
 centered = false
 
 [node name="AnimatedLabel" type="Label" parent="Control"]

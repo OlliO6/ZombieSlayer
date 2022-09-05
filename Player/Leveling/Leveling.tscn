@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Player/Leveling/Level.cs" type="Script" id=1]
 [ext_resource path="res://Player/Leveling/LevelingSystem.cs" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://Items/WeaponPickUps/PistolPickup.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player/Leveling/BuffTypes/GameMethodCall.cs" type="Script" id=10]
 [ext_resource path="res://Player/Leveling/BuffTypes/ShopItem.cs" type="Script" id=11]
+[ext_resource path="res://Player/Leveling/BuffTypes/MusicChange.cs" type="Script" id=12]
+[ext_resource path="res://Music/GameSongLvl10.wav" type="AudioStream" id=13]
 
 [sub_resource type="Animation" id=1]
 resource_name = "LevelUp"
@@ -39,6 +41,7 @@ startLevelIndex = 2
 xpRaiseOneLvlTweenTime = 0.8
 
 [node name="Levels" type="Node" parent="."]
+pause_mode = 2
 
 [node name="Level 0" type="Node" parent="Levels"]
 script = ExtResource( 1 )
@@ -180,6 +183,12 @@ dontShow = true
 
 [node name="Coins" type="Node" parent="Levels/Level 10"]
 script = ExtResource( 6 )
+
+[node name="MusicSwitch" type="Node" parent="Levels/Level 10"]
+script = ExtResource( 12 )
+song = ExtResource( 13 )
+fadeOutTime = 1.0
+delay = 0.2
 
 [node name="Level 11" type="Node" parent="Levels"]
 script = ExtResource( 1 )
