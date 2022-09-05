@@ -20,6 +20,8 @@ public class ExplanationsManager : CanvasLayer
     {
         if (disableExplanations) return;
 
+        Debug.LogU(instance, $"Started {name}");
+
         var newExplanation = instance.GetNodeOrNull<Explanation>(name);
         if (newExplanation is null)
         {

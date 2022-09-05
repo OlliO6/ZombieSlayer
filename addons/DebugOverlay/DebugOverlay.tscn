@@ -71,7 +71,7 @@ custom_constants/separation = 0
 margin_top = -1.0
 margin_right = 252.0
 margin_bottom = 3.13333
-text = "FPS: 30"
+text = "FPS: 59"
 align = 1
 script = ExtResource( 4 )
 
@@ -430,18 +430,74 @@ custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 0.529412, 0.596078, 0.647059, 1 )
 bbcode_enabled = true
 bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint]
-[00:02] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
-[00:03] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
-[00:03] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
-[00:08] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
-[00:08] [tint r=0.88 g=1 b=1 a=1]Heal: Healed[/tint]
+[00:01] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
+[00:02] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
+[00:02] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
+[00:02] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
+[00:09] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
+[00:09] [tint r=0.88 g=1 b=1 a=1]Heal: Healed[/tint]
+[00:09] [tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
+[00:09] [tint r=0.88 g=1 b=1 a=1]Heal: Healed[/tint]
+[00:09] [tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
+[00:09] [tint r=0.88 g=1 b=1 a=1]Heal: Healed[/tint]
+[00:11] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started ShopPosition[/tint]
+[00:11] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started UpgradeDices[/tint]
+[00:16] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started ShopMenu[/tint]
+[12:51] [tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
+[13:01] [tint r=0.88 g=1 b=1 a=1]DicePickup: False[/tint]
+[13:05] [tint r=0.88 g=1 b=1 a=1]WeaponSwitcher: Added weapon Pistol[/tint]
+[13:05] [tint r=0.88 g=1 b=1 a=1]PistolPickup: Collected[/tint]
+[13:06] [tint r=0 g=1 b=1 a=1]MovementSpeedUpgrade: Buff added[/tint]
+[13:08] [tint r=0.88 g=1 b=1 a=1]DicePickup: Collected[/tint]
+[13:16] [tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
+[13:16] [tint r=0.88 g=1 b=1 a=1]Heal: Healed[/tint]
+[13:43] [tint r=0.5 g=1 b=0.83 a=1]Level 5: Reached[/tint]
+[13:43] [tint r=0.88 g=1 b=1 a=1]Heal: Healed[/tint]
+[14:09] [tint r=0.5 g=1 b=0.83 a=1]Level 6: Reached[/tint]
+[14:09] [tint r=0.88 g=1 b=1 a=1]Heal: Healed[/tint]
+[14:22] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
+[14:22] [tint r=0 g=1 b=1 a=1]MovementSpeedUpgrade: Buff removed[/tint]
+[14:23] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
+[14:23] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
+[14:23] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
+[14:48] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[14:49] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
+[14:49] [tint r=0.88 g=1 b=1 a=1]Heal: Healed[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
-[00:02] SceneManager: Loaded Menu
-[00:03] SceneManager: Loaded Game
-[00:03] Level 0: Reached
-[00:08] Level 1: Reached
-[00:08] Heal: Healed
+[00:01] SceneManager: Loaded Menu
+[00:02] SceneManager: Loaded Game
+[00:02] ExplanationsManager: Started MoveAndAttack
+[00:02] Level 0: Reached
+[00:09] Level 1: Reached
+[00:09] Heal: Healed
+[00:09] Level 2: Reached
+[00:09] Heal: Healed
+[00:09] Level 3: Reached
+[00:09] Heal: Healed
+[00:11] ExplanationsManager: Started ShopPosition
+[00:11] ExplanationsManager: Started UpgradeDices
+[00:16] ExplanationsManager: Started ShopMenu
+[12:51] ShopMenu: Selled Dice
+[13:01] DicePickup: False
+[13:05] WeaponSwitcher: Added weapon Pistol
+[13:05] PistolPickup: Collected
+[13:06] MovementSpeedUpgrade: Buff added
+[13:08] DicePickup: Collected
+[13:16] Level 4: Reached
+[13:16] Heal: Healed
+[13:43] Level 5: Reached
+[13:43] Heal: Healed
+[14:09] Level 6: Reached
+[14:09] Heal: Healed
+[14:22] SceneManager: Loaded Menu
+[14:22] MovementSpeedUpgrade: Buff removed
+[14:23] SceneManager: Loaded Game
+[14:23] ExplanationsManager: Started MoveAndAttack
+[14:23] Level 0: Reached
+[14:48] Player: Got 1 damage
+[14:49] Level 1: Reached
+[14:49] Heal: Healed
 "
 scroll_following = true
 selection_enabled = true

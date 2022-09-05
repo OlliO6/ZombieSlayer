@@ -41,10 +41,12 @@ public class LevelUpDisplay : PanelContainer
     public void AddBuffText(LevelBuff buff)
     {
         if (buff.dontShow) return;
+        string buffText = buff.GetBuffText();
+        if (buffText is "") return;
 
         Content.AddChild(new Label()
         {
-            Text = $"- {buff.GetBuffText()}"
+            Text = $"-{buffText}"
         });
     }
 

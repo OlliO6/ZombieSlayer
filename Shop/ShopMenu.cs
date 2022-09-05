@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Additions;
@@ -11,6 +12,10 @@ public class ShopMenu : Control
 
     public override void _Ready()
     {
+        foreach (ShopItem item in GetNode(shopItems).GetChildren().OfType<ShopItem>())
+        {
+            item.Hide();
+        }
         OnUpdateRatio();
     }
 
@@ -55,6 +60,12 @@ public class ShopMenu : Control
         {
             GetNode<Button>(buyDiceButton).Disabled = false;
         }
+    }
+
+    public void UnlockItem(string name)
+    {
+        GetNode(shopItems).GetChildren().OfType<ShopItem>().First((ShopItem item) => item.Name == name)
+                .Show();
     }
 
     [TroughtSignal]

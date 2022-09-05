@@ -1,15 +1,24 @@
-using Godot;
 using System;
+using Godot;
 
 public class Shop : Area2D
 {
-    [Export] private NodePath shopMenu;
-    bool playerInArea;
-
     [Signal] public delegate void MenuOpened();
     [Signal] public delegate void MenuClosed();
     [Signal] public delegate void PlayerEntered();
     [Signal] public delegate void PlayerExited();
+
+    [Export] private NodePath shopMenu;
+    private bool playerInArea;
+
+    private ShopMenu shop;
+
+    public override void _Ready()
+    {
+        shop = GetNode<ShopMenu>(shopMenu);
+
+        ExplanationsManager.ConnectExplanationToSignal("ShopMenu", this, nameof(MenuOpened));
+    }
 
     [TroughtSignal]
     private void OnAreaEntered(Area2D area)
@@ -36,11 +45,12 @@ public class Shop : Area2D
         }
     }
 
+    public void UnlockShopItem(string name) => shop.UnlockItem(name);
+
     public void OpenMenu()
     {
         GetTree().Paused = true;
 
-        ShopMenu shop = GetNode<ShopMenu>(shopMenu);
         shop.Visible = true;
         shop.OnUpdateRatio();
 
@@ -49,8 +59,7 @@ public class Shop : Area2D
     public void CloseMenu()
     {
         GetTree().Paused = false;
-
-        GetNode<CanvasItem>(shopMenu).Visible = false;
+        shop.Visible = false;
 
         EmitSignal(nameof(MenuClosed));
     }

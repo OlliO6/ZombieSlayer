@@ -85,21 +85,18 @@ anchor_bottom = 1.0
 margin_top = 3.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel/CenterContainer"]
-margin_left = 40.0
+margin_left = 98.0
 margin_top = 16.0
-margin_right = 156.0
+margin_right = 98.0
 margin_bottom = 104.001
 rect_min_size = Vector2( 0, 88.001 )
 scroll_horizontal_enabled = false
-scroll_vertical = 30
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/CenterContainer/ScrollContainer"]
-margin_top = -30.0
-margin_right = 100.0
-margin_bottom = 109.0
 custom_constants/separation = 1
 
-[node name="SpeedUp" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+[node name="Speed" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+visible = false
 margin_top = 0.0
 margin_bottom = 19.0
 hint_tooltip = "Move faster"
@@ -109,6 +106,7 @@ startPrice = 5
 priceAdded = 3
 
 [node name="Magnet" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+visible = false
 margin_top = 20.0
 margin_bottom = 39.0
 hint_tooltip = "Attract coins and other collectables"
@@ -119,17 +117,19 @@ priceAdded = 3
 priceMultiplier = 0.93
 
 [node name="Pistol" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_top = 40.0
-margin_bottom = 59.0
+visible = false
+margin_top = 0.0
+margin_bottom = 19.0
 SceneToBuy = ExtResource( 19 )
 Icon = ExtResource( 18 )
 startPrice = 7
 priceAdded = 4
 priceMultiplier = 0.91
 
-[node name="DamageUp" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_top = 60.0
-margin_bottom = 79.0
+[node name="Damage" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+visible = false
+margin_top = 0.0
+margin_bottom = 19.0
 hint_tooltip = "Deal more damage"
 SceneToBuy = ExtResource( 9 )
 Icon = ExtResource( 8 )
@@ -138,24 +138,27 @@ priceAdded = 4
 priceMultiplier = 0.93
 
 [node name="Heart" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_top = 80.0
-margin_bottom = 99.0
+visible = false
+margin_top = 0.0
+margin_bottom = 19.0
 SceneToBuy = ExtResource( 7 )
 Icon = ExtResource( 15 )
 startPrice = 8
 priceAdded = 3
 
 [node name="Rifle" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_top = 100.0
-margin_bottom = 119.0
+visible = false
+margin_top = 0.0
+margin_bottom = 19.0
 SceneToBuy = ExtResource( 4 )
 Icon = ExtResource( 14 )
 startPrice = 14
 priceAdded = 6
 
 [node name="Dagger" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_top = 120.0
-margin_bottom = 139.0
+visible = false
+margin_top = 0.0
+margin_bottom = 19.0
 SceneToBuy = ExtResource( 16 )
 Icon = ExtResource( 17 )
 startPrice = 15
