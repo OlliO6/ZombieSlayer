@@ -11,8 +11,8 @@ public class Level : Node
     [Signal] public delegate void LevelReached();
 
     [Export] public int xpToLevelUp = 100;
-    [Export] private bool noMenu = false;
     [Export] public string explanation = "";
+    [Export] public bool noMenu, dontHeal;
 
     private static PackedScene lvlUpDispScene = GD.Load<PackedScene>("res://UI/Leveling/LevelUpDisplay.tscn");
 
@@ -23,6 +23,9 @@ public class Level : Node
 
         IEnumerable<LevelBuff> buffs = this.GetChildren<LevelBuff>();
         ApllyBuffs(buffs);
+
+        if (!dontHeal)
+            Player.currentPlayer?.Heal();
 
         if (explanation is not "")
             ExplanationsManager.ConnectExplanationToSignal(explanation, this, nameof(LevelReached));

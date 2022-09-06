@@ -81,6 +81,45 @@ text = "Attack with 'left mouse'"
 align = 1
 valign = 1
 
+[node name="Health" type="Control" parent="Explanations"]
+visible = false
+margin_right = 256.0
+margin_bottom = 144.0
+mouse_filter = 2
+theme = ExtResource( 15 )
+script = ExtResource( 12 )
+
+[node name="ColorRect" type="ColorRect" parent="Explanations/Health"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Explanations/Health"]
+anchor_right = 1.0
+margin_top = 8.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Explanations/Health/VBoxContainer"]
+margin_right = 256.0
+margin_bottom = 29.0
+size_flags_vertical = 1
+text = "Level ups will heal you
+And you can die now"
+align = 1
+valign = 1
+
+[node name="Button" type="Button" parent="Explanations/Health/VBoxContainer"]
+margin_left = 116.0
+margin_top = 33.0
+margin_right = 140.0
+margin_bottom = 50.0
+focus_mode = 0
+size_flags_horizontal = 4
+enabled_focus_mode = 0
+text = "OK"
+
 [node name="UpgradeDices" type="Control" parent="Explanations"]
 visible = false
 margin_right = 256.0
@@ -105,7 +144,7 @@ alignment = 1
 margin_right = 256.0
 margin_bottom = 13.0
 size_flags_vertical = 1
-text = "Press 'R' to roll a dice"
+text = "Press 'R' to roll you dices"
 align = 1
 valign = 1
 
@@ -404,6 +443,7 @@ position = Vector2( 108, 189 )
 [node name="Node2D48" type="Node2D" parent="SpawnPositions"]
 position = Vector2( 25, 46 )
 
+[connection signal="pressed" from="Explanations/Health/VBoxContainer/Button" to="Explanations/Health" method="Finish"]
 [connection signal="pressed" from="Explanations/UpgradeDices/VBoxContainer/Button" to="Explanations/UpgradeDices" method="Finish"]
 [connection signal="pressed" from="Explanations/ShopPosition/VBoxContainer/Button" to="Explanations/ShopPosition" method="Finish"]
 [connection signal="pressed" from="Explanations/ShopMenu/VBoxContainer/Button" to="Explanations/ShopMenu" method="Finish"]
