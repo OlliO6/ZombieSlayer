@@ -31,8 +31,6 @@ public class ShowHideExplanation : Explanation
 
     protected override void End()
     {
-        GD.Print("END");
-
         if (pause)
         {
             GetTree().Paused = false;
@@ -51,7 +49,6 @@ public class ShowHideExplanation : Explanation
             awaiter.OnCompleted(() =>
             {
                 Hide();
-                GD.Print("dsakojpdfjasniokfusdhguijhbsdiuzfvadsfjkniasdiufjnxck");
             });
             return;
         }
