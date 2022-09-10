@@ -10,7 +10,8 @@ public class IngameUI : Control
     [Export] public int maxHealth;
     [Export] public int currentHealth;
 
-    private Label storerForCoinLabel, storerForLevelLabel;
+    private CoinDisplay storerForCoinLabel;
+    private Label storerForLevelLabel;
     private Control storerForWeaponContainer, storerForHeartContainer;
     private ProgressBar storerForXpProgress;
     private AnimationPlayer storerForLevelUpAnim;
@@ -18,7 +19,7 @@ public class IngameUI : Control
     private Texture emptyHeart = GD.Load<Texture>("res://UI/Ingame/EmptyHeart.png");
     private Texture fullHeart = GD.Load<Texture>("res://UI/Ingame/FullHeart.png");
 
-    public Label CoinLabel => this.LazyGetNode(ref storerForCoinLabel, "%CoinDisplay/Label");
+    public CoinDisplay CoinsDisplay => this.LazyGetNode(ref storerForCoinLabel, "%CoinDisplay");
     public Control WeaponContainer => this.LazyGetNode(ref storerForWeaponContainer, "%WeaponContainer");
     public Control HeartContainer => this.LazyGetNode(ref storerForHeartContainer, "%HeartContainer");
     public ProgressBar XpProgress => this.LazyGetNode(ref storerForXpProgress, "%XpProgress");
@@ -35,7 +36,7 @@ public class IngameUI : Control
     [TroughtSignal]
     private void OnCoinsAmountChanged(int amount)
     {
-        CoinLabel.Text = amount.ToString();
+        CoinsDisplay.ChangeCoinsAmount(amount);
     }
 
     [TroughtSignal]

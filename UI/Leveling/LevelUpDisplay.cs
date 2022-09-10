@@ -8,6 +8,7 @@ public class LevelUpDisplay : PanelContainer
 {
     [Signal] public delegate void Opened();
     [Signal] public delegate void Closed();
+    [Signal] public delegate void CloseBegan();
 
     private bool open;
 
@@ -69,6 +70,7 @@ public class LevelUpDisplay : PanelContainer
     {
         if (!open) return;
 
+        EmitSignal(nameof(CloseBegan));
         open = false;
         GetTree().Paused = false;
         AnimationPlayer.Play("Close");

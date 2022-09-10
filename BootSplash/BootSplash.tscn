@@ -179,10 +179,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 2.6, 3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1e-05 ),
 "update": 0,
-"values": [ 1, 1, 30 ]
+"values": [ 1, 1 ]
 }
 tracks/3/type = "audio"
 tracks/3/path = NodePath("AudioStreamPlayer")
@@ -239,7 +239,7 @@ theme = ExtResource( 2 )
 use_parent_material = true
 frames = SubResource( 17 )
 animation = "Glow"
-frame = 15
+frame = 5
 playing = true
 centered = false
 

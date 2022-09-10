@@ -1,21 +1,75 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Items/Coin/Coin.png" type="Texture" id=2]
 [ext_resource path="res://Shaders/CuttetTexture.shader" type="Shader" id=3]
+[ext_resource path="res://UI/Ingame/CoinDisplay.cs" type="Script" id=4]
+[ext_resource path="res://Sounds/Pickup_coin.wav" type="AudioStream" id=5]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 3 )
 shader_param/frames = Vector2( 2, 1 )
 shader_param/currentFrame = Vector2( 0, 0 )
 
+[sub_resource type="Animation" id=3]
+resource_name = "Collect"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.01, 0.1 ),
+"transitions": PoolRealArray( -2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 1.2 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="AudioStreamRandomPitch" id=5]
+audio_stream = ExtResource( 5 )
+
 [node name="CoinDisplay" type="HBoxContainer"]
+pause_mode = 2
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 56.0
 margin_bottom = 15.0
 mouse_filter = 2
 theme = ExtResource( 1 )
+script = ExtResource( 4 )
+_CoinLabel = NodePath("Label")
 
 [node name="Control" type="Control" parent="."]
 margin_right = 8.0
@@ -26,13 +80,23 @@ mouse_filter = 2
 [node name="TextureRect" type="TextureRect" parent="Control"]
 material = SubResource( 2 )
 margin_right = 16.0
-margin_bottom = 11.0
+margin_bottom = 12.0
 mouse_filter = 2
 texture = ExtResource( 2 )
 stretch_mode = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Collect = SubResource( 3 )
+anims/RESET = SubResource( 4 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = 12.0
 margin_right = 20.0
 margin_bottom = 13.0
+rect_pivot_offset = Vector2( 16, 6.5 )
 text = "0"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 5 )
+volume_db = -10.03
+bus = "SFX"

@@ -83,9 +83,9 @@ public class LevelingSystem : Node
             if (CurrentLevelIndex >= Levels.GetChildCount()) break;
 
             CurrentLevelNode.ReachLevel();
-            EmitSignal(nameof(LevelChanged));
-
             StartTween();
+            ToSignal(CurrentLevelNode, nameof(Level.LevelReached)).OnCompleted(() =>
+                    EmitSignal(nameof(LevelChanged)));
         }
     }
 

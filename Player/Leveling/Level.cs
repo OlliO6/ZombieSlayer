@@ -22,7 +22,6 @@ public class Level : Node
         Debug.LogU(this, "Reached");
 
         IEnumerable<LevelBuff> buffs = this.GetChildren<LevelBuff>();
-        ApllyBuffs(buffs);
 
         if (!dontHeal)
             Player.currentPlayer?.Heal();
@@ -35,14 +34,16 @@ public class Level : Node
             LevelUpDisplay menu;
             menu = MakeMenu();
 
-            ToSignal(menu, nameof(LevelUpDisplay.Closed)).OnCompleted(() =>
+            ToSignal(menu, nameof(LevelUpDisplay.CloseBegan)).OnCompleted(() =>
             {
                 EmitSignal(nameof(LevelReached));
+                ApllyBuffs(buffs);
                 menu.QueueFree();
             });
             return;
         }
 
+        ApllyBuffs(buffs);
         EmitSignal(nameof(LevelReached));
 
         static void ApllyBuffs(IEnumerable<LevelBuff> buffs)
