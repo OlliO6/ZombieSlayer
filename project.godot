@@ -10,11 +10,17 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "RichTextEffect",
-"class": "TintTextEffect",
+"class": "ColorTextEffect",
 "language": "GDScript",
 "path": "res://addons/DebugOverlay/RichTextColorEfx.gd"
+}, {
+"base": "RichTextEffect",
+"class": "TintTextEffect",
+"language": "GDScript",
+"path": "res://addons/Diadot/RichTextColorEfx.gd"
 } ]
 _global_script_class_icons={
+"ColorTextEffect": "",
 "TintTextEffect": ""
 }
 
@@ -51,7 +57,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/BetterFileSystem/plugin.cfg", "res://addons/DebugOverlay/plugin.cfg", "res://addons/Random Scene Node/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg", "res://addons/project-statistics/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/BetterFileSystem/plugin.cfg", "res://addons/DebugOverlay/plugin.cfg", "res://addons/Diadot/plugin.cfg", "res://addons/Random Scene Node/plugin.cfg", "res://addons/imrp/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg", "res://addons/project-statistics/plugin.cfg" )
 
 [gui]
 
