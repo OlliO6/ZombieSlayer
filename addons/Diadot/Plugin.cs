@@ -1,36 +1,22 @@
 #if TOOLS
 namespace Diadot;
 using System;
+using Additions;
 using Godot;
 
 [Tool]
 public class Plugin : EditorPlugin
 {
-    public const string SkipInput = "Diadot/SkipInput";
+    private const string SkipInputSetting = "Diadot/SkipInput";
 
     public override void _EnterTree()
     {
-        AddProjectSettings();
-    }
-
-    private void AddProjectSettings()
-    {
-        const string DefaultSkipInput = "ui_accept";
-        if (!ProjectSettings.HasSetting(SkipInput))
-        {
-            ProjectSettings.SetSetting(SkipInput, DefaultSkipInput);
-            ProjectSettings.AddPropertyInfo(new()
-                {
-                    {"name", SkipInput},
-                    {"tye", Variant.Type.String}
-                });
-            ProjectSettings.SetInitialValue(SkipInput, DefaultSkipInput);
-        }
+        GDAdditions.AddProjectSetting(SkipInputSetting, "ui_accept", Variant.Type.String);
     }
 
     public override void _ExitTree()
     {
-
+        ProjectSettings.Clear(SkipInputSetting);
     }
 }
 
