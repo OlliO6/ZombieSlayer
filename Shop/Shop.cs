@@ -17,7 +17,7 @@ public class Shop : Area2D
     {
         shop = GetNode<ShopMenu>(shopMenu);
 
-        ExplanationsManager.ConnectExplanationToSignal("ShopMenu", this, nameof(MenuOpened));
+        // ExplanationsManager.ConnectExplanationToSignal("ShopMenu", this, nameof(MenuOpened));
     }
 
     [TroughtSignal]

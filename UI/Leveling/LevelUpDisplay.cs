@@ -70,10 +70,10 @@ public class LevelUpDisplay : PanelContainer
     {
         if (!open) return;
 
-        EmitSignal(nameof(CloseBegan));
         open = false;
         GetTree().Paused = false;
         AnimationPlayer.Play("Close");
+        EmitSignal(nameof(CloseBegan));
 
         await ToSignal(AnimationPlayer, "animation_finished");
         Hide();

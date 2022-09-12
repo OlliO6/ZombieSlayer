@@ -9,10 +9,12 @@ using Godot;
 public class AnimatedRichTextLabel : RichTextLabel
 {
     [Signal] public delegate void Advanced();
+    [Signal] public delegate void NonWhiteSpaceAdvanced();
     [Signal] public delegate void Finished();
-    [Export] public float defaultDelay = 0.1f;
 
-    const float delayMultiplierWhenPress = 0.125f;
+    [Export] public float defaultDelay = 0.05f;
+
+    const float delayMultiplierWhenPress = 0.02f;
 
     public string skipInput;
     public float delay;
@@ -22,11 +24,14 @@ public class AnimatedRichTextLabel : RichTextLabel
     public override void _Ready()
     {
         skipInput = GDAdditions.GetOrAddProjectSetting<string>("Diadot/SkipInput", "ui_accept", Variant.Type.String);
-        AnimateText();
     }
 
-    public async void AnimateText()
+    public async void Play(string bbText = null)
     {
+        if (bbText is not null) BbcodeText = bbText;
+
+        await ToSignal(GetTree(), "idle_frame");
+
         cancellation?.Cancel();
         cancellation = new CancellationTokenSource();
         CancellationToken token = cancellation.Token;
@@ -60,6 +65,8 @@ public class AnimatedRichTextLabel : RichTextLabel
                 continue;
             }
 
+            if (!(lastChar is ' ')) EmitSignal(nameof(NonWhiteSpaceAdvanced));
+            EmitSignal(nameof(Advanced));
             await new TimeAwaiter(this, delay * (Input.IsActionPressed(skipInput) ? delayMultiplierWhenPress : 1));
         }
 
@@ -107,4 +114,28 @@ public class AnimatedRichTextLabel : RichTextLabel
     }
 
     private static float ParseFloat(string number) => float.Parse(number, System.Globalization.CultureInfo.InvariantCulture);
+
+    public override void _Input(InputEvent @event)
+    {
+        if (@event is InputEventMouseButton mouseInput)
+        {
+            if (mouseInput.Pressed)
+            {
+                if (GetGlobalRect().HasPoint(mouseInput.Position))
+                {
+                    Input.ParseInputEvent(new InputEventAction()
+                    {
+                        Action = ProjectSettingsControl.SkipInput,
+                        Pressed = true
+                    });
+                }
+                return;
+            }
+            Input.ParseInputEvent(new InputEventAction()
+            {
+                Action = ProjectSettingsControl.SkipInput,
+                Pressed = false
+            });
+        }
+    }
 }
