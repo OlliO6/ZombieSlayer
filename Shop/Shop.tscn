@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Shop/Shop.png" type="Texture" id=1]
 [ext_resource path="res://Shop/Shop.cs" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://addons/Diadot/Dialog.cs" type="Script" id=5]
 [ext_resource path="res://Player/Upgrades/Icons/Magnet.png" type="Texture" id=6]
 [ext_resource path="res://addons/Diadot/DialogPlayer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/Diadot/RedirectingDialog.cs" type="Script" id=8]
 [ext_resource path="res://Items/Health/HealthIcon.png" type="Texture" id=9]
 [ext_resource path="res://Shaders/Materials/StandartSpriteMat.material" type="Material" id=10]
 
@@ -105,16 +106,26 @@ script = ExtResource( 5 )
 text = "Hello i am Robert the shop keeper. 
 You can call me [tint r=0.3 g=0.7 b=0.7 a=1]Rob[/tint]. "
 
-[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting"]
+[node name="BadJoke" type="Node" parent="DialogPlayer/FirstMeeting"]
 script = ExtResource( 5 )
-text = "\\wait 1/But don't rob the shop. 
-\\wait 1/\\d=1/....\\d=0.05/[shake] HAHAHAHA!!![/shake] 
-\\reset d/\\wait 2/Get it?"
+text = "\\wait 1/But don't rob the shop. [b]Rob[/b]
+\\wait 1/\\d=1/....\\d=0.025/[shake] HAHAHAHA!!![/shake] 
+\\reset d/\\wait 2/[b]Get it?[/b]"
 
-[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/Dialog"]
+[node name="Yes" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke"]
 script = ExtResource( 5 )
-text = "Ok, jokes away.
-"
+text = "HAHA, a little fun is needed some times. 
+\\wait 1/\\d=0.2/But\\reset d/ jokes away now. "
+
+[node name="Redirect" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes"]
+script = ExtResource( 8 )
+to = NodePath("../../..")
+
+[node name="No" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke"]
+script = ExtResource( 5 )
+text = "Its so fricking funny because i am called Rob but you should not rob me. 
+\\wait 1/Because of robbery. 
+[shake]HAHAHA!![/shake]"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2

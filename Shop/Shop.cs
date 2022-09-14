@@ -9,8 +9,7 @@ public class Shop : Area2D
     [Signal] public delegate void PlayerEntered();
     [Signal] public delegate void PlayerExited();
 
-    private bool playerInArea, hadFirstTalk = false;
-
+    private bool playerInArea, hadFirstTalk;
     private ShopMenu shop;
     private DialogPlayer dialogPlayer;
 

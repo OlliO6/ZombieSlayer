@@ -33,6 +33,12 @@ public class Dialog : Node, IDialogProvider
     public void OnStarted()
     {
         waitingForInput = false;
+
+        foreach (IDialogProvider dialogChild in this.GetChildren<IDialogProvider>())
+        {
+            dialogChild.Ended -= OnSubDialogEnded;
+            dialogChild.DialogChanged -= OnSubDialogChanged;
+        }
     }
 
     public void Finish()
@@ -46,17 +52,15 @@ public class Dialog : Node, IDialogProvider
         }
 
         IDialogProvider dialog = GetChild<IDialogProvider>(0);
-        DialogChanged?.Invoke(dialog);
-
         dialog.DialogChanged += OnSubDialogChanged;
         dialog.Ended += OnSubDialogEnded;
+        DialogChanged?.Invoke(dialog);
     }
 
     private void OnSubDialogEnded(IDialogProvider sender, NodePath dialog)
     {
         sender.Ended -= OnSubDialogEnded;
         sender.DialogChanged -= OnSubDialogChanged;
-
         Ended?.Invoke(this, dialog + Name);
     }
 

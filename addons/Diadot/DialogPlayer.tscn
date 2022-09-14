@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
-[ext_resource path="res://UI/Fonts/PondeSmall.tres" type="DynamicFont" id=2]
 [ext_resource path="res://UI/Theme/SmallRect.png" type="Texture" id=3]
 [ext_resource path="res://Shaders/Materials/StandartSpriteMat.material" type="Material" id=4]
 [ext_resource path="res://addons/Diadot/RichTextEffects/TintEffect.tres" type="RichTextEffect" id=5]
@@ -98,7 +97,6 @@ unique_name_in_owner = true
 margin_right = 236.0
 margin_bottom = 8.0
 custom_constants/line_separation = 0
-custom_fonts/normal_font = ExtResource( 2 )
 bbcode_enabled = true
 fit_content_height = true
 scroll_active = false
