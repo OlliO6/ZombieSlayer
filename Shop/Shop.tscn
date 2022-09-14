@@ -66,7 +66,6 @@ tracks/0/keys = {
 collision_layer = 0
 collision_mask = 4
 script = ExtResource( 2 )
-shopMenu = NodePath("CanvasLayer/ShopMenu")
 
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 10 )
@@ -103,15 +102,25 @@ pause_mode = 2
 
 [node name="FirstMeeting" type="Node" parent="DialogPlayer"]
 script = ExtResource( 5 )
-text = "Hello i am Robert the shop keeper, you can call me [tint r=0.3 g=0.7 b=0.7 a=1]Rob[/tint]. 
-\\wait 1/But don't rob the shop. 
+text = "Hello i am Robert the shop keeper. 
+You can call me [tint r=0.3 g=0.7 b=0.7 a=1]Rob[/tint]. "
+
+[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting"]
+script = ExtResource( 5 )
+text = "\\wait 1/But don't rob the shop. 
 \\wait 1/\\d=1/....\\d=0.05/[shake] HAHAHAHA!!![/shake] 
 \\reset d/\\wait 2/Get it?"
+
+[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/Dialog"]
+script = ExtResource( 5 )
+text = "Ok, jokes away.
+"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
 
 [node name="ShopMenu" parent="CanvasLayer" instance=ExtResource( 4 )]
+unique_name_in_owner = true
 visible = false
 
 [node name="Icon" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Magnet/HBoxContainer" index="0"]
@@ -126,7 +135,7 @@ texture = ExtResource( 9 )
 [node name="Label" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Heart/HBoxContainer" index="1"]
 text = "7"
 
-[connection signal="MenuOpened" from="." to="DialogPlayer" method="Play" flags=6 binds= [ "FirstMeeting" ]]
+[connection signal="MenuOpened" from="." to="DialogPlayer" method="Play" binds= [ "FirstMeeting" ]]
 [connection signal="PlayerEntered" from="." to="AnimationPlayer" method="play" binds= [ "ShowText" ]]
 [connection signal="PlayerExited" from="." to="AnimationPlayer" method="play" binds= [ "HideText" ]]
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]

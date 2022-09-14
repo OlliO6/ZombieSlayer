@@ -35,7 +35,7 @@ pause_mode = 2
 layer = 100
 script = ExtResource( 3 )
 IsShowingFps = true
-turnOffCommonLogs = true
+turnOffCommonLogs = false
 removeNameUniqeness = true
 _Labels = NodePath("MarginContainer/HBoxContainer/DebugLabels")
 _Logs = NodePath("MarginContainer/MarginContainer/Logs")
@@ -70,7 +70,7 @@ custom_constants/separation = 0
 [node name="FPSLabel" type="Label" parent="MarginContainer/HBoxContainer/DebugLabels"]
 margin_top = -1.0
 margin_right = 252.0
-margin_bottom = 3.2
+margin_bottom = 3.13333
 text = "FPS: 60"
 align = 1
 script = ExtResource( 4 )
@@ -239,6 +239,7 @@ text = "Show fps"
 margin_top = 44.0
 margin_right = 212.0
 margin_bottom = 84.0
+pressed = true
 text = "Common logs"
 
 [node name="NoUniqueNamesToggle" type="CheckButton" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer"]
@@ -288,15 +289,15 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="ScreenshotButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer"]
-margin_right = 231.0
+margin_right = 230.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 6 )
 text = "Screenshot"
 
 [node name="ScreenshotIUButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer"]
-margin_left = 231.0
-margin_right = 319.533
+margin_left = 230.0
+margin_right = 319.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.29
@@ -426,22 +427,16 @@ custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 0.529412, 0.596078, 0.647059, 1 )
 bbcode_enabled = true
 bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint]
-[00:04] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
-[00:05] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
-[00:05] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
-[00:05] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
-[00:14] [tint r=0.88 g=1 b=1 a=1]OptionsManager: Saving Options[/tint]
-[00:29] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
-[00:33] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started Health[/tint]
+[00:02] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
+[00:03] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
+[00:03] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
+[00:03] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
-[00:04] SceneManager: Loaded Menu
-[00:05] SceneManager: Loaded Game
-[00:05] ExplanationsManager: Started MoveAndAttack
-[00:05] Level 0: Reached
-[00:14] OptionsManager: Saving Options
-[00:29] Level 1: Reached
-[00:33] ExplanationsManager: Started Health
+[00:02] SceneManager: Loaded Menu
+[00:03] SceneManager: Loaded Game
+[00:03] ExplanationsManager: Started MoveAndAttack
+[00:03] Level 0: Reached
 "
 scroll_following = true
 selection_enabled = true

@@ -7,6 +7,9 @@ using Godot;
 
 public class DialogPlayer : CanvasLayer
 {
+    [Signal] public delegate void DialogStarted(string dialog);
+    [Signal] public delegate void DialogFinished(string dialog, NodePath exitPath);
+
     public Label nameLabel;
     public AnimatedRichTextLabel textLabel;
 
@@ -24,31 +27,52 @@ public class DialogPlayer : CanvasLayer
 
     private void OnTextFinished()
     {
-        currentDialog.OnTextFinished();
+        currentDialog?.OnTextFinished();
     }
     private void OnTextAdvanced()
     {
-        currentDialog.OnTextAdvanced();
+        currentDialog?.OnTextAdvanced();
     }
 
     public Error Play(string dialogName)
     {
-        currentDialog = GetNodeOrNull<IDialogProvider>(dialogName);
+        IDialogProvider dialog = GetNodeOrNull<IDialogProvider>(dialogName);
 
-        if (currentDialog is null)
+        if (dialog is null)
             return Error.DoesNotExist;
 
+        Play(dialog);
+
+        return Error.Ok;
+    }
+
+    public void Play(IDialogProvider dialog)
+    {
         Show();
 
-        textLabel.Play("[expressions]" + currentDialog.Text);
+        ChangeDialog(dialog);
+        dialog.Ended += OnDialogEnded;
+        dialog.DialogChanged += ChangeDialog;
 
-        currentDialog.Ended += (_) =>
-        {
-            currentDialog = null;
-            Hide();
-        };
+        Debug.Log(this, $"{dialog.Name} started");
+    }
 
-        Debug.Log(this, $"{dialogName} started");
-        return Error.Ok;
+    private void ChangeDialog(IDialogProvider dialog)
+    {
+        currentDialog = dialog;
+        textLabel.Play("[expressions]" + dialog.Text);
+        dialog.OnStarted();
+        EmitSignal(nameof(DialogStarted), dialog.Name);
+    }
+
+    private void OnDialogEnded(IDialogProvider sender, NodePath dialog)
+    {
+        currentDialog = null;
+        sender.Ended -= OnDialogEnded;
+        sender.DialogChanged -= ChangeDialog;
+        EmitSignal(nameof(DialogFinished), sender.Name, dialog);
+        Hide();
+
+        Debug.Log(this, $"{sender.Name} ended");
     }
 }

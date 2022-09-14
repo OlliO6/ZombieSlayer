@@ -10,29 +10,55 @@ public class Dialog : Node, IDialogProvider
     [Export(PropertyHint.MultilineText)] private string text = "";
 
     public bool waitingForInput;
-    public event Action<IDialogProvider> Ended;
+    public event Action<IDialogProvider, NodePath> Ended;
+    public event Action<IDialogProvider> DialogChanged;
 
     public string Text { get => text; set => text = value; }
 
-    public void OnTextAdvanced()
-    {
-    }
+    public void OnTextAdvanced() { }
 
     public void OnTextFinished()
     {
         waitingForInput = true;
     }
 
-    private void InputAwaited()
-    {
-        Ended?.Invoke(this);
-    }
-
     public override void _UnhandledInput(InputEvent @event)
     {
         if (waitingForInput && @event.IsActionPressed(ProjectSettingsControl.SkipInput))
         {
-            InputAwaited();
+            Finish();
         }
     }
+
+    public void OnStarted()
+    {
+        waitingForInput = false;
+    }
+
+    public void Finish()
+    {
+        waitingForInput = false;
+
+        if (GetChildCount() is 0)
+        {
+            Ended?.Invoke(this, Name);
+            return;
+        }
+
+        IDialogProvider dialog = GetChild<IDialogProvider>(0);
+        DialogChanged?.Invoke(dialog);
+
+        dialog.DialogChanged += OnSubDialogChanged;
+        dialog.Ended += OnSubDialogEnded;
+    }
+
+    private void OnSubDialogEnded(IDialogProvider sender, NodePath dialog)
+    {
+        sender.Ended -= OnSubDialogEnded;
+        sender.DialogChanged -= OnSubDialogChanged;
+
+        Ended?.Invoke(this, dialog + Name);
+    }
+
+    private void OnSubDialogChanged(IDialogProvider dialog) => DialogChanged?.Invoke(dialog);
 }
