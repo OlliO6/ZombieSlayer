@@ -18,23 +18,18 @@ public class AnimatedRichTextLabel : RichTextLabel
 
     public async void Play(string bbText = null)
     {
-        if (bbText is not null) BbcodeText = bbText;
-
-        await ToSignal(GetTree(), "idle_frame");
-
         cancellation?.Cancel();
         cancellation = new CancellationTokenSource();
         CancellationToken token = cancellation.Token;
 
+        if (bbText is not null) BbcodeText = bbText;
+
         delay = ProjectSettingsControl.DefaultDelay;
         VisibleCharacters = 0;
-
         string textString = Text.Replace("\n", "");
 
-        while (PercentVisible < 1)
+        while (VisibleCharacters < textString.Length)
         {
-            if (token.IsCancellationRequested) return;
-
             VisibleCharacters++;
             char lastChar = textString[VisibleCharacters - 1];
 
@@ -52,13 +47,16 @@ public class AnimatedRichTextLabel : RichTextLabel
                 }
 
                 await ProcessExpression(expression);
+                if (token.IsCancellationRequested) return;
                 continue;
             }
 
             if (!(lastChar is ' ')) EmitSignal(nameof(NonWhiteSpaceAdvanced));
             EmitSignal(nameof(Advanced));
             await new TimeAwaiter(this, delay * (Input.IsActionPressed(ProjectSettingsControl.SkipInput) ? ProjectSettingsControl.DelayFactorWhenSkipPressed : 1));
+            if (token.IsCancellationRequested) return;
         }
+        if (token.IsCancellationRequested) return;
 
         EmitSignal(nameof(Finished));
     }
