@@ -11,6 +11,7 @@ public class AnimatedRichTextLabel : RichTextLabel
     [Signal] public delegate void Advanced();
     [Signal] public delegate void NonWhiteSpaceAdvanced();
     [Signal] public delegate void Finished();
+    [Signal] public delegate void NotHandeledExpression(string expression);
 
     public float delay;
 
@@ -63,42 +64,51 @@ public class AnimatedRichTextLabel : RichTextLabel
 
     private async Task ProcessExpression(string expression)
     {
-        if (expression.Contains("="))
+        if (await TryToHandleExpression()) return;
+
+        EmitSignal(nameof(NotHandeledExpression), expression);
+
+        async Task<bool> TryToHandleExpression()
         {
-            string[] equalSeperated = expression.Split('=');
-
-            if (equalSeperated.Length < 2) return;
-
-            switch (equalSeperated[0])
+            if (expression.Contains("="))
             {
-                case "d":
-                    delay = ParseFloat(equalSeperated[1]);
-                    break;
-            }
-            return;
-        }
+                string[] equalSeperated = expression.Split('=');
 
-        string[] spaceSeperated = expression.Split(' ');
-        if (spaceSeperated.Length < 1) return;
+                if (equalSeperated.Length < 2) return false;
 
-        switch (spaceSeperated[0])
-        {
-            case "reset":
-                if (spaceSeperated.Length < 2) return;
-                switch (spaceSeperated[1])
+                switch (equalSeperated[0])
                 {
                     case "d":
-                        delay = ProjectSettingsControl.DefaultDelay;
-                        break;
+                        delay = ParseFloat(equalSeperated[1]);
+                        return true;
                 }
-                break;
+                return false;
+            }
 
-            case "wait":
-                if (spaceSeperated.Length < 2) return;
-                await new TimeAwaiter(this, ParseFloat(spaceSeperated[1]) * (Input.IsActionPressed(ProjectSettingsControl.SkipInput) ? ProjectSettingsControl.DelayFactorWhenSkipPressed : 1));
-                break;
+            string[] spaceSeperated = expression.Split(' ');
+            if (spaceSeperated.Length < 1) return false;
+
+            switch (spaceSeperated[0])
+            {
+                case "reset":
+                    if (spaceSeperated.Length < 2) return false;
+                    switch (spaceSeperated[1])
+                    {
+                        case "d":
+                            delay = ProjectSettingsControl.DefaultDelay;
+                            return true;
+                    }
+                    break;
+
+                case "wait":
+                    if (spaceSeperated.Length < 2) return false;
+                    await new TimeAwaiter(this, ParseFloat(spaceSeperated[1]) * (Input.IsActionPressed(ProjectSettingsControl.SkipInput) ? ProjectSettingsControl.DelayFactorWhenSkipPressed : 1));
+                    return true;
+            }
+            return false;
         }
-        return;
+
+
     }
 
     private static float ParseFloat(string number) => float.Parse(number, System.Globalization.CultureInfo.InvariantCulture);

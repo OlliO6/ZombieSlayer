@@ -42,4 +42,5 @@ public class RedirectDialog : Node, IDialogProvider
     public void OnTextFinished() { }
     public string[] GetOptions() => null;
     public void ProcessOptionPress(string option) { }
+    public void ProcessUnhandeledExpression(string expression) { }
 }

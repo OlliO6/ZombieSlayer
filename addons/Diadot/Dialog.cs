@@ -11,6 +11,9 @@ public class Dialog : Node, IDialogProvider
     [Export(PropertyHint.MultilineText)] private string text = "";
     [Export] private string character = "";
     [Export] private bool giveOptions;
+    [Export] private NodePath[] callableActions = new NodePath[0];
+    [Export] private NodePath[] onStartActions = new NodePath[0];
+    [Export] private NodePath[] onFinishActions = new NodePath[0];
 
     public bool waitingForInput;
 
@@ -47,11 +50,23 @@ public class Dialog : Node, IDialogProvider
             dialogChild.Ended -= OnSubDialogEnded;
             dialogChild.DialogChanged -= OnSubDialogChanged;
         }
+
+        foreach (NodePath path in onStartActions)
+        {
+            Action action = GetNodeOrNull<Action>(path);
+            if (action is not null) action.Execute();
+        }
     }
 
     public void Finish()
     {
         waitingForInput = false;
+
+        foreach (NodePath path in onFinishActions)
+        {
+            Action action = GetNodeOrNull<Action>(path);
+            if (action is not null) action.Execute();
+        }
 
         IDialogProvider dialog = GetDialog();
 
@@ -102,5 +117,20 @@ public class Dialog : Node, IDialogProvider
 
         selectedOption = option;
         Finish();
+    }
+
+    public void ProcessUnhandeledExpression(string expression)
+    {
+        foreach (NodePath path in callableActions)
+        {
+            Action action = GetNodeOrNull<Action>(path);
+            if (action is null) continue;
+
+            if (action.command == expression)
+            {
+                action.Execute();
+                return;
+            }
+        }
     }
 }

@@ -10,10 +10,11 @@ public class DialogPlayer : CanvasLayer
     [Signal] public delegate void DialogStarted(string dialog);
     [Signal] public delegate void DialogFinished(string dialog, NodePath exitPath);
 
+    [Export] private NodePath[] callableActions = new NodePath[0];
+
     public Label nameLabel;
     public HBoxContainer optionsContainer;
     public AnimatedRichTextLabel textLabel;
-
     public IDialogProvider currentDialog;
 
     public override void _Ready()
@@ -24,12 +25,30 @@ public class DialogPlayer : CanvasLayer
 
         textLabel.Connect(nameof(AnimatedRichTextLabel.Advanced), this, nameof(OnTextAdvanced));
         textLabel.Connect(nameof(AnimatedRichTextLabel.Finished), this, nameof(OnTextFinished));
+        textLabel.Connect(nameof(AnimatedRichTextLabel.NotHandeledExpression), this, nameof(OnExpressionCouldntBeHandled));
         Hide();
     }
 
     private void OnTextFinished() => currentDialog?.OnTextFinished();
     private void OnTextAdvanced() => currentDialog?.OnTextAdvanced();
     private void OnOptionButtonPressed(string option) => currentDialog?.ProcessOptionPress(option);
+
+    private void OnExpressionCouldntBeHandled(string expression)
+    {
+        foreach (NodePath path in callableActions)
+        {
+            Action action = GetNodeOrNull<Action>(path);
+            if (action is null) continue;
+
+            if (action.command == expression)
+            {
+                action.Execute();
+                return;
+            }
+        }
+
+        currentDialog?.ProcessUnhandeledExpression(expression);
+    }
 
     public Error Play(string dialogName)
     {
