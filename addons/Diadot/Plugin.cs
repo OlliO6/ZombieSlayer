@@ -12,13 +12,16 @@ public class Plugin : EditorPlugin
         _ = ProjectSettingsControl.SkipInput;
         _ = ProjectSettingsControl.DefaultDelay;
         _ = ProjectSettingsControl.DelayFactorWhenSkipPressed;
-        AddCustomType(nameof(Dialog), nameof(Node), GD.Load<CSharpScript>("res://addons/Diadot/Dialog.cs"), null);
+
+        AddCustomType(nameof(Dialog), nameof(Node), GD.Load<CSharpScript>("res://addons/Diadot/Dialog.cs"), GD.Load<Texture>("res://addons/Diadot/Icons/Bubble.png"));
+        AddCustomType(nameof(RedirectDialog), nameof(Node), GD.Load<CSharpScript>("res://addons/Diadot/RedirectDialog.cs"), GD.Load<Texture>("res://addons/Diadot/Icons/Redirect.png"));
     }
 
     public override void _ExitTree()
     {
         ClearProjectSettings();
         RemoveCustomType(nameof(Dialog));
+        RemoveCustomType(nameof(RedirectDialog));
     }
 
     private void ClearProjectSettings()
