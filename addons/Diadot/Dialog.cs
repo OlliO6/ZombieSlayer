@@ -2,18 +2,26 @@ namespace Diadot;
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Additions;
 using Godot;
 
 public class Dialog : Node, IDialogProvider
 {
     [Export(PropertyHint.MultilineText)] private string text = "";
+    [Export] private string character = "";
+    [Export] private bool giveOptions;
 
     public bool waitingForInput;
+
     public event Action<IDialogProvider, NodePath> Ended;
     public event Action<IDialogProvider> DialogChanged;
 
+    private string selectedOption;
+
     public string Text { get => text; set => text = value; }
+
+    public string Character { get => character; set => character = value; }
 
     public void OnTextAdvanced() { }
 
@@ -24,7 +32,7 @@ public class Dialog : Node, IDialogProvider
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (waitingForInput && @event.IsActionPressed(ProjectSettingsControl.SkipInput))
+        if (!giveOptions && waitingForInput && @event.IsActionPressed(ProjectSettingsControl.SkipInput))
         {
             Finish();
         }
@@ -45,16 +53,28 @@ public class Dialog : Node, IDialogProvider
     {
         waitingForInput = false;
 
-        if (GetChildCount() is 0)
+        IDialogProvider dialog = GetDialog();
+
+        if (dialog is null)
         {
             Ended?.Invoke(this, Name);
             return;
         }
 
-        IDialogProvider dialog = GetChild<IDialogProvider>(0);
         dialog.DialogChanged += OnSubDialogChanged;
         dialog.Ended += OnSubDialogEnded;
         DialogChanged?.Invoke(dialog);
+
+        IDialogProvider GetDialog()
+        {
+            if (giveOptions)
+                return GetNodeOrNull<IDialogProvider>(selectedOption);
+
+            if (GetChildCount() > 0)
+                return GetChild<IDialogProvider>(0);
+
+            return null;
+        }
     }
 
     private void OnSubDialogEnded(IDialogProvider sender, NodePath dialog)
@@ -65,4 +85,22 @@ public class Dialog : Node, IDialogProvider
     }
 
     private void OnSubDialogChanged(IDialogProvider dialog) => DialogChanged?.Invoke(dialog);
+
+    public string[] GetOptions()
+    {
+        if (giveOptions)
+            return this.GetChildren<IDialogProvider>()
+                                .Select<IDialogProvider, string>((IDialogProvider dialogProvider) => dialogProvider.Name).ToArray();
+
+        return null;
+    }
+
+    public void ProcessOptionPress(string option)
+    {
+        if (!waitingForInput)
+            return;
+
+        selectedOption = option;
+        Finish();
+    }
 }

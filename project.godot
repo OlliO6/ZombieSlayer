@@ -21,7 +21,7 @@ _global_script_class_icons={
 [Diadot]
 
 SkipInput="SkipDialog"
-DelayFactorWhenSkipPressed=0.01
+DelayFactorWhenSkipPressed=0.001
 
 [application]
 

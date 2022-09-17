@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Additions;
 using Godot;
 
-public class RedirectingDialog : Node, IDialogProvider
+public class RedirectDialog : Node, IDialogProvider
 {
     [Export] private NodePath to;
 
@@ -13,7 +13,7 @@ public class RedirectingDialog : Node, IDialogProvider
     public event Action<IDialogProvider> DialogChanged;
 
     public string Text => string.Empty;
-
+    public string Character => string.Empty;
 
     public void Finish()
     {
@@ -40,4 +40,6 @@ public class RedirectingDialog : Node, IDialogProvider
     private void OnSubDialogChanged(IDialogProvider dialog) => DialogChanged?.Invoke(dialog);
     public void OnTextAdvanced() { }
     public void OnTextFinished() { }
+    public string[] GetOptions() => null;
+    public void ProcessOptionPress(string option) { }
 }

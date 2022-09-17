@@ -126,4 +126,6 @@ public class AnimatedRichTextLabel : RichTextLabel
             });
         }
     }
+
+    public void CancelPlay() => cancellation?.Cancel();
 }
