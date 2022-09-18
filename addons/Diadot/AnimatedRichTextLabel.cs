@@ -11,7 +11,7 @@ public class AnimatedRichTextLabel : RichTextLabel
     [Signal] public delegate void Advanced();
     [Signal] public delegate void NonWhiteSpaceAdvanced();
     [Signal] public delegate void Finished();
-    [Signal] public delegate void NotHandeledExpression(string expression);
+    public event Func<string, Task> NotHandeledExpression;
 
     public float delay;
 
@@ -64,9 +64,13 @@ public class AnimatedRichTextLabel : RichTextLabel
 
     private async Task ProcessExpression(string expression)
     {
-        if (await TryToHandleExpression()) return;
+        GD.Print($"started {expression}  {Time.GetTicksMsec() * 0.001f}");
+        bool v = await TryToHandleExpression();
+        GD.Print($"ended {expression}  {Time.GetTicksMsec() * 0.001f}");
 
-        EmitSignal(nameof(NotHandeledExpression), expression);
+        if (v) return;
+
+        await NotHandeledExpression?.Invoke(expression);
 
         async Task<bool> TryToHandleExpression()
         {

@@ -1,6 +1,7 @@
 namespace Diadot;
 
 using System;
+using System.Threading.Tasks;
 using Godot;
 
 public interface IDialogProvider
@@ -12,7 +13,7 @@ public interface IDialogProvider
     public event Action<IDialogProvider> DialogChanged;
     public string[] GetOptions();
     public void ProcessOptionPress(string option);
-    public void ProcessUnhandeledExpression(string expression);
+    public Task ProcessUnhandeledExpression(string expression);
     public void OnTextFinished();
     public void OnTextAdvanced();
     public void OnStarted();

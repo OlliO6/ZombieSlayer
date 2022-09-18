@@ -3,6 +3,7 @@ namespace Diadot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Additions;
 using Godot;
 
@@ -15,7 +16,7 @@ public class Dialog : Node, IDialogProvider
     [Export] private NodePath[] onStartActions = new NodePath[0];
     [Export] private NodePath[] onFinishActions = new NodePath[0];
 
-    public bool waitingForInput;
+    public bool waitingForInput, waitForInputRelease;
 
     public event Action<IDialogProvider, NodePath> Ended;
     public event Action<IDialogProvider> DialogChanged;
@@ -35,9 +36,14 @@ public class Dialog : Node, IDialogProvider
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (!giveOptions && waitingForInput && @event.IsActionPressed(ProjectSettingsControl.SkipInput))
+        if (!giveOptions && waitingForInput && @event.IsAction(ProjectSettingsControl.SkipInput))
         {
-            Finish();
+            if (waitForInputRelease)
+            {
+                if (!@event.IsPressed()) Finish();
+                return;
+            }
+            if (@event.IsPressed()) waitForInputRelease = true;
         }
     }
 
@@ -119,7 +125,7 @@ public class Dialog : Node, IDialogProvider
         Finish();
     }
 
-    public void ProcessUnhandeledExpression(string expression)
+    public async Task ProcessUnhandeledExpression(string expression)
     {
         foreach (NodePath path in callableActions)
         {
@@ -128,7 +134,7 @@ public class Dialog : Node, IDialogProvider
 
             if (action.command == expression)
             {
-                action.Execute();
+                await action.Execute();
                 return;
             }
         }

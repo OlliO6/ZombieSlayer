@@ -1,6 +1,7 @@
 namespace Diadot;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Additions;
 using Godot;
 
@@ -42,5 +43,5 @@ public class RedirectDialog : Node, IDialogProvider
     public void OnTextFinished() { }
     public string[] GetOptions() => null;
     public void ProcessOptionPress(string option) { }
-    public void ProcessUnhandeledExpression(string expression) { }
+    public Task ProcessUnhandeledExpression(string expression) => Task.CompletedTask;
 }

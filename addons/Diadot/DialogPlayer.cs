@@ -2,6 +2,7 @@ namespace Diadot;
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Additions;
 using Godot;
 
@@ -25,7 +26,7 @@ public class DialogPlayer : CanvasLayer
 
         textLabel.Connect(nameof(AnimatedRichTextLabel.Advanced), this, nameof(OnTextAdvanced));
         textLabel.Connect(nameof(AnimatedRichTextLabel.Finished), this, nameof(OnTextFinished));
-        textLabel.Connect(nameof(AnimatedRichTextLabel.NotHandeledExpression), this, nameof(OnExpressionCouldntBeHandled));
+        textLabel.NotHandeledExpression += OnExpressionCouldntBeHandled;
         Hide();
     }
 
@@ -33,8 +34,31 @@ public class DialogPlayer : CanvasLayer
     private void OnTextAdvanced() => currentDialog?.OnTextAdvanced();
     private void OnOptionButtonPressed(string option) => currentDialog?.ProcessOptionPress(option);
 
-    private void OnExpressionCouldntBeHandled(string expression)
+    private async Task OnExpressionCouldntBeHandled(string expression)
     {
+        switch (expression)
+        {
+            case "hide":
+                Hide();
+                return;
+
+            case "show":
+                Show();
+                return;
+
+            // case "enableinput":
+
+            // case "disableinput":
+
+            case "pause":
+                GetTree().Paused = true;
+                return;
+
+            case "unpause":
+                GetTree().Paused = true;
+                return;
+        }
+
         foreach (NodePath path in callableActions)
         {
             Action action = GetNodeOrNull<Action>(path);
@@ -42,12 +66,12 @@ public class DialogPlayer : CanvasLayer
 
             if (action.command == expression)
             {
-                action.Execute();
+                await action.Execute();
                 return;
             }
         }
 
-        currentDialog?.ProcessUnhandeledExpression(expression);
+        await currentDialog?.ProcessUnhandeledExpression(expression);
     }
 
     public Error Play(string dialogName)
@@ -124,5 +148,6 @@ public class DialogPlayer : CanvasLayer
         {
             optionsContainer.GetChild(i).QueueFree();
         }
+        optionsContainer.Update();
     }
 }

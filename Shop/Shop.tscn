@@ -106,7 +106,7 @@ callableActions = [ NodePath("Actions/OpenShopMenu") ]
 [node name="FirstMeeting" type="Node" parent="DialogPlayer"]
 script = ExtResource( 5 )
 text = "Hello i am Robert the shop keeper. 
-You can call me [tint r=0.3 g=0.7 b=0.7 a=1]Rob[/tint]. "
+\\wait 1/You can call me [tint r=0.3 g=0.7 b=0.7 a=1]Rob[/tint]. "
 character = "Robert"
 
 [node name="BadJoke" type="Node" parent="DialogPlayer/FirstMeeting"]
@@ -120,7 +120,13 @@ giveOptions = true
 [node name="Yes" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke"]
 script = ExtResource( 5 )
 text = "HAHA, a little fun is needed some times. 
-\\wait 1/\\d=0.6/But\\reset d/\\wait 1/\\openmenu/\\wait 1/jokes away now. "
+\\wait 1/\\d=0.6/But\\reset d/\\wait 1/\\wait 0.5/ jokes away now. "
+character = "Rob"
+
+[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes"]
+script = ExtResource( 5 )
+text = "\\hide/\\wait 1/\\openmenu/\\wait 1/\\show/This\\wait 1/ is my menu.
+You can buy a 6 sided dice here."
 character = "Rob"
 
 [node name="No" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke"]
@@ -132,7 +138,7 @@ character = "Rob"
 
 [node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/No"]
 script = ExtResource( 5 )
-text = "Got it now?\\openmenu/"
+text = "Got it now?"
 character = "Rob"
 giveOptions = true
 
