@@ -1,3 +1,4 @@
+using System;
 using Additions;
 using Godot;
 
@@ -7,8 +8,9 @@ public class InputManager : Node
 
     public static bool attackInput;
 
-    [Signal] public delegate void AttackInputStarted();
-    [Signal] public delegate void AttackInputEnded();
+    public static event Action AttackInputStarted;
+    public static event Action AttackInputEnded;
+    public static event Action DropWeaponPressed;
 
     public override void _Ready()
     {
@@ -39,12 +41,18 @@ public class InputManager : Node
             if (@event.IsPressed())
             {
                 attackInput = true;
-                EmitSignal(nameof(AttackInputStarted));
+                AttackInputStarted?.Invoke();
                 return;
             }
 
             attackInput = false;
-            EmitSignal(nameof(AttackInputEnded));
+            AttackInputEnded?.Invoke();
+            return;
+        }
+
+        if (@event.IsActionPressed("DropWeapon"))
+        {
+            DropWeaponPressed?.Invoke();
             return;
         }
 

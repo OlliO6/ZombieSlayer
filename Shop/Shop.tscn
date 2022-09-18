@@ -102,14 +102,6 @@ layer = 2
 [node name="ShopMenu" parent="CanvasLayer" instance=ExtResource( 4 )]
 visible = false
 
-[node name="ScrollContainer" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer" index="0"]
-margin_left = 48.0
-margin_right = 148.0
-
-[node name="VBoxContainer" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer" index="0"]
-margin_top = 0.0
-margin_bottom = 118.0
-
 [node name="Icon" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Magnet/HBoxContainer" index="0"]
 texture = ExtResource( 6 )
 

@@ -22,6 +22,8 @@ public class WeaponSwitcher : Node2D
 
     public override void _Ready()
     {
+        InputManager.DropWeaponPressed += () => DropWeapon(CurrentWeapon);
+
         if (GetChildCount() > 0)
         {
             foreach (WeaponBase weapon in this.GetChildren<WeaponBase>())
@@ -63,12 +65,6 @@ public class WeaponSwitcher : Node2D
 
         if (@event is InputEventKey keyInput)
         {
-            if (keyInput.PhysicalScancode is (int)KeyList.Q)
-            {
-                DropWeapon(CurrentWeapon);
-                return;
-            }
-
             int prevIndex = currentIndex;
 
             switch (keyInput.PhysicalScancode)
@@ -133,6 +129,8 @@ public class WeaponSwitcher : Node2D
     public void DropWeapon(WeaponBase weapon)
     {
         if (weapon is null) return;
+
+        if (GetChildCount() <= 1) return;
 
         if (weapon.weaponPickup is not null)
         {

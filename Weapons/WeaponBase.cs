@@ -23,8 +23,8 @@ public class WeaponBase : Node2D
 
     public override void _Ready()
     {
-        InputManager.instance.Connect(nameof(InputManager.AttackInputStarted), this, nameof(OnAttackInputStarted));
-        InputManager.instance.Connect(nameof(InputManager.AttackInputEnded), this, nameof(OnAttackInputEnded));
+        InputManager.AttackInputStarted += OnAttackInputStarted;
+        InputManager.AttackInputEnded += OnAttackInputEnded;
         AnimationPlayer.Connect("animation_finished", this, nameof(OnAnimationFinished));
     }
 
