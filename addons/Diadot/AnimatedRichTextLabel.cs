@@ -17,56 +17,141 @@ public class AnimatedRichTextLabel : RichTextLabel
 
     private CancellationTokenSource cancellation;
 
-    public async void Play(string bbText = null)
+    public async void Play(string codeText)
     {
         cancellation?.Cancel();
         cancellation = new CancellationTokenSource();
         CancellationToken token = cancellation.Token;
 
-        if (bbText is not null) BbcodeText = bbText;
+        BbcodeText = codeText;
+        FilterExpressions(out Dictionary<int, List<string>> expressions);
 
         delay = ProjectSettingsControl.DefaultDelay;
         VisibleCharacters = 0;
-        string textString = Text.Replace("\n", "");
 
-        while (VisibleCharacters < textString.Length)
+        for (int i = 0; i < Text.Length; i++)
         {
-            VisibleCharacters++;
-            char lastChar = textString[VisibleCharacters - 1];
+            char c = Text[i];
 
-            if (lastChar is '\\')
+            if (c is '\n') continue;
+
+            if (expressions.ContainsKey(i))
             {
-                string expression = "";
-
-                while (true)
+                foreach (string expression in expressions[i])
                 {
-                    VisibleCharacters++;
-                    char c = textString[VisibleCharacters - 1];
-                    if (c is '/')
-                        break;
-                    expression += c;
+                    await ProcessExpression(expression);
+                    if (token.IsCancellationRequested) return;
                 }
-
-                await ProcessExpression(expression);
-                if (token.IsCancellationRequested) return;
-                continue;
             }
 
-            if (!(lastChar is ' ')) EmitSignal(nameof(NonWhiteSpaceAdvanced));
+            if (c is not ' ') EmitSignal(nameof(NonWhiteSpaceAdvanced));
             EmitSignal(nameof(Advanced));
+
             await new TimeAwaiter(this, delay * (Input.IsActionPressed(ProjectSettingsControl.SkipInput) ? ProjectSettingsControl.DelayFactorWhenSkipPressed : 1));
             if (token.IsCancellationRequested) return;
+
+            VisibleCharacters++;
         }
+
         if (token.IsCancellationRequested) return;
 
         EmitSignal(nameof(Finished));
+
+
+        void FilterExpressions(out Dictionary<int, List<string>> expressions)
+        {
+            RemoveFromText(out expressions);
+            RemoveFromBbText();
+
+            void RemoveFromText(out Dictionary<int, List<string>> expressions)
+            {
+                expressions = new();
+
+                string newText = Text;
+                int skipped = 0;
+
+                for (int i = 0; i < Text.Length; i++)
+                {
+                    char c = Text[i];
+
+                    if (c is '\\')
+                    {
+                        string expression = string.Empty;
+                        int expressionIndex = i;
+
+                        while (true)
+                        {
+                            i++;
+                            if (i >= Text.Length) return;
+
+                            c = Text[i];
+                            if (c is '/')
+                                break;
+                            expression += c;
+                        }
+                        newText = newText.Remove(expressionIndex - skipped, i - expressionIndex);
+                        // AddExpression(expressions, expressionIndex - skipped, expression);
+
+                        if (expressions.ContainsKey(expressionIndex - skipped))
+                        {
+                            expressions[expressionIndex - skipped].Add(expression);
+                        }
+                        else expressions.Add(expressionIndex - skipped, new() { expression });
+
+                        skipped += i + 1 - expressionIndex;
+                    }
+                }
+                Text = newText;
+
+                void AddExpression(Dictionary<int, List<string>> expressions, int index, string expression)
+                {
+                    if (expressions.ContainsKey(index))
+                    {
+                        expressions[index].Add(expression);
+                        return;
+                    }
+                    expressions.Add(index, new() { expression });
+                }
+            }
+
+            void RemoveFromBbText()
+            {
+                GD.Print("\n" + BbcodeText);
+
+                string newBb = BbcodeText;
+                int skipped = 0;
+
+                for (int i = 0; i < BbcodeText.Length; i++)
+                {
+                    char c = BbcodeText[i];
+
+                    if (c is '\\')
+                    {
+                        int startIndex = i;
+                        string expression = string.Empty;
+
+                        while (true)
+                        {
+                            i++;
+                            if (i >= BbcodeText.Length) return;
+                            expression += BbcodeText[i];
+                            if (BbcodeText[i] is '/')
+                                break;
+                        }
+                        GD.Print("BB: " + expression);
+
+                        newBb = newBb.Remove(startIndex - skipped, i + 1 - startIndex);
+                        skipped += i + 1 - startIndex;
+                    }
+                }
+                BbcodeText = newBb;
+            }
+        }
     }
 
     private async Task ProcessExpression(string expression)
     {
-        GD.Print($"started {expression}  {Time.GetTicksMsec() * 0.001f}");
         bool v = await TryToHandleExpression();
-        GD.Print($"ended {expression}  {Time.GetTicksMsec() * 0.001f}");
 
         if (v) return;
 

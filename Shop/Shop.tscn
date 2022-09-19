@@ -111,9 +111,9 @@ character = "Robert"
 
 [node name="BadJoke" type="Node" parent="DialogPlayer/FirstMeeting"]
 script = ExtResource( 5 )
-text = "\\wait 1/But don't rob the shop. [b]Rob[/b]
+text = "\\wait 1/But don't rob the shop. 
 \\wait 1/\\d=1/....\\d=0.025/[shake] HAHAHAHA!!![/shake] 
-\\reset d/\\wait 2/[b]Get it?[/b]"
+\\reset d/\\wait 2/Get it?"
 character = "Rob"
 giveOptions = true
 

@@ -18,6 +18,11 @@ public class DialogPlayer : CanvasLayer
     public AnimatedRichTextLabel textLabel;
     public IDialogProvider currentDialog;
 
+    public override void _EnterTree()
+    {
+        Hide();
+    }
+
     public override void _Ready()
     {
         nameLabel = GetNode<Label>("%NameLabel");
@@ -27,7 +32,6 @@ public class DialogPlayer : CanvasLayer
         textLabel.Connect(nameof(AnimatedRichTextLabel.Advanced), this, nameof(OnTextAdvanced));
         textLabel.Connect(nameof(AnimatedRichTextLabel.Finished), this, nameof(OnTextFinished));
         textLabel.NotHandeledExpression += OnExpressionCouldntBeHandled;
-        Hide();
     }
 
     private void OnTextFinished() => currentDialog?.OnTextFinished();
@@ -107,7 +111,7 @@ public class DialogPlayer : CanvasLayer
             InitOptions(options);
 
         nameLabel.Text = dialog.Character;
-        textLabel.Play("[expressions]" + dialog.Text);
+        textLabel.Play(dialog.Text);
         dialog.OnStarted();
         EmitSignal(nameof(DialogStarted), dialog.Name);
 
