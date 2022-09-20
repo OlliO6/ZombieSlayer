@@ -1,17 +1,38 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Shop/Shop.png" type="Texture" id=1]
+[ext_resource path="res://Shop/ShopKeeperRob_2.0.png" type="Texture" id=1]
 [ext_resource path="res://Shop/Shop.cs" type="Script" id=2]
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=3]
 [ext_resource path="res://Shop/ShopMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player/Upgrades/Icons/Magnet.png" type="Texture" id=6]
 [ext_resource path="res://Items/Health/HealthIcon.png" type="Texture" id=9]
 [ext_resource path="res://Shaders/Materials/StandartSpriteMat.material" type="Material" id=10]
+[ext_resource path="res://Shop/ShopKeeperRob_Shadow_2.0.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6, 2 )
+extents = Vector2( 5, 2 )
 
 [sub_resource type="CircleShape2D" id=2]
+
+[sub_resource type="Animation" id=6]
+resource_name = "Fly"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 3 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ), Vector2( 0, -9 ), Vector2( 0, -8 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
 
 [sub_resource type="Animation" id=3]
 resource_name = "HideText"
@@ -66,20 +87,29 @@ collision_mask = 4
 script = ExtResource( 2 )
 shopMenu = NodePath("CanvasLayer/ShopMenu")
 
+[node name="Shadow" type="Sprite" parent="."]
+material = ExtResource( 10 )
+texture = ExtResource( 12 )
+
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 10 )
+position = Vector2( 0, -8.23529 )
 texture = ExtResource( 1 )
-offset = Vector2( 0, -13 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 0, -2 )
+position = Vector2( 0, 4 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -1 )
+position = Vector2( 0, 4 )
 shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Fly"
+anims/Fly = SubResource( 6 )
+anims/RESET = SubResource( 7 )
 
 [node name="Label" type="Label" parent="."]
 modulate = Color( 1, 1, 1, 0 )
@@ -91,7 +121,8 @@ theme = ExtResource( 3 )
 text = "Press 'E'"
 align = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+root_node = NodePath("../..")
 anims/HideText = SubResource( 3 )
 anims/RESET = SubResource( 4 )
 anims/ShowText = SubResource( 5 )
@@ -114,8 +145,8 @@ texture = ExtResource( 9 )
 [node name="Label" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Heart/HBoxContainer" index="1"]
 text = "7"
 
-[connection signal="PlayerEntered" from="." to="AnimationPlayer" method="play" binds= [ "ShowText" ]]
-[connection signal="PlayerExited" from="." to="AnimationPlayer" method="play" binds= [ "HideText" ]]
+[connection signal="PlayerEntered" from="." to="Label/AnimationPlayer" method="play" binds= [ "ShowText" ]]
+[connection signal="PlayerExited" from="." to="Label/AnimationPlayer" method="play" binds= [ "HideText" ]]
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="area_exited" from="." to="." method="OnAreaExited"]
 [connection signal="pressed" from="CanvasLayer/ShopMenu/MarginContainer/Panel/BackButton" to="." method="CloseMenu"]
