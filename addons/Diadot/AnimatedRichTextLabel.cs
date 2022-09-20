@@ -44,15 +44,14 @@ public class AnimatedRichTextLabel : RichTextLabel
                 }
             }
 
+            VisibleCharacters++;
+
             if (c is not ' ') EmitSignal(nameof(NonWhiteSpaceAdvanced));
             EmitSignal(nameof(Advanced));
 
             await new TimeAwaiter(this, delay * (Input.IsActionPressed(ProjectSettingsControl.SkipInput) ? ProjectSettingsControl.DelayFactorWhenSkipPressed : 1));
             if (token.IsCancellationRequested) return;
-
-            VisibleCharacters++;
         }
-
         if (token.IsCancellationRequested) return;
 
         EmitSignal(nameof(Finished));
@@ -77,7 +76,7 @@ public class AnimatedRichTextLabel : RichTextLabel
                     if (c is '\\')
                     {
                         string expression = string.Empty;
-                        int expressionIndex = i;
+                        int startIndex = i;
 
                         while (true)
                         {
@@ -89,21 +88,16 @@ public class AnimatedRichTextLabel : RichTextLabel
                                 break;
                             expression += c;
                         }
-                        newText = newText.Remove(expressionIndex - skipped, i - expressionIndex);
-                        // AddExpression(expressions, expressionIndex - skipped, expression);
+                        int expressionIndex = startIndex - skipped;
+                        newText = newText.Remove(expressionIndex, i - startIndex);
+                        AddExpression(ref expressions, expressionIndex, expression);
 
-                        if (expressions.ContainsKey(expressionIndex - skipped))
-                        {
-                            expressions[expressionIndex - skipped].Add(expression);
-                        }
-                        else expressions.Add(expressionIndex - skipped, new() { expression });
-
-                        skipped += i + 1 - expressionIndex;
+                        skipped += i + 1 - startIndex;
                     }
                 }
                 Text = newText;
 
-                void AddExpression(Dictionary<int, List<string>> expressions, int index, string expression)
+                void AddExpression(ref Dictionary<int, List<string>> expressions, int index, string expression)
                 {
                     if (expressions.ContainsKey(index))
                     {
@@ -116,8 +110,6 @@ public class AnimatedRichTextLabel : RichTextLabel
 
             void RemoveFromBbText()
             {
-                GD.Print("\n" + BbcodeText);
-
                 string newBb = BbcodeText;
                 int skipped = 0;
 
@@ -138,8 +130,6 @@ public class AnimatedRichTextLabel : RichTextLabel
                             if (BbcodeText[i] is '/')
                                 break;
                         }
-                        GD.Print("BB: " + expression);
-
                         newBb = newBb.Remove(startIndex - skipped, i + 1 - startIndex);
                         skipped += i + 1 - startIndex;
                     }
@@ -196,8 +186,6 @@ public class AnimatedRichTextLabel : RichTextLabel
             }
             return false;
         }
-
-
     }
 
     private static float ParseFloat(string number) => float.Parse(number, System.Globalization.CultureInfo.InvariantCulture);

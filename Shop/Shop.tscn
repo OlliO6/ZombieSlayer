@@ -100,7 +100,6 @@ anims/RESET = SubResource( 4 )
 anims/ShowText = SubResource( 5 )
 
 [node name="DialogPlayer" parent="." instance=ExtResource( 7 )]
-pause_mode = 2
 callableActions = [ NodePath("Actions/OpenShopMenu") ]
 
 [node name="FirstMeeting" type="Node" parent="DialogPlayer"]
@@ -113,7 +112,7 @@ character = "Robert"
 script = ExtResource( 5 )
 text = "\\wait 1/But don't rob the shop. 
 \\wait 1/\\d=1/....\\d=0.025/[shake] HAHAHAHA!!![/shake] 
-\\reset d/\\wait 2/Get it?"
+\\reset d/\\wait 2/Get it? "
 character = "Rob"
 giveOptions = true
 
@@ -125,8 +124,8 @@ character = "Rob"
 
 [node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes"]
 script = ExtResource( 5 )
-text = "\\hide/\\wait 1/\\openmenu/\\wait 1/\\show/This\\wait 1/ is my menu.
-You can buy a 6 sided dice here."
+text = "\\hide/\\wait 1/\\openmenu/\\wait 1/\\show/This\\wait 1/ is my menu. 
+You can buy a 6 sided dice here. "
 character = "Rob"
 
 [node name="No" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke"]
@@ -138,7 +137,7 @@ character = "Rob"
 
 [node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/No"]
 script = ExtResource( 5 )
-text = "Got it now?"
+text = "Got it now? "
 character = "Rob"
 giveOptions = true
 
