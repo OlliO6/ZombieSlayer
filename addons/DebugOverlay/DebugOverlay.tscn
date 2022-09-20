@@ -35,7 +35,7 @@ pause_mode = 2
 layer = 100
 script = ExtResource( 3 )
 IsShowingFps = true
-turnOffCommonLogs = true
+turnOffCommonLogs = false
 removeNameUniqeness = true
 _Labels = NodePath("MarginContainer/HBoxContainer/DebugLabels")
 _Logs = NodePath("MarginContainer/MarginContainer/Logs")
@@ -239,6 +239,7 @@ text = "Show fps"
 margin_top = 44.0
 margin_right = 212.0
 margin_bottom = 84.0
+pressed = true
 text = "Common logs"
 
 [node name="NoUniqueNamesToggle" type="CheckButton" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer"]
@@ -288,15 +289,15 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="ScreenshotButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer"]
-margin_right = 231.0
+margin_right = 230.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 6 )
 text = "Screenshot"
 
 [node name="ScreenshotIUButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer"]
-margin_left = 231.0
-margin_right = 319.533
+margin_left = 230.0
+margin_right = 319.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.29
@@ -466,9 +467,11 @@ margin_top = 454.0
 margin_right = 704.0
 margin_bottom = 480.0
 size_flags_stretch_ratio = 0.19
+text = "lvlup"
 clear_button_enabled = true
 placeholder_text = "Command Line"
 caret_blink = true
+caret_position = 5
 
 [node name="Commands" type="Node" parent="Console"]
 script = ExtResource( 10 )

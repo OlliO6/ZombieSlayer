@@ -1,4 +1,5 @@
 using System;
+using Diadot;
 using Godot;
 
 public class Shop : Area2D
@@ -8,16 +9,15 @@ public class Shop : Area2D
     [Signal] public delegate void PlayerEntered();
     [Signal] public delegate void PlayerExited();
 
-    [Export] private NodePath shopMenu;
-    private bool playerInArea;
-
+    private bool playerInArea, hadFirstTalk;
     private ShopMenu shop;
+    private DialogPlayer dialogPlayer;
 
     public override void _Ready()
     {
-        shop = GetNode<ShopMenu>(shopMenu);
-
-        ExplanationsManager.ConnectExplanationToSignal("ShopMenu", this, nameof(MenuOpened));
+        shop = GetNode<ShopMenu>("%ShopMenu");
+        dialogPlayer = GetNode<DialogPlayer>("DialogPlayer");
+        // ExplanationsManager.ConnectExplanationToSignal("ShopMenu", this, nameof(MenuOpened));
     }
 
     [TroughtSignal]
@@ -41,8 +41,20 @@ public class Shop : Area2D
     {
         if (playerInArea && @event.IsActionPressed("Interact"))
         {
-            OpenMenu();
+            TalkToPlayer();
         }
+    }
+
+    private async void TalkToPlayer()
+    {
+        if (!hadFirstTalk)
+        {
+            hadFirstTalk = true;
+            GetTree().Paused = true;
+            dialogPlayer.Play("FirstMeeting");
+            await ToSignal(dialogPlayer, nameof(DialogPlayer.DialogFinished));
+        }
+        OpenMenu();
     }
 
     public void UnlockShopItem(string name) => shop.UnlockItem(name);

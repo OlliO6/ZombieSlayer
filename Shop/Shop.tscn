@@ -1,12 +1,16 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Shop/ShopKeeperRob_2.0.png" type="Texture" id=1]
 [ext_resource path="res://Shop/Shop.cs" type="Script" id=2]
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=3]
 [ext_resource path="res://Shop/ShopMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/Diadot/Dialog.cs" type="Script" id=5]
 [ext_resource path="res://Player/Upgrades/Icons/Magnet.png" type="Texture" id=6]
+[ext_resource path="res://addons/Diadot/DialogPlayer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/Diadot/RedirectDialog.cs" type="Script" id=8]
 [ext_resource path="res://Items/Health/HealthIcon.png" type="Texture" id=9]
 [ext_resource path="res://Shaders/Materials/StandartSpriteMat.material" type="Material" id=10]
+[ext_resource path="res://addons/Diadot/Actions/CallAction.cs" type="Script" id=11]
 [ext_resource path="res://Shop/ShopKeeperRob_Shadow_2.0.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -85,7 +89,6 @@ tracks/0/keys = {
 collision_layer = 0
 collision_mask = 4
 script = ExtResource( 2 )
-shopMenu = NodePath("CanvasLayer/ShopMenu")
 
 [node name="Shadow" type="Sprite" parent="."]
 material = ExtResource( 10 )
@@ -127,11 +130,79 @@ anims/HideText = SubResource( 3 )
 anims/RESET = SubResource( 4 )
 anims/ShowText = SubResource( 5 )
 
+[node name="DialogPlayer" parent="." instance=ExtResource( 7 )]
+callableActions = [ NodePath("Actions/OpenShopMenu") ]
+
+[node name="FirstMeeting" type="Node" parent="DialogPlayer"]
+script = ExtResource( 5 )
+text = "Hello i am Robert the shop keeper. 
+\\wait 1/You can call me [tint r=0.3 g=0.7 b=0.7 a=1]Rob[/tint]. "
+character = "Robert"
+
+[node name="BadJoke" type="Node" parent="DialogPlayer/FirstMeeting"]
+script = ExtResource( 5 )
+text = "\\wait 1/But don't rob the shop. 
+\\wait 1/\\d=1/....\\d=0.025/[shake] HAHAHAHA!!![/shake] 
+\\reset d/\\wait 2/Get it? "
+character = "Rob"
+giveOptions = true
+
+[node name="Yes" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke"]
+script = ExtResource( 5 )
+text = "HAHA, a little fun is needed some times. 
+\\wait 1/\\d=0.6/But\\reset d/\\wait 1/\\wait 0.5/ jokes away now. "
+character = "Rob"
+
+[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes"]
+script = ExtResource( 5 )
+text = "\\hide/\\wait 1/\\openmenu/\\wait 1/\\show/This\\wait 1/ is my menu. 
+You can buy a 6 sided dice here. "
+character = "Rob"
+
+[node name="No" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke"]
+script = ExtResource( 5 )
+text = "Its funny because you can call me Rob the shop keeper but you should not [b]rob[/b] the shop. 
+\\wait 1/Because of robbery. 
+[shake]HAHAHA!![/shake]"
+character = "Rob"
+
+[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/No"]
+script = ExtResource( 5 )
+text = "Got it now? "
+character = "Rob"
+giveOptions = true
+
+[node name="Yes" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/No/Dialog"]
+script = ExtResource( 8 )
+to = NodePath("../../../Yes")
+
+[node name="No" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/No/Dialog"]
+script = ExtResource( 8 )
+to = NodePath("../..")
+
+[node name="Actions" type="Node" parent="DialogPlayer"]
+
+[node name="OpenShopMenu" type="Node" parent="DialogPlayer/Actions"]
+script = ExtResource( 11 )
+command = "openmenu"
+node = NodePath("../../..")
+method = "OpenMenu"
+args = [  ]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
 
 [node name="ShopMenu" parent="CanvasLayer" instance=ExtResource( 4 )]
+unique_name_in_owner = true
 visible = false
+
+[node name="ScrollContainer" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer" index="0"]
+margin_left = 48.0
+margin_right = 148.0
+
+[node name="VBoxContainer" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer" index="0"]
+margin_top = 0.0
+margin_bottom = 118.0
 
 [node name="Icon" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer/Magnet/HBoxContainer" index="0"]
 texture = ExtResource( 6 )
