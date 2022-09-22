@@ -64,16 +64,16 @@ public class DiceMenu : Control
 
     public override void _EnterTree()
     {
-        InputManager.InventoryPressed += OnInventoryPressed;
+        InputManager.DiceMenuPressed += OnDiceMenuPressed;
         InputManager.UICancelPressed += OnUICancelPressed;
     }
     public override void _ExitTree()
     {
-        InputManager.InventoryPressed -= OnInventoryPressed;
+        InputManager.DiceMenuPressed -= OnDiceMenuPressed;
         InputManager.UICancelPressed -= OnUICancelPressed;
     }
 
-    private void OnInventoryPressed()
+    private void OnDiceMenuPressed()
     {
         if (isOpen) Close();
         else Open();

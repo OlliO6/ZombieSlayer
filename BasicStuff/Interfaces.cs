@@ -20,6 +20,15 @@ public interface IHealth
     public int MaxHealth { get; set; }
 }
 
+public interface IInteractable
+{
+    public Vector2 Position { get; }
+    public void Interact();
+    public void Select();
+    public void Deselect();
+}
+
+
 public interface ISelectable
 {
     public bool IsSelected { get; set; }

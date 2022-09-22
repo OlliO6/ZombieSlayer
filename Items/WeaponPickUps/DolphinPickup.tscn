@@ -8,7 +8,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.09902
 
-[node name="RiflePickup" instance=ExtResource( 3 )]
+[node name="DolphinPickup" instance=ExtResource( 3 )]
 script = ExtResource( 2 )
 weaponScene = ExtResource( 4 )
 
@@ -19,6 +19,5 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="VisibilityDisabler" parent="." index="5"]
-visible = true
 position = Vector2( 0.5, 0 )
 scale = Vector2( 0.65, 0.5 )

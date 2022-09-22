@@ -160,6 +160,11 @@ public class AnimatedRichTextLabel : RichTextLabel
                     case "d":
                         delay = ParseFloat(equalSeperated[1]);
                         return true;
+
+                    // Project specific
+                    case "input":
+                        InputManager.ProcessInput = bool.Parse(equalSeperated[1]);
+                        return true;
                 }
                 return false;
             }

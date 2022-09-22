@@ -16,5 +16,4 @@ weaponScene = ExtResource( 3 )
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" parent="." index="2"]
-visible = true
 shape = SubResource( 1 )

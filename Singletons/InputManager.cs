@@ -15,6 +15,13 @@ public class InputManager : Node
     public static event Action InventoryPressed;
     public static event Action DiceMenuPressed;
     public static event Action PausePressed;
+    public static event Action InteractPressed;
+
+    public static bool ProcessInput
+    {
+        get => instance.IsProcessingUnhandledInput();
+        set => instance.SetProcessUnhandledInput(value);
+    }
 
     public override void _Ready()
     {
@@ -54,11 +61,12 @@ public class InputManager : Node
             return;
         }
 
+        InvokeIfActionPressed(@event, "Interact", InteractPressed);
         InvokeIfActionPressed(@event, "DropWeapon", DropWeaponPressed);
-        InvokeIfActionPressed(@event, "Pause", PausePressed);
-        InvokeIfActionPressed(@event, "ui_cancel", UICancelPressed);
-        InvokeIfActionPressed(@event, "Inventory", InventoryPressed);
-        InvokeIfActionPressed(@event, "DiceMenu", DiceMenuPressed);
+        InvokeIfActionPressed(@event, "Pause", PausePressed, true);
+        InvokeIfActionPressed(@event, "ui_cancel", UICancelPressed, true);
+        InvokeIfActionPressed(@event, "Inventory", InventoryPressed, true);
+        InvokeIfActionPressed(@event, "DiceMenu", DiceMenuPressed, true);
 
         if (@event is InputEventKey keyInput)
         {
@@ -68,9 +76,10 @@ public class InputManager : Node
             }
         }
     }
-    private bool InvokeIfActionPressed(InputEvent @event, string actionName, Action eventAction)
+
+    private bool InvokeIfActionPressed(InputEvent @event, string actionName, Action eventAction, bool ignorePausing = false)
     {
-        if (@event.IsActionPressed(actionName))
+        if (@event.IsActionPressed(actionName) && (ignorePausing || !instance.GetTree().Paused))
         {
             eventAction?.Invoke();
             return true;

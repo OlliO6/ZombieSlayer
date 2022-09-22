@@ -2,14 +2,14 @@ using System;
 using Diadot;
 using Godot;
 
-public class Shop : Area2D
+public class Shop : Area2D, IInteractable
 {
     [Signal] public delegate void MenuOpened();
     [Signal] public delegate void MenuClosed();
     [Signal] public delegate void PlayerEntered();
     [Signal] public delegate void PlayerExited();
 
-    private bool playerInArea, hadFirstTalk;
+    private bool hadFirstTalk;
     private ShopMenu shop;
     private DialogPlayer dialogPlayer;
 
@@ -39,36 +39,14 @@ public class Shop : Area2D
     {
         if (Player.currentPlayer is null) return;
 
-        playerInArea = true;
-        EmitSignal(nameof(PlayerEntered));
+        Player.currentPlayer.AddInteractable(this);
     }
 
     private void OnAreaExited(Area2D area)
     {
         if (Player.currentPlayer is null) return;
 
-        playerInArea = false;
-        EmitSignal(nameof(PlayerExited));
-    }
-
-    public override void _UnhandledInput(InputEvent @event)
-    {
-        if (playerInArea && @event.IsActionPressed("Interact"))
-        {
-            TalkToPlayer();
-        }
-    }
-
-    private async void TalkToPlayer()
-    {
-        if (!hadFirstTalk)
-        {
-            hadFirstTalk = true;
-            GetTree().Paused = true;
-            dialogPlayer.Play("FirstMeeting");
-            await ToSignal(dialogPlayer, nameof(DialogPlayer.DialogFinished));
-        }
-        OpenMenu();
+        Player.currentPlayer.RemoveInteractable(this);
     }
 
     public void UnlockShopItem(string name) => shop.UnlockItem(name);
@@ -88,5 +66,30 @@ public class Shop : Area2D
         shop.Visible = false;
 
         EmitSignal(nameof(MenuClosed));
+    }
+
+    public void Interact()
+    {
+        if (!hadFirstTalk)
+        {
+            InputManager.ProcessInput = false;
+            hadFirstTalk = true;
+            GetTree().Paused = true;
+            dialogPlayer.Play("FirstMeeting");
+            ToSignal(dialogPlayer, "DialogFinished").OnCompleted(
+                    () => { InputManager.ProcessInput = true; });
+            return;
+        }
+        OpenMenu();
+    }
+
+    public void Select()
+    {
+        EmitSignal(nameof(PlayerEntered));
+    }
+
+    public void Deselect()
+    {
+        EmitSignal(nameof(PlayerExited));
     }
 }
