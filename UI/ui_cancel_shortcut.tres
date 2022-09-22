@@ -1,8 +1,0 @@
-[gd_resource type="ShortCut" load_steps=2 format=2]
-
-[sub_resource type="InputEventAction" id=2]
-action = "ui_cancel"
-
-[resource]
-resource_name = "ui_cancel_shortcut"
-shortcut = SubResource( 2 )

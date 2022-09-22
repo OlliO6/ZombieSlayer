@@ -1,5 +1,5 @@
-using Godot;
 using System;
+using Godot;
 
 public class PauseMenu : Control
 {
@@ -7,13 +7,19 @@ public class PauseMenu : Control
 
     private bool paused;
 
-    public override void _UnhandledInput(InputEvent @event)
+    public override void _EnterTree()
     {
-        if (@event.IsActionPressed("Pause"))
-        {
-            if (paused) Unpause();
-            else Pause();
-        }
+        InputManager.PausePressed += OnPausePressed;
+    }
+    public override void _ExitTree()
+    {
+        InputManager.PausePressed -= OnPausePressed;
+    }
+
+    private void OnPausePressed()
+    {
+        if (paused) Unpause();
+        else Pause();
     }
 
     private void Unpause()

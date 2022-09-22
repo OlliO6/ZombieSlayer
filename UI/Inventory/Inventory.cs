@@ -1,6 +1,6 @@
-using Godot;
 using System;
 using Additions;
+using Godot;
 
 public class Inventory : Control
 {
@@ -40,13 +40,25 @@ public class Inventory : Control
         }
     }
 
-    public override void _UnhandledInput(InputEvent @event)
+    public override void _EnterTree()
     {
-        if (@event.IsActionPressed("Inventory"))
-        {
-            if (isOpen) Close();
-            else Open();
-        }
+        InputManager.InventoryPressed += OnInventoryPressed;
+        InputManager.UICancelPressed += OnUICancelPressed;
+    }
+    public override void _ExitTree()
+    {
+        InputManager.InventoryPressed -= OnInventoryPressed;
+        InputManager.UICancelPressed -= OnUICancelPressed;
+    }
+
+    private void OnInventoryPressed()
+    {
+        if (isOpen) Close();
+        else Open();
+    }
+    private void OnUICancelPressed()
+    {
+        if (isOpen) Close();
     }
 
     private void Open()

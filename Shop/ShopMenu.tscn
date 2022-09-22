@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Items/Dice/Dice.tscn" type="PackedScene" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://Items/UpgradePickups/MagnetPickup.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Player/Upgrades/Icons/Magnet.png" type="Texture" id=11]
 [ext_resource path="res://Player/Upgrades/Icons/SpeedUpgrade.png" type="Texture" id=12]
-[ext_resource path="res://UI/ui_cancel_shortcut.tres" type="ShortCut" id=13]
 [ext_resource path="res://Weapons/Guns/Rifle/RifleIcon.png" type="Texture" id=14]
 [ext_resource path="res://Items/Health/HealthIcon.png" type="Texture" id=15]
 [ext_resource path="res://Items/WeaponPickUps/SwordPickup.tscn" type="PackedScene" id=16]
@@ -172,7 +171,6 @@ margin_bottom = 17.0
 focus_mode = 0
 shortcut_in_tooltip = false
 enabled_focus_mode = 0
-shortcut = ExtResource( 13 )
 text = "Back"
 flat = true
 

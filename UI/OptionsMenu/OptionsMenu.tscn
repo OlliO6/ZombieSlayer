@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/OptionsMenu/OptionsMenu.cs" type="Script" id=2]
 [ext_resource path="res://UI/OptionsMenu/SfxVolumeChangeSound.wav" type="AudioStream" id=3]
-[ext_resource path="res://UI/ui_cancel_shortcut.tres" type="ShortCut" id=4]
 [ext_resource path="res://UI/Foldout.tscn" type="PackedScene" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=2]
@@ -65,7 +64,6 @@ focus_mode = 0
 size_flags_horizontal = 2
 shortcut_in_tooltip = false
 enabled_focus_mode = 0
-shortcut = ExtResource( 4 )
 text = "Back"
 flat = true
 
@@ -101,13 +99,13 @@ scroll_horizontal_enabled = false
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
 margin_right = 127.0
-margin_bottom = 92.0
+margin_bottom = 26.0
 custom_constants/margin_left = 2
 
 [node name="Options" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer"]
 margin_left = 2.0
 margin_right = 127.0
-margin_bottom = 92.0
+margin_bottom = 26.0
 rect_min_size = Vector2( 125, 0 )
 size_flags_horizontal = 6
 size_flags_vertical = 7

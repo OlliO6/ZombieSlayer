@@ -17,7 +17,21 @@ public class Shop : Area2D
     {
         shop = GetNode<ShopMenu>("%ShopMenu");
         dialogPlayer = GetNode<DialogPlayer>("DialogPlayer");
-        // ExplanationsManager.ConnectExplanationToSignal("ShopMenu", this, nameof(MenuOpened));
+    }
+
+    public override void _EnterTree()
+    {
+        InputManager.UICancelPressed += OnUICancelPressed;
+    }
+    public override void _ExitTree()
+    {
+        InputManager.UICancelPressed -= OnUICancelPressed;
+    }
+
+    private void OnUICancelPressed()
+    {
+        if (shop.Visible)
+            CloseMenu();
     }
 
     [TroughtSignal]

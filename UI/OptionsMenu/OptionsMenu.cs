@@ -5,6 +5,7 @@ public class OptionsMenu : Control
 {
     [Export] private NodePath _fullscreenToggle, _sfxVolumeSlider, _musicVolumeSlider, _upscaleToggle;
 
+    private bool open;
     private CheckButton fullscreenToggle;
     private Slider sfxSlider, musicSlider;
     private CheckButton upscaleToggle;
@@ -23,13 +24,28 @@ public class OptionsMenu : Control
         upscaleToggle.Connect("toggled", this, nameof(SetUseUpscaling));
     }
 
+    public override void _EnterTree()
+    {
+        InputManager.UICancelPressed += OnUICancelPressed;
+    }
+    public override void _ExitTree()
+    {
+        InputManager.UICancelPressed -= OnUICancelPressed;
+    }
+
+    private void OnUICancelPressed()
+    {
+        if (open)
+            OnBackPressed();
+    }
+
     private void ReloadOptions()
     {
         if (!Visible) return;
 
         fullscreenToggle.SetBlockSignals(true);
         sfxSlider.SetBlockSignals(true);
-        musicSlider.SetBlockSignals(true); ;
+        musicSlider.SetBlockSignals(true);
         upscaleToggle.SetBlockSignals(true);
 
         fullscreenToggle.Pressed = OptionsManager.IsFullscreen;
@@ -39,7 +55,7 @@ public class OptionsMenu : Control
 
         fullscreenToggle.SetBlockSignals(false);
         sfxSlider.SetBlockSignals(false);
-        musicSlider.SetBlockSignals(false); ;
+        musicSlider.SetBlockSignals(false);
         upscaleToggle.SetBlockSignals(false);
     }
 
@@ -47,6 +63,7 @@ public class OptionsMenu : Control
     private void OnOptionsPressed()
     {
         Visible = true;
+        open = true;
 
         ReloadOptions();
     }
@@ -55,6 +72,7 @@ public class OptionsMenu : Control
     private void OnBackPressed()
     {
         Visible = false;
+        open = false;
 
         OptionsManager.SaveOptions();
     }

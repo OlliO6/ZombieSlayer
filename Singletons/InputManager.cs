@@ -11,6 +11,10 @@ public class InputManager : Node
     public static event Action AttackInputStarted;
     public static event Action AttackInputEnded;
     public static event Action DropWeaponPressed;
+    public static event Action UICancelPressed;
+    public static event Action InventoryPressed;
+    public static event Action DiceMenuPressed;
+    public static event Action PausePressed;
 
     public override void _Ready()
     {
@@ -50,27 +54,28 @@ public class InputManager : Node
             return;
         }
 
-        if (@event.IsActionPressed("DropWeapon"))
-        {
-            DropWeaponPressed?.Invoke();
-            return;
-        }
+        InvokeIfActionPressed(@event, "DropWeapon", DropWeaponPressed);
+        InvokeIfActionPressed(@event, "Pause", PausePressed);
+        InvokeIfActionPressed(@event, "ui_cancel", UICancelPressed);
+        InvokeIfActionPressed(@event, "Inventory", InventoryPressed);
+        InvokeIfActionPressed(@event, "DiceMenu", DiceMenuPressed);
 
         if (@event is InputEventKey keyInput)
         {
-            if (keyInput.Pressed)
+            if (keyInput.Pressed && keyInput.Scancode is (uint)KeyList.F11)
             {
-                if (keyInput.Scancode is (uint)KeyList.F11)
-                {
-                    ToggleFullscreen();
-                    return;
-                }
-
-                return;
+                ToggleFullscreen();
             }
-
-            return;
         }
+    }
+    private bool InvokeIfActionPressed(InputEvent @event, string actionName, Action eventAction)
+    {
+        if (@event.IsActionPressed(actionName))
+        {
+            eventAction?.Invoke();
+            return true;
+        }
+        return false;
     }
 
     private void ToggleFullscreen()

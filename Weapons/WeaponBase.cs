@@ -23,18 +23,25 @@ public class WeaponBase : Node2D
 
     public override void _Ready()
     {
-        InputManager.AttackInputStarted += OnAttackInputStarted;
-        InputManager.AttackInputEnded += OnAttackInputEnded;
         AnimationPlayer.Connect("animation_finished", this, nameof(OnAnimationFinished));
+    }
+
+    public override void _ExitTree()
+    {
+        Disable();
     }
 
     public virtual void Disable()
     {
+        InputManager.AttackInputStarted -= AttackInputStarted;
+        InputManager.AttackInputEnded -= AttackInputEnded;
         Visible = false;
         disabled = true;
     }
     public virtual void Enable()
     {
+        InputManager.AttackInputStarted += AttackInputStarted;
+        InputManager.AttackInputEnded += AttackInputEnded;
         Visible = true;
         disabled = false;
     }
@@ -42,17 +49,6 @@ public class WeaponBase : Node2D
     public override void _Process(float delta)
     {
         if (InputManager.attackInput && !disabled) AttackInputProcess(delta);
-    }
-
-    [TroughtSignal]
-    private void OnAttackInputStarted()
-    {
-        if (!disabled) AttackInputStarted();
-    }
-    [TroughtSignal]
-    private void OnAttackInputEnded()
-    {
-        if (!disabled) AttackInputEnded();
     }
 
     protected virtual void AttackInputStarted() { }

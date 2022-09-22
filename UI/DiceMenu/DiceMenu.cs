@@ -55,23 +55,35 @@ public class DiceMenu : Control
 
     #endregion
 
-    #region Open and close 
-
-    public override void _UnhandledInput(InputEvent @event)
+    public override void _Ready()
     {
-        if (@event.IsActionPressed("DiceMenu"))
-        {
-            if (!isOpen) Open();
-            else Close();
-
-            return;
-        }
-
-        if (@event.IsActionPressed("ui_cancel") && isOpen)
-        {
-            Close();
-        }
+        Connect(nameof(OpenStarted), this, nameof(UpdateDices));
+        ThrowAllButton.Connect("pressed", this, nameof(OnThrowAllPressed));
+        ThrowSelectedButton.Connect("pressed", this, nameof(OnThrowSelectedPressed));
     }
+
+    public override void _EnterTree()
+    {
+        InputManager.InventoryPressed += OnInventoryPressed;
+        InputManager.UICancelPressed += OnUICancelPressed;
+    }
+    public override void _ExitTree()
+    {
+        InputManager.InventoryPressed -= OnInventoryPressed;
+        InputManager.UICancelPressed -= OnUICancelPressed;
+    }
+
+    private void OnInventoryPressed()
+    {
+        if (isOpen) Close();
+        else Open();
+    }
+    private void OnUICancelPressed()
+    {
+        if (isOpen) Close();
+    }
+
+    #region Open and close 
 
     private async void Open()
     {
@@ -107,13 +119,6 @@ public class DiceMenu : Control
     }
 
     #endregion
-
-    public override void _Ready()
-    {
-        Connect(nameof(OpenStarted), this, nameof(UpdateDices));
-        ThrowAllButton.Connect("pressed", this, nameof(OnThrowAllPressed));
-        ThrowSelectedButton.Connect("pressed", this, nameof(OnThrowSelectedPressed));
-    }
 
     [TroughtSignal]
     private void UpdateDices()
