@@ -52,6 +52,10 @@ script = ExtResource( 1 )
 xpToLevelUp = 30
 explanation = "Health"
 
+[node name="HealthUnlock" type="Node" parent="Levels/Level 1"]
+script = ExtResource( 10 )
+methodName = "UnlockHealth"
+
 [node name="HealthText" type="Node" parent="Levels/Level 1"]
 script = ExtResource( 4 )
 text = "Unlocked Health"
@@ -99,6 +103,14 @@ xpToLevelUp = 35
 
 [node name="Coins" type="Node" parent="Levels/Level 4"]
 script = ExtResource( 6 )
+
+[node name="InventoryUnlock" type="Node" parent="Levels/Level 4"]
+script = ExtResource( 10 )
+methodName = "UnlockInventory"
+
+[node name="InventoryText" type="Node" parent="Levels/Level 4"]
+script = ExtResource( 4 )
+text = "Unlocked Inventory"
 
 [node name="Level 5" type="Node" parent="Levels"]
 script = ExtResource( 1 )

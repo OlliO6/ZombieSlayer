@@ -25,6 +25,12 @@ public class IngameUI : Control
     public ProgressBar XpProgress => this.LazyGetNode(ref storerForXpProgress, "%XpProgress");
     public Label LevelLabel => this.LazyGetNode(ref storerForLevelLabel, "%LevelLabel");
 
+    public override void _Ready()
+    {
+        HeartContainer.Hide();
+        GameState.instance.HealthUnlocked += HeartContainer.Show;
+    }
+
     [TroughtSignal]
     private void OnPlayerHealthChanged()
     {
@@ -44,9 +50,6 @@ public class IngameUI : Control
     {
         LevelingSystem leveling = GetOwner<Player>().Leveling;
         LevelLabel.Text = leveling.CurrentLevelIndex.ToString();
-
-        // Hide hearts when on lvl 0
-        HeartContainer.Visible = leveling.CurrentLevelIndex is 0 ? false : true;
     }
 
     private void UpdateHealthDisplay()

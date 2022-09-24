@@ -35,6 +35,8 @@ public class PauseMenu : Control
     {
         if (GetTree().Paused) return;
 
+        GetNode<Button>("%InventoryButton").Disabled = !GameStats.Current.inventoryUnlocked;
+
         paused = true;
         GetTree().Paused = true;
         Visible = true;
