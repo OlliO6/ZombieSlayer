@@ -191,7 +191,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
         Debug.LogU(this, $"Got {amount} damage");
 
-        if (Leveling.CurrentLevelIndex is not 0) CurrentHealth -= amount;
+        if (GameStats.Current.healthUnlocked) CurrentHealth -= amount;
 
         isInvincible = true;
         EmitSignal(nameof(InvincibilityStarted));
