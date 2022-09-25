@@ -6,7 +6,6 @@ public class HurtArea : Area2D
 {
     [Export] private bool damageFromAreas = true, damageFromBodies = false;
 
-    [Signal] public delegate void ApplyingDamage();
     [Signal] public delegate void DamageApplied();
 
     #region DamageReceiver Reference

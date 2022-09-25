@@ -75,18 +75,22 @@ public class LevelingSystem : Node
 
     private void TweenFinished()
     {
-        // Check for level up
+        // Check for level ups
         while (currentXp >= xpToNextLevel)
         {
-            CurrentLevelIndex++;
-            AnimationPlayer.Play("LevelUp");
-            if (CurrentLevelIndex >= Levels.GetChildCount()) break;
-
-            CurrentLevelNode.ReachLevel();
-            StartTween();
-            ToSignal(CurrentLevelNode, nameof(Level.LevelReached)).OnCompleted(() =>
-                    EmitSignal(nameof(LevelChanged)));
+            LvlUp();
         }
+    }
+
+    public void LvlUp()
+    {
+        CurrentLevelIndex++;
+        AnimationPlayer.Play("LevelUp");
+        if (CurrentLevelIndex >= Levels.GetChildCount()) return;
+        CurrentLevelNode.ReachLevel();
+        StartTween();
+        ToSignal(CurrentLevelNode, nameof(Level.LevelReached)).OnCompleted(() =>
+                EmitSignal(nameof(LevelChanged)));
     }
 
     public override void _Ready()

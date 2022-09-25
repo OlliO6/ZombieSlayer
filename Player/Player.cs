@@ -12,6 +12,9 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     [Signal] public delegate void CoinsAmountChanged(int amount);
     [Signal] public delegate void LevelChanged(int to);
+    [Signal] public delegate void DeathStarted();
+    [Signal] public delegate void DeathEnded();
+    [Signal] public delegate void Damged();
     [Signal] public delegate void InvincibilityStarted();
     [Signal] public delegate void InvincibilityEnded();
     [Signal] public delegate void HealthChanged();
@@ -64,6 +67,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     #endregion
 
+    public bool isDead;
     public bool isInvincible;
     public List<IInteractable> interactablesInRange = new(1);
     public IInteractable currentInteractable;
@@ -72,6 +76,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     private int coins;
 
     [Export] public int MaxHealth { get; set; }
+
     public int CurrentHealth
     {
         get => storerForCurrentHealth;
@@ -116,10 +121,14 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         Coins = startCoins;
         MagnetAreaSize = startMagnetSize;
         Heal();
+
+        ToSignal(this, nameof(DeathEnded)).OnCompleted(SceneManager.LoadMenu);
     }
 
     public override void _PhysicsProcess(float delta)
     {
+        if (isDead) return;
+
         InputManager.GetMovementInput(out Vector2 inputVector, out float lenght);
 
         Move(inputVector, delta);
@@ -127,10 +136,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         UpdateInteractablesInRange();
     }
 
-    private void OnInteractPressed()
-    {
-        currentInteractable?.Interact();
-    }
+    private void OnInteractPressed() => currentInteractable?.Interact();
 
     private void UpdateInteractablesInRange()
     {
@@ -173,12 +179,12 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     {
         if (lenght > 0.2f)
         {
-            AnimationTree.Set("parameters/MovementState/current", 1);
+            AnimationTree.Set("parameters/State/current", 1);
             AnimationTree.Set("parameters/RunSpeed/scale", Mathf.Lerp(0.3f, 1, lenght));
         }
         else
         {
-            AnimationTree.Set("parameters/MovementState/current", 0);
+            AnimationTree.Set("parameters/State/current", 0);
         }
     }
 
@@ -186,12 +192,16 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     public void GetDamage(int amount)
     {
-        if (isInvincible)
+        if (isInvincible || isDead)
             return;
 
+        if (GameStats.Current.healthUnlocked) CurrentHealth -= amount;
+
+        AnimationTree.Set("parameters/Damage/active", true);
+        EmitSignal(nameof(Damged));
         Debug.LogU(this, $"Got {amount} damage");
 
-        if (GameStats.Current.healthUnlocked) CurrentHealth -= amount;
+        if (isDead) return;
 
         isInvincible = true;
         EmitSignal(nameof(InvincibilityStarted));
@@ -208,9 +218,18 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     public void Die()
     {
-        Debug.LogU(this, $"Died");
+        isDead = true;
 
-        SceneManager.LoadMenu();
+        PauseMode = PauseModeEnum.Process;
+        GetTree().Paused = true;
+
+        Debug.LogU(this, $"Is dying");
+        AnimationTree.Set("parameters/State/current", 2);
+    }
+
+    public void EndDeath()
+    {
+        if (isDead) EmitSignal(nameof(DeathEnded));
     }
 
     [TroughtSignal]

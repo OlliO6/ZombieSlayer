@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using Additions;
 using Godot;
 
+#if TOOLS
 [Tool]
+#endif
 public class GamePropertySet : LevelBuff
 {
     [Export] public string propertyName = "";
@@ -16,8 +18,10 @@ public class GamePropertySet : LevelBuff
 
     public override string GetBuffText() => "";
 
+#if TOOLS
     public override string _GetConfigurationWarning()
     {
         return value.Count is 1 ? string.Empty : "Value needs a size of one";
     }
+#endif
 }

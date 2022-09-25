@@ -80,6 +80,7 @@ public class GameCommands : CommandCollection
         if (!PlayerAvailable()) return;
 
         CurrentPlayer.Leveling.CurrentXp += CurrentPlayer.Leveling.CurrentLevelNode.xpToLevelUp;
+        CurrentPlayer.Leveling.LvlUp();
     }
 
     private bool PlayerAvailable()
