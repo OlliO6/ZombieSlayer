@@ -1,24 +1,36 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Enemies/BasicEnemyBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/Zombie/Zombie.png" type="Texture" id=2]
 [ext_resource path="res://Enemies/Zombie/Zombie.cs" type="Script" id=3]
-[ext_resource path="res://Items/Coin/Coin.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Shaders/Flash.shader" type="Shader" id=4]
+[ext_resource path="res://Sounds/Hit_hurt.wav" type="AudioStream" id=6]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/flashColor = Color( 0.988235, 1, 0.870588, 1 )
+shader_param/flashStrenght = 0.0
+
+[sub_resource type="AudioStreamRandomPitch" id=2]
+audio_stream = ExtResource( 6 )
+random_pitch = 1.2
 
 [node name="Zombie" instance=ExtResource( 1 )]
-collision_layer = 2
 script = ExtResource( 3 )
 MaxHealth = 36
-coinScene = ExtResource( 5 )
 movementSpeedRange = Vector2( 6, 20 )
 
 [node name="Sprite" parent="." index="0"]
+material = SubResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="HurtAudioPlayer" type="AudioStreamPlayer" parent="." index="6"]
+stream = SubResource( 2 )
 volume_db = -8.189
 bus = "SFX"
 
+[connection signal="Damaged" from="." to="HurtAudioPlayer" method="play"]
 [connection signal="Died" from="." to="CollisionShape2D" method="set_disabled" flags=3 binds= [ true ]]
 [connection signal="Died" from="." to="DamagingHurtArea/CollisionShape2D" method="set_disabled" flags=3 binds= [ true ]]
 

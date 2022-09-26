@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Additions;
+using Enemies;
 using Godot;
 
 public class EnemySpawner : Node
@@ -28,8 +29,11 @@ public class EnemySpawner : Node
         get => difficultyIndex;
         set
         {
-            difficultyIndex = value.Clamp(0, GetChildCount() - 1);
-            difficultyLevel = GetChild<DifficultyLevel>(difficultyIndex);
+            difficultyIndex = value;
+            DifficultyLevel newLevel = GetNodeOrNull<DifficultyLevel>($"Level{difficultyIndex}");
+            Debug.LogU(this, newLevel is null);
+            if (newLevel is null) return;
+            difficultyLevel = newLevel;
             timeToNextSpawn = difficultyLevel.GetTimeToNextSpawn();
         }
     }

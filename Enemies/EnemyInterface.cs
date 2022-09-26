@@ -1,3 +1,4 @@
+namespace Enemies;
 public interface IEnemy : IKillable
 {
     public int ExPoints { get; }

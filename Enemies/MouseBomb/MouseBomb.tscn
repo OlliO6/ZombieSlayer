@@ -1,0 +1,244 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Enemies/BasicEnemyBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Shaders/Flash.shader" type="Shader" id=2]
+[ext_resource path="res://Enemies/MouseBomb/MouseBomb.cs" type="Script" id=3]
+[ext_resource path="res://Sounds/Hit_hurt.wav" type="AudioStream" id=4]
+[ext_resource path="res://Enemies/MouseBomb/MouseBomb.png" type="Texture" id=5]
+[ext_resource path="res://BasicStuff/PlayerOtherDamageArea.cs" type="Script" id=6]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/flashColor = Color( 0.988235, 1, 0.870588, 1 )
+shader_param/flashStrenght = 0.0
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 1.0
+height = 6.0
+
+[sub_resource type="Animation" id=24]
+resource_name = "Detonation"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7, 3, 3.3, 3.6, 3.9, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 6, 7, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 15, 16, 15, 16, 15, 16, 15, 16, 15 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "DetonationFinished"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:detonationSpeedFactor")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.3, 4.1, 5 ),
+"transitions": PoolRealArray( 1, 0.112657, 0.0424045, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 3.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BombArea/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Die"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 17, 18 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "DeleteEverythingButSprite"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BombArea/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BombArea/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "Run"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "Detonation"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "Die"
+
+[sub_resource type="AnimationNodeTimeScale" id=22]
+
+[sub_resource type="AnimationNodeTransition" id=21]
+input_count = 3
+input_0/name = "Running"
+input_0/auto_advance = false
+input_1/name = "Detonating"
+input_1/auto_advance = false
+input_2/name = "Death"
+input_2/auto_advance = false
+
+[sub_resource type="AnimationNodeBlendTree" id=18]
+graph_offset = Vector2( -754.153, 57.8946 )
+nodes/Animation/node = SubResource( 20 )
+nodes/Animation/position = Vector2( -420, 360 )
+"nodes/Animation 2/node" = SubResource( 19 )
+"nodes/Animation 2/position" = Vector2( -580, 100 )
+"nodes/Animation 4/node" = SubResource( 25 )
+"nodes/Animation 4/position" = Vector2( -440, 240 )
+nodes/RunSpeed/node = SubResource( 22 )
+nodes/RunSpeed/position = Vector2( -420, 100 )
+nodes/Transition/node = SubResource( 21 )
+nodes/Transition/position = Vector2( -240, 200 )
+nodes/output/position = Vector2( -40, 200 )
+node_connections = [ "RunSpeed", 0, "Animation 2", "output", 0, "Transition", "Transition", 0, "RunSpeed", "Transition", 1, "Animation 4", "Transition", 2, "Animation" ]
+
+[sub_resource type="AudioStreamRandomPitch" id=2]
+audio_stream = ExtResource( 4 )
+random_pitch = 1.2
+
+[sub_resource type="CircleShape2D" id=23]
+radius = 42.0
+
+[sub_resource type="CircleShape2D" id=26]
+radius = 21.0238
+
+[node name="MouseBomb" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+MaxHealth = 12
+detonationSpeedFactor = 4.99548
+coinsAmount = 1
+movementSpeed = 12.0
+
+[node name="Sprite" parent="." index="0"]
+material = SubResource( 1 )
+texture = ExtResource( 5 )
+hframes = 7
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = true
+position = Vector2( -1, 0 )
+rotation = 1.5708
+shape = SubResource( 3 )
+
+[node name="AnimationPlayer" parent="." index="3"]
+anims/Detonation = SubResource( 24 )
+anims/Die = SubResource( 4 )
+anims/RESET = SubResource( 27 )
+
+[node name="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 18 )
+parameters/Transition/current = 0
+
+[node name="HurtAudioPlayer" type="AudioStreamPlayer" parent="." index="6"]
+stream = SubResource( 2 )
+volume_db = -8.189
+bus = "SFX"
+
+[node name="DetonationArea" type="Area2D" parent="." index="7"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetonationArea" index="0"]
+position = Vector2( -1, 0 )
+shape = SubResource( 23 )
+
+[node name="BombArea" type="Area2D" parent="." index="8"]
+collision_layer = 24
+collision_mask = 0
+monitoring = false
+script = ExtResource( 6 )
+damageToOthers = 24
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BombArea" index="0"]
+position = Vector2( -1, -2 )
+shape = SubResource( 26 )
+disabled = true
+
+[connection signal="Damaged" from="." to="HurtAudioPlayer" method="play"]
+[connection signal="Died" from="." to="CollisionShape2D" method="set_disabled" flags=3 binds= [ true ]]
+[connection signal="Died" from="." to="DamagingHurtArea/CollisionShape2D" method="set_disabled" flags=3 binds= [ true ]]
+
+[editable path="DamagingHurtArea"]

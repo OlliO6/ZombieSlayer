@@ -35,7 +35,7 @@ pause_mode = 2
 layer = 100
 script = ExtResource( 3 )
 IsShowingFps = true
-turnOffCommonLogs = false
+turnOffCommonLogs = true
 removeNameUniqeness = true
 _Labels = NodePath("MarginContainer/HBoxContainer/DebugLabels")
 _Logs = NodePath("MarginContainer/MarginContainer/Logs")
@@ -77,8 +77,8 @@ script = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_left = 2.0
-margin_top = 130.0
-margin_right = 59.0
+margin_top = 138.0
+margin_right = 48.0
 margin_bottom = 142.0
 mouse_filter = 2
 size_flags_horizontal = 0
@@ -86,13 +86,13 @@ size_flags_vertical = 8
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer"]
 visible = false
-margin_right = 57.0
-margin_bottom = 12.0
+margin_right = 46.0
+margin_bottom = 4.0
 color = Color( 0, 0, 0, 0.392157 )
 
 [node name="Logs" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
-margin_right = 57.0
-margin_bottom = 12.0
+margin_right = 46.0
+margin_bottom = 4.0
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 10
@@ -243,7 +243,6 @@ text = "Show fps"
 margin_top = 44.0
 margin_right = 212.0
 margin_bottom = 84.0
-pressed = true
 text = "Common logs"
 
 [node name="NoUniqueNamesToggle" type="CheckButton" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer"]
@@ -432,37 +431,97 @@ custom_colors/selection_color = Color( 0.529412, 0.596078, 0.647059, 1 )
 bbcode_enabled = true
 bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint]
 [00:01] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
-[00:02] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
-[00:02] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
-[00:02] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
-[00:06] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
-[00:07] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started Health[/tint]
-[00:21] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
-[00:26] [tint r=0 g=0.75 b=1 a=1]Player: Is dying[/tint]
-[00:26] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
-[00:31] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
-[01:27] [tint r=0.88 g=1 b=1 a=1]OptionsManager: Saving Options[/tint]
-[01:28] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
-[01:28] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
-[01:28] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
-[01:31] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
+[00:04] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
+[00:05] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
+[00:05] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
+[00:05] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
+[00:40] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[00:43] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[00:46] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[00:50] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
+[00:51] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started Health[/tint]
+[00:51] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
+[01:32] [tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
+[01:34] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started UpgradeDices[/tint]
+[01:34] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[01:44] [tint r=0.88 g=1 b=1 a=1]WeaponSwitcher: Added weapon Pistol[/tint]
+[01:44] [tint r=0.88 g=1 b=1 a=1]PistolPickup: Collected[/tint]
+[01:55] [tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
+[01:56] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started ShopPosition[/tint]
+[01:56] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[02:54] [tint r=0.88 g=1 b=1 a=1]OpenShopMenu: Executed [Area2D:27227][/tint]
+[03:02] [tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
+[03:08] [tint r=0.88 g=1 b=1 a=1]DicePickup: False[/tint]
+[03:10] [tint r=0 g=1 b=1 a=1]MovementSpeedUpgrade: Buff added[/tint]
+[03:11] [tint r=0.88 g=1 b=1 a=1]DicePickup: Collected[/tint]
+[03:14] [tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
+[03:19] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
+[03:44] [tint r=0.5 g=1 b=0.83 a=1]Level 5: Reached[/tint]
+[03:46] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[03:59] [tint r=0.5 g=1 b=0.83 a=1]Level 6: Reached[/tint]
+[04:00] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[04:04] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[04:15] [tint r=0.5 g=1 b=0.83 a=1]Level 7: Reached[/tint]
+[04:17] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[04:35] [tint r=0.5 g=1 b=0.83 a=1]Level 8: Reached[/tint]
+[04:36] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[05:24] [tint r=0.5 g=1 b=0.83 a=1]Level 9: Reached[/tint]
+[05:25] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[05:48] [tint r=0.5 g=1 b=0.83 a=1]Level 10: Reached[/tint]
+[05:49] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[06:07] [tint r=0.5 g=1 b=0.83 a=1]Level 11: Reached[/tint]
+[06:09] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[06:20] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[tint r=1 g=0.84 b=0 a=1]Restored player health[/tint]
+[06:33] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[tint r=1 g=0.84 b=0 a=1]Restored player health[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
 [00:01] SceneManager: Loaded Menu
-[00:02] SceneManager: Loaded Game
-[00:02] ExplanationsManager: Started MoveAndAttack
-[00:02] Level 0: Reached
-[00:06] Level 1: Reached
-[00:07] ExplanationsManager: Started Health
-[00:21] Player: Got 1 damage
-[00:26] Player: Is dying
-[00:26] Player: Got 1 damage
-[00:31] SceneManager: Loaded Menu
-[01:27] OptionsManager: Saving Options
-[01:28] SceneManager: Loaded Game
-[01:28] ExplanationsManager: Started MoveAndAttack
-[01:28] Level 0: Reached
-[01:31] Level 1: Reached
+[00:04] SceneManager: Loaded Game
+[00:05] ExplanationsManager: Started MoveAndAttack
+[00:05] Level 0: Reached
+[00:05] EnemySpawner: False
+[00:40] Player: Got 1 damage
+[00:43] Player: Got 1 damage
+[00:46] Player: Got 1 damage
+[00:50] Level 1: Reached
+[00:51] ExplanationsManager: Started Health
+[00:51] EnemySpawner: False
+[01:32] Level 2: Reached
+[01:34] ExplanationsManager: Started UpgradeDices
+[01:34] EnemySpawner: True
+[01:44] WeaponSwitcher: Added weapon Pistol
+[01:44] PistolPickup: Collected
+[01:55] Level 3: Reached
+[01:56] ExplanationsManager: Started ShopPosition
+[01:56] EnemySpawner: True
+[02:54] OpenShopMenu: Executed [Area2D:27227]
+[03:02] ShopMenu: Selled Dice
+[03:08] DicePickup: False
+[03:10] MovementSpeedUpgrade: Buff added
+[03:11] DicePickup: Collected
+[03:14] Level 4: Reached
+[03:19] EnemySpawner: False
+[03:44] Level 5: Reached
+[03:46] EnemySpawner: True
+[03:59] Level 6: Reached
+[04:00] EnemySpawner: True
+[04:04] Player: Got 1 damage
+[04:15] Level 7: Reached
+[04:17] EnemySpawner: True
+[04:35] Level 8: Reached
+[04:36] EnemySpawner: True
+[05:24] Level 9: Reached
+[05:25] EnemySpawner: True
+[05:48] Level 10: Reached
+[05:49] EnemySpawner: True
+[06:07] Level 11: Reached
+[06:09] EnemySpawner: True
+[06:20] Player: Got 1 damage
+Restored player health
+[06:33] Player: Got 1 damage
+Restored player health
 "
 scroll_following = true
 selection_enabled = true

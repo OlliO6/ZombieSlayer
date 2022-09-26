@@ -1,12 +1,14 @@
+namespace Enemies;
 using Additions;
 using Godot;
+using static EnemyUtilities;
 
 [Additions.Debugging.DefaultColor("LightGreen")]
 public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
 {
-    public const float InvisTime = 0.075f, StunTime = 0.15f;
+    [Signal] public delegate void Damaged();
+    [Signal] public delegate void Died();
 
-    [Export] private PackedScene coinScene;
     [Export] private int coinsAmount = 2;
     [Export] private Vector2 movementSpeedRange;
 
@@ -16,9 +18,6 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
 
     public int CurrentHealth { get; set; }
     [Export] public int MaxHealth { get; set; }
-
-    [Signal] public delegate void Damaged();
-    [Signal] public delegate void Died();
     public event System.Action<IEnemy> EnemyDied;
 
     private bool dead, isInvincible;
@@ -40,15 +39,9 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
 
     #endregion
 
-    #region AudioPlayer Reference
-
-    private AudioStreamPlayer storerForAudioPlayer;
-    public AudioStreamPlayer AudioPlayer => this.LazyGetNode(ref storerForAudioPlayer, "HurtAudioPlayer");
-
-    #endregion
-
     public override void _Ready()
     {
+        BasicSetup(this);
         CurrentHealth = MaxHealth;
         movementSpeed = Random.FloatRange(movementSpeedRange);
 
@@ -63,19 +56,9 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
     {
         if (dead || isStunned) return;
 
-        Vector2 dirToPlayer = GetDirectionToPlayer();
-
-        Sprite.FlipH = dirToPlayer.x < 0 ? true : false;
-
+        Vector2 dirToPlayer = GetDirectionToPlayer(this);
+        Sprite.FlipH = dirToPlayer.x < 0;
         MoveAndSlide(dirToPlayer * movementSpeed);
-    }
-
-    private Vector2 GetDirectionToPlayer()
-    {
-        if (Player.currentPlayer is null)
-            return Vector2.Zero;
-
-        return (Player.currentPlayer.GlobalPosition - GlobalPosition).Normalized();
     }
 
     public bool AllowDamageFrom(IDamageDealer from) => !isInvincible;
@@ -83,7 +66,9 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
     public void GetDamage(int amount)
     {
         CurrentHealth -= amount;
-        AnimateDamage();
+
+        FlashSprite(Sprite);
+        AnimTree.SetParam("RunSpeed/scale", 0);
 
         EmitSignal(nameof(Damaged));
 
@@ -97,23 +82,6 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
                     isStunned = false;
                     AnimTree.Set("parameters/RunSpeed/scale", runSpeedScale);
                 });
-
-        void AnimateDamage()
-        {
-            var tween = CreateTween();
-            tween.Chain()
-                    .TweenProperty(Sprite, "material:shader_param/flashStrenght", 0.9f, 0.05f)
-                    .From(0f)
-                    .SetTrans(Tween.TransitionType.Sine)
-                    .SetEase(Tween.EaseType.In);
-
-            tween.TweenProperty(Sprite, "material:shader_param/flashStrenght", 0f, 0.15f)
-                    .SetTrans(Tween.TransitionType.Sine)
-                    .SetEase(Tween.EaseType.In);
-
-            AnimTree.SetParam("RunSpeed/scale", 0);
-            AudioPlayer.Play();
-        }
     }
 
     public void Die()
@@ -127,22 +95,9 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
 
         AnimTree.SetParam("State/current", 2);
 
-        if (Player.currentPlayer is not null) Player.currentPlayer.Leveling.CurrentXp += ExPoints;
-
-        SpawnCoins();
+        SpawnCoins(this, coinsAmount);
         EmitSignal(nameof(Died));
         EnemyDied?.Invoke(this);
-    }
-
-    private void SpawnCoins()
-    {
-        for (int i = 0; i < coinsAmount; i++)
-        {
-            Coin coin = coinScene.Instance<Coin>();
-            GetTree().CurrentScene.CallDeferred("add_child", coin);
-            coin.GlobalPosition = GlobalPosition;
-            coin.Launch();
-        }
     }
 
     [TroughtEditor]

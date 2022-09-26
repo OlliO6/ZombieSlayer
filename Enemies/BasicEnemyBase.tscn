@@ -5,7 +5,7 @@
 [ext_resource path="res://BasicStuff/VisibilityDisabler.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=19]
-radius = 2.23607
+radius = 3.0
 
 [sub_resource type="RectangleShape2D" id=20]
 extents = Vector2( 3, 5 )
@@ -109,7 +109,7 @@ input_2/name = "Dead"
 input_2/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=25]
-graph_offset = Vector2( -503.29, -32.0331 )
+graph_offset = Vector2( -616.182, -55.5711 )
 nodes/Animation/node = SubResource( 11 )
 nodes/Animation/position = Vector2( -380, -20 )
 "nodes/Animation 2/node" = SubResource( 9 )
@@ -121,9 +121,10 @@ nodes/RunSpeed/position = Vector2( -340, 120 )
 nodes/State/node = SubResource( 13 )
 nodes/State/position = Vector2( -100, 40 )
 nodes/output/position = Vector2( 140, 40 )
-node_connections = [ "output", 0, "State", "RunSpeed", 0, "Animation 2", "State", 0, "Animation", "State", 1, "RunSpeed", "State", 2, "Animation 4" ]
+node_connections = [ "RunSpeed", 0, "Animation 2", "State", 0, "Animation", "State", 1, "RunSpeed", "State", 2, "Animation 4", "output", 0, "State" ]
 
 [node name="EnemyBase" type="KinematicBody2D"]
+collision_layer = 2
 
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 1 )

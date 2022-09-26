@@ -2,6 +2,7 @@ namespace Explanations;
 using System.Collections.Generic;
 using System.Linq;
 using Additions;
+using Enemies;
 using Godot;
 
 public class MoveAndAttackExplanations : Explanation
