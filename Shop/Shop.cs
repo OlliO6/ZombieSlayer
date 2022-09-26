@@ -34,7 +34,7 @@ public class Shop : Area2D, IInteractable
             CloseMenu();
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnAreaEntered(Area2D area)
     {
         if (Player.currentPlayer is null) return;

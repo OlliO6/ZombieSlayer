@@ -1,14 +1,14 @@
-using Godot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Additions;
-using System;
+using Godot;
 
 public class DiceContainer : VBoxContainer
 {
     [Export] private PackedScene diceFieldScene;
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnInventoryOpened() => UpdateDices();
 
     private void UpdateDices()

@@ -39,7 +39,7 @@ public class DebugMenu : Control
         EmitSignal(nameof(StateLoaded));
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     public async void FrameStep(int times, bool physics)
     {
         await ToSignal(GetTree(), physics ? "physics_frame" : "idle_frame");
@@ -55,7 +55,7 @@ public class DebugMenu : Control
         GetTree().Paused = true;
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     public async void TakeScreenshot(bool noCanvasLayers)
     {
         const float UiHideTime = 0.2f;
@@ -162,28 +162,28 @@ public class DebugMenu : Control
         }
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     public void Quit() => GetTree().Quit();
 
-    [TroughtSignal]
+    [TroughtEditor]
     public void Crash() => OS.Crash("Crashed from debug overlay");
 
-    [TroughtSignal]
+    [TroughtEditor]
     public void Exit() => Overlay.HideMenu();
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OpenConsole() => Overlay.OpenConsole();
 
-    [TroughtSignal]
+    [TroughtEditor]
     public void TogglePrintCommonLogs(bool toggled) => Overlay.turnOffCommonLogs = !toggled;
 
-    [TroughtSignal]
+    [TroughtEditor]
     public void ToggleNoUniqueNames(bool toggled) => Overlay.removeNameUniqeness = toggled;
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void ToggleShowFps(bool toggled) => Overlay.IsShowingFps = toggled;
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void PrintStrays()
     {
         PrintStrayNodes();

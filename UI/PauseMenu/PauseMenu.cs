@@ -42,10 +42,10 @@ public class PauseMenu : Control
         Visible = true;
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnMenuButtonPressed() => SceneManager.LoadMenu();
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnInventoryButtonPressed()
     {
         Unpause();

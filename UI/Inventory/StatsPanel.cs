@@ -22,7 +22,7 @@ public class StatsPanel : Control
     Inventory Inventory => Owner.LazyObjectCast(ref _inventory);
     Inventory _inventory;
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnInventorySelectionChanged(Node to) => ShowStats(to);
 
     public void ShowStats(Node from)

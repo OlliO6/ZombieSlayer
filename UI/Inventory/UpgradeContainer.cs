@@ -1,9 +1,9 @@
-using Godot;
 using System.Collections.Generic;
+using Godot;
 
 public class UpgradeContainer : GridContainer
 {
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnInventoryOpened() => UpdateAmounts();
 
     private void UpdateAmounts()

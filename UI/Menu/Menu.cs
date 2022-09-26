@@ -5,13 +5,13 @@ public class Menu : CanvasLayer
 {
     [Export] private PackedScene gameScene;
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnPlayPressed()
     {
         SceneManager.ChangeScence(gameScene);
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnQuitPressed()
     {
         GetTree().Quit();

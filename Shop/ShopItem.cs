@@ -92,7 +92,7 @@ public class ShopItem : Control
 
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnAddButtonPressed()
     {
         currentAmount++;
@@ -102,7 +102,7 @@ public class ShopItem : Control
         EmitSignal(nameof(AmountChanged));
         UpdateShopItem();
     }
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnRemoveButtonPressed()
     {
         currentAmount--;

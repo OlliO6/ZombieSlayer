@@ -1,6 +1,6 @@
-using Godot;
 using System.Collections.Generic;
 using Additions;
+using Godot;
 
 [Tool]
 public class Foldout : Container
@@ -37,7 +37,7 @@ public class Foldout : Container
         IsCollapsed = IsCollapsed;
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnButtonPressed()
     {
         IsCollapsed = !IsCollapsed;

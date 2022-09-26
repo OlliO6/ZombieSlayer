@@ -1,10 +1,10 @@
-using Godot;
 using System.Collections.Generic;
 using System.Linq;
+using Godot;
 
 public class WeaponContainer : HBoxContainer
 {
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnInventoryOpened() => UpdateWeaponFields();
 
     private void UpdateWeaponFields()

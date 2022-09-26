@@ -31,7 +31,7 @@ public class IngameUI : Control
         GameState.instance.HealthUnlocked += HeartContainer.Show;
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnPlayerHealthChanged()
     {
         maxHealth = GetOwner<Player>().MaxHealth;
@@ -39,13 +39,13 @@ public class IngameUI : Control
         UpdateHealthDisplay();
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnCoinsAmountChanged(int amount)
     {
         CoinsDisplay.ChangeCoinsAmount(amount);
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnLevelChanged()
     {
         LevelingSystem leveling = GetOwner<Player>().Leveling;
@@ -87,7 +87,7 @@ public class IngameUI : Control
         }
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnWeaponChanged(int index)
     {
         List<WeaponBase> weapons = Player.currentPlayer.GetWeapons().ToList();

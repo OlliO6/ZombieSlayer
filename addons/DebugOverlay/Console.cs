@@ -93,24 +93,24 @@ public class Console : MarginContainer
         RefreshOutput();
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnBackPressed() => (Owner as DebugOverlay)?.CloseConsole();
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnHideCommonStuffToggled(bool toggled)
     {
         removeCommonStuff = toggled;
         RefreshOutput();
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnHideTimeToggled(bool toggled)
     {
         showTime = !toggled;
         RefreshOutput();
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnCommandEntered(string command)
     {
         CommandLine.Clear();
@@ -123,13 +123,13 @@ public class Console : MarginContainer
         commandHistory.Insert(1, command);
         CurrentHistoryIndex = 0;
     }
-    [TroughtSignal]
+    [TroughtEditor]
     private void LineEdited(string text)
     {
         commandHistory[0] = text;
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnMetaClicked(string meta)
     {
         if (isReading)

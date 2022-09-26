@@ -8,7 +8,7 @@ public class PickupBase : Area2D
     protected bool collected;
 
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnAreaEntered(Area2D area)
     {
         if (collected || Player.currentPlayer is null) return;

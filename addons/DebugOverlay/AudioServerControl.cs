@@ -6,7 +6,7 @@ public class AudioServerControl : VBoxContainer
 {
     private PackedScene audioBusCtrlScene = GD.Load<PackedScene>("res://addons/DebugOverlay/AudioBusControl.tscn");
 
-    [TroughtSignal]
+    [TroughtEditor]
     public void UpdateLayout()
     {
         foreach (Node child in GetChildren())

@@ -120,7 +120,7 @@ public class DiceMenu : Control
 
     #endregion
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void UpdateDices()
     {
         if (Player.currentPlayer is null) return;
@@ -157,7 +157,7 @@ public class DiceMenu : Control
         ThrowAllButton.Disabled = DiceContainer.GetChildCount() > 0 ? false : true;
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     public void OnDiceFieldSelected(DiceField diceField)
     {
         slectedCount++;
@@ -168,7 +168,7 @@ public class DiceMenu : Control
         }
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     public void OnDiceFieldDeselected(DiceField diceField)
     {
         slectedCount--;
@@ -180,7 +180,7 @@ public class DiceMenu : Control
         }
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     public void OnDiceFieldWatched(DiceField diceField)
     {
         ShowDiceScenes(diceField);
@@ -218,7 +218,7 @@ public class DiceMenu : Control
         }
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnThrowAllPressed()
     {
         Close();
@@ -229,7 +229,7 @@ public class DiceMenu : Control
         }
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnThrowSelectedPressed()
     {
         Close();

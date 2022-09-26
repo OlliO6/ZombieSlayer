@@ -232,7 +232,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         if (isDead) EmitSignal(nameof(DeathEnded));
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnLevelChanged()
     {
         EmitSignal(nameof(LevelChanged), Leveling.CurrentLevelIndex);

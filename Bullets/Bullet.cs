@@ -34,7 +34,7 @@ public class Bullet : Area2D, IKillable, IDamageDealer
         GlobalPosition += speed * delta * GlobalTransform.x.Normalized();
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     protected virtual void OnBodyEntered(Node body)
     {
         Die();

@@ -9,7 +9,7 @@ public class InteractionPickupBase : Area2D, IInteractable
 
     protected bool collected;
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnAreaEntered(Area2D area)
     {
         if (collected || Player.currentPlayer is null) return;
@@ -17,7 +17,7 @@ public class InteractionPickupBase : Area2D, IInteractable
         Player.currentPlayer.AddInteractable(this);
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnAreaExited(Area2D area)
     {
         if (collected) return;

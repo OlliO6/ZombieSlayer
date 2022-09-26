@@ -16,7 +16,7 @@ public class HurtArea : Area2D
 
     #endregion
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnAreaEntered(Area2D area)
     {
         if (!damageFromAreas) return;
@@ -24,7 +24,7 @@ public class HurtArea : Area2D
         if (area is IDamageDealer dealer) ApplyDamage(dealer);
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnBodyEntered(Node body)
     {
         if (!damageFromBodies) return;

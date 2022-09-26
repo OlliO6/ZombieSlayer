@@ -59,7 +59,7 @@ public class OptionsMenu : Control
         upscaleToggle.SetBlockSignals(false);
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnOptionsPressed()
     {
         Visible = true;
@@ -68,7 +68,7 @@ public class OptionsMenu : Control
         ReloadOptions();
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnBackPressed()
     {
         Visible = false;
@@ -77,10 +77,10 @@ public class OptionsMenu : Control
         OptionsManager.SaveOptions();
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnRevertPressed() => OptionsManager.SetToUserFile();
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnResetPressed() => OptionsManager.ResetOptions();
 
     private void SetFullscreen(bool value) => OptionsManager.IsFullscreen = value;

@@ -4,6 +4,8 @@ using Godot;
 [Additions.Debugging.DefaultColor("LightGreen")]
 public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
 {
+    public const float InvisTime = 0.075f, StunTime = 0.15f;
+
     [Export] private PackedScene coinScene;
     [Export] private int coinsAmount = 2;
     [Export] private Vector2 movementSpeedRange;
@@ -20,6 +22,9 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
     public event System.Action<IEnemy> EnemyDied;
 
     private bool dead, isInvincible;
+    private bool isStunned;
+    float runSpeedScale;
+
 
     #region AnimTree Reference
 
@@ -38,14 +43,7 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
     #region AudioPlayer Reference
 
     private AudioStreamPlayer storerForAudioPlayer;
-    public AudioStreamPlayer AudioPlayer => this.LazyGetNode(ref storerForAudioPlayer, "AudioPlayer");
-
-    #endregion
-
-    #region FlashTween Reference
-
-    private Tween storerForFlashTween;
-    public Tween FlashTween => this.LazyGetNode(ref storerForFlashTween, "FlashTween");
+    public AudioStreamPlayer AudioPlayer => this.LazyGetNode(ref storerForAudioPlayer, "HurtAudioPlayer");
 
     #endregion
 
@@ -56,16 +54,14 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
 
         AnimTree.SetParam("State/current", 1);
         float weight = Mathf.InverseLerp(movementSpeedRange.x, movementSpeedRange.y, movementSpeed);
-        float runSpeedScale = Mathf.Lerp(0.6f, 1, weight);
+        runSpeedScale = Mathf.Lerp(0.6f, 1, weight);
 
         AnimTree.SetParam("RunSpeed/scale", runSpeedScale);
-
-        FlashTween.Connect("tween_all_completed", AnimTree, "set", new("parameters/RunSpeed/scale", runSpeedScale));
     }
 
     public override void _PhysicsProcess(float delta)
     {
-        if (dead || FlashTween.IsActive()) return;
+        if (dead || isStunned) return;
 
         Vector2 dirToPlayer = GetDirectionToPlayer();
 
@@ -87,30 +83,47 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
     public void GetDamage(int amount)
     {
         CurrentHealth -= amount;
-
-        FlashTween.InterpolateProperty(Sprite, "material:shader_param/flashStrenght", 0.9f, 0f, 0.15f, Tween.TransitionType.Cubic, Tween.EaseType.In);
-        FlashTween.Start();
-        AnimTree.SetParam("RunSpeed/scale", 0);
-
-        AudioPlayer.Play();
+        AnimateDamage();
 
         EmitSignal(nameof(Damaged));
 
         if (CurrentHealth <= 0) Die();
 
+        isStunned = true;
         isInvincible = true;
-        new TimeAwaiter(this, 0.075f, onCompleted: () => isInvincible = false);
+        new TimeAwaiter(this, InvisTime, onCompleted: () => isInvincible = false);
+        new TimeAwaiter(this, StunTime, onCompleted: () =>
+                {
+                    isStunned = false;
+                    AnimTree.Set("parameters/RunSpeed/scale", runSpeedScale);
+                });
+
+        void AnimateDamage()
+        {
+            var tween = CreateTween();
+            tween.Chain()
+                    .TweenProperty(Sprite, "material:shader_param/flashStrenght", 0.9f, 0.05f)
+                    .From(0f)
+                    .SetTrans(Tween.TransitionType.Sine)
+                    .SetEase(Tween.EaseType.In);
+
+            tween.TweenProperty(Sprite, "material:shader_param/flashStrenght", 0f, 0.15f)
+                    .SetTrans(Tween.TransitionType.Sine)
+                    .SetEase(Tween.EaseType.In);
+
+            AnimTree.SetParam("RunSpeed/scale", 0);
+            AudioPlayer.Play();
+        }
     }
 
     public void Die()
     {
         dead = true;
-
         Debug.Log(this, "Died");
 
         // better y sort
-        Sprite.Offset += Vector2.Down * 4;
-        Position += Vector2.Up * 4;
+        Sprite.Offset += Vector2.Down * 5;
+        Position += Vector2.Up * 5;
 
         AnimTree.SetParam("State/current", 2);
 
@@ -132,6 +145,7 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
         }
     }
 
+    [TroughtEditor]
     public void DeleteEverythingButSprite()
     {
         Vector2 spritePos = Sprite.GlobalPosition;

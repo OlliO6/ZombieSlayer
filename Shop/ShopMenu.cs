@@ -19,7 +19,7 @@ public class ShopMenu : Control
         OnUpdateRatio();
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     public void OnUpdateRatio()
     {
         List<ShopItem> items = GetNode(shopItems).GetChildren().OfType<ShopItem>().ToList();
@@ -68,7 +68,7 @@ public class ShopMenu : Control
                 .Show();
     }
 
-    [TroughtSignal]
+    [TroughtEditor]
     private void OnBuyDicePressed()
     {
         if (Player.currentPlayer is null) return;
