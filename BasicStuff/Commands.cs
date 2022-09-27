@@ -85,7 +85,7 @@ public class GameCommands : CommandCollection
 
     private bool PlayerAvailable()
     {
-        if (IsInstanceValid(Player.currentPlayer)) return true;
+        if (Player.Exists) return true;
 
         AddOutputLine(ColorizeText("No player available", Colors.OrangeRed));
         return false;

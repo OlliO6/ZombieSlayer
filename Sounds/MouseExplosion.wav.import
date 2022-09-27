@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/MouseExplosion.wav-c7d3f669a3165e7651c36907b009fdce.sample"
+
+[deps]
+
+source_file="res://Sounds/MouseExplosion.wav"
+dest_files=[ "res://.import/MouseExplosion.wav-c7d3f669a3165e7651c36907b009fdce.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=true
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

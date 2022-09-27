@@ -313,7 +313,7 @@ scene = ExtResource( 6 )
 
 [node name="MouseBomb" type="Node" parent="EnemySpawner/Level4/BombWave"]
 script = ExtResource( 10 )
-scene = ExtResource( 6 )
+scene = ExtResource( 17 )
 priority = 5
 
 [node name="Instantiater2" type="Node" parent="EnemySpawner/Level4"]

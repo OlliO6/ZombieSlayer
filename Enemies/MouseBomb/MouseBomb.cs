@@ -42,16 +42,22 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
     {
         if (dead || node is not Player) return;
 
-        AnimTree.SetParam("Transition/current", 1);
+        AnimTree.SetParam("State/current", 1);
         isDetonating = true;
     }
 
     public override void _PhysicsProcess(float delta)
     {
-        if (dead || isStunned) return;
+        if (dead || isStunned || !Player.Exists ||
+                Position.DistanceTo(Player.currentPlayer.Position) < NoMoveDist)
+        {
+            AnimTree.SetParam("RunSpeed/scale", 0);
+            return;
+        }
 
+        AnimTree.SetParam("RunSpeed/scale", 1);
         Vector2 dirToPlayer = GetDirectionToPlayer(this);
-        Sprite.FlipH = dirToPlayer.x > 0; // Other because sprite
+        Sprite.FlipH = dirToPlayer.x > 0; // Greater because sprite is flipped
         MoveAndSlide(dirToPlayer * movementSpeed * (isDetonating ? detonationSpeedFactor : 1));
     }
 
@@ -61,12 +67,12 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
     {
         CurrentHealth -= amount;
 
-        AnimTree.SetParam("RunSpeed/scale", 0);
         FlashSprite(Sprite);
 
         EmitSignal(nameof(Damaged));
 
-        if (CurrentHealth <= 0) Die();
+        if (CurrentHealth <= 0)
+            Die();
 
         isStunned = true;
         isInvincible = true;
@@ -81,7 +87,10 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
     public void Die()
     {
         dead = true;
-        AnimTree.SetParam("Transition/current", 2);
+        AnimTree.SetParam("State/current", 2);
+        AnimTree.SetParam("DiyingType/current", 0);
+
+        DeadYSort(this, Sprite, 10);
 
         SpawnCoins(this, coinsAmount);
         EmitSignal(nameof(Died));
@@ -92,7 +101,13 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
     public void DetonationFinished()
     {
         EmitSignal(nameof(Detonated));
+        Explode();
+    }
+
+    public void Explode()
+    {
         Die();
+        AnimTree.SetParam("DiyingType/current", 1);
     }
 
     [TroughtEditor]

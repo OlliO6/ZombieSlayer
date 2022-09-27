@@ -9,6 +9,7 @@ using Leveling;
 public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 {
     public static Player currentPlayer;
+    public static bool Exists => IsInstanceValid(currentPlayer);
 
     [Signal] public delegate void CoinsAmountChanged(int amount);
     [Signal] public delegate void LevelChanged(int to);

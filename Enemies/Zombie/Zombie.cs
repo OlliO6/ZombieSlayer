@@ -48,13 +48,17 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
         AnimTree.SetParam("State/current", 1);
         float weight = Mathf.InverseLerp(movementSpeedRange.x, movementSpeedRange.y, movementSpeed);
         runSpeedScale = Mathf.Lerp(0.6f, 1, weight);
-
-        AnimTree.SetParam("RunSpeed/scale", runSpeedScale);
     }
 
     public override void _PhysicsProcess(float delta)
     {
-        if (dead || isStunned) return;
+        if (dead || isStunned || !Player.Exists ||
+                Position.DistanceTo(Player.currentPlayer.Position) < NoMoveDist)
+        {
+            AnimTree.SetParam("RunSpeed/scale", 0);
+            return;
+        }
+        AnimTree.SetParam("RunSpeed/scale", runSpeedScale);
 
         Vector2 dirToPlayer = GetDirectionToPlayer(this);
         Sprite.FlipH = dirToPlayer.x < 0;
@@ -68,7 +72,6 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
         CurrentHealth -= amount;
 
         FlashSprite(Sprite);
-        AnimTree.SetParam("RunSpeed/scale", 0);
 
         EmitSignal(nameof(Damaged));
 
@@ -89,9 +92,7 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
         dead = true;
         Debug.Log(this, "Died");
 
-        // better y sort
-        Sprite.Offset += Vector2.Down * 5;
-        Position += Vector2.Up * 5;
+        DeadYSort(this, Sprite, 5);
 
         AnimTree.SetParam("State/current", 2);
 

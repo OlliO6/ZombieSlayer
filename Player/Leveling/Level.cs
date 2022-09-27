@@ -26,25 +26,25 @@ public class Level : Node
         if (!dontHeal)
             Player.currentPlayer?.Heal();
 
-        if (explanation is not "")
-            ExplanationsManager.ConnectExplanationToSignal(explanation, this, nameof(LevelReached));
+        EmitSignal(nameof(LevelReached));
 
         if (!noMenu)
         {
             LevelUpDisplay menu;
             menu = MakeMenu();
-
-            ToSignal(menu, nameof(LevelUpDisplay.CloseBegan)).OnCompleted(() =>
+            ToSignal(menu, nameof(LevelUpDisplay.CloseBegan)).OnCompleted(() => ApllyBuffs(buffs));
+            ToSignal(menu, nameof(LevelUpDisplay.Closed)).OnCompleted(() =>
             {
-                EmitSignal(nameof(LevelReached));
-                ApllyBuffs(buffs);
+                if (explanation is not "")
+                    ExplanationsManager.StartExplanation(explanation);
                 menu.QueueFree();
             });
             return;
         }
 
         ApllyBuffs(buffs);
-        EmitSignal(nameof(LevelReached));
+        if (explanation is not "")
+            ExplanationsManager.StartExplanation(explanation);
 
         static void ApllyBuffs(IEnumerable<LevelBuff> buffs)
         {

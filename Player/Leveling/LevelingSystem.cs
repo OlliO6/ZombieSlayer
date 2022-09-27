@@ -87,10 +87,11 @@ public class LevelingSystem : Node
         CurrentLevelIndex++;
         AnimationPlayer.Play("LevelUp");
         if (CurrentLevelIndex >= Levels.GetChildCount()) return;
-        CurrentLevelNode.ReachLevel();
-        StartTween();
+
         ToSignal(CurrentLevelNode, nameof(Level.LevelReached)).OnCompleted(() =>
                 EmitSignal(nameof(LevelChanged)));
+        CurrentLevelNode.ReachLevel();
+        StartTween();
     }
 
     public override void _Ready()
