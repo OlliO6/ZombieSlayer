@@ -35,7 +35,7 @@ pause_mode = 2
 layer = 100
 script = ExtResource( 3 )
 IsShowingFps = true
-turnOffCommonLogs = true
+turnOffCommonLogs = false
 removeNameUniqeness = true
 _Labels = NodePath("MarginContainer/HBoxContainer/DebugLabels")
 _Logs = NodePath("MarginContainer/MarginContainer/Logs")
@@ -243,6 +243,7 @@ text = "Show fps"
 margin_top = 44.0
 margin_right = 212.0
 margin_bottom = 84.0
+pressed = true
 text = "Common logs"
 
 [node name="NoUniqueNamesToggle" type="CheckButton" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer"]
@@ -344,7 +345,7 @@ custom_constants/margin_top = 50
 custom_constants/margin_left = 150
 custom_constants/margin_bottom = 50
 script = ExtResource( 8 )
-removeCommonStuff = true
+removeCommonStuff = false
 showTime = true
 _output = NodePath("MarginContainer/VBoxContainer/RichTextLabel")
 _CommandLine = NodePath("MarginContainer/VBoxContainer/LineEdit")
@@ -396,7 +397,6 @@ margin_right = 108.0
 margin_bottom = 20.0
 size_flags_horizontal = 10
 toggle_mode = true
-pressed = true
 text = "Hide Common "
 
 [node name="HideTimeButton" type="Button" parent="Console/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
@@ -431,33 +431,53 @@ custom_colors/selection_color = Color( 0.529412, 0.596078, 0.647059, 1 )
 bbcode_enabled = true
 bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint]
 [00:01] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
-[00:02] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
-[00:02] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
-[00:02] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
-[00:02] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
-[00:04] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
-[00:04] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
-[00:05] [tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
-[00:05] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
-[00:05] [tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
-[00:05] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
-[00:05] [tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
-[00:05] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
+[00:03] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
+[00:03] [tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to [/tint]
+[00:03] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
+[00:03] [tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Started[/tint]
+[00:03] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
+[00:03] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
+[00:03] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+[00:04] [tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
+[00:05] [tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dolphin[/tint]
+[00:05] [tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Rifle[/tint]
+[00:15] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[00:16] [tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Ended[/tint]
+[00:19] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[00:21] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[00:23] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[00:25] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[00:27] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[00:29] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[00:31] [tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[00:41] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
+[00:41] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
+[00:41] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
 [00:01] SceneManager: Loaded Menu
-[00:02] SceneManager: Loaded Game
-[00:02] ExplanationsManager: Started MoveAndAttack
-[00:02] Level 0: Reached
-[00:02] EnemySpawner: False
-[00:04] Level 1: Reached
-[00:04] EnemySpawner: False
-[00:05] Level 2: Reached
-[00:05] EnemySpawner: True
-[00:05] Level 3: Reached
-[00:05] EnemySpawner: True
-[00:05] Level 4: Reached
-[00:05] EnemySpawner: False
+[00:03] SceneManager: Loaded Game
+[00:03] WeaponSwitcher: Switched weapon to 
+[00:03] ExplanationsManager: Started MoveAndAttack
+[00:03] MoveAndAttack: Explanation Started
+[00:03] Level 0: Reached
+[00:03] EnemySpawner: False
+[00:03] EnemySpawner: Difficulty changed to Level0
+[00:04] WeaponSwitcher: Switched weapon to Dagger
+[00:05] WeaponSwitcher: Switched weapon to Dolphin
+[00:05] WeaponSwitcher: Switched weapon to Rifle
+[00:15] Player: Got 1 damage
+[00:16] MoveAndAttack: Explanation Ended
+[00:19] Player: Got 1 damage
+[00:21] Player: Got 1 damage
+[00:23] Player: Got 1 damage
+[00:25] Player: Got 1 damage
+[00:27] Player: Got 1 damage
+[00:29] Player: Got 1 damage
+[00:31] Player: Got 1 damage
+[00:41] Level 1: Reached
+[00:41] EnemySpawner: False
+[00:41] EnemySpawner: Difficulty changed to Level1
 "
 scroll_following = true
 selection_enabled = true
@@ -474,11 +494,9 @@ margin_top = 454.0
 margin_right = 704.0
 margin_bottom = 480.0
 size_flags_stretch_ratio = 0.19
-text = "lvlup"
 clear_button_enabled = true
 placeholder_text = "Command Line"
 caret_blink = true
-caret_position = 5
 
 [node name="Commands" type="Node" parent="Console"]
 script = ExtResource( 10 )

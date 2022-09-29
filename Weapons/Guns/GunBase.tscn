@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Shaders/Materials/StandartSpriteMat.material" type="Material" id=1]
 [ext_resource path="res://Weapons/Guns/Pistol/Pistol.cs" type="Script" id=2]
 [ext_resource path="res://Bullets/PlayerBullets/PlayerBullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sounds/shoot.wav" type="AudioStream" id=4]
+[ext_resource path="res://addons/Shake/PlayerCamShakeInducer.cs" type="Script" id=5]
 
 [sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0.352174, 1 )
@@ -102,6 +103,20 @@ tracks/3/keys = {
 } ],
 "times": PoolRealArray( 0 )
 }
+tracks/4/type = "method"
+tracks/4/path = NodePath("PlayerCamShakeInducer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "Shake"
+} ]
+}
 
 [node name="Gun" type="Node2D"]
 script = ExtResource( 2 )
@@ -139,3 +154,6 @@ anims/Shoot = SubResource( 2 )
 stream = SubResource( 6 )
 volume_db = -11.885
 bus = "SFX"
+
+[node name="PlayerCamShakeInducer" type="Node" parent="."]
+script = ExtResource( 5 )

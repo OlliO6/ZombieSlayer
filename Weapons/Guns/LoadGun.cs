@@ -11,6 +11,9 @@ public class LoadGun : GunBase
     bool isLoading;
     float loadProgress;
 
+    private PlayerCamShakeInducer storerForPlayerCamShakeInducer;
+    public PlayerCamShakeInducer PlayerCamShakeInducer => this.LazyGetNode(ref storerForPlayerCamShakeInducer, "PlayerCamShakeInducer");
+
     public override void Attack()
     {
         if (!IsInstanceValid(lastBullet)) return;
@@ -27,9 +30,16 @@ public class LoadGun : GunBase
         lastBullet.damage = GetBulletDamage();
         lastBullet.maxLivetime = bulletLivetime;
         lastBullet.GlobalTransform = InstantiatePoint.GlobalTransform;
-        lastBullet.Rotate(Mathf.Deg2Rad(Random.NormallyDistributedFloat(deviation: bulletSpread * spread.Interpolate(loadProgress))));
-        (lastBullet as LoadBullet).Power = power.InterpolateBaked(loadProgress);
+        lastBullet.Rotate(Mathf.Deg2Rad(Random.NormallyDistributedFloat(deviation: bulletSpread * spread.InterpolateBaked(loadProgress))));
 
+        float _power = power.InterpolateBaked(loadProgress);
+
+        if (lastBullet is LoadBullet loadBullet)
+        {
+            loadBullet.Power = _power;
+        }
+
+        PlayerCamShakeInducer.Shake(_power);
         AnimationPlayer.Stop();
         AnimationPlayer.Play("Shoot");
 
@@ -46,6 +56,7 @@ public class LoadGun : GunBase
             loadProgress = 0;
             lastBullet = bulletScene.Instance<Bullet>();
             lastBullet.dead = true;
+            AnimationPlayer.Play("Load");
             CallDeferred(nameof(PauseBullet));
             InstantiatePoint.AddChild(lastBullet);
             EmitSignal(nameof(LoadStarted));

@@ -4,6 +4,7 @@ using System.Linq;
 using Additions;
 using Godot;
 using Leveling;
+using Shaking;
 
 [Additions.Debugging.DefaultColor(nameof(Colors.LightBlue), nameof(Colors.DeepSkyBlue))]
 public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
@@ -24,6 +25,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     [Export] public float damageMultiplier = 1;
     [Export] public int startCoins = 0;
     [Export] private float startMagnetSize = 4;
+    [Export] private ShakeProfile damageShake, dieShake;
 
     #region AnimationTree Reference
 
@@ -65,6 +67,12 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     private LevelingSystem storerForLeveling;
     public LevelingSystem Leveling => this.LazyGetNode(ref storerForLeveling, "Leveling");
+
+    #endregion
+    #region CamShaker Reference
+
+    private CamShaker storerForCamShaker;
+    public CamShaker CamShaker => this.LazyGetNode(ref storerForCamShaker, "CamShaker");
 
     #endregion
 
@@ -189,6 +197,10 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         }
     }
 
+    public void ShakeCam(ShakeProfile profile) => CamShaker.Shake(profile);
+    public void ShakeCam(ShakeProfile profile, float ampAndTimeFactor) => CamShaker.Shake(profile, ampAndTimeFactor);
+    public void ShakeCam(ShakeProfile profile, float ampFactor, float timeFactor) => CamShaker.Shake(profile, ampFactor, timeFactor);
+
     public bool AllowDamageFrom(IDamageDealer from) => true;
 
     public void GetDamage(int amount)
@@ -197,6 +209,8 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
             return;
 
         if (GameStats.Current.healthUnlocked) CurrentHealth -= amount;
+
+        ShakeCam(damageShake);
 
         AnimationTree.Set("parameters/Damage/active", true);
         EmitSignal(nameof(Damged));
@@ -220,6 +234,8 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     public void Die()
     {
         isDead = true;
+
+        ShakeCam(dieShake);
 
         PauseMode = PauseModeEnum.Process;
         GetTree().Paused = true;

@@ -24,6 +24,12 @@ SkipInput="SkipDialog"
 DelayFactorWhenSkipPressed=0.001
 DefaultDelay=0.06
 
+[MonoCustomResourceRegistry]
+
+ResourceScriptDirectories=[ "res://" ]
+SearchType=0
+ClassPrefix=""
+
 [application]
 
 config/name="ZombieSlayer"
@@ -57,7 +63,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/BetterFileSystem/plugin.cfg", "res://addons/DebugOverlay/plugin.cfg", "res://addons/Diadot/plugin.cfg", "res://addons/Random Scene Node/plugin.cfg", "res://addons/imrp/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg", "res://addons/project-statistics/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/BetterFileSystem/plugin.cfg", "res://addons/DebugOverlay/plugin.cfg", "res://addons/Diadot/plugin.cfg", "res://addons/MonoCustomResourceRegistry/plugin.cfg", "res://addons/Random Scene Node/plugin.cfg", "res://addons/Shake/plugin.cfg", "res://addons/imrp/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg", "res://addons/project-statistics/plugin.cfg" )
 
 [gui]
 
