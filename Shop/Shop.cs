@@ -56,7 +56,7 @@ public class Shop : Area2D, IInteractable
         GetTree().Paused = true;
 
         shop.Visible = true;
-        shop.OnUpdateRatio();
+        shop.OnDiceUpdate();
 
         EmitSignal(nameof(MenuOpened));
     }

@@ -144,18 +144,18 @@ margin_right = 199.0
 margin_bottom = 87.0
 size_flags_vertical = 3
 custom_constants/margin_right = 2
-custom_constants/margin_top = 6
+custom_constants/margin_top = 2
 custom_constants/margin_left = 2
 custom_constants/margin_bottom = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
 margin_left = 2.0
-margin_top = 6.0
+margin_top = 2.0
 margin_right = 197.0
 margin_bottom = 85.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-margin_bottom = 79.0
+margin_bottom = 83.0
 scroll_horizontal_enabled = false
 
 [node name="DiceContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer"]
@@ -165,14 +165,14 @@ diceFieldScene = ExtResource( 18 )
 [node name="VSeparator" type="VSeparator" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 margin_left = 4.0
 margin_right = 7.0
-margin_bottom = 79.0
+margin_bottom = 83.0
 
 [node name="StatsPanel" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource( 19 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 11.0
 margin_right = 195.0
-margin_bottom = 79.0
+margin_bottom = 83.0
 
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_top = 87.0

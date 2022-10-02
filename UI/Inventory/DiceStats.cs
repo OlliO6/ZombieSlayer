@@ -9,8 +9,8 @@ public class DiceStats : Control
 
     #region DiceScenesContainer Reference
 
-    private GridContainer storerForDiceScenesContainer;
-    public GridContainer DiceScenesContainer => this.LazyGetNode(ref storerForDiceScenesContainer, "%DiceScenesContainer");
+    private DiceScenesContainer storerForDiceScenesContainer;
+    public DiceScenesContainer DiceScenesContainer => this.LazyGetNode(ref storerForDiceScenesContainer, "%DiceScenesContainer");
 
     #endregion
     #region TypeLabel Reference
@@ -44,7 +44,7 @@ public class DiceStats : Control
     public void ShowStats(Dice dice)
     {
         Show();
-        ShowDiceScenes(dice);
+        DiceScenesContainer.Scenes = dice.scenes.ToList();
 
         TypeLabel.Text = $"{(dice.broken ? "Broken " : "")}{dice.Filename.GetFile().BaseName()}";
 
@@ -56,24 +56,5 @@ public class DiceStats : Control
         RepairButton.Disabled = repairCost > (Player.currentPlayer is null ? 0 : Player.currentPlayer.Coins);
 
         SellButton.Text = $"Sell {sellPrice}";
-    }
-
-    private void ShowDiceScenes(Dice dice)
-    {
-        foreach (DiceSceneField sceneField in DiceScenesContainer.GetChildren())
-        {
-            sceneField.QueueFree();
-            DiceScenesContainer.RemoveChild(sceneField);
-        }
-
-        if (dice is null || dice.scenes is null) return;
-
-        foreach (PackedScene scene in dice.scenes)
-        {
-            DiceSceneField sceneField = diceSceneFieldScene.Instance<DiceSceneField>();
-            sceneField.Scene = scene;
-
-            DiceScenesContainer.AddChild(sceneField);
-        }
     }
 }

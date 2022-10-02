@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Additions;
 using Godot;
 
 public class DiceMenu : Control
 {
-    [Export] private PackedScene diceFieldScene, diceSceneFieldScene;
+    [Export] private PackedScene diceFieldScene;
 
     [Signal] public delegate void Opened();
     [Signal] public delegate void OpenStarted();
@@ -15,43 +16,34 @@ public class DiceMenu : Control
     private int slectedCount;
     private DiceField watchedField;
 
-
     #region AnimationPlayer Reference
 
     private AnimationPlayer storerForAnimationPlayer;
     public AnimationPlayer AnimationPlayer => this.LazyGetNode(ref storerForAnimationPlayer, "AnimationPlayer");
 
     #endregion
-
     #region DiceContainer Reference
 
     private Container storerForDiceContainer;
-    public Container DiceContainer => this.LazyGetNode(ref storerForDiceContainer, _DiceContainer);
-    [Export] private NodePath _DiceContainer = "DiceContainer";
+    public Container DiceContainer => this.LazyGetNode(ref storerForDiceContainer, "%DiceContainer");
 
     #endregion
-
     #region DiceScenesContainer Reference
 
-    private GridContainer storerForDiceScenesContainer;
-    public GridContainer DiceScenesContainer => this.LazyGetNode(ref storerForDiceScenesContainer, _DiceScenesContainer);
-    [Export] private NodePath _DiceScenesContainer = "DiceScenesContainer";
+    private DiceScenesContainer storerForDiceScenesContainer;
+    public DiceScenesContainer DiceScenesContainer => this.LazyGetNode(ref storerForDiceScenesContainer, "%DiceScenesContainer");
 
     #endregion
-
     #region ThrowAllButton Reference
 
     private Button storerForThrowAllButton;
-    public Button ThrowAllButton => this.LazyGetNode(ref storerForThrowAllButton, _ThrowAllButton);
-    [Export] private NodePath _ThrowAllButton = "ThrowAllButton";
+    public Button ThrowAllButton => this.LazyGetNode(ref storerForThrowAllButton, "%ThrowAllButton");
 
     #endregion
-
     #region ThrowSelectedButton Reference
 
     private Button storerForThrowSelectedButton;
-    public Button ThrowSelectedButton => this.LazyGetNode(ref storerForThrowSelectedButton, _ThrowSelectedButton);
-    [Export] private NodePath _ThrowSelectedButton = "ThrowSelectedButton";
+    public Button ThrowSelectedButton => this.LazyGetNode(ref storerForThrowSelectedButton, "%ThrowSelectedButton");
 
     #endregion
 
@@ -194,13 +186,7 @@ public class DiceMenu : Control
         if (watchedField is not null) watchedField.IsWatched = false;
         watchedField = diceField;
 
-        foreach (DiceSceneField sceneField in DiceScenesContainer.GetChildren())
-        {
-            sceneField.QueueFree();
-            DiceScenesContainer.RemoveChild(sceneField);
-        }
-
-        HSeparator separator = GetNode<HSeparator>("HBoxContainer/CenterContainer/VBoxContainer/HSeparator");
+        HSeparator separator = GetNode<HSeparator>("%Separator");
 
         if (dice is null || dice.scenes is null || dice.scenes.Length is 0)
         {
@@ -208,14 +194,7 @@ public class DiceMenu : Control
             return;
         }
         separator.Visible = true;
-
-        foreach (PackedScene scene in dice.scenes)
-        {
-            DiceSceneField sceneField = diceSceneFieldScene.Instance<DiceSceneField>();
-            sceneField.Scene = scene;
-
-            DiceScenesContainer.AddChild(sceneField);
-        }
+        DiceScenesContainer.Scenes = dice.scenes.ToList();
     }
 
     [TroughtEditor]

@@ -7,101 +7,111 @@ using Godot;
 public class ShopMenu : Control
 {
     [Export] private PackedScene diceScene;
-    [Export] private NodePath ratioLabel, priceLabel, buyDiceButton, backButton;
-    [Export] private NodePath shopItems;
+
+    public List<ShopItem> itemsToBuy = new();
+
+    private Label storerForPriceLabel;
+    private Container storerForShopItemsContainer;
+    private Button storerForBuyDiceButton;
+    private DiceScenesContainer storerForDiceScenesContainer;
+
+    public Button BuyDiceButton => this.LazyGetNode(ref storerForBuyDiceButton, "%BuyDiceButton");
+    public Label PriceLabel => this.LazyGetNode(ref storerForPriceLabel, "%PriceLabel");
+    public Container ShopItemsContainer => this.LazyGetNode(ref storerForShopItemsContainer, "%ShopItemsContainer");
+    public DiceScenesContainer DiceScenesContainer => this.LazyGetNode(ref storerForDiceScenesContainer, "%DiceScenesContainer");
 
     public override void _Ready()
     {
-        foreach (ShopItem item in GetNode(shopItems).GetChildren().OfType<ShopItem>())
+        foreach (ShopItem item in ShopItemsContainer.GetChildren().OfType<ShopItem>())
         {
             item.Hide();
+            item.UpdateShopItem();
         }
-        OnUpdateRatio();
+        OnDiceUpdate();
     }
 
-    [TroughtEditor]
-    public void OnUpdateRatio()
+    public void OnDiceUpdate()
     {
-        List<ShopItem> items = GetNode(shopItems).GetChildren().OfType<ShopItem>().ToList();
+        var items = GetItems();
+        var scenes = GetScenesToBuy();
+        int price = GetPrice();
 
-        int ratio = 0;
-        int price = 0;
-        foreach (var item in items)
+        foreach (ShopItem item in items)
+            item.SetAddButtonEnabled(scenes.Count < 6);
+
+        BuyDiceButton.Disabled = (scenes.Count is 0 || Player.currentPlayer is null || Player.currentPlayer.Coins < price) ? true : false;
+
+        // Make Scene count 6 
+        while (scenes.Count < 6)
+            scenes.Add(null);
+
+        DiceScenesContainer.Scenes = scenes;
+        PriceLabel.Text = $"Price: {price.ToString()}";
+    }
+
+    public void OnItemRemoved(ShopItem item)
+    {
+        itemsToBuy.Remove(item);
+        OnDiceUpdate();
+    }
+
+    public void OnItemAdded(ShopItem item)
+    {
+        itemsToBuy.Add(item);
+        OnDiceUpdate();
+    }
+
+    public List<ShopItem> GetItems() => ShopItemsContainer.GetChildren().OfType<ShopItem>().ToList();
+
+    public List<PackedScene> GetScenesToBuy() => itemsToBuy.ConvertAll((ShopItem item) => item.SceneToBuy);
+
+    public int GetPrice()
+    {
+        int result = 0;
+
+        foreach (ShopItem item in GetItems())
         {
-            item.UpdateShopItem();
-            ratio += item.currentAmount;
-            price += item.currentPrice;
-        }
-
-        GetNode<Label>(ratioLabel).Text = $"{ratio}/6";
-        GetNode<Label>(priceLabel).Text = $"Price: {price}";
-
-
-        if (ratio >= 6)
-        {
-            foreach (var item in items)
+            for (int count = item.count - 1; count >= item.count - item.currentAmount; count--)
             {
-                item.SetAddButtonEnabled(false);
+                result += item.GetPrice(count);
             }
         }
-        else
-        {
-            foreach (var item in items)
-            {
-                item.SetAddButtonEnabled(true);
-            }
-        }
 
-        if (ratio == 0 || Player.currentPlayer is null || Player.currentPlayer.Coins < price)
-        {
-            GetNode<Button>(buyDiceButton).Disabled = true;
-        }
-        else
-        {
-            GetNode<Button>(buyDiceButton).Disabled = false;
-        }
+        return result;
     }
 
     public void UnlockItem(string name)
     {
-        GetNode(shopItems).GetChildren().OfType<ShopItem>().First((ShopItem item) => item.Name == name)
+        GetItems()
+                .First((ShopItem item) => item.Name == name)
                 .Show();
     }
+
+    [TroughtEditor]
+    private void OnBackPressed() => (Owner as Shop)?.CloseMenu();
 
     [TroughtEditor]
     private void OnBuyDicePressed()
     {
         if (Player.currentPlayer is null) return;
 
-        Dice dice = diceScene.Instance<Dice>();
+        var items = GetItems();
+        var scenes = GetScenesToBuy();
 
-        List<ShopItem> items = GetNode(shopItems).GetChildren().OfType<ShopItem>().ToList();
-
-        List<PackedScene> scenes = new();
-
-        int price = 0;
-
-        foreach (var item in items)
-        {
-            for (int i = 0; i < item.currentAmount; i++)
-            {
-                scenes.Add(item.SceneToBuy);
-            }
-            price += item.currentPrice;
-        }
+        int price = GetPrice();
 
         if (Player.currentPlayer.Coins < price) return;
 
         foreach (var item in items) item.Sell();
 
+        Dice dice = diceScene.Instance<Dice>();
         AddScenesToDice(dice, scenes);
 
         Player.currentPlayer.Coins -= price;
         Player.currentPlayer.AddDice(dice);
 
-        OnUpdateRatio();
-
         Debug.LogU(this, "Selled Dice");
+        OnDiceUpdate();
     }
 
     private void AddScenesToDice(Dice dice, List<PackedScene> scenes)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://UI/DiceMenu/DiceMenu.cs" type="Script" id=1]
 [ext_resource path="res://UI/DiceMenu/DiceSceneField.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/Fonts/PondeSmall.tres" type="DynamicFont" id=3]
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=4]
+[ext_resource path="res://UI/DiceMenu/DiceScenesContainer.cs" type="Script" id=5]
 [ext_resource path="res://UI/DiceMenu/DiceField.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Animation" id=4]
@@ -134,11 +135,6 @@ anchor_bottom = 1.0
 theme = ExtResource( 4 )
 script = ExtResource( 1 )
 diceFieldScene = ExtResource( 7 )
-diceSceneFieldScene = ExtResource( 2 )
-_DiceContainer = NodePath("HBoxContainer/ScrollContainer/DiceContainer")
-_DiceScenesContainer = NodePath("HBoxContainer/CenterContainer/VBoxContainer/DiceScenesContainer")
-_ThrowAllButton = NodePath("HBoxContainer/CenterContainer/VBoxContainer/ThrowAllButton")
-_ThrowSelectedButton = NodePath("HBoxContainer/CenterContainer/VBoxContainer/ThrowSelectedButton")
 
 [node name="Control" type="Control" parent="."]
 margin_right = 256.0
@@ -164,6 +160,7 @@ margin_bottom = 144.0
 scroll_horizontal_enabled = false
 
 [node name="DiceContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
 margin_right = 18.0
 margin_bottom = 144.0
 size_flags_vertical = 3
@@ -192,23 +189,29 @@ margin_right = 107.0
 margin_bottom = 144.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterContainer"]
-margin_top = 51.0
+margin_top = 52.0
 margin_right = 78.0
-margin_bottom = 92.0
+margin_bottom = 91.0
 
 [node name="DiceScenesContainer" type="GridContainer" parent="HBoxContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_right = 78.0
 columns = 3
+script = ExtResource( 5 )
+diceSceneFieldScene = ExtResource( 2 )
+number = NodePath("")
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/CenterContainer/VBoxContainer"]
+[node name="Separator" type="HSeparator" parent="HBoxContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 4.0
 margin_right = 78.0
 margin_bottom = 7.0
 
 [node name="ThrowSelectedButton" type="Button" parent="HBoxContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 11.0
 margin_right = 78.0
-margin_bottom = 24.0
+margin_bottom = 23.0
 focus_mode = 0
 custom_fonts/font = ExtResource( 3 )
 disabled = true
@@ -216,9 +219,10 @@ enabled_focus_mode = 0
 text = "Trhow selected"
 
 [node name="ThrowAllButton" type="Button" parent="HBoxContainer/CenterContainer/VBoxContainer"]
-margin_top = 28.0
+unique_name_in_owner = true
+margin_top = 27.0
 margin_right = 78.0
-margin_bottom = 41.0
+margin_bottom = 39.0
 focus_mode = 0
 custom_fonts/font = ExtResource( 3 )
 disabled = true

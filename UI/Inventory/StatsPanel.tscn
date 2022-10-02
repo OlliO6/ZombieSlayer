@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://UI/Inventory/StatsPanel.cs" type="Script" id=1]
 [ext_resource path="res://UI/DiceMenu/DiceSceneField.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://UI/Fonts/PondeSmall.tres" type="DynamicFont" id=5]
 [ext_resource path="res://UI/Inventory/DiceStats.cs" type="Script" id=6]
 [ext_resource path="res://UI/Theme/SmallRect.png" type="Texture" id=7]
+[ext_resource path="res://UI/DiceMenu/DiceScenesContainer.cs" type="Script" id=8]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 7 )
@@ -101,6 +102,8 @@ margin_top = 31.0
 margin_right = 159.0
 margin_bottom = 71.0
 columns = 3
+script = ExtResource( 8 )
+number = NodePath("")
 
 [node name="DiceSceneField2" parent="DiceStats/VBoxContainer/CenterContainer/DiceScenesContainer" instance=ExtResource( 2 )]
 modulate = Color( 1, 1, 1, 0.5 )
@@ -193,15 +196,15 @@ margin_bottom = 17.0
 custom_constants/separation = 0
 
 [node name="StatsContainer" type="VBoxContainer" parent="WeaponStats/VBoxContainer"]
-margin_top = 72.0
+margin_top = 73.0
 margin_right = 256.0
-margin_bottom = 93.0
+margin_bottom = 92.0
 size_flags_vertical = 6
 custom_constants/separation = 0
 
 [node name="StatsLabel" type="Label" parent="WeaponStats/VBoxContainer/StatsContainer"]
 margin_right = 256.0
-margin_bottom = 21.0
+margin_bottom = 19.0
 custom_fonts/font = ExtResource( 5 )
 text = "Shoot Speed: 5
 Damage: 3"

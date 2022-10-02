@@ -28,6 +28,8 @@ public class Shaker : Node2D
     public void Shake(ShakeProfile profile, float ampAndTimeFactor) => Shake(profile, ampAndTimeFactor, ampAndTimeFactor);
     public void Shake(ShakeProfile profile, float ampFactor, float timeFactor)
     {
+        if (profile is null) return;
+
         profile = GetUnusedProfile(profile);
 
         profile.Bound(this);

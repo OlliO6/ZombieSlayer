@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Items/Dice/Dice.tscn" type="PackedScene" id=2]
@@ -12,12 +12,14 @@
 [ext_resource path="res://Items/UpgradePickups/MagnetPickup.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Player/Upgrades/Icons/Magnet.png" type="Texture" id=11]
 [ext_resource path="res://Player/Upgrades/Icons/SpeedUpgrade.png" type="Texture" id=12]
+[ext_resource path="res://UI/DiceMenu/DiceSceneField.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Weapons/Guns/Rifle/RifleIcon.png" type="Texture" id=14]
 [ext_resource path="res://Items/Health/HealthIcon.png" type="Texture" id=15]
 [ext_resource path="res://Items/WeaponPickUps/SwordPickup.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Weapons/Melee/Sword/SwordIcon.png" type="Texture" id=17]
 [ext_resource path="res://Weapons/Guns/Pistol/PistolIcon.png" type="Texture" id=18]
 [ext_resource path="res://Items/WeaponPickUps/PistolPickup.tscn" type="PackedScene" id=19]
+[ext_resource path="res://UI/DiceMenu/DiceScenesContainer.cs" type="Script" id=20]
 
 [node name="ShopMenu" type="Control"]
 pause_mode = 2
@@ -27,11 +29,6 @@ rect_pivot_offset = Vector2( -300, -61 )
 theme = ExtResource( 1 )
 script = ExtResource( 3 )
 diceScene = ExtResource( 2 )
-ratioLabel = NodePath("MarginContainer/Panel/RatioLabel")
-priceLabel = NodePath("MarginContainer/Panel/PriceLabel")
-buyDiceButton = NodePath("MarginContainer/Panel/BuyButton")
-backButton = NodePath("MarginContainer/Panel/BackButton")
-shopItems = NodePath("MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -52,62 +49,85 @@ margin_top = 10.0
 margin_right = 226.0
 margin_bottom = 134.0
 
-[node name="Label" type="Label" parent="MarginContainer/Panel"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -16.0
-margin_top = 7.0
-margin_right = 16.0
-margin_bottom = 18.0
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 2
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer"]
+margin_left = 4.0
+margin_top = 2.0
+margin_right = 192.0
+margin_bottom = 122.0
+
+[node name="TopBar" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+margin_right = 188.0
+margin_bottom = 17.0
+
+[node name="BackButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TopBar"]
+margin_right = 40.0
+margin_bottom = 17.0
+focus_mode = 0
+size_flags_horizontal = 0
+size_flags_vertical = 5
+theme = ExtResource( 1 )
+theme_type_variation = "FlatButton"
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+text = "Back"
+flat = true
+align = 0
+
+[node name="ShopLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TopBar"]
+margin_right = 188.0
+margin_bottom = 17.0
+size_flags_vertical = 5
 text = "SHOP"
+align = 1
 
-[node name="RatioLabel" type="Label" parent="MarginContainer/Panel"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -32.0
-margin_top = 4.0
-margin_bottom = 15.0
-text = "0/6"
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+margin_top = 21.0
+margin_right = 188.0
+margin_bottom = 99.0
+size_flags_vertical = 3
+custom_constants/margin_right = 0
+custom_constants/margin_left = 4
 
-[node name="PriceLabel" type="Label" parent="MarginContainer/Panel"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 5.0
-margin_top = -14.0
-margin_right = 85.0
-margin_bottom = -3.0
-text = "Price: 100"
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer"]
+margin_left = 4.0
+margin_right = 188.0
+margin_bottom = 78.0
+size_flags_vertical = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 3.0
-
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel/CenterContainer"]
-margin_left = 98.0
-margin_top = 16.0
-margin_right = 98.0
-margin_bottom = 104.001
-rect_min_size = Vector2( 0, 88.001 )
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+margin_left = 3.0
+margin_right = 83.0
+margin_bottom = 78.0
+size_flags_horizontal = 6
+size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/CenterContainer/ScrollContainer"]
+[node name="ShopItemsContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+margin_right = 64.0
+margin_bottom = 132.0
 custom_constants/separation = 1
 
-[node name="Speed" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-visible = false
+[node name="Speed" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ShopItemsContainer" instance=ExtResource( 5 )]
 margin_top = 0.0
-margin_bottom = 19.0
+margin_bottom = 18.0
 hint_tooltip = "Move faster"
 SceneToBuy = ExtResource( 6 )
 Icon = ExtResource( 12 )
 startPrice = 5
 priceAdded = 3
 
-[node name="Magnet" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-visible = false
-margin_top = 20.0
-margin_bottom = 39.0
+[node name="Magnet" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ShopItemsContainer" instance=ExtResource( 5 )]
+margin_top = 19.0
+margin_bottom = 37.0
 hint_tooltip = "Attract coins and other collectables"
 SceneToBuy = ExtResource( 10 )
 Icon = ExtResource( 11 )
@@ -115,20 +135,18 @@ startPrice = 6
 priceAdded = 3
 priceMultiplier = 0.93
 
-[node name="Pistol" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-visible = false
-margin_top = 0.0
-margin_bottom = 19.0
+[node name="Pistol" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ShopItemsContainer" instance=ExtResource( 5 )]
+margin_top = 38.0
+margin_bottom = 56.0
 SceneToBuy = ExtResource( 19 )
 Icon = ExtResource( 18 )
 startPrice = 7
 priceAdded = 4
 priceMultiplier = 0.91
 
-[node name="Damage" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-visible = false
-margin_top = 0.0
-margin_bottom = 19.0
+[node name="Damage" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ShopItemsContainer" instance=ExtResource( 5 )]
+margin_top = 57.0
+margin_bottom = 75.0
 hint_tooltip = "Deal more damage"
 SceneToBuy = ExtResource( 9 )
 Icon = ExtResource( 8 )
@@ -136,56 +154,76 @@ startPrice = 9
 priceAdded = 4
 priceMultiplier = 0.93
 
-[node name="Heart" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-visible = false
-margin_top = 0.0
-margin_bottom = 19.0
+[node name="Heart" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ShopItemsContainer" instance=ExtResource( 5 )]
+margin_top = 76.0
+margin_bottom = 94.0
 SceneToBuy = ExtResource( 7 )
 Icon = ExtResource( 15 )
 startPrice = 8
 priceAdded = 3
 
-[node name="Rifle" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-visible = false
-margin_top = 0.0
-margin_bottom = 19.0
+[node name="Rifle" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ShopItemsContainer" instance=ExtResource( 5 )]
+margin_top = 95.0
+margin_bottom = 113.0
 SceneToBuy = ExtResource( 4 )
 Icon = ExtResource( 14 )
 startPrice = 14
 priceAdded = 6
 
-[node name="Dagger" parent="MarginContainer/Panel/CenterContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
-visible = false
-margin_top = 0.0
-margin_bottom = 19.0
+[node name="Dagger" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ShopItemsContainer" instance=ExtResource( 5 )]
+margin_top = 114.0
+margin_bottom = 132.0
 SceneToBuy = ExtResource( 16 )
 Icon = ExtResource( 17 )
 startPrice = 15
 priceAdded = 7
 
-[node name="BackButton" type="Button" parent="MarginContainer/Panel"]
-margin_left = 4.0
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+margin_left = 90.0
+margin_right = 93.0
+margin_bottom = 78.0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+margin_left = 140.0
+margin_top = 39.0
+margin_right = 140.0
+margin_bottom = 39.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="DiceScenesContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+columns = 3
+script = ExtResource( 20 )
+diceSceneFieldScene = ExtResource( 13 )
+number = NodePath("")
+
+[node name="BottomBar" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+margin_top = 103.0
+margin_right = 188.0
+margin_bottom = 120.0
+size_flags_vertical = 8
+
+[node name="PriceLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar"]
+unique_name_in_owner = true
 margin_top = 2.0
-margin_right = 40.0
+margin_right = 112.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+text = "Price: 100"
+
+[node name="BuyDiceButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar"]
+unique_name_in_owner = true
+margin_left = 116.0
+margin_right = 188.0
 margin_bottom = 17.0
 focus_mode = 0
-shortcut_in_tooltip = false
-enabled_focus_mode = 0
-text = "Back"
-flat = true
-
-[node name="BuyButton" type="Button" parent="MarginContainer/Panel"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -72.0
-margin_top = -16.0
-margin_right = -4.0
-margin_bottom = -1.0
-focus_mode = 0
+size_flags_horizontal = 8
+theme_type_variation = "FlatButton"
 enabled_focus_mode = 0
 text = "Buy Dice"
 flat = true
+align = 2
 
-[connection signal="pressed" from="MarginContainer/Panel/BuyButton" to="." method="OnBuyDicePressed"]
+[connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/TopBar/BackButton" to="." method="OnBackPressed"]
+[connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar/BuyDiceButton" to="." method="OnBuyDicePressed"]

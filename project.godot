@@ -67,6 +67,7 @@ enabled=PoolStringArray( "res://addons/BetterFileSystem/plugin.cfg", "res://addo
 
 [gui]
 
+theme/custom="res://UI/Theme/Theme.tres"
 timers/tooltip_delay_sec=0.4
 
 [importer_defaults]

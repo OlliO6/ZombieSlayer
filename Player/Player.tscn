@@ -25,15 +25,15 @@
 
 [sub_resource type="Resource" id=26]
 script = ExtResource( 22 )
-amplitude = 1.0
-time = 0.4
+amplitude = 1.2
+time = 0.5
 speed = 0.0
 easeType = 0
 transitionType = 1
 
 [sub_resource type="Resource" id=27]
 script = ExtResource( 22 )
-amplitude = 2.4
+amplitude = 3.0
 time = 1.5
 speed = 0.0
 easeType = 0
@@ -417,7 +417,7 @@ nodes/RunSpeed/position = Vector2( -260, 140 )
 nodes/State/node = SubResource( 6 )
 nodes/State/position = Vector2( -60, 120 )
 nodes/output/position = Vector2( 520, 240 )
-node_connections = [ "Damage", 0, "Animation 4", "Damage", 1, "Animation 3", "State", 0, "Animation", "State", 1, "RunSpeed", "State", 2, "Animation 5", "RunSpeed", 0, "Animation 2", "Add2", 0, "State", "Add2", 1, "Damage", "output", 0, "Add2" ]
+node_connections = [ "output", 0, "Add2", "Damage", 0, "Animation 4", "Damage", 1, "Animation 3", "Add2", 0, "State", "Add2", 1, "Damage", "RunSpeed", 0, "Animation 2", "State", 0, "Animation", "State", 1, "RunSpeed", "State", 2, "Animation 5" ]
 
 [sub_resource type="AudioStreamRandomPitch" id=14]
 audio_stream = ExtResource( 9 )
@@ -526,7 +526,7 @@ parameters/State/current = 0
 script = ExtResource( 17 )
 rotationMagnitude = 0.0
 positionMagnitude = 2.5
-speed = 35.0
+speed = 45.0
 amountThreshold = 0.02
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -562,8 +562,8 @@ mouse_filter = 2
 
 [connection signal="CoinsAmountChanged" from="." to="UI/IngameUI" method="OnCoinsAmountChanged"]
 [connection signal="HealthChanged" from="." to="UI/IngameUI" method="OnPlayerHealthChanged"]
-[connection signal="InvincibilityEnded" from="." to="HurtArea" method="Check" flags=3]
 [connection signal="InvincibilityEnded" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ true ]]
+[connection signal="InvincibilityEnded" from="." to="HurtArea" method="Check" flags=3]
 [connection signal="InvincibilityStarted" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ false ]]
 [connection signal="LevelChanged" from="Leveling" to="." method="OnLevelChanged"]
 [connection signal="LevelChanged" from="Leveling" to="UI/IngameUI" method="OnLevelChanged"]
