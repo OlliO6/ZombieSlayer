@@ -95,6 +95,8 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
         SpawnCoins(this, coinsAmount);
         EmitSignal(nameof(Died));
         EnemyDied?.Invoke(this);
+
+        Debug.Log(this, "Died");
     }
 
     [TroughtEditor]
@@ -106,8 +108,17 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
 
     public void Explode()
     {
-        Die();
+        dead = true;
+        AnimTree.SetParam("State/current", 2);
         AnimTree.SetParam("DiyingType/current", 1);
+
+        DeadYSort(this, Sprite, 10);
+
+        SpawnCoins(this, coinsAmount);
+        EmitSignal(nameof(Died));
+        EnemyDied?.Invoke(this);
+
+        Debug.Log(this, "Exploded");
     }
 
     [TroughtEditor]

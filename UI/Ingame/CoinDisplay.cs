@@ -31,27 +31,29 @@ public class CoinDisplay : HBoxContainer
     {
         targetCoins = coins;
 
-        IncreaseCoins();
+        if (coinsDisplayed < targetCoins)
+        {
+            IncreaseCoins();
+            return;
+        }
+        coinsDisplayed = targetCoins;
+        CoinLabel.Text = coinsDisplayed.ToString();
+        CallDeferred(nameof(CenterLabel));
     }
 
-    private void CenterLabel()
-    {
-        CoinLabel.RectPivotOffset = RectSize * 0.5f;
-    }
+    private void CenterLabel() => CoinLabel.RectPivotOffset = RectSize * 0.5f;
 
     private void OnAnimationFinished(string anim)
     {
-        IncreaseCoins();
+        if (coinsDisplayed < targetCoins) IncreaseCoins();
     }
 
     private void IncreaseCoins()
     {
-        if (coinsDisplayed >= targetCoins) return;
-
         coinsDisplayed++;
         CoinLabel.Text = coinsDisplayed.ToString();
-
         CallDeferred(nameof(CenterLabel));
+
         AnimationPlayer.Play("Collect");
     }
 }
