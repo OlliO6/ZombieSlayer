@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=26 format=2]
+[gd_resource type="Theme" load_steps=27 format=2]
 
 [ext_resource path="res://UI/Theme/UncheckedCheckbox.png" type="Texture" id=1]
 [ext_resource path="res://UI/Theme/CheckedCheckbox.png" type="Texture" id=2]
@@ -44,6 +44,8 @@ margin_right = 4.0
 margin_top = 2.0
 margin_bottom = 2.0
 modulate_color = Color( 0.733333, 0.733333, 0.733333, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=24]
 
 [sub_resource type="StyleBoxTexture" id=22]
 texture = ExtResource( 7 )
@@ -182,11 +184,11 @@ FlatButton/colors/font_color_hover = Color( 0.843137, 0.807843, 0.768627, 1 )
 FlatButton/colors/font_color_pressed = Color( 0.945098, 0.933333, 0.917647, 1 )
 FlatButton/constants/hseparation = 2
 FlatButton/fonts/font = ExtResource( 4 )
-FlatButton/styles/disabled = SubResource( 2 )
-FlatButton/styles/focus = SubResource( 3 )
-FlatButton/styles/hover = SubResource( 3 )
-FlatButton/styles/normal = SubResource( 1 )
-FlatButton/styles/pressed = SubResource( 4 )
+FlatButton/styles/disabled = SubResource( 24 )
+FlatButton/styles/focus = SubResource( 24 )
+FlatButton/styles/hover = SubResource( 24 )
+FlatButton/styles/normal = SubResource( 24 )
+FlatButton/styles/pressed = SubResource( 24 )
 HSeparator/constants/separation = 3
 HSeparator/styles/separator = SubResource( 22 )
 HSlider/icons/grabber = ExtResource( 3 )

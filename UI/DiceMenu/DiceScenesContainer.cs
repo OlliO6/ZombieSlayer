@@ -5,9 +5,11 @@ using Godot;
 [Tool]
 public class DiceScenesContainer : GridContainer
 {
+    [Signal] public delegate void Interacted(int index);
     [Export] private PackedScene diceSceneFieldScene;
 
-    [Export] private NodePath number;
+    [Export] public bool interactableFields;
+    [Export] public string interactionSignalName = "Interacted";
 
     private List<PackedScene> scenes = new();
 
@@ -48,6 +50,10 @@ public class DiceScenesContainer : GridContainer
             sceneField.Scene = scene;
 
             AddChild(sceneField);
+
+            if (interactableFields) sceneField.Connect(interactionSignalName, this, nameof(OnFieldInteracted), new(sceneField.GetIndex()));
         }
     }
+
+    private void OnFieldInteracted(int index) => EmitSignal(nameof(Interacted), index);
 }

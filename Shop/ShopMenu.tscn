@@ -12,7 +12,7 @@
 [ext_resource path="res://Items/UpgradePickups/MagnetPickup.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Player/Upgrades/Icons/Magnet.png" type="Texture" id=11]
 [ext_resource path="res://Player/Upgrades/Icons/SpeedUpgrade.png" type="Texture" id=12]
-[ext_resource path="res://UI/DiceMenu/DiceSceneField.tscn" type="PackedScene" id=13]
+[ext_resource path="res://UI/DiceMenu/InteractableDiceSceneField.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Weapons/Guns/Rifle/RifleIcon.png" type="Texture" id=14]
 [ext_resource path="res://Items/Health/HealthIcon.png" type="Texture" id=15]
 [ext_resource path="res://Items/WeaponPickUps/SwordPickup.tscn" type="PackedScene" id=16]
@@ -65,11 +65,11 @@ margin_bottom = 122.0
 
 [node name="TopBar" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
 margin_right = 188.0
-margin_bottom = 17.0
+margin_bottom = 13.0
 
 [node name="BackButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TopBar"]
-margin_right = 40.0
-margin_bottom = 17.0
+margin_right = 32.0
+margin_bottom = 13.0
 focus_mode = 0
 size_flags_horizontal = 0
 size_flags_vertical = 5
@@ -83,15 +83,15 @@ align = 0
 
 [node name="ShopLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TopBar"]
 margin_right = 188.0
-margin_bottom = 17.0
+margin_bottom = 13.0
 size_flags_vertical = 5
 text = "SHOP"
 align = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
-margin_top = 21.0
+margin_top = 17.0
 margin_right = 188.0
-margin_bottom = 99.0
+margin_bottom = 103.0
 size_flags_vertical = 3
 custom_constants/margin_right = 0
 custom_constants/margin_left = 4
@@ -99,13 +99,13 @@ custom_constants/margin_left = 4
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer"]
 margin_left = 4.0
 margin_right = 188.0
-margin_bottom = 78.0
+margin_bottom = 86.0
 size_flags_vertical = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 margin_left = 3.0
 margin_right = 83.0
-margin_bottom = 78.0
+margin_bottom = 86.0
 size_flags_horizontal = 6
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
@@ -181,13 +181,13 @@ priceAdded = 7
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 margin_left = 90.0
 margin_right = 93.0
-margin_bottom = 78.0
+margin_bottom = 86.0
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 margin_left = 140.0
-margin_top = 39.0
+margin_top = 43.0
 margin_right = 140.0
-margin_bottom = 39.0
+margin_bottom = 43.0
 size_flags_horizontal = 6
 size_flags_vertical = 4
 
@@ -196,27 +196,26 @@ unique_name_in_owner = true
 columns = 3
 script = ExtResource( 20 )
 diceSceneFieldScene = ExtResource( 13 )
-number = NodePath("")
+interactableFields = true
 
 [node name="BottomBar" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
-margin_top = 103.0
+margin_top = 107.0
 margin_right = 188.0
 margin_bottom = 120.0
 size_flags_vertical = 8
 
 [node name="PriceLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar"]
 unique_name_in_owner = true
-margin_top = 2.0
-margin_right = 112.0
-margin_bottom = 15.0
+margin_right = 120.0
+margin_bottom = 13.0
 size_flags_horizontal = 3
 text = "Price: 100"
 
 [node name="BuyDiceButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar"]
 unique_name_in_owner = true
-margin_left = 116.0
+margin_left = 124.0
 margin_right = 188.0
-margin_bottom = 17.0
+margin_bottom = 13.0
 focus_mode = 0
 size_flags_horizontal = 8
 theme_type_variation = "FlatButton"

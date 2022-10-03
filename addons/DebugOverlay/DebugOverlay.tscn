@@ -134,7 +134,7 @@ custom_constants/separation = 0
 margin_top = -1.0
 margin_right = 252.0
 margin_bottom = 3.2
-text = "FPS: 30"
+text = "FPS: 144"
 align = 1
 script = ExtResource( 4 )
 
@@ -267,12 +267,12 @@ margin_bottom = 544.0
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2"]
-margin_right = 193.0
+margin_right = 195.0
 margin_bottom = 433.0
 size_flags_vertical = 3
 
 [node name="ExitButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
-margin_right = 193.0
+margin_right = 195.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = ExtResource( 6 )
@@ -281,7 +281,7 @@ text = "Exit Overlay"
 
 [node name="PrintStrayButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
 margin_top = 54.0
-margin_right = 193.867
+margin_right = 195.0
 margin_bottom = 104.0
 rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = ExtResource( 6 )
@@ -290,38 +290,38 @@ text = "Print Stray Nodes"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
 margin_top = 235.0
-margin_right = 193.0
+margin_right = 195.0
 margin_bottom = 306.0
 size_flags_vertical = 6
 
 [node name="ShowFpsToggle" type="CheckButton" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer"]
-margin_right = 193.0
-margin_bottom = 21.1333
+margin_right = 195.0
+margin_bottom = 21.2
 pressed = true
 text = "Show fps"
 
 [node name="PrintCommonToggle" type="CheckButton" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer"]
 margin_top = 25.0
-margin_right = 193.0
-margin_bottom = 46.1333
+margin_right = 195.0
+margin_bottom = 46.2
 pressed = true
 text = "Common logs"
 
 [node name="NoUniqueNamesToggle" type="CheckButton" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer"]
 margin_top = 50.0
-margin_right = 193.0
-margin_bottom = 71.1333
+margin_right = 195.0
+margin_bottom = 71.2
 hint_tooltip = "If on the names of the Objects logging and watched will be made ununique."
 pressed = true
 text = "No unique names"
 
 [node name="VSeparator" type="VSeparator" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 197.0
-margin_right = 201.0
+margin_left = 199.0
+margin_right = 203.0
 margin_bottom = 433.0
 
 [node name="MarginContainer" type="MarginContainer" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 205.0
+margin_left = 207.0
 margin_right = 992.0
 margin_bottom = 433.0
 size_flags_horizontal = 3
@@ -331,14 +331,14 @@ custom_constants/margin_left = 8
 [node name="HBoxContainer" type="HBoxContainer" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
 margin_left = 8.0
 margin_top = 166.0
-margin_right = 779.0
+margin_right = 777.0
 margin_bottom = 266.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_vertical = 6
 custom_constants/separation = 12
 
 [node name="ConsolButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
-margin_right = 220.0
+margin_right = 219.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
@@ -347,22 +347,22 @@ custom_fonts/font = ExtResource( 6 )
 text = "Console"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
-margin_left = 232.0
-margin_right = 565.0
+margin_left = 231.0
+margin_right = 564.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="ScreenshotButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer"]
-margin_right = 249.0
+margin_right = 248.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 6 )
 text = "Screenshot"
 
 [node name="ScreenshotIUButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer"]
-margin_left = 249.0
-margin_right = 333.533
+margin_left = 248.0
+margin_right = 333.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.29
@@ -370,23 +370,23 @@ custom_fonts/font = ExtResource( 6 )
 text = "With UI"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
-margin_left = 577.0
-margin_right = 771.0
+margin_left = 576.0
+margin_right = 769.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.58
 custom_constants/separation = 0
 
 [node name="QuitButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer2"]
-margin_right = 120.0
+margin_right = 119.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 6 )
 text = "Quit Game"
 
 [node name="CrashButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer2"]
-margin_left = 120.0
-margin_right = 194.0
+margin_left = 119.0
+margin_right = 193.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.61
@@ -493,82 +493,48 @@ custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 0.529412, 0.596078, 0.647059, 1 )
 bbcode_enabled = true
 bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint]
-[00:03] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
-[00:06] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
-[00:06] [tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to [/tint]
-[00:07] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
-[00:07] [tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Started[/tint]
-[00:07] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
-[00:07] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
-[00:07] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+[00:01] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
+[00:02] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
+[00:02] [tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to [/tint]
+[00:02] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
+[00:02] [tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Started[/tint]
+[00:02] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
+[00:02] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
+[00:02] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
 [00:13] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
 [00:13] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
 [00:13] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
 [00:13] [tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
 [00:13] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
 [00:13] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
-[00:14] [tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
-[00:14] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
-[00:14] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
-[00:16] [tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
-[00:16] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
-[00:16] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
-[00:20] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started ShopPosition[/tint]
-[00:20] [tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Ended[/tint]
-[00:20] [tint r=1 g=1 b=1 a=1]ShopPosition: Explanation Started[/tint]
-[00:21] [tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
-[00:21] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started UpgradeDices[/tint]
-[00:21] [tint r=1 g=1 b=1 a=1]ShopPosition: Explanation Ended[/tint]
-[00:21] [tint r=1 g=1 b=1 a=1]UpgradeDices: Explanation Started[/tint]
-[00:22] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started Health[/tint]
-[00:22] [tint r=1 g=1 b=1 a=1]UpgradeDices: Explanation Ended[/tint]
-[00:22] [tint r=1 g=1 b=1 a=1]Health: Explanation Started[/tint]
-[00:23] [tint r=1 g=1 b=1 a=1]Health: Explanation Ended[/tint]
-[00:27] [tint r=1 g=1 b=1 a=1]DialogPlayer: FirstMeeting started[/tint]
-[01:01] [tint r=0.88 g=1 b=1 a=1]OpenShopMenu: Executed [Area2D:12729][/tint]
-[01:09] [tint r=1 g=1 b=1 a=1]DialogPlayer: FirstMeeting ended[/tint]
-[01:17] [tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
-[01:17] [tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
-[01:21] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
+[00:13] [tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
+[00:13] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[00:13] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[00:14] [tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
+[00:14] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
+[00:14] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
-[00:03] SceneManager: Loaded Menu
-[00:06] SceneManager: Loaded Game
-[00:06] WeaponSwitcher: Switched weapon to 
-[00:07] ExplanationsManager: Started MoveAndAttack
-[00:07] MoveAndAttack: Explanation Started
-[00:07] Level 0: Reached
-[00:07] EnemySpawner: False
-[00:07] EnemySpawner: Difficulty changed to Level0
+[00:01] SceneManager: Loaded Menu
+[00:02] SceneManager: Loaded Game
+[00:02] WeaponSwitcher: Switched weapon to 
+[00:02] ExplanationsManager: Started MoveAndAttack
+[00:02] MoveAndAttack: Explanation Started
+[00:02] Level 0: Reached
+[00:02] EnemySpawner: False
+[00:02] EnemySpawner: Difficulty changed to Level0
 [00:13] Level 1: Reached
 [00:13] EnemySpawner: False
 [00:13] EnemySpawner: Difficulty changed to Level1
 [00:13] Level 2: Reached
 [00:13] EnemySpawner: True
 [00:13] EnemySpawner: Difficulty changed to Level1
-[00:14] Level 3: Reached
-[00:14] EnemySpawner: True
-[00:14] EnemySpawner: Difficulty changed to Level1
-[00:16] Level 4: Reached
-[00:16] EnemySpawner: False
-[00:16] EnemySpawner: Difficulty changed to Level4
-[00:20] ExplanationsManager: Started ShopPosition
-[00:20] MoveAndAttack: Explanation Ended
-[00:20] ShopPosition: Explanation Started
-[00:21] DiceInventory: Added Dice
-[00:21] ExplanationsManager: Started UpgradeDices
-[00:21] ShopPosition: Explanation Ended
-[00:21] UpgradeDices: Explanation Started
-[00:22] ExplanationsManager: Started Health
-[00:22] UpgradeDices: Explanation Ended
-[00:22] Health: Explanation Started
-[00:23] Health: Explanation Ended
-[00:27] DialogPlayer: FirstMeeting started
-[01:01] OpenShopMenu: Executed [Area2D:12729]
-[01:09] DialogPlayer: FirstMeeting ended
-[01:17] DiceInventory: Added Dice
-[01:17] ShopMenu: Selled Dice
-[01:21] SceneManager: Loaded Menu
+[00:13] Level 3: Reached
+[00:13] EnemySpawner: True
+[00:13] EnemySpawner: Difficulty changed to Level1
+[00:14] Level 4: Reached
+[00:14] EnemySpawner: False
+[00:14] EnemySpawner: Difficulty changed to Level4
 "
 scroll_following = true
 selection_enabled = true

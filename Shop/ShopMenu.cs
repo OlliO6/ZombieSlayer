@@ -27,10 +27,27 @@ public class ShopMenu : Control
             item.Hide();
             item.UpdateShopItem();
         }
-        OnDiceUpdate();
+        DiceUpdate();
+
+        DiceScenesContainer.Connect(nameof(DiceScenesContainer.Interacted), this, nameof(OnSceneFieldInteracted));
     }
 
-    public void OnDiceUpdate()
+    private void OnSceneFieldInteracted(int index)
+    {
+        if (itemsToBuy.Count >= index + 1)
+        {
+            var removingItem = itemsToBuy[index];
+
+            removingItem.currentAmount--;
+            removingItem.count--;
+            removingItem.UpdateShopItem();
+
+            itemsToBuy.RemoveAt(index);
+            DiceUpdate();
+        }
+    }
+
+    public void DiceUpdate()
     {
         var items = GetItems();
         var scenes = GetScenesToBuy();
@@ -52,13 +69,13 @@ public class ShopMenu : Control
     public void OnItemRemoved(ShopItem item)
     {
         itemsToBuy.Remove(item);
-        OnDiceUpdate();
+        DiceUpdate();
     }
 
     public void OnItemAdded(ShopItem item)
     {
         itemsToBuy.Add(item);
-        OnDiceUpdate();
+        DiceUpdate();
     }
 
     public List<ShopItem> GetItems() => ShopItemsContainer.GetChildren().OfType<ShopItem>().ToList();
@@ -111,7 +128,7 @@ public class ShopMenu : Control
         Player.currentPlayer.AddDice(dice);
 
         Debug.LogU(this, "Selled Dice");
-        OnDiceUpdate();
+        DiceUpdate();
     }
 
     private void AddScenesToDice(Dice dice, List<PackedScene> scenes)

@@ -1,6 +1,6 @@
-using Godot;
 using System;
 using Additions;
+using Godot;
 
 [Tool]
 public class DiceSceneField : NinePatchRect
@@ -27,12 +27,14 @@ public class DiceSceneField : NinePatchRect
 
     private void SetIcon(Texture icon)
     {
+        IconRect.Show();
         IconRect.Texture = icon;
+        Modulate = new Color(Colors.White);
     }
 
     private void Deactivate()
     {
-        IconRect.Visible = false;
+        IconRect.Hide();
 
         Modulate = new Color(Colors.White, 0.5f);
     }
