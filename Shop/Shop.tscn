@@ -134,7 +134,7 @@ callableActions = [ NodePath("Actions/OpenShopMenu") ]
 [node name="FirstMeeting" type="Node" parent="DialogPlayer"]
 script = ExtResource( 5 )
 text = "Hello i am Robert the shop keeper. 
-\\wait 1/You can call me [tint r=0.3 g=0.7 b=0.7 a=1]Rob[/tint]. "
+\\wait 1/You can call me \\objname Rob/"
 character = "Robert"
 
 [node name="BadJoke" type="Node" parent="DialogPlayer/FirstMeeting"]
@@ -151,27 +151,27 @@ text = "HAHA, a little fun is needed some times.
 \\wait 1/\\d=0.6/But\\reset d/\\wait 1/\\wait 0.5/ jokes away now. "
 character = "Rob"
 
-[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes"]
+[node name="MenuOpen" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes"]
 script = ExtResource( 5 )
 text = "\\hide/\\wait 1/\\openmenu/\\wait 1/\\show/This\\wait 1/ is my menu. 
 You can buy a 6 sided dice here. "
 character = "Rob"
 
-[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/Dialog"]
+[node name="Explanation" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen"]
 script = ExtResource( 5 )
 text = "Press the + buttons to add items to the dice.
-You can remove them in the preview by clicking the symbols."
+You can remove them in the dice preview by clicking the symbols."
 character = "Rob"
 
-[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/Dialog/Dialog"]
+[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation"]
 script = ExtResource( 5 )
 text = "When you're finish press the buy dice button."
 character = "Rob"
 
-[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/Dialog/Dialog/Dialog"]
+[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog"]
 script = ExtResource( 5 )
 text = "I recommend filling all 6 sides but you can do whatever you want.
-\\wait 1/\\d=0.02/Unless\\reset d/ you don't rob Rob."
+\\wait 1/\\d=0.02/Unless\\reset d/ you don't rob \\objname Rob/."
 character = "Rob"
 
 [node name="No" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke"]
@@ -192,8 +192,23 @@ script = ExtResource( 8 )
 to = NodePath("../../../Yes")
 
 [node name="No" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/No/Dialog"]
+script = ExtResource( 5 )
+text = "Ok, \\wait 1/maybe my human humor simulation module is broken."
+character = "Rob"
+
+[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/No/Dialog/No"]
+script = ExtResource( 5 )
+text = "But that can't be the case\\wait 0.8/ so maybe you can't get it because you're just a little \\wait 0.8/dumb."
+character = "Rob"
+
+[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/No/Dialog/No/Dialog"]
+script = ExtResource( 5 )
+text = "But anyways, \\wait 0.5/let me continue."
+character = "Rob"
+
+[node name="MenuOpen" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/No/Dialog/No/Dialog/Dialog"]
 script = ExtResource( 8 )
-to = NodePath("../..")
+to = NodePath("../../../../../../Yes/MenuOpen")
 
 [node name="Actions" type="Node" parent="DialogPlayer"]
 

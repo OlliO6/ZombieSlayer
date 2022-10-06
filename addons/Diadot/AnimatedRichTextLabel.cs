@@ -76,8 +76,51 @@ public class AnimatedRichTextLabel : RichTextLabel
 
         void FilterExpressions(out Dictionary<int, List<string>> expressions)
         {
+            InitializeExpressions();
             RemoveFromText(out expressions);
             RemoveFromBbText();
+
+            void InitializeExpressions()
+            {
+                string newBb = BbcodeText;
+                int skipped = 0;
+
+                for (int i = 0; i < BbcodeText.Length; i++)
+                {
+                    char c = BbcodeText[i];
+
+                    if (c is '\\')
+                    {
+                        int startIndex = i;
+                        string expression = string.Empty;
+
+                        while (true)
+                        {
+                            i++;
+                            if (i >= BbcodeText.Length) return;
+
+                            c = BbcodeText[i];
+                            if (c is '/')
+                                break;
+                            expression += c;
+                        }
+                        int index = startIndex - skipped;
+                        bool removeExpression = false;
+                        string textToPlace = InitializeExpression(expression, ref removeExpression);
+                        if (removeExpression)
+                        {
+                            newBb = newBb.Remove(index, i + 1 - startIndex);
+                            skipped += i + 1 - startIndex;
+                        }
+                        if (textToPlace is not null and not "")
+                        {
+                            newBb = newBb.Insert(index, textToPlace);
+                            i += textToPlace.Length;
+                        }
+                    }
+                }
+                BbcodeText = newBb;
+            }
 
             void RemoveFromText(out Dictionary<int, List<string>> expressions)
             {
@@ -143,9 +186,11 @@ public class AnimatedRichTextLabel : RichTextLabel
                         {
                             i++;
                             if (i >= BbcodeText.Length) return;
-                            expression += BbcodeText[i];
-                            if (BbcodeText[i] is '/')
+
+                            c = BbcodeText[i];
+                            if (c is '/')
                                 break;
+                            expression += c;
                         }
                         newBb = newBb.Remove(startIndex - skipped, i + 1 - startIndex);
                         skipped += i + 1 - startIndex;
@@ -155,6 +200,31 @@ public class AnimatedRichTextLabel : RichTextLabel
             }
         }
     }
+
+    private string InitializeExpression(string expression, ref bool removeExpression)
+    {
+        string[] spaceSeperated = expression.Split(' ');
+        if (spaceSeperated.Length < 1) return null;
+
+        switch (spaceSeperated[0])
+        {
+            // Project specific
+            case "objname":
+                if (spaceSeperated.Length < 2) return null;
+
+                removeExpression = true;
+
+                switch (spaceSeperated[1])
+                {
+                    case "Rob": return ColorizedText(spaceSeperated[1], new Color("627c80"));
+                }
+                return null;
+        }
+
+        return null;
+    }
+
+    private string ColorizedText(string text, Color color) => $"[tint r={color.r.InvariantToString()} g={color.g.InvariantToString()} b={color.b.InvariantToString()}]{text}[/tint]";
 
     private async Task ProcessExpression(string expression)
     {
@@ -214,26 +284,25 @@ public class AnimatedRichTextLabel : RichTextLabel
 
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventMouseButton mouseInput)
+        if (@event is not InputEventMouseButton mouseInput) return;
+
+        if (mouseInput.Pressed)
         {
-            if (mouseInput.Pressed)
+            if (GetGlobalRect().HasPoint(mouseInput.Position))
             {
-                if (GetGlobalRect().HasPoint(mouseInput.Position))
+                Input.ParseInputEvent(new InputEventAction()
                 {
-                    Input.ParseInputEvent(new InputEventAction()
-                    {
-                        Action = ProjectSettingsControl.SkipInput,
-                        Pressed = true
-                    });
-                }
-                return;
+                    Action = ProjectSettingsControl.SkipInput,
+                    Pressed = true
+                });
             }
-            Input.ParseInputEvent(new InputEventAction()
-            {
-                Action = ProjectSettingsControl.SkipInput,
-                Pressed = false
-            });
+            return;
         }
+        Input.ParseInputEvent(new InputEventAction()
+        {
+            Action = ProjectSettingsControl.SkipInput,
+            Pressed = false
+        });
     }
 
     public void CancelPlay() => cancellation?.Cancel();

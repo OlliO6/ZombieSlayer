@@ -36,7 +36,7 @@ public class Dialog : Node, IDialogProvider
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (!giveOptions && waitingForInput && @event.IsAction(ProjectSettingsControl.SkipInput))
+        if (!giveOptions && waitingForInput && @event.IsAction(ProjectSettingsControl.SkipInput) && !@event.IsEcho())
         {
             if (waitForInputRelease)
             {
@@ -50,6 +50,7 @@ public class Dialog : Node, IDialogProvider
     public void OnStarted()
     {
         waitingForInput = false;
+        waitForInputRelease = false;
 
         foreach (IDialogProvider dialogChild in this.GetChildren<IDialogProvider>())
         {
@@ -67,6 +68,7 @@ public class Dialog : Node, IDialogProvider
     public void Finish()
     {
         waitingForInput = false;
+        waitForInputRelease = false;
 
         foreach (NodePath path in onFinishActions)
         {
