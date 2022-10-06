@@ -11,7 +11,7 @@ public class Plugin : EditorPlugin
     {
         _ = ProjectSettingsControl.SkipInput;
         _ = ProjectSettingsControl.DefaultDelay;
-        _ = ProjectSettingsControl.DelayFactorWhenSkipPressed;
+        _ = ProjectSettingsControl.CharsToSkipWhenSkippPressed;
 
         AddCustomType(nameof(Dialog), nameof(Node), GD.Load<CSharpScript>("res://addons/Diadot/Dialog.cs"), GD.Load<Texture>("res://addons/Diadot/Icons/Bubble.png"));
         AddCustomType(nameof(RedirectDialog), nameof(Node), GD.Load<CSharpScript>("res://addons/Diadot/RedirectDialog.cs"), GD.Load<Texture>("res://addons/Diadot/Icons/Redirect.png"));
@@ -28,7 +28,7 @@ public class Plugin : EditorPlugin
     {
         ProjectSettings.Clear("Diadot/SkipInput");
         ProjectSettings.Clear("Diadot/DefaultDelay");
-        ProjectSettings.Clear("Diadot/DelayFactorWhenSkipPressed");
+        ProjectSettings.Clear("Diadot/CharsToSkipWhenSkippPressed");
     }
 }
 #endif
@@ -37,7 +37,7 @@ public class ProjectSettingsControl
 {
     private static string skipInput;
     private static float? defaultDelay;
-    private static float? delayFactorWhenSkipPressed;
+    private static int? charsToSkipWhenSkippPressed;
 
     public static string SkipInput
     {
@@ -55,12 +55,12 @@ public class ProjectSettingsControl
             return defaultDelay.Value;
         }
     }
-    public static float DelayFactorWhenSkipPressed
+    public static int CharsToSkipWhenSkippPressed
     {
         get
         {
-            delayFactorWhenSkipPressed ??= GDAdditions.GetOrAddProjectSetting("Diadot/DelayFactorWhenSkipPressed", 0.02f, Variant.Type.Real);
-            return delayFactorWhenSkipPressed.Value;
+            charsToSkipWhenSkippPressed ??= GDAdditions.GetOrAddProjectSetting("Diadot/CharsToSkipWhenSkippPressed", 4, Variant.Type.Int);
+            return charsToSkipWhenSkippPressed.Value;
         }
     }
 }

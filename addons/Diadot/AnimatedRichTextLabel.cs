@@ -28,6 +28,7 @@ public class AnimatedRichTextLabel : RichTextLabel
 
         delay = ProjectSettingsControl.DefaultDelay;
         VisibleCharacters = 0;
+        int skipped = 0;
 
         for (int i = 0; i < Text.Length; i++)
         {
@@ -35,27 +36,43 @@ public class AnimatedRichTextLabel : RichTextLabel
 
             if (c is '\n') continue;
 
-            if (expressions.ContainsKey(i))
-            {
-                foreach (string expression in expressions[i])
-                {
-                    await ProcessExpression(expression);
-                    if (token.IsCancellationRequested) return;
-                }
-            }
+            await TryToHandleExpression(expressions, i);
 
             VisibleCharacters++;
 
             if (c is not ' ') EmitSignal(nameof(NonWhiteSpaceAdvanced));
             EmitSignal(nameof(Advanced));
 
-            await new TimeAwaiter(this, delay * (Input.IsActionPressed(ProjectSettingsControl.SkipInput) ? ProjectSettingsControl.DelayFactorWhenSkipPressed : 1));
+            if (Input.IsActionPressed(ProjectSettingsControl.SkipInput))
+            {
+                if (skipped < ProjectSettingsControl.CharsToSkipWhenSkippPressed)
+                {
+                    skipped++;
+                    continue;
+                }
+                skipped = 0;
+            }
+
+            await new TimeAwaiter(this, delay);
             if (token.IsCancellationRequested) return;
         }
+        await TryToHandleExpression(expressions, Text.Length);
         if (token.IsCancellationRequested) return;
 
         EmitSignal(nameof(Finished));
 
+
+        async Task TryToHandleExpression(Dictionary<int, List<string>> expressions, int index)
+        {
+            if (expressions.ContainsKey(index))
+            {
+                foreach (string expression in expressions[index])
+                {
+                    await ProcessExpression(expression);
+                    if (token.IsCancellationRequested) return;
+                }
+            }
+        }
 
         void FilterExpressions(out Dictionary<int, List<string>> expressions)
         {
@@ -186,7 +203,7 @@ public class AnimatedRichTextLabel : RichTextLabel
 
                 case "wait":
                     if (spaceSeperated.Length < 2) return false;
-                    await new TimeAwaiter(this, ParseFloat(spaceSeperated[1]) * (Input.IsActionPressed(ProjectSettingsControl.SkipInput) ? ProjectSettingsControl.DelayFactorWhenSkipPressed : 1));
+                    await new TimeAwaiter(this, ParseFloat(spaceSeperated[1]) / (Input.IsActionPressed(ProjectSettingsControl.SkipInput) ? (float)ProjectSettingsControl.CharsToSkipWhenSkippPressed : 1f));
                     return true;
             }
             return false;

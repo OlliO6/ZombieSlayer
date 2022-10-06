@@ -157,6 +157,23 @@ text = "\\hide/\\wait 1/\\openmenu/\\wait 1/\\show/This\\wait 1/ is my menu.
 You can buy a 6 sided dice here. "
 character = "Rob"
 
+[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/Dialog"]
+script = ExtResource( 5 )
+text = "Press the + buttons to add items to the dice.
+You can remove them in the preview by clicking the symbols."
+character = "Rob"
+
+[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/Dialog/Dialog"]
+script = ExtResource( 5 )
+text = "When you're finish press the buy dice button."
+character = "Rob"
+
+[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/Dialog/Dialog/Dialog"]
+script = ExtResource( 5 )
+text = "I recommend filling all 6 sides but you can do whatever you want.
+\\wait 1/\\d=0.02/Unless\\reset d/ you don't rob Rob."
+character = "Rob"
+
 [node name="No" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke"]
 script = ExtResource( 5 )
 text = "Its funny because you can call me Rob the shop keeper but you should not [b]rob[/b] the shop. 
