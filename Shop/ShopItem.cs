@@ -120,5 +120,6 @@ public class ShopItem : Control
     public void Sell()
     {
         currentAmount = 0;
+        UpdateShopItem();
     }
 }

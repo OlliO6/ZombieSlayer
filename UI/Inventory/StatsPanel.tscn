@@ -103,35 +103,29 @@ margin_right = 159.0
 margin_bottom = 71.0
 columns = 3
 script = ExtResource( 8 )
-number = NodePath("")
+diceSceneFieldScene = ExtResource( 2 )
 
 [node name="DiceSceneField2" parent="DiceStats/VBoxContainer/CenterContainer/DiceScenesContainer" instance=ExtResource( 2 )]
-modulate = Color( 1, 1, 1, 0.5 )
 
 [node name="DiceSceneField3" parent="DiceStats/VBoxContainer/CenterContainer/DiceScenesContainer" instance=ExtResource( 2 )]
-modulate = Color( 1, 1, 1, 0.5 )
 margin_left = 22.0
 margin_right = 40.0
 
 [node name="DiceSceneField4" parent="DiceStats/VBoxContainer/CenterContainer/DiceScenesContainer" instance=ExtResource( 2 )]
-modulate = Color( 1, 1, 1, 0.5 )
 margin_left = 44.0
 margin_right = 62.0
 
 [node name="DiceSceneField5" parent="DiceStats/VBoxContainer/CenterContainer/DiceScenesContainer" instance=ExtResource( 2 )]
-modulate = Color( 1, 1, 1, 0.5 )
 margin_top = 22.0
 margin_bottom = 40.0
 
 [node name="DiceSceneField7" parent="DiceStats/VBoxContainer/CenterContainer/DiceScenesContainer" instance=ExtResource( 2 )]
-modulate = Color( 1, 1, 1, 0.5 )
 margin_left = 22.0
 margin_top = 22.0
 margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="DiceSceneField6" parent="DiceStats/VBoxContainer/CenterContainer/DiceScenesContainer" instance=ExtResource( 2 )]
-modulate = Color( 1, 1, 1, 0.5 )
 margin_left = 44.0
 margin_top = 22.0
 margin_right = 62.0

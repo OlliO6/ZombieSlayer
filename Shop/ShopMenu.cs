@@ -116,7 +116,6 @@ public class ShopMenu : Control
 
         var items = GetItems();
         var scenes = GetScenesToBuy();
-
         int price = GetPrice();
 
         if (Player.currentPlayer.Coins < price) return;
@@ -130,8 +129,9 @@ public class ShopMenu : Control
         Player.currentPlayer.AddDice(dice);
 
         EmitSignal(nameof(BoughtDice));
-        Debug.LogU(this, "Selled Dice");
+        itemsToBuy = new();
         DiceUpdate();
+        Debug.LogU(this, "Selled Dice");
     }
 
     private void AddScenesToDice(Dice dice, List<PackedScene> scenes)
