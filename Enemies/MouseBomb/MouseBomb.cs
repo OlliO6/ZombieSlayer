@@ -17,14 +17,14 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
     [Export] private int coinsAmount;
     [Export] private float movementSpeed;
 
-    private bool isInvincible, dead, isStunned, isDetonating;
+    private bool isInvincible, dead, exploded, isStunned, isDetonating;
     private AnimationTree storerForAnimTree;
     private Sprite storerForSprite;
 
 
     public AnimationTree AnimTree => this.LazyGetNode(ref storerForAnimTree, "AnimationTree");
     public Sprite Sprite => this.LazyGetNode(ref storerForSprite, "Sprite");
-    public int ExPoints => 3;
+    public int ExPoints => exploded ? 0 : 3;
     public int CurrentHealth { get; set; }
     [Export] public int MaxHealth { get; set; }
 
@@ -102,6 +102,7 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
     public void Explode()
     {
         dead = true;
+        exploded = true;
         AnimTree.SetParam("State/current", 2);
         AnimTree.SetParam("DiyingType/current", 1);
 
