@@ -49,7 +49,6 @@ public class DiceMenu : Control
 
     public override void _Ready()
     {
-        Connect(nameof(OpenStarted), this, nameof(UpdateDices));
         ThrowAllButton.Connect("pressed", this, nameof(OnThrowAllPressed));
         ThrowSelectedButton.Connect("pressed", this, nameof(OnThrowSelectedPressed));
     }
@@ -81,6 +80,7 @@ public class DiceMenu : Control
     {
         if (GetTree().Paused == true || isOpen) return;
 
+        UpdateDices();
         EmitSignal(nameof(OpenStarted));
 
         AnimationPlayer.Stop();
@@ -112,7 +112,6 @@ public class DiceMenu : Control
 
     #endregion
 
-    [TroughtEditor]
     private void UpdateDices()
     {
         if (Player.currentPlayer is null) return;
@@ -144,6 +143,7 @@ public class DiceMenu : Control
         }
 
         ShowDiceScenes(null);
+        watchedField = null;
 
         ThrowSelectedButton.Disabled = true;
         ThrowAllButton.Disabled = DiceContainer.GetChildCount() > 0 ? false : true;
@@ -190,6 +190,7 @@ public class DiceMenu : Control
 
         if (dice is null || dice.scenes is null || dice.scenes.Length is 0)
         {
+            DiceScenesContainer.Scenes = null;
             separator.Visible = false;
             return;
         }

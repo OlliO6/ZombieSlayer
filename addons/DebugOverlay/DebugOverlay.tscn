@@ -492,42 +492,42 @@ custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 0.529412, 0.596078, 0.647059, 1 )
 bbcode_enabled = true
 bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint]
-[00:06] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
-[00:08] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
-[00:08] [tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to [/tint]
-[00:08] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
-[00:08] [tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Started[/tint]
-[00:08] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
+[00:02] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
+[00:03] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
+[00:03] [tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to [/tint]
+[00:03] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
+[00:03] [tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Started[/tint]
+[00:03] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
+[00:03] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
+[00:03] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+[00:08] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
 [00:08] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
-[00:08] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
-[00:11] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
-[00:11] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
-[00:11] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
-[00:11] [tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
-[00:11] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
-[00:11] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
-[00:11] [tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
-[00:11] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
-[00:11] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[00:08] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[00:08] [tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
+[00:08] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[00:08] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[00:09] [tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
+[00:09] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[00:09] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
-[00:06] SceneManager: Loaded Menu
-[00:08] SceneManager: Loaded Game
-[00:08] WeaponSwitcher: Switched weapon to 
-[00:08] ExplanationsManager: Started MoveAndAttack
-[00:08] MoveAndAttack: Explanation Started
-[00:08] Level 0: Reached
+[00:02] SceneManager: Loaded Menu
+[00:03] SceneManager: Loaded Game
+[00:03] WeaponSwitcher: Switched weapon to 
+[00:03] ExplanationsManager: Started MoveAndAttack
+[00:03] MoveAndAttack: Explanation Started
+[00:03] Level 0: Reached
+[00:03] EnemySpawner: False
+[00:03] EnemySpawner: Difficulty changed to Level0
+[00:08] Level 1: Reached
 [00:08] EnemySpawner: False
-[00:08] EnemySpawner: Difficulty changed to Level0
-[00:11] Level 1: Reached
-[00:11] EnemySpawner: False
-[00:11] EnemySpawner: Difficulty changed to Level1
-[00:11] Level 2: Reached
-[00:11] EnemySpawner: True
-[00:11] EnemySpawner: Difficulty changed to Level1
-[00:11] Level 3: Reached
-[00:11] EnemySpawner: True
-[00:11] EnemySpawner: Difficulty changed to Level1
+[00:08] EnemySpawner: Difficulty changed to Level1
+[00:08] Level 2: Reached
+[00:08] EnemySpawner: True
+[00:08] EnemySpawner: Difficulty changed to Level1
+[00:09] Level 3: Reached
+[00:09] EnemySpawner: True
+[00:09] EnemySpawner: Difficulty changed to Level1
 "
 scroll_following = true
 selection_enabled = true
