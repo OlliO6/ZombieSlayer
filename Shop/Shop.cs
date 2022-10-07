@@ -62,6 +62,8 @@ public class Shop : Area2D, IInteractable
     }
     public void CloseMenu()
     {
+        if (!hadFirstTalk) return;
+
         GetTree().Paused = false;
         shop.Visible = false;
 
@@ -73,11 +75,14 @@ public class Shop : Area2D, IInteractable
         if (!hadFirstTalk)
         {
             InputManager.ProcessInput = false;
-            hadFirstTalk = true;
             GetTree().Paused = true;
             dialogPlayer.Play("FirstMeeting");
-            ToSignal(dialogPlayer, "DialogFinished").OnCompleted(
-                    () => { InputManager.ProcessInput = true; });
+            ToSignal(dialogPlayer, "DialogFinished").OnCompleted(() =>
+            {
+                InputManager.ProcessInput = true;
+                hadFirstTalk = true;
+            });
+
             return;
         }
         OpenMenu();

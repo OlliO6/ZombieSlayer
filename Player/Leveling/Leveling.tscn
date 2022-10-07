@@ -83,10 +83,6 @@ text = "Unlocked Shop"
 script = ExtResource( 10 )
 methodName = "UnlockShop"
 
-[node name="Coins" type="Node" parent="Levels/Level 3"]
-script = ExtResource( 6 )
-coins = 50
-
 [node name="Speed" type="Node" parent="Levels/Level 3"]
 script = ExtResource( 11 )
 dontShow = true
@@ -97,27 +93,41 @@ script = ExtResource( 11 )
 dontShow = true
 itemName = "Magnet"
 
-[node name="Level 4" type="Node" parent="Levels"]
-script = ExtResource( 1 )
-xpToLevelUp = 35
-
-[node name="Coins" type="Node" parent="Levels/Level 4"]
+[node name="Coins" type="Node" parent="Levels/Level 3"]
 script = ExtResource( 6 )
+coins = 50
 
-[node name="InventoryUnlock" type="Node" parent="Levels/Level 4"]
-script = ExtResource( 10 )
-methodName = "UnlockInventory"
-
-[node name="InventoryText" type="Node" parent="Levels/Level 4"]
-script = ExtResource( 4 )
-text = "Unlocked Inventory"
-
-[node name="Level 5" type="Node" parent="Levels"]
+[node name="Level 4" type="Node" parent="Levels"]
 script = ExtResource( 1 )
 xpToLevelUp = 20
 
+[node name="Damage" type="Node" parent="Levels/Level 4"]
+script = ExtResource( 11 )
+dontShow = true
+itemName = "Damage"
+
+[node name="DamageText" type="Node" parent="Levels/Level 4"]
+script = ExtResource( 4 )
+text = "Unlocked Damage up (shop)"
+
+[node name="Coins" type="Node" parent="Levels/Level 4"]
+script = ExtResource( 6 )
+coins = 25
+
+[node name="Level 5" type="Node" parent="Levels"]
+script = ExtResource( 1 )
+xpToLevelUp = 35
+
 [node name="Coins" type="Node" parent="Levels/Level 5"]
 script = ExtResource( 6 )
+
+[node name="InventoryUnlock" type="Node" parent="Levels/Level 5"]
+script = ExtResource( 10 )
+methodName = "UnlockInventory"
+
+[node name="InventoryText" type="Node" parent="Levels/Level 5"]
+script = ExtResource( 4 )
+text = "Unlocked Inventory"
 
 [node name="Level 6" type="Node" parent="Levels"]
 script = ExtResource( 1 )

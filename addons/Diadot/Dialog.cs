@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Actions;
 using Additions;
 using Godot;
 
@@ -60,7 +61,7 @@ public class Dialog : Node, IDialogProvider
 
         foreach (NodePath path in onStartActions)
         {
-            Action action = GetNodeOrNull<Action>(path);
+            DialogAction action = GetNodeOrNull<DialogAction>(path);
             if (action is not null) action.Execute();
         }
     }
@@ -72,7 +73,7 @@ public class Dialog : Node, IDialogProvider
 
         foreach (NodePath path in onFinishActions)
         {
-            Action action = GetNodeOrNull<Action>(path);
+            DialogAction action = GetNodeOrNull<DialogAction>(path);
             if (action is not null) action.Execute();
         }
 
@@ -131,7 +132,7 @@ public class Dialog : Node, IDialogProvider
     {
         foreach (NodePath path in callableActions)
         {
-            Action action = GetNodeOrNull<Action>(path);
+            DialogAction action = GetNodeOrNull<DialogAction>(path);
             if (action is null) continue;
 
             if (action.command == expression)

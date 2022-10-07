@@ -3,6 +3,7 @@ namespace Diadot;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Actions;
 using Additions;
 using Godot;
 
@@ -65,7 +66,7 @@ public class DialogPlayer : CanvasLayer
 
         foreach (NodePath path in callableActions)
         {
-            Action action = GetNodeOrNull<Action>(path);
+            DialogAction action = GetNodeOrNull<DialogAction>(path);
             if (action is null) continue;
 
             if (action.command == expression)

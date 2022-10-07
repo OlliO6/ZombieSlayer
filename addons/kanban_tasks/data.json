@@ -7,6 +7,10 @@
     {
       "title": "Idea",
       "color": "49b166"
+    },
+    {
+      "title": "Problem",
+      "color": "ff5f5f"
     }
   ],
   "columns": [
@@ -32,7 +36,7 @@
       "tasks": [
         3,
         4,
-        5,
+        6,
         7
       ]
     },
@@ -48,7 +52,7 @@
         1,
         2,
         0,
-        6
+        5
       ]
     }
   ],
@@ -74,11 +78,6 @@
       "details": ""
     },
     {
-      "category": 1,
-      "title": "Bullets go trough enemies upgrade",
-      "details": "but bullets will deal less damage"
-    },
-    {
       "category": 0,
       "title": "Enemy spawn position areas",
       "details": "Maybe a dictionary or a enum with like nord, east or top, right.\nFor the tutorial, so zombies spawn near you but also for later stuff and general flexibility."
@@ -89,8 +88,13 @@
       "details": ""
     },
     {
-      "category": 0,
-      "title": "Disable mouse input when dialog hidden",
+      "category": 2,
+      "title": "Shop broken after dice bought",
+      "details": ""
+    },
+    {
+      "category": 2,
+      "title": "Dice menu still shows selected when thrown and reopened",
       "details": ""
     }
   ]

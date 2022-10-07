@@ -1,10 +1,11 @@
-namespace Diadot;
+namespace Diadot.Actions;
+
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Additions;
 using Godot;
 
-public class CallAction : Action
+public class Call : DialogAction
 {
     [Export] private NodePath node;
     [Export] private string method;

@@ -9,5 +9,6 @@
         "Exports": true
     },
     "debug.confirmOnExit": "never",
-    "debug.console.closeOnEnd": true
+    "debug.console.closeOnEnd": true,
+    "godot_tools.scene_file_config": "c:\\Users\\olive\\OneDrive\\Godot Projects\\ZombieSlayer\\addons\\DebugOverlay\\AudioBusControl.tscn"
 }

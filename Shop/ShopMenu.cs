@@ -6,6 +6,8 @@ using Godot;
 
 public class ShopMenu : Control
 {
+    [Signal] public delegate void BoughtDice();
+
     [Export] private PackedScene diceScene;
 
     public List<ShopItem> itemsToBuy = new();
@@ -127,6 +129,7 @@ public class ShopMenu : Control
         Player.currentPlayer.Coins -= price;
         Player.currentPlayer.AddDice(dice);
 
+        EmitSignal(nameof(BoughtDice));
         Debug.LogU(this, "Selled Dice");
         DiceUpdate();
     }

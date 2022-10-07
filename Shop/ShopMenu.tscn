@@ -77,7 +77,7 @@ theme = ExtResource( 1 )
 theme_type_variation = "FlatButton"
 shortcut_in_tooltip = false
 enabled_focus_mode = 0
-text = "Back"
+text = "Exit"
 flat = true
 align = 0
 
