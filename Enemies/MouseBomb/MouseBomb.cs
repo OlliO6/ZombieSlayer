@@ -99,13 +99,6 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
         Debug.Log(this, "Died");
     }
 
-    [TroughtEditor]
-    public void DetonationFinished()
-    {
-        EmitSignal(nameof(Detonated));
-        Explode();
-    }
-
     public void Explode()
     {
         dead = true;
@@ -114,11 +107,17 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
 
         DeadYSort(this, Sprite, 10);
 
-        SpawnCoins(this, coinsAmount);
         EmitSignal(nameof(Died));
         EnemyDied?.Invoke(this);
 
         Debug.Log(this, "Exploded");
+    }
+
+    [TroughtEditor]
+    public void DetonationFinished()
+    {
+        EmitSignal(nameof(Detonated));
+        Explode();
     }
 
     [TroughtEditor]
