@@ -11,11 +11,50 @@ public class AnimatedRichTextLabel : RichTextLabel
     [Signal] public delegate void Advanced();
     [Signal] public delegate void NonWhiteSpaceAdvanced();
     [Signal] public delegate void Finished();
+
+    [Export(PropertyHint.File, "*.json")] private string pathToObjNamesJson = "";
+
     public event Func<string, Task> NotHandeledExpression;
 
+    public Godot.Collections.Dictionary objNamesJsonDict = null;
     public float delay;
 
     private CancellationTokenSource cancellation;
+
+    public string PathToObjNamesJson
+    {
+        get => pathToObjNamesJson;
+        set
+        {
+            if (value == pathToObjNamesJson) return;
+
+            pathToObjNamesJson = value;
+
+            if (value is null or "") return;
+
+            File file = new();
+            if (file.Open(value, File.ModeFlags.Read) is not Error.Ok)
+            {
+                GD.PrintErr($"Can't open file '{value}'");
+                return;
+            }
+
+            JSONParseResult parsed = JSON.Parse(file.GetAsText());
+
+            if (parsed.Error is not Error.Ok)
+            {
+                GD.PrintErr($"Can't parse json string from file '{value}'");
+                return;
+            }
+
+            objNamesJsonDict = parsed.Result as Godot.Collections.Dictionary;
+        }
+    }
+
+    public override void _Ready()
+    {
+        PathToObjNamesJson = PathToObjNamesJson;
+    }
 
     public async void Play(string codeText)
     {
@@ -24,6 +63,7 @@ public class AnimatedRichTextLabel : RichTextLabel
         CancellationToken token = cancellation.Token;
 
         BbcodeText = codeText;
+        InitializeExpressions();
         FilterExpressions(out Dictionary<int, List<string>> expressions);
 
         delay = ProjectSettingsControl.DefaultDelay;
@@ -74,53 +114,52 @@ public class AnimatedRichTextLabel : RichTextLabel
             }
         }
 
-        void FilterExpressions(out Dictionary<int, List<string>> expressions)
+        void InitializeExpressions()
         {
-            InitializeExpressions();
-            RemoveFromText(out expressions);
-            RemoveFromBbText();
+            string newBb = BbcodeText;
+            int skipped = 0;
 
-            void InitializeExpressions()
+            for (int i = 0; i < BbcodeText.Length; i++)
             {
-                string newBb = BbcodeText;
-                int skipped = 0;
+                char c = BbcodeText[i];
 
-                for (int i = 0; i < BbcodeText.Length; i++)
+                if (c is '\\')
                 {
-                    char c = BbcodeText[i];
+                    int startIndex = i;
+                    string expression = string.Empty;
 
-                    if (c is '\\')
+                    while (true)
                     {
-                        int startIndex = i;
-                        string expression = string.Empty;
+                        i++;
+                        if (i >= BbcodeText.Length) return;
 
-                        while (true)
-                        {
-                            i++;
-                            if (i >= BbcodeText.Length) return;
-
-                            c = BbcodeText[i];
-                            if (c is '/')
-                                break;
-                            expression += c;
-                        }
-                        int index = startIndex - skipped;
-                        bool removeExpression = false;
-                        string textToPlace = InitializeExpression(expression, ref removeExpression);
-                        if (removeExpression)
-                        {
-                            newBb = newBb.Remove(index, i + 1 - startIndex);
-                            skipped += i + 1 - startIndex;
-                        }
-                        if (textToPlace is not null and not "")
-                        {
-                            newBb = newBb.Insert(index, textToPlace);
-                            i += textToPlace.Length;
-                        }
+                        c = BbcodeText[i];
+                        if (c is '/')
+                            break;
+                        expression += c;
+                    }
+                    int index = startIndex - skipped;
+                    bool removeExpression = false;
+                    string textToPlace = InitializeExpression(expression, ref removeExpression);
+                    if (removeExpression)
+                    {
+                        newBb = newBb.Remove(index, i + 1 - startIndex);
+                        skipped += i + 1 - startIndex;
+                    }
+                    if (textToPlace is not null and not "")
+                    {
+                        newBb = newBb.Insert(index, textToPlace);
+                        i += textToPlace.Length;
                     }
                 }
-                BbcodeText = newBb;
             }
+            BbcodeText = newBb;
+        }
+
+        void FilterExpressions(out Dictionary<int, List<string>> expressions)
+        {
+            RemoveFromText(out expressions);
+            RemoveFromBbText();
 
             void RemoveFromText(out Dictionary<int, List<string>> expressions)
             {
@@ -214,11 +253,20 @@ public class AnimatedRichTextLabel : RichTextLabel
 
                 removeExpression = true;
 
-                switch (spaceSeperated[1])
-                {
-                    case "Rob": return ColorizedText(spaceSeperated[1], new Color("627c80"));
-                }
-                return null;
+                if (objNamesJsonDict is null || !objNamesJsonDict.Contains(spaceSeperated[1])) return spaceSeperated[1];
+
+                var objDict = objNamesJsonDict[spaceSeperated[1]] as Godot.Collections.Dictionary;
+
+                string name = objDict.Contains("Translations") ? (objDict["Translations"] as Godot.Collections.Dictionary)
+                        .GetOrDefault(OptionsManager.Lang, spaceSeperated[1]) : spaceSeperated[1];
+
+                Color? color = objDict.Contains("HexColor") ?
+                        new(objDict["HexColor"] as string)
+                        : (objDict.Contains("RgbColor") && objDict["RgbColor"] is Godot.Collections.Array rgb && rgb.Count is 3) ?
+                        new((float)rgb[0], (float)rgb[1], (float)rgb[2])
+                        : null;
+
+                return color is null ? name : ColorizedText(name, color.Value);
         }
 
         return null;

@@ -13,6 +13,7 @@ public class DialogPlayer : CanvasLayer
     [Signal] public delegate void DialogFinished(string dialog, NodePath exitPath);
 
     [Export] private NodePath[] callableActions = new NodePath[0];
+    [Export(PropertyHint.File, "*.json")] public string pathToObjNamesJson = null;
 
     public Label nameLabel;
     public HBoxContainer optionsContainer;
@@ -112,6 +113,8 @@ public class DialogPlayer : CanvasLayer
             InitOptions(options);
 
         nameLabel.Text = dialog.Character;
+        if (textLabel.PathToObjNamesJson != pathToObjNamesJson)
+            textLabel.PathToObjNamesJson = pathToObjNamesJson;
         textLabel.Play(dialog.Text);
         dialog.OnStarted();
         EmitSignal(nameof(DialogStarted), dialog.Name);

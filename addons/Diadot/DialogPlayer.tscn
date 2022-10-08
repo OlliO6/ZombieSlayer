@@ -27,6 +27,7 @@ audio_stream = ExtResource( 8 )
 pause_mode = 2
 layer = 5
 script = ExtResource( 9 )
+pathToObjNamesJson = "res://Data/ObjNames.json"
 
 [node name="DialogPlayer" type="Control" parent="."]
 anchor_right = 1.0

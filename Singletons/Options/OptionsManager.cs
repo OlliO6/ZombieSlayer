@@ -73,6 +73,16 @@ public class OptionsManager : Node
         }
     }
 
+    public static string Lang
+    {
+        get => CurrentOptions.language;
+        set
+        {
+            CurrentOptions.language = value;
+            instance.EmitSignal(nameof(OptionsChanged));
+        }
+    }
+
     #endregion Current Options Shortcuts
 
     public override void _EnterTree()

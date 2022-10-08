@@ -1,0 +1,16 @@
+{
+    "Example": {
+        "HexColor": "ffffff",
+        "RgbColor": [ 1, 1, 1 ],
+        "Translations": {
+            "de": "Beispiel"
+        }
+    },
+
+    "Rob": {
+        "HexColor": "9a93b7",
+        "Translations": {
+            "de": "Klaus"
+        }
+    }
+}

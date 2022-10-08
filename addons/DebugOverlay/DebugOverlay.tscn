@@ -134,7 +134,7 @@ custom_constants/separation = 0
 margin_top = -1.0
 margin_right = 252.0
 margin_bottom = 3.13333
-text = "FPS: 144"
+text = "FPS: 30"
 align = 1
 script = ExtResource( 4 )
 
@@ -492,100 +492,42 @@ custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 0.529412, 0.596078, 0.647059, 1 )
 bbcode_enabled = true
 bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint]
-[00:01] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
-[00:02] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
-[00:02] [tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to [/tint]
-[00:02] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
-[00:02] [tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Started[/tint]
-[00:02] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
-[00:02] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
-[00:02] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
-[00:05] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
+[00:02] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
+[00:05] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
+[00:05] [tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to [/tint]
+[00:05] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
+[00:05] [tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Started[/tint]
+[00:05] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
 [00:05] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
-[00:05] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
-[00:06] [tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
-[00:06] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
-[00:06] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
-[00:06] [tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
-[00:06] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
-[00:06] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
-[00:08] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started ShopPosition[/tint]
-[00:08] [tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Ended[/tint]
-[00:08] [tint r=1 g=1 b=1 a=1]ShopPosition: Explanation Started[/tint]
-[00:08] [tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
-[00:08] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started UpgradeDices[/tint]
-[00:08] [tint r=1 g=1 b=1 a=1]ShopPosition: Explanation Ended[/tint]
-[00:08] [tint r=1 g=1 b=1 a=1]UpgradeDices: Explanation Started[/tint]
-[00:09] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started Health[/tint]
-[00:09] [tint r=1 g=1 b=1 a=1]UpgradeDices: Explanation Ended[/tint]
-[00:09] [tint r=1 g=1 b=1 a=1]Health: Explanation Started[/tint]
-[00:10] [tint r=1 g=1 b=1 a=1]Health: Explanation Ended[/tint]
-[00:12] [tint r=1 g=1 b=1 a=1]DialogPlayer: FirstMeeting started[/tint]
-[00:23] [tint r=0.88 g=1 b=1 a=1]OpenShopMenu: Executed [Area2D:136598][/tint]
-[00:41] [tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
-[00:41] [tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
-[00:44] [tint r=1 g=1 b=1 a=1]DialogPlayer: FirstMeeting ended[/tint]
-[tint r=1 g=0.84 b=0 a=1]Gave 50 coins to player[/tint]
-[tint r=1 g=0.84 b=0 a=1]Gave 50 coins to player[/tint]
-[01:35] [tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
-[01:35] [tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
-[01:39] [tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
-[01:39] [tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Sword[/tint]
-[01:39] [tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
-[01:52] [tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
-[01:52] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
-[01:52] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
-[01:52] [tint r=0.5 g=1 b=0.83 a=1]Level 5: Reached[/tint]
-[01:52] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
-[01:52] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
+[00:05] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+[00:11] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
+[00:11] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
+[00:11] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[00:11] [tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
+[00:11] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[00:11] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[00:12] [tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
+[00:12] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[00:12] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
-[00:01] SceneManager: Loaded Menu
-[00:02] SceneManager: Loaded Game
-[00:02] WeaponSwitcher: Switched weapon to 
-[00:02] ExplanationsManager: Started MoveAndAttack
-[00:02] MoveAndAttack: Explanation Started
-[00:02] Level 0: Reached
-[00:02] EnemySpawner: False
-[00:02] EnemySpawner: Difficulty changed to Level0
-[00:05] Level 1: Reached
+[00:02] SceneManager: Loaded Menu
+[00:05] SceneManager: Loaded Game
+[00:05] WeaponSwitcher: Switched weapon to 
+[00:05] ExplanationsManager: Started MoveAndAttack
+[00:05] MoveAndAttack: Explanation Started
+[00:05] Level 0: Reached
 [00:05] EnemySpawner: False
-[00:05] EnemySpawner: Difficulty changed to Level1
-[00:06] Level 2: Reached
-[00:06] EnemySpawner: True
-[00:06] EnemySpawner: Difficulty changed to Level1
-[00:06] Level 3: Reached
-[00:06] EnemySpawner: True
-[00:06] EnemySpawner: Difficulty changed to Level1
-[00:08] ExplanationsManager: Started ShopPosition
-[00:08] MoveAndAttack: Explanation Ended
-[00:08] ShopPosition: Explanation Started
-[00:08] DiceInventory: Added Dice
-[00:08] ExplanationsManager: Started UpgradeDices
-[00:08] ShopPosition: Explanation Ended
-[00:08] UpgradeDices: Explanation Started
-[00:09] ExplanationsManager: Started Health
-[00:09] UpgradeDices: Explanation Ended
-[00:09] Health: Explanation Started
-[00:10] Health: Explanation Ended
-[00:12] DialogPlayer: FirstMeeting started
-[00:23] OpenShopMenu: Executed [Area2D:136598]
-[00:41] DiceInventory: Added Dice
-[00:41] ShopMenu: Selled Dice
-[00:44] DialogPlayer: FirstMeeting ended
-Gave 50 coins to player
-Gave 50 coins to player
-[01:35] DiceInventory: Added Dice
-[01:35] ShopMenu: Selled Dice
-[01:39] WeaponSwitcher: Switched weapon to Dagger
-[01:39] WeaponSwitcher: Switched weapon to Sword
-[01:39] WeaponSwitcher: Switched weapon to Pistol
-[01:52] Level 4: Reached
-[01:52] EnemySpawner: False
-[01:52] EnemySpawner: Difficulty changed to Level4
-[01:52] Level 5: Reached
-[01:52] EnemySpawner: True
-[01:52] EnemySpawner: Difficulty changed to Level4
+[00:05] EnemySpawner: Difficulty changed to Level0
+[00:11] Level 1: Reached
+[00:11] EnemySpawner: False
+[00:11] EnemySpawner: Difficulty changed to Level1
+[00:11] Level 2: Reached
+[00:11] EnemySpawner: True
+[00:11] EnemySpawner: Difficulty changed to Level1
+[00:12] Level 3: Reached
+[00:12] EnemySpawner: True
+[00:12] EnemySpawner: Difficulty changed to Level1
 "
 scroll_following = true
 selection_enabled = true
