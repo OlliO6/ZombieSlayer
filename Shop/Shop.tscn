@@ -135,7 +135,7 @@ callableActions = [ NodePath("Actions/OpenShopMenu") ]
 [node name="FirstMeeting" type="Node" parent="DialogPlayer"]
 script = ExtResource( 5 )
 text = "Hello i am Robert the shop keeper. 
-\\wait 1/You can call me \\objname Rob/"
+\\wait 1/You can call me \\objname Rob/."
 character = "Robert"
 
 [node name="BadJoke" type="Node" parent="DialogPlayer/FirstMeeting"]
