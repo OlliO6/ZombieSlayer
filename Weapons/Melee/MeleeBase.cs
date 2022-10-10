@@ -3,11 +3,11 @@ using Godot;
 
 public class MeleeBase : WeaponBase
 {
-    [Export] public int[] comboDamageLevels;
-    [Export] public int maxComboCount;
-    [Export] private float afterAttackTransitionTime = 1, comboTime = 0.3f;
-    [Export] private string[] comboAnims;
-    [Export] private float[] extraTime;
+    public int[] comboDamageLevels;
+    public int maxComboCount;
+    public float afterAttackTransitionTime = 1, comboTime = 0.3f;
+    public string[] comboAnims;
+    public float[] extraTime;
 
     protected float currentExtraTime;
     protected int currentCombo;

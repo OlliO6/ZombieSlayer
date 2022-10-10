@@ -1,6 +1,6 @@
 using Godot;
 
-public class Pistol : GunBase
+public class Gun : ShootingWeaponBase
 {
     protected override void AttackInputStarted()
     {

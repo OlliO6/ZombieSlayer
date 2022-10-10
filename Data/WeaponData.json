@@ -8,25 +8,28 @@
         "StartEvolveCost": 45,
         "DmgToEvolve": 100,
 
-        "StartAttack": "Swing",
         "DefaultTransTime": 0.3,
         "DedaultComboReactTime": 0.2,
 
-        "Attacks": {
-            "Swing": {
+        "Attacks": [
+            {
+                "AnimName": "Swing",
                 "Damage": 5,
                 "NextAttack": "Stitch"
             },
-            "Stitch": {
+            {
+                "AnimName": "Stitch",
                 "Damage": 6,
                 "ExtraTime": 0.1
             }
-        }
+        ]
     },
     "Pistol": {
         "Type": "Gun",
         "Path": "res://Weapons/Guns/Pistol/Pistol.tscn",
         "PickupPath": "res://Items/WeaponPickUps/PistolPickup.tscn",
+
+        "AllowHold": false,
 
         "Bullet": {
             "Path": "res://Bullets/PlayerBullets/SmallPlayerBullet.tscn",
@@ -41,6 +44,8 @@
         "Path": "res://Weapons/Guns/Rifle/Rifle.tscn",
         "PickupPath": "res://Items/WeaponPickUps/RiflePickup.tscn",
 
+        "AllowHold": true,
+
         "Bullet": {
             "Path": "res://Bullets/PlayerBullets/SmallPlayerBullet.tscn",
             "Damage": 5,
@@ -54,23 +59,26 @@
         "Path": "res://Weapons/Melee/Sword/Sword.tscn",
         "PickupPath": "res://Items/WeaponPickUps/SwordPickup.tscn",
 
-        "StartAttack": "Swing",
         "DefaultTransTime": 0.5,
         "DedaultComboReactTime": 0.25,
 
-        "Attacks": {
-            "Swing": {
-                "Damage": 9,
-                "NextAttack": "Swing2"
+        "Attacks": [
+            {
+                "AnimName": "Swing",
+                "Damage": 9
             },
-            "Swing2": { "Damage": 9 }
-        }
+            {
+                "AnimName": "Swing2",
+                "Damage": 9
+            }
+        ]
     },
     "Dolphin": {
         "Type": "Load Gun",
         "Path": "res://Weapons/Guns/Dolphin/Dolphin.tscn",
         "PickupPath": "res://Items/WeaponPickUps/DolphinPickup.tscn",
 
+        "AllowHold": false,
         "LoadTime": 1,
         "MinPower": 0.4,
 

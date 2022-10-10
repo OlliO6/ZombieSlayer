@@ -132,9 +132,9 @@ public class WeaponSwitcher : Node2D
 
         if (GetChildCount() <= 1) return;
 
-        if (weapon.weaponPickup is not null)
+        if (weapon.weaponPickupScene is not null)
         {
-            WeaponPickUp pickup = GD.Load<PackedScene>(weapon.weaponPickup).Instance<WeaponPickUp>();
+            WeaponPickUp pickup = weapon.weaponPickupScene.Instance<WeaponPickUp>();
 
             GetTree().CurrentScene.AddChild(pickup);
 

@@ -51,7 +51,7 @@ public class DragableWeaponField : WeaponField
         if (weapon is null) return null;
 
         CenterContainer preview = new CenterContainer();
-        TextureRect previewRect = new TextureRect() { Texture = weapon.icon };
+        TextureRect previewRect = new TextureRect() { Texture = weapon.Icon };
         preview.AddChild(previewRect);
         preview.UseTopLeft = true;
 
@@ -73,7 +73,7 @@ public class DragableWeaponField : WeaponField
         cameFrom.Icon = Icon;
 
         weapon = weaponData.weapon;
-        Icon = weaponData.weapon.icon;
+        Icon = weaponData.weapon.Icon;
     }
 
     private void MovePlayerWeapon(int fromIndex, int toIndex)

@@ -1,12 +1,12 @@
 using Additions;
 using Godot;
 
-public class GunBase : WeaponBase
+public abstract class ShootingWeaponBase : WeaponBase
 {
-    [Export] public PackedScene bulletScene;
-    [Export] public Vector2 bulletSpeedRange;
-    [Export] public float bulletSpread, bulletLivetime = 3;
-    [Export] public int baseBulletDamage;
+    public PackedScene bulletScene;
+    public Vector2 bulletSpeedRange;
+    public float bulletSpread, bulletLivetime = 3;
+    public int bulletDamage;
 
     #region InstantiatePoint Reference
 
@@ -18,7 +18,7 @@ public class GunBase : WeaponBase
 
     protected Bullet lastBullet;
 
-    public virtual int GetBulletDamage() => Mathf.RoundToInt(baseBulletDamage * (Player.currentPlayer is null ? 1 : Player.currentPlayer.damageMultiplier));
+    public virtual int GetBulletDamage() => Mathf.RoundToInt(bulletDamage * (Player.currentPlayer is null ? 1 : Player.currentPlayer.damageMultiplier));
 
     public override void Attack()
     {

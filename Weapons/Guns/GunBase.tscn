@@ -1,10 +1,11 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Shaders/Materials/StandartSpriteMat.material" type="Material" id=1]
-[ext_resource path="res://Weapons/Guns/Pistol/Pistol.cs" type="Script" id=2]
+[ext_resource path="res://Weapons/Guns/Gun.cs" type="Script" id=2]
 [ext_resource path="res://Bullets/PlayerBullets/PlayerBullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sounds/shoot.wav" type="AudioStream" id=4]
 [ext_resource path="res://addons/Shake/PlayerCamShakeInducer.cs" type="Script" id=5]
+
 
 [sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0.352174, 1 )
