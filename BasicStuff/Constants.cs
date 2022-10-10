@@ -15,7 +15,9 @@ public static class Icons
         // Weapon Pickups
         { GD.Load<PackedScene>("res://Items/WeaponPickUps/PistolPickup.tscn"), GD.Load<Texture>("res://Weapons/Guns/Pistol/PistolIcon.png") },
         { GD.Load<PackedScene>("res://Items/WeaponPickUps/RiflePickup.tscn"), GD.Load<Texture>("res://Weapons/Guns/Rifle/RifleIcon.png") },
+        { GD.Load<PackedScene>("res://Items/WeaponPickUps/DaggerPickup.tscn"), GD.Load<Texture>("res://Weapons/Melee/Dagger/DaggerIcon.png") },
         { GD.Load<PackedScene>("res://Items/WeaponPickUps/SwordPickup.tscn"), GD.Load<Texture>("res://Weapons/Melee/Sword/SwordIcon.png") },
+        { GD.Load<PackedScene>("res://Items/WeaponPickUps/DolphinsPickup.tscn"), GD.Load<Texture>("res://Weapons/Guns/Dolphins/DolphinsIcon.png") }, 
         // Other Pickups
         { GD.Load<PackedScene>("res://Items/Health/HealthPickup.tscn"), GD.Load<Texture>("res://Items/Health/HealthIcon.png") },
     };
