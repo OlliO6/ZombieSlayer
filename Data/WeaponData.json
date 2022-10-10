@@ -1,0 +1,28 @@
+{
+    "Dagger": {
+        "Type": "Melee",
+        "Path": "res://Weapons/Melee/Dagger/Dagger.tscn",
+        "PickupPath": "res://Items/WeaponPickUps/DaggerPickup.tscn"
+    },
+    "Pistol": {
+        "Type": "Gun",
+        "Path": "res://Weapons/Guns/Pistol/Pistol.tscn",
+        "PickupPath": "res://Items/WeaponPickUps/PistolPickup.tscn"
+    },
+    "Rifle": {
+        "Type": "Gun",
+        "Path": "res://Weapons/Guns/Rifle/Rifle.tscn",
+        "PickupPath": "res://Items/WeaponPickUps/RiflePickup.tscn"
+    },
+    "Sword": {
+        "Type": "Melee",
+        "Path": "res://Weapons/Melee/Sword/Sword.tscn",
+        "PickupPath": "res://Items/WeaponPickUps/SwordPickup.tscn"
+    },
+    "Dolphin": {
+        "Type": "Load Gun",
+        "Path": "res://Weapons/Guns/Dolphin/Dolphin.tscn",
+        "PickupPath": "res://Items/WeaponPickUps/DolphinPickup.tscn"
+
+    }
+}
