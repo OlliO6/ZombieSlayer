@@ -209,14 +209,7 @@ tracks/4/keys = {
 }
 
 [node name="Dagger" instance=ExtResource( 1 )]
-weaponPickup = "res://Items/WeaponPickUps/DaggerPickup.tscn"
-icon = ExtResource( 2 )
-comboDamageLevels = PoolIntArray( 5, 6 )
-maxComboCount = 1
-afterAttackTransitionTime = 0.25
-comboTime = 0.2
-comboAnims = PoolStringArray( "Attack", "Stitch" )
-extraTime = PoolRealArray(  )
+weaponName = "Dagger"
 
 [node name="Sprite" parent="." index="0"]
 rotation = 0.261799

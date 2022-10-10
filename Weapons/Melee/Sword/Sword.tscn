@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Weapons/Melee/Sword/Sword.png" type="Texture" id=1]
-[ext_resource path="res://Weapons/Melee/Sword/SwordIcon.png" type="Texture" id=2]
 [ext_resource path="res://Sounds/SwordSwing.wav" type="AudioStream" id=3]
 [ext_resource path="res://Weapons/Melee/MeleeBase.tscn" type="PackedScene" id=4]
 
@@ -149,14 +148,7 @@ tracks/4/keys = {
 __meta__ = {
 "_edit_horizontal_guides_": [ -21.0 ]
 }
-weaponPickup = "res://Items/WeaponPickUps/DaggerPickup.tscn"
-icon = ExtResource( 2 )
-comboDamageLevels = PoolIntArray( 9, 9 )
-maxComboCount = 1
-afterAttackTransitionTime = 0.5
-comboTime = 0.25
-comboAnims = PoolStringArray( "Swing", "Swing2" )
-extraTime = PoolRealArray(  )
+weaponName = "Sword"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 1 )
