@@ -9,8 +9,9 @@ public abstract class WeaponBase : Node2D
 
     [Export] public string weaponName = "";
 
+    public Godot.Collections.Dictionary data;
     public PackedScene weaponPickupScene;
-    public Texture Icon => Icons.IconPickupMatrix[weaponPickupScene];
+    public Texture Icon => Icons.IconPickupMatrix.ContainsKey(weaponPickupScene) ? Icons.IconPickupMatrix[weaponPickupScene] : null;
 
     private AnimationPlayer storerForAnimationPlayer;
     public AnimationPlayer AnimationPlayer => this.LazyGetNode(ref storerForAnimationPlayer, "AnimationPlayer");
@@ -18,8 +19,15 @@ public abstract class WeaponBase : Node2D
     public bool disabled;
     public bool isAttacking;
 
+    protected virtual void ApplyData()
+    {
+        data = Database.weaponData[weaponName] as Godot.Collections.Dictionary;
+        weaponPickupScene = GD.Load<PackedScene>(data.Get<string>("PickupPath"));
+    }
+
     public override void _Ready()
     {
+        ApplyData();
         AnimationPlayer.Connect("animation_finished", this, nameof(OnAnimationFinished));
     }
 

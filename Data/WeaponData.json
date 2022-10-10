@@ -51,7 +51,7 @@
             "Damage": 5,
             "Livetime": 3,
             "Spread": 4.5,
-            "Speed": [ 90, 100 ]
+            "Speed": [ 110, 130 ]
         }
     },
     "Sword": {
@@ -78,7 +78,6 @@
         "Path": "res://Weapons/Guns/Dolphin/Dolphin.tscn",
         "PickupPath": "res://Items/WeaponPickUps/DolphinPickup.tscn",
 
-        "AllowHold": false,
         "LoadTime": 1,
         "MinPower": 0.4,
 

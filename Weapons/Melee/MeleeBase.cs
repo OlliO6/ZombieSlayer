@@ -13,14 +13,15 @@ public class MeleeBase : WeaponBase
     protected int currentCombo;
     protected SceneTreeTween tween;
 
-    #region DamageDealee Reference
-
     private DamagingArea storerForDamageDealed;
+
     public DamagingArea DamageDealer => this.LazyGetNode(ref storerForDamageDealed, "%DamageDealer");
-
-    #endregion
-
     public virtual int GetDamageAmount(int combo = 0) => Mathf.RoundToInt(comboDamageLevels[combo.Clamp(0, comboDamageLevels.Length - 1)] * (Player.currentPlayer is null ? 1 : Player.currentPlayer.damageMultiplier));
+
+    protected override void ApplyData()
+    {
+        base.ApplyData();
+    }
 
     protected override void AttackInputStarted()
     {

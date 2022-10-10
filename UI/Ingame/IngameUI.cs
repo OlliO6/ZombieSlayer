@@ -28,7 +28,8 @@ public class IngameUI : Control
     public override void _Ready()
     {
         HeartContainer.Hide();
-        GameState.instance.HealthUnlocked += HeartContainer.Show;
+        if (GameState.hasInstance)
+            GameState.instance.HealthUnlocked += HeartContainer.Show;
     }
 
     [TroughtEditor]

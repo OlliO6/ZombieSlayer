@@ -3,20 +3,31 @@ using Godot;
 
 public abstract class ShootingWeaponBase : WeaponBase
 {
+    protected Godot.Collections.Dictionary bulletData;
+
     public PackedScene bulletScene;
     public Vector2 bulletSpeedRange;
     public float bulletSpread, bulletLivetime = 3;
     public int bulletDamage;
 
-    #region InstantiatePoint Reference
-
-    private Node2D storerForInstantiatePoint;
     public Node2D InstantiatePoint => this.LazyGetNode(ref storerForInstantiatePoint, _InstantiatePoint);
-    [Export] private NodePath _InstantiatePoint = "InstantiatePoint";
-
-    #endregion
-
     protected Bullet lastBullet;
+
+    [Export] private NodePath _InstantiatePoint = "InstantiatePoint";
+    private Node2D storerForInstantiatePoint;
+
+    protected override void ApplyData()
+    {
+        base.ApplyData();
+
+        bulletData = data.Get<Godot.Collections.Dictionary>("Bullet");
+        bulletScene = GD.Load<PackedScene>(bulletData.Get<string>("Path"));
+        bulletSpread = bulletData.Get<float>("Spread");
+        bulletLivetime = bulletData.Get<float>("Livetime");
+        bulletDamage = (int)bulletData.Get<float>("Damage");
+        var speedArray = bulletData.Get<Godot.Collections.Array>("Speed");
+        bulletSpeedRange = new((float)speedArray[0], (float)speedArray[1]);
+    }
 
     public virtual int GetBulletDamage() => Mathf.RoundToInt(bulletDamage * (Player.currentPlayer is null ? 1 : Player.currentPlayer.damageMultiplier));
 

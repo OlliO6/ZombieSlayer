@@ -6,14 +6,19 @@ public class LoadGun : ShootingWeaponBase
 {
     [Signal] public delegate void LoadStarted();
 
-    public float loadingTime, minProgress = 0.25f;
     [Export] public Curve spread, power;
+    public float loadingTime, minProgress;
 
     bool isLoading;
     float loadProgress;
 
     private PlayerCamShakeInducer storerForPlayerCamShakeInducer;
     public PlayerCamShakeInducer PlayerCamShakeInducer => this.LazyGetNode(ref storerForPlayerCamShakeInducer, "PlayerCamShakeInducer");
+
+    protected override void ApplyData()
+    {
+        base.ApplyData();
+    }
 
     public override void Attack()
     {
