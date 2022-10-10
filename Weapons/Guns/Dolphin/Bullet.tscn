@@ -7,8 +7,7 @@
 _data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
 
 [sub_resource type="Curve" id=2]
-max_value = 2.0
-_data = [ Vector2( 0, 0 ), 0.0, 2.0, 0, 1, Vector2( 1, 2 ), 2.0, 0.0, 1, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
 
 [node name="DolphinBullet" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -20,3 +19,6 @@ dieAnimSpeed = 6.0
 damageOverPower = SubResource( 1 )
 speedOverPower = SubResource( 1 )
 scaleOverPower = SubResource( 2 )
+
+[node name="Sprite" parent="." index="1"]
+scale = Vector2( 2, 2 )

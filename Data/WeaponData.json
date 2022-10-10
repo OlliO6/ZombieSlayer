@@ -2,27 +2,85 @@
     "Dagger": {
         "Type": "Melee",
         "Path": "res://Weapons/Melee/Dagger/Dagger.tscn",
-        "PickupPath": "res://Items/WeaponPickUps/DaggerPickup.tscn"
+        "PickupPath": "res://Items/WeaponPickUps/DaggerPickup.tscn",
+
+        "Evolution": "BloodyDagger",
+        "StartEvolveCost": 45,
+        "DmgToEvolve": 100,
+
+        "StartAttack": "Swing",
+        "DefaultTransTime": 0.3,
+        "DedaultComboReactTime": 0.2,
+
+        "Attacks": {
+            "Swing": {
+                "Damage": 5,
+                "NextAttack": "Stitch"
+            },
+            "Stitch": {
+                "Damage": 6,
+                "ExtraTime": 0.1
+            }
+        }
     },
     "Pistol": {
         "Type": "Gun",
         "Path": "res://Weapons/Guns/Pistol/Pistol.tscn",
-        "PickupPath": "res://Items/WeaponPickUps/PistolPickup.tscn"
+        "PickupPath": "res://Items/WeaponPickUps/PistolPickup.tscn",
+
+        "Bullet": {
+            "Path": "res://Bullets/PlayerBullets/SmallPlayerBullet.tscn",
+            "Damage": 7,
+            "Livetime": 3,
+            "Spread": 3,
+            "Speed": [ 90, 100 ]
+        }
     },
     "Rifle": {
         "Type": "Gun",
         "Path": "res://Weapons/Guns/Rifle/Rifle.tscn",
-        "PickupPath": "res://Items/WeaponPickUps/RiflePickup.tscn"
+        "PickupPath": "res://Items/WeaponPickUps/RiflePickup.tscn",
+
+        "Bullet": {
+            "Path": "res://Bullets/PlayerBullets/SmallPlayerBullet.tscn",
+            "Damage": 5,
+            "Livetime": 3,
+            "Spread": 4.5,
+            "Speed": [ 90, 100 ]
+        }
     },
     "Sword": {
         "Type": "Melee",
         "Path": "res://Weapons/Melee/Sword/Sword.tscn",
-        "PickupPath": "res://Items/WeaponPickUps/SwordPickup.tscn"
+        "PickupPath": "res://Items/WeaponPickUps/SwordPickup.tscn",
+
+        "StartAttack": "Swing",
+        "DefaultTransTime": 0.5,
+        "DedaultComboReactTime": 0.25,
+
+        "Attacks": {
+            "Swing": {
+                "Damage": 9,
+                "NextAttack": "Swing2"
+            },
+            "Swing2": { "Damage": 9 }
+        }
     },
     "Dolphin": {
         "Type": "Load Gun",
         "Path": "res://Weapons/Guns/Dolphin/Dolphin.tscn",
-        "PickupPath": "res://Items/WeaponPickUps/DolphinPickup.tscn"
+        "PickupPath": "res://Items/WeaponPickUps/DolphinPickup.tscn",
 
+        "LoadTime": 1,
+        "MinPower": 0.4,
+
+        "Bullet": {
+            "Path": "res://Weapons/Guns/Dolphin/Bullet.tscn",
+            "PowerLossPerHit": 0.2,
+            "Damage": 18,
+            "Spread": 6,
+            "Livetime": 3,
+            "Speed": [ 90, 100 ]
+        }
     }
 }
