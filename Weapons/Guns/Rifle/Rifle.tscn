@@ -1,12 +1,13 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Weapons/Guns/Rifle/Rifle.png" type="Texture" id=1]
-[ext_resource path="res://Weapons/Guns/Rifle/Rifle.cs" type="Script" id=2]
+[ext_resource path="res://Weapons/Guns/Gun.cs" type="Script" id=2]
 [ext_resource path="res://Weapons/Guns/GunBase.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sounds/RifleShoot.wav" type="AudioStream" id=4]
 [ext_resource path="res://Weapons/Guns/Rifle/RifleIcon.png" type="Texture" id=5]
 [ext_resource path="res://Bullets/PlayerBullets/SmallPlayerBullet.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/Shake/ShakeProfile.cs" type="Script" id=7]
+
 
 [sub_resource type="AudioStreamRandomPitch" id=6]
 audio_stream = ExtResource( 4 )

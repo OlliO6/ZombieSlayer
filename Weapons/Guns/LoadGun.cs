@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using Additions;
 using Godot;
 
-public class LoadGun : GunBase
+public class LoadGun : ShootingWeaponBase
 {
     [Signal] public delegate void LoadStarted();
-    [Export] public float loadingTime, minProgress = 0.25f;
+
+    public float loadingTime, minProgress = 0.25f;
     [Export] public Curve spread, power;
 
     bool isLoading;

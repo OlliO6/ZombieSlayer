@@ -38,7 +38,7 @@ public class WeaponContainer : HBoxContainer
                 continue;
             }
 
-            field.Icon = weapon.icon;
+            field.Icon = weapon.Icon;
         }
     }
 }

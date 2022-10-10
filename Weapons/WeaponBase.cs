@@ -2,23 +2,20 @@ using System;
 using Additions;
 using Godot;
 
-public class WeaponBase : Node2D
+public abstract class WeaponBase : Node2D
 {
     [Signal] public delegate void AttackStarted();
     [Signal] public delegate void AttackFinished();
 
-    [Export(PropertyHint.File, "*tscn,*scn")] public string weaponPickup;
-    [Export] public Texture icon;
+    [Export] public string weaponName = "";
 
-    #region AnimationPlayer Reference
+    public PackedScene weaponPickupScene;
+    public Texture Icon => Icons.IconPickupMatrix[weaponPickupScene];
 
     private AnimationPlayer storerForAnimationPlayer;
     public AnimationPlayer AnimationPlayer => this.LazyGetNode(ref storerForAnimationPlayer, "AnimationPlayer");
 
-    #endregion
-
     public bool disabled;
-
     public bool isAttacking;
 
     public override void _Ready()
