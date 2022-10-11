@@ -9,13 +9,12 @@
         "DmgToEvolve": 100,
 
         "DefaultTransTime": 0.3,
-        "DedaultComboReactTime": 0.2,
+        "DefaultComboReactTime": 0.2,
 
         "Attacks": [
             {
                 "AnimName": "Swing",
-                "Damage": 5,
-                "NextAttack": "Stitch"
+                "Damage": 5
             },
             {
                 "AnimName": "Stitch",
@@ -32,7 +31,7 @@
         "AllowHold": false,
 
         "Bullet": {
-            "Path": "res://Bullets/PlayerBullets/SmallPlayerBullet.tscn",
+            "Path": "res://Bullets/PlayerBullets/PlayerBullet.tscn",
             "Damage": 7,
             "Livetime": 3,
             "Spread": 3,
@@ -60,17 +59,12 @@
         "PickupPath": "res://Items/WeaponPickUps/SwordPickup.tscn",
 
         "DefaultTransTime": 0.5,
-        "DedaultComboReactTime": 0.25,
+        "DefaultComboReactTime": 0.25,
+        "DefaultDamage": 9,
 
         "Attacks": [
-            {
-                "AnimName": "Swing",
-                "Damage": 9
-            },
-            {
-                "AnimName": "Swing2",
-                "Damage": 9
-            }
+            { "AnimName": "Swing" },
+            { "AnimName": "Swing2" }
         ]
     },
     "Dolphin": {

@@ -31,10 +31,7 @@ public abstract class WeaponBase : Node2D
         AnimationPlayer.Connect("animation_finished", this, nameof(OnAnimationFinished));
     }
 
-    public override void _ExitTree()
-    {
-        Disable();
-    }
+    public override void _ExitTree() => Disable();
 
     public virtual void Disable()
     {
