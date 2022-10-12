@@ -35,26 +35,11 @@ public class LoadGun : ShootingWeaponBase
         bulletLivetime = bulletData.Get<float>("Livetime");
         bulletPowerLossPerHit = bulletData.Get<float>("PowerLossPerHit");
 
-        powerOverLoad = ConvertCurveData(data.Get<Godot.Collections.Array>("PowerOverLoad"));
-        spreadOverLoad = ConvertCurveData(data.Get<Godot.Collections.Array>("SpreadOverLoad"));
-        bulletDamageOverPower = ConvertCurveData(bulletData.Get<Godot.Collections.Array>("DamageOverPower"));
-        bulletSpeedOverPower = ConvertCurveData(bulletData.Get<Godot.Collections.Array>("SpeedOverPower"));
-        bulletScaleOverPower = ConvertCurveData(bulletData.Get<Godot.Collections.Array>("ScaleOverPower"));
-
-        static Curve ConvertCurveData(Godot.Collections.Array data)
-        {
-            Curve curve = new();
-
-            foreach (Godot.Collections.Dictionary pointData in data)
-            {
-                curve.AddPoint(
-                        position: new Vector2(pointData.Get<float>("Pos"), pointData.Get<float>("Val")),
-                        leftMode: Curve.TangentMode.Linear,
-                        rightMode: Curve.TangentMode.Linear);
-            }
-
-            return curve;
-        }
+        powerOverLoad = data.Get<Curve>("PowerOverLoadCurve");
+        spreadOverLoad = data.Get<Curve>("SpreadOverLoadCurve");
+        bulletDamageOverPower = bulletData.Get<Curve>("DamageOverPowerCurve");
+        bulletSpeedOverPower = bulletData.Get<Curve>("SpeedOverPowerCurve");
+        bulletScaleOverPower = bulletData.Get<Curve>("ScaleOverPowerCurve");
     }
 
     public override float GetBulletLivetime() => bulletLivetime;

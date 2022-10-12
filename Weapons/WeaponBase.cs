@@ -22,7 +22,7 @@ public abstract class WeaponBase : Node2D
     protected virtual void ApplyData()
     {
         data = Database.weaponData[weaponName] as Godot.Collections.Dictionary;
-        weaponPickupScene = GD.Load<PackedScene>(data.Get<string>("PickupPath"));
+        weaponPickupScene = data.Get<PackedScene>("PickupScene");
     }
 
     public override void _Ready()

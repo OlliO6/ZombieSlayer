@@ -18,7 +18,7 @@ public abstract class ShootingWeaponBase : WeaponBase
         base.ApplyData();
 
         bulletData = data.Get<Godot.Collections.Dictionary>("Bullet");
-        bulletScene = GD.Load<PackedScene>(bulletData.Get<string>("Path"));
+        bulletScene = bulletData.Get<PackedScene>("Scene");
     }
 
     public virtual float GetSpread() => 0;
