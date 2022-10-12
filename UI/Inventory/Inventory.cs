@@ -42,11 +42,12 @@ public class Inventory : Control
 
     public override void _EnterTree()
     {
-        GameState.instance.InventoryUnlocked += () =>
-        {
-            InputManager.InventoryPressed += OnInventoryPressed;
-            InputManager.UICancelPressed += OnUICancelPressed;
-        };
+        if (GameState.hasInstance)
+            GameState.instance.InventoryUnlocked += () =>
+            {
+                InputManager.InventoryPressed += OnInventoryPressed;
+                InputManager.UICancelPressed += OnUICancelPressed;
+            };
     }
     public override void _ExitTree()
     {

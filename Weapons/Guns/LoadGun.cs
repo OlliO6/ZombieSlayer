@@ -2,44 +2,70 @@ using System.Collections.Generic;
 using Additions;
 using Godot;
 
-public class LoadGun : GunBase
+public class LoadGun : ShootingWeaponBase
 {
     [Signal] public delegate void LoadStarted();
-    [Export] public float loadingTime, minProgress = 0.25f;
-    [Export] public Curve spread, power;
 
-    bool isLoading;
-    float loadProgress;
+    public Curve powerOverLoad, spreadOverLoad;
+    public Curve bulletDamageOverPower, bulletSpeedOverPower, bulletScaleOverPower;
+    public float bulletLivetime, bulletPowerLossPerHit;
+    public float loadTime;
 
+    private bool isLoading;
+    private float loadProgress;
     private PlayerCamShakeInducer storerForPlayerCamShakeInducer;
+
     public PlayerCamShakeInducer PlayerCamShakeInducer => this.LazyGetNode(ref storerForPlayerCamShakeInducer, "PlayerCamShakeInducer");
+    public float CurrentPower { get; private set; }
+    public float LoadProgress
+    {
+        get => loadProgress;
+        set
+        {
+            loadProgress = value;
+            CurrentPower = isLoading ? powerOverLoad.InterpolateBaked(value) : 0;
+        }
+    }
+
+    protected override void ApplyData()
+    {
+        base.ApplyData();
+
+        loadTime = data.Get<float>("LoadTime");
+        bulletLivetime = bulletData.Get<float>("Livetime");
+        bulletPowerLossPerHit = bulletData.Get<float>("PowerLossPerHit");
+
+        powerOverLoad = data.Get<Curve>("PowerOverLoadCurve");
+        spreadOverLoad = data.Get<Curve>("SpreadOverLoadCurve");
+        bulletDamageOverPower = bulletData.Get<Curve>("DamageOverPowerCurve");
+        bulletSpeedOverPower = bulletData.Get<Curve>("SpeedOverPowerCurve");
+        bulletScaleOverPower = bulletData.Get<Curve>("ScaleOverPowerCurve");
+    }
+
+    public override float GetBulletLivetime() => bulletLivetime;
+    public override float GetSpread() => spreadOverLoad.InterpolateBaked(LoadProgress);
 
     public override void Attack()
     {
         if (!IsInstanceValid(lastBullet)) return;
+
         isAttacking = true;
+
         lastBullet.dead = false;
         lastBullet.liveAwaiter.Continue();
-
-        Vector2 globPos = lastBullet.GlobalPosition;
         InstantiatePoint.RemoveChild(lastBullet);
         GetTree().CurrentScene.AddChild(lastBullet);
-        lastBullet.GlobalPosition = globPos;
-
-        lastBullet.speed = (float)GD.RandRange(bulletSpeedRange.x, bulletSpeedRange.y);
-        lastBullet.damage = GetBulletDamage();
-        lastBullet.maxLivetime = bulletLivetime;
         lastBullet.GlobalTransform = InstantiatePoint.GlobalTransform;
-        lastBullet.Rotate(Mathf.Deg2Rad(Random.NormallyDistributedFloat(deviation: bulletSpread * spread.InterpolateBaked(loadProgress))));
-
-        float _power = power.InterpolateBaked(loadProgress);
+        lastBullet.Rotate(Mathf.Deg2Rad(Random.NormallyDistributedFloat(deviation: GetSpread())));
 
         if (lastBullet is LoadBullet loadBullet)
         {
-            loadBullet.Power = _power;
+            loadBullet.Power = CurrentPower;
+            loadBullet.powerLoosePerHit = bulletPowerLossPerHit;
         }
+        lastBullet.maxLivetime = GetBulletLivetime();
 
-        PlayerCamShakeInducer.Shake(_power);
+        PlayerCamShakeInducer.Shake(CurrentPower);
         AnimationPlayer.Stop();
         AnimationPlayer.Play("Shoot");
 
@@ -53,8 +79,14 @@ public class LoadGun : GunBase
         if (!isLoading)
         {
             isLoading = true;
-            loadProgress = 0;
+            LoadProgress = 0;
             lastBullet = bulletScene.Instance<Bullet>();
+            if (lastBullet is LoadBullet loadBullet)
+            {
+                loadBullet.damageOverPower = bulletDamageOverPower;
+                loadBullet.speedOverPower = bulletSpeedOverPower;
+                loadBullet.scaleOverPower = bulletScaleOverPower;
+            }
             lastBullet.dead = true;
             AnimationPlayer.Play("Load");
             CallDeferred(nameof(PauseBullet));
@@ -68,10 +100,8 @@ public class LoadGun : GunBase
             return;
         }
 
-        loadProgress += delta / loadingTime;
-        loadProgress = loadProgress.Clamp01();
-
-        (lastBullet as LoadBullet).Power = power.InterpolateBaked(loadProgress);
+        LoadProgress = (LoadProgress + delta / loadTime).Clamp01();
+        (lastBullet as LoadBullet).Power = CurrentPower;
     }
 
     private void PauseBullet() => lastBullet.liveAwaiter.Pause();
@@ -81,7 +111,7 @@ public class LoadGun : GunBase
         if (isAttacking || !isLoading) return;
 
         isLoading = false;
-        if (loadProgress > minProgress)
+        if (loadProgress > 0)
         {
             Attack();
             return;

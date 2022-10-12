@@ -1,0 +1,107 @@
+{
+    "Dagger": {
+        "Type": "Melee",
+        "Scene": "res://Weapons/Melee/Dagger/Dagger.tscn",
+        "PickupScene": "res://Items/WeaponPickUps/DaggerPickup.tscn",
+
+        "Evolution": "BloodyDagger",
+        "StartEvolveCost": 45,
+        "DmgToEvolve": 60,
+
+        "DefaultTransTime": 0.3,
+        "DefaultComboReactTime": 0.2,
+
+        "Attacks": [
+            {
+                "AnimName": "Swing",
+                "Damage": 5
+            },
+            {
+                "AnimName": "Stitch",
+                "Damage": 6,
+                "ExtraTime": 0.1
+            }
+        ]
+    },
+    "Pistol": {
+        "Type": "Gun",
+        "Scene": "res://Weapons/Guns/Pistol/Pistol.tscn",
+        "PickupScene": "res://Items/WeaponPickUps/PistolPickup.tscn",
+
+        "AllowHold": false,
+        "Spread": 3,
+
+        "Bullet": {
+            "Scene": "res://Bullets/PlayerBullets/PlayerBullet.tscn",
+            "Damage": 7,
+            "Livetime": 3,
+            "Speed": [ 90, 100 ]
+        }
+    },
+    "Rifle": {
+        "Type": "Gun",
+        "Scene": "res://Weapons/Guns/Rifle/Rifle.tscn",
+        "PickupScene": "res://Items/WeaponPickUps/RiflePickup.tscn",
+
+        "AllowHold": true,
+        "Spread": 4.5,
+
+        "Bullet": {
+            "Scene": "res://Bullets/PlayerBullets/SmallPlayerBullet.tscn",
+            "Damage": 5,
+            "Livetime": 3,
+            "Speed": [ 110, 130 ]
+        }
+    },
+    "Sword": {
+        "Type": "Melee",
+        "Scene": "res://Weapons/Melee/Sword/Sword.tscn",
+        "PickupScene": "res://Items/WeaponPickUps/SwordPickup.tscn",
+
+        "DefaultTransTime": 0.5,
+        "DefaultComboReactTime": 0.25,
+        "DefaultDamage": 9,
+
+        "Attacks": [
+            { "AnimName": "Swing" },
+            { "AnimName": "Swing2" }
+        ]
+    },
+    "Dolphin": {
+        "Type": "Load Gun",
+        "Scene": "res://Weapons/Guns/Dolphin/Dolphin.tscn",
+        "PickupScene": "res://Items/WeaponPickUps/DolphinPickup.tscn",
+
+        "Evolution": "Orca",
+        "StartEvolveCost": 250,
+        "DmgToEvolve": 150,
+
+        "LoadTime": 1,
+        "PowerOverLoadCurve": [
+            { "Pos": 0, "Val": 0 },
+            { "Pos": 1, "Val": 1 }
+        ],
+        "SpreadOverLoadCurve": [
+            { "Pos": 0, "Val": 6 },
+            { "Pos": 1, "Val": 1 }
+        ],
+
+        "Bullet": {
+            "Scene": "res://Weapons/Guns/Dolphin/Bullet.tscn",
+            "PowerLossPerHit": 0.25,
+            "Livetime": 3,
+            "DamageOverPowerCurve": [
+                { "Pos": 0, "Val": 4 },
+                { "Pos": 1, "Val": 18 }
+            ],
+            "SpeedOverPowerCurve": [
+                { "Pos": 0, "Val": 40 },
+                { "Pos": 1, "Val": 90 }
+            ],
+            "ScaleOverPowerCurve": [
+                { "Pos": 0, "Val": 0.4 },
+                { "Pos": 1, "Val": 1 }
+            ]
+        }
+    }
+}

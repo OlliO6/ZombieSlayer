@@ -1,26 +1,53 @@
+using System.Linq;
 using Additions;
 using Godot;
 
 public class MeleeBase : WeaponBase
 {
-    [Export] public int[] comboDamageLevels;
-    [Export] public int maxComboCount;
-    [Export] private float afterAttackTransitionTime = 1, comboTime = 0.3f;
-    [Export] private string[] comboAnims;
-    [Export] private float[] extraTime;
+    public struct AttackData
+    {
+        public string animName;
+        public int damage;
+        public float comboReactTime;
+        public float transitionTime;
+        public float extraTime;
+    }
+
+    public AttackData[] attacks;
 
     protected float currentExtraTime;
     protected int currentCombo;
     protected SceneTreeTween tween;
 
-    #region DamageDealee Reference
-
     private DamagingArea storerForDamageDealed;
+
+    public AttackData CurrentAttack => attacks[currentCombo];
     public DamagingArea DamageDealer => this.LazyGetNode(ref storerForDamageDealed, "%DamageDealer");
+    public virtual int GetDamageAmount(int combo = 0) => Mathf.RoundToInt(attacks[combo].damage * (Player.Exists ? Player.currentPlayer.damageMultiplier : 1));
 
-    #endregion
+    protected override void ApplyData()
+    {
+        base.ApplyData();
+        var attacksData = data.Get<Godot.Collections.Array>("Attacks").Cast<Godot.Collections.Dictionary>().ToList();
+        attacks = new AttackData[attacksData.Count];
 
-    public virtual int GetDamageAmount(int combo = 0) => Mathf.RoundToInt(comboDamageLevels[combo.Clamp(0, comboDamageLevels.Length - 1)] * (Player.currentPlayer is null ? 1 : Player.currentPlayer.damageMultiplier));
+        int defaultDamage = (int)data.GetOrDefault<float>("DefaultDamage", 0);
+        float defaultComboReactTime = data.GetOrDefault<float>("DefaultComboReactTime", 0);
+        float defaultTransTime = data.GetOrDefault<float>("DefaultTransTime", 0);
+        float defaultExtraTime = data.GetOrDefault<float>("DefaultExtraTime", 0);
+
+        for (int i = 0; i < attacks.Length; i++)
+        {
+            attacks[i] = new AttackData()
+            {
+                animName = attacksData[i].Get<string>("AnimName"),
+                damage = (int)attacksData[i].GetOrDefault<float>("Damage", defaultDamage),
+                comboReactTime = attacksData[i].GetOrDefault<float>("ComboReactTime", defaultComboReactTime),
+                transitionTime = attacksData[i].GetOrDefault<float>("TransTime", defaultTransTime),
+                extraTime = attacksData[i].GetOrDefault<float>("ExtraTime", defaultExtraTime)
+            };
+        }
+    }
 
     protected override void AttackInputStarted()
     {
@@ -31,10 +58,10 @@ public class MeleeBase : WeaponBase
     {
         isAttacking = true;
 
-        if (tween is not null && tween.GetTotalElapsedTime() < comboTime + currentExtraTime)
+        if (tween is not null && currentCombo < attacks.Length - 1 && tween.GetTotalElapsedTime() < CurrentAttack.comboReactTime + currentExtraTime)
         {
             currentCombo++;
-            if (currentCombo > maxComboCount || currentCombo >= comboAnims.Length)
+            if (currentCombo > attacks.Length)
                 currentCombo = 0;
         }
         else
@@ -42,7 +69,7 @@ public class MeleeBase : WeaponBase
 
         DamageDealer.DamageAmount = GetDamageAmount();
         AnimationPlayer.Stop();
-        AnimationPlayer.Play(comboAnims[currentCombo]);
+        AnimationPlayer.Play(CurrentAttack.animName);
         tween?.Kill();
 
         EmitSignal(nameof(AttackStarted));
@@ -67,9 +94,9 @@ public class MeleeBase : WeaponBase
 
     protected override void OnAnimationFinished(string animation)
     {
-        if (animation == comboAnims[currentCombo])
+        if (animation == CurrentAttack.animName)
         {
-            currentExtraTime = currentCombo < extraTime.Length ? extraTime[currentCombo] : 0;
+            currentExtraTime = CurrentAttack.extraTime;
             OnAttackFinished();
         }
     }
@@ -87,7 +114,7 @@ public class MeleeBase : WeaponBase
         {
             string[] path = ((string)reset.TrackGetPath(i)).Split(':');
 
-            tween.TweenProperty(GetNode(path[0]), path[1], reset.TrackGetKeyValue(i, 0), afterAttackTransitionTime);
+            tween.TweenProperty(GetNode(path[0]), path[1], reset.TrackGetKeyValue(i, 0), CurrentAttack.transitionTime);
         }
 
         if (currentExtraTime != 0) await new TimeAwaiter(this, currentExtraTime);

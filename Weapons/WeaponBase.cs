@@ -2,34 +2,36 @@ using System;
 using Additions;
 using Godot;
 
-public class WeaponBase : Node2D
+public abstract class WeaponBase : Node2D
 {
     [Signal] public delegate void AttackStarted();
     [Signal] public delegate void AttackFinished();
 
-    [Export(PropertyHint.File, "*tscn,*scn")] public string weaponPickup;
-    [Export] public Texture icon;
+    [Export] public string weaponName = "";
 
-    #region AnimationPlayer Reference
+    public Godot.Collections.Dictionary data;
+    public PackedScene weaponPickupScene;
+    public Texture Icon => Icons.IconPickupMatrix.ContainsKey(weaponPickupScene) ? Icons.IconPickupMatrix[weaponPickupScene] : null;
 
     private AnimationPlayer storerForAnimationPlayer;
     public AnimationPlayer AnimationPlayer => this.LazyGetNode(ref storerForAnimationPlayer, "AnimationPlayer");
 
-    #endregion
-
     public bool disabled;
-
     public bool isAttacking;
+
+    protected virtual void ApplyData()
+    {
+        data = Database.weaponData[weaponName] as Godot.Collections.Dictionary;
+        weaponPickupScene = data.Get<PackedScene>("PickupScene");
+    }
 
     public override void _Ready()
     {
+        ApplyData();
         AnimationPlayer.Connect("animation_finished", this, nameof(OnAnimationFinished));
     }
 
-    public override void _ExitTree()
-    {
-        Disable();
-    }
+    public override void _ExitTree() => Disable();
 
     public virtual void Disable()
     {

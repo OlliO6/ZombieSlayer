@@ -60,7 +60,7 @@ public class WeaponStats : Control
 
         switch (weapon)
         {
-            case GunBase gun:
+            case ShootingWeaponBase gun:
                 AddGunBaseStats(gun);
                 break;
 
@@ -75,15 +75,15 @@ public class WeaponStats : Control
 
         AddLabels();
 
-        void AddGunBaseStats(GunBase gun)
+        void AddGunBaseStats(ShootingWeaponBase gun)
         {
             LoadGun loadGun = gun as LoadGun;
-            float timeBetweenShots = gun.AnimationPlayer.GetAnimation("Shoot").Length + (loadGun is null ? 0 : loadGun.loadingTime);
+            float timeBetweenShots = gun.AnimationPlayer.GetAnimation("Shoot").Length + (loadGun is null ? 0 : loadGun.loadTime);
             float bulletsPerSecond = 1 / timeBetweenShots;
 
             stats.Add("Shoot Speed", bulletsPerSecond);
             stats.Add("Damage", gun.GetBulletDamage());
-            stats.Add("Spread", loadGun is null ? gun.bulletSpread : (loadGun.spread.InterpolateBaked(1) * loadGun.bulletSpread));
+            // stats.Add("Spread", loadGun is null ? gun.bulletSpread : (loadGun.spreadOverPower.InterpolateBaked(1) * loadGun.bulletSpread));
             stats.Add("DPS", (int)stats["Damage"] * bulletsPerSecond);
             tooltips.Add("DPS", "Best possible damage per second");
         }

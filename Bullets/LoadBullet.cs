@@ -2,15 +2,13 @@ using System.Collections.Generic;
 using Additions;
 using Godot;
 
-public class LoadBullet : Bullet, IKillable, IDamageDealer
+public class LoadBullet : Bullet
 {
-    [Export(PropertyHint.Range, "0,1")] private float power = 1;
-    [Export(PropertyHint.Range, "0,1")] private float powerLoosePerHit = 1, minPower = 0;
-    [Export] private float dieAnimSpeed;
+    [Export(PropertyHint.Range, "0,1")] public float powerLoosePerHit = 1;
+    [Export] public float dieAnimSpeed;
     [Export] public Curve damageOverPower, speedOverPower, scaleOverPower;
 
-    public override int DamageAmount => (damage * damageOverPower.InterpolateBaked(Power)).Round();
-    public float Speed => speed * speedOverPower.InterpolateBaked(Power);
+    private float power = 1;
 
     public float Power
     {
@@ -18,19 +16,15 @@ public class LoadBullet : Bullet, IKillable, IDamageDealer
         set
         {
             power = value;
-            if (value < minPower)
+            if (value < 0)
             {
                 Die();
                 return;
             }
             Scale = Vector2.One * scaleOverPower.InterpolateBaked(value);
+            speed = speedOverPower.InterpolateBaked(value);
+            damage = damageOverPower.InterpolateBaked(value).Round();
         }
-    }
-
-    public override void _PhysicsProcess(float delta)
-    {
-        if (dead) return;
-        GlobalPosition += Speed * delta * GlobalTransform.x.Normalized();
     }
 
     public override void HitTarget()
