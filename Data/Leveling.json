@@ -1,0 +1,72 @@
+[
+    {
+        "XpToNextLevel": 25,
+        "Explanation": "Health",
+        "Buffs": [
+            {
+                "Type": "GameMethodCall",
+                "Text": "Unlocked Health",
+                "Method": "UnlockHealth"
+            }
+        ]
+    },
+    {
+        "XpToNextLevel": 35,
+        "Explanation": "UpgradeDices",
+        "Buffs": [
+            {
+                "Type": "AddDice",
+                "Dice": {
+                    "Scene": "res://Items/Dice/Dice.tscn",
+                    "Scenes": [
+                        "res://Items/WeaponPickUps/PistolPickup.tscn"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "XpToNextLevel": 35,
+        "Explanation": "ShopPosition",
+        "Buffs": [
+            {
+                "Type": "GameMethodCall",
+                "Text": "Unlocked Shop",
+                "Method": "UnlockShop"
+            },
+            {
+                "Type": "ShopItem",
+                "ItemName": "Speed",
+                "Hide": true
+            },
+            {
+                "Type": "ShopItem",
+                "ItemName": "Magnet",
+                "Hide": true
+            },
+            { "Type": "Coins", "Amount": 50 }
+        ]
+    },
+    {
+        "XpToNextLevel": 35,
+        "Buffs": [
+            {
+                "Type": "ShopItem",
+                "Text": "Unlocked Dmg Upgrade (shop)",
+                "ItemName": "Damage"
+            },
+            { "Type": "Coins", "Amount": 30 }
+        ]
+    },
+    {
+        "XpToNextLevel": 40,
+        "Buffs": [
+            {
+                "Type": "GameMethodCall",
+                "Text": "Unlocked Inventory",
+                "Method": "UnlockInventory"
+            },
+            { "Type": "Coins", "Amount": 10 }
+        ]
+    }
+]
