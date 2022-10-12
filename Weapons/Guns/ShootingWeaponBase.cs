@@ -6,9 +6,6 @@ public abstract class ShootingWeaponBase : WeaponBase
     protected Godot.Collections.Dictionary bulletData;
 
     public PackedScene bulletScene;
-    public Vector2 bulletSpeedRange;
-    public float bulletSpread, bulletLivetime = 3;
-    public int bulletDamage;
 
     public Node2D InstantiatePoint => this.LazyGetNode(ref storerForInstantiatePoint, _InstantiatePoint);
     protected Bullet lastBullet;
@@ -22,28 +19,25 @@ public abstract class ShootingWeaponBase : WeaponBase
 
         bulletData = data.Get<Godot.Collections.Dictionary>("Bullet");
         bulletScene = GD.Load<PackedScene>(bulletData.Get<string>("Path"));
-        bulletSpread = bulletData.Get<float>("Spread");
-        bulletLivetime = bulletData.Get<float>("Livetime");
-        bulletDamage = (int)bulletData.Get<float>("Damage");
-        var speedArray = bulletData.Get<Godot.Collections.Array>("Speed");
-        bulletSpeedRange = new((float)speedArray[0], (float)speedArray[1]);
     }
 
-    public virtual int GetBulletDamage() => Mathf.RoundToInt(bulletDamage * (Player.currentPlayer is null ? 1 : Player.currentPlayer.damageMultiplier));
+    public virtual int GetBulletDamage() => 0;
+    public virtual float GetBulletSpread() => 0;
+    public virtual float GetBulletSpeed() => 0;
+    public virtual float GetBulletLivetime() => 0;
 
     public override void Attack()
     {
         isAttacking = true;
 
         lastBullet = bulletScene.Instance<Bullet>();
-
-        lastBullet.speed = (float)GD.RandRange(bulletSpeedRange.x, bulletSpeedRange.y);
         lastBullet.damage = GetBulletDamage();
-        lastBullet.maxLivetime = bulletLivetime;
+        lastBullet.maxLivetime = GetBulletLivetime();
+        lastBullet.speed = GetBulletSpeed();
 
         GetTree().CurrentScene.AddChild(lastBullet);
         lastBullet.GlobalTransform = InstantiatePoint.GlobalTransform;
-        lastBullet.Rotate(Mathf.Deg2Rad(Random.NormallyDistributedFloat(deviation: bulletSpread)));
+        lastBullet.Rotate(Mathf.Deg2Rad(Random.NormallyDistributedFloat(deviation: GetBulletSpread())));
 
         AnimationPlayer.Stop();
         AnimationPlayer.Play("Shoot");

@@ -6,7 +6,7 @@
 
         "Evolution": "BloodyDagger",
         "StartEvolveCost": 45,
-        "DmgToEvolve": 100,
+        "DmgToEvolve": 60,
 
         "DefaultTransTime": 0.3,
         "DefaultComboReactTime": 0.2,
@@ -72,16 +72,36 @@
         "Path": "res://Weapons/Guns/Dolphin/Dolphin.tscn",
         "PickupPath": "res://Items/WeaponPickUps/DolphinPickup.tscn",
 
+        "Evolution": "Orca",
+        "StartEvolveCost": 250,
+        "DmgToEvolve": 150,
+
         "LoadTime": 1,
-        "MinPower": 0.4,
+        "PowerOverLoad": [
+            { "Pos": 0, "Val": 0 },
+            { "Pos": 1, "Val": 1 }
+        ],
+        "SpreadOverLoad": [
+            { "Pos": 0, "Val": 6 },
+            { "Pos": 1, "Val": 1 }
+        ],
 
         "Bullet": {
             "Path": "res://Weapons/Guns/Dolphin/Bullet.tscn",
-            "PowerLossPerHit": 0.2,
-            "Damage": 18,
-            "Spread": 6,
+            "PowerLossPerHit": 0.25,
             "Livetime": 3,
-            "Speed": [ 90, 100 ]
+            "DamageOverPower": [
+                { "Pos": 0, "Val": 4 },
+                { "Pos": 1, "Val": 18 }
+            ],
+            "SpeedOverPower": [
+                { "Pos": 0, "Val": 40 },
+                { "Pos": 1, "Val": 90 }
+            ],
+            "ScaleOverPower": [
+                { "Pos": 0, "Val": 0.4 },
+                { "Pos": 1, "Val": 1 }
+            ]
         }
     }
 }
