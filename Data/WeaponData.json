@@ -1,8 +1,8 @@
 {
     "Dagger": {
         "Type": "Melee",
-        "Scene": "res://Weapons/Melee/Dagger/Dagger.tscn",
-        "PickupScene": "res://Items/WeaponPickUps/DaggerPickup.tscn",
+        "Scene": "Load: res://Weapons/Melee/Dagger/Dagger.tscn",
+        "PickupScene": "Load: res://Items/WeaponPickUps/DaggerPickup.tscn",
 
         "Evolution": "BloodyDagger",
         "StartEvolveCost": 45,
@@ -25,14 +25,14 @@
     },
     "Pistol": {
         "Type": "Gun",
-        "Scene": "res://Weapons/Guns/Pistol/Pistol.tscn",
-        "PickupScene": "res://Items/WeaponPickUps/PistolPickup.tscn",
+        "Scene": "Load: res://Weapons/Guns/Pistol/Pistol.tscn",
+        "PickupScene": "Load: res://Items/WeaponPickUps/PistolPickup.tscn",
 
         "AllowHold": false,
         "Spread": 3,
 
         "Bullet": {
-            "Scene": "res://Bullets/PlayerBullets/PlayerBullet.tscn",
+            "Scene": "Load: res://Bullets/PlayerBullets/PlayerBullet.tscn",
             "Damage": 7,
             "Livetime": 3,
             "Speed": [ 90, 100 ]
@@ -40,14 +40,14 @@
     },
     "Rifle": {
         "Type": "Gun",
-        "Scene": "res://Weapons/Guns/Rifle/Rifle.tscn",
-        "PickupScene": "res://Items/WeaponPickUps/RiflePickup.tscn",
+        "Scene": "Load: res://Weapons/Guns/Rifle/Rifle.tscn",
+        "PickupScene": "Load: res://Items/WeaponPickUps/RiflePickup.tscn",
 
         "AllowHold": true,
         "Spread": 4.5,
 
         "Bullet": {
-            "Scene": "res://Bullets/PlayerBullets/SmallPlayerBullet.tscn",
+            "Scene": "Load: res://Bullets/PlayerBullets/SmallPlayerBullet.tscn",
             "Damage": 5,
             "Livetime": 3,
             "Speed": [ 110, 130 ]
@@ -55,8 +55,8 @@
     },
     "Sword": {
         "Type": "Melee",
-        "Scene": "res://Weapons/Melee/Sword/Sword.tscn",
-        "PickupScene": "res://Items/WeaponPickUps/SwordPickup.tscn",
+        "Scene": "Load: res://Weapons/Melee/Sword/Sword.tscn",
+        "PickupScene": "Load: res://Items/WeaponPickUps/SwordPickup.tscn",
 
         "DefaultTransTime": 0.5,
         "DefaultComboReactTime": 0.25,
@@ -69,39 +69,39 @@
     },
     "Dolphin": {
         "Type": "Load Gun",
-        "Scene": "res://Weapons/Guns/Dolphin/Dolphin.tscn",
-        "PickupScene": "res://Items/WeaponPickUps/DolphinPickup.tscn",
+        "Scene": "Load: res://Weapons/Guns/Dolphin/Dolphin.tscn",
+        "PickupScene": "Load: res://Items/WeaponPickUps/DolphinPickup.tscn",
 
         "Evolution": "Orca",
         "StartEvolveCost": 250,
         "DmgToEvolve": 150,
 
         "LoadTime": 1,
-        "PowerOverLoadCurve": [
-            { "Pos": 0, "Val": 0 },
-            { "Pos": 1, "Val": 1 }
-        ],
-        "SpreadOverLoadCurve": [
-            { "Pos": 0, "Val": 6 },
-            { "Pos": 1, "Val": 1 }
-        ],
+        "PowerOverLoad": { "CurveData": [
+                { "Pos": 0, "Val": 0 },
+                { "Pos": 1, "Val": 1 }
+            ] },
+        "SpreadOverLoad": { "CurveData": [
+                { "Pos": 0, "Val": 6 },
+                { "Pos": 1, "Val": 1 }
+            ] },
 
         "Bullet": {
-            "Scene": "res://Weapons/Guns/Dolphin/Bullet.tscn",
+            "Scene": "Load: res://Weapons/Guns/Dolphin/Bullet.tscn",
             "PowerLossPerHit": 0.25,
             "Livetime": 3,
-            "DamageOverPowerCurve": [
-                { "Pos": 0, "Val": 4 },
-                { "Pos": 1, "Val": 18 }
-            ],
-            "SpeedOverPowerCurve": [
-                { "Pos": 0, "Val": 40 },
-                { "Pos": 1, "Val": 90 }
-            ],
-            "ScaleOverPowerCurve": [
-                { "Pos": 0, "Val": 0.4 },
-                { "Pos": 1, "Val": 1 }
-            ]
+            "DamageOverPower": { "CurveData": [
+                    { "Pos": 0, "Val": 4 },
+                    { "Pos": 1, "Val": 18 }
+                ] },
+            "SpeedOverPower": { "CurveData": [
+                    { "Pos": 0, "Val": 40 },
+                    { "Pos": 1, "Val": 90 }
+                ] },
+            "ScaleOverPower": { "CurveData": [
+                    { "Pos": 0, "Val": 0.4 },
+                    { "Pos": 1, "Val": 1 }
+                ] }
         }
     }
 }

@@ -35,11 +35,11 @@ public class LoadGun : ShootingWeaponBase
         bulletLivetime = bulletData.Get<float>("Livetime");
         bulletPowerLossPerHit = bulletData.Get<float>("PowerLossPerHit");
 
-        powerOverLoad = data.Get<Curve>("PowerOverLoadCurve");
-        spreadOverLoad = data.Get<Curve>("SpreadOverLoadCurve");
-        bulletDamageOverPower = bulletData.Get<Curve>("DamageOverPowerCurve");
-        bulletSpeedOverPower = bulletData.Get<Curve>("SpeedOverPowerCurve");
-        bulletScaleOverPower = bulletData.Get<Curve>("ScaleOverPowerCurve");
+        powerOverLoad = data.Get<Curve>("PowerOverLoad");
+        spreadOverLoad = data.Get<Curve>("SpreadOverLoad");
+        bulletDamageOverPower = bulletData.Get<Curve>("DamageOverPower");
+        bulletSpeedOverPower = bulletData.Get<Curve>("SpeedOverPower");
+        bulletScaleOverPower = bulletData.Get<Curve>("ScaleOverPower");
     }
 
     public override float GetBulletLivetime() => bulletLivetime;
