@@ -10,7 +10,7 @@ public class GameState : YSort
     public event Action HealthUnlocked;
 
     public static GameState instance;
-    public static bool hasInstance;
+    public static bool HasInstance => IsInstanceValid(instance);
 
     public GameStats stats = new GameStats();
     [Export] private NodePath shopParent;

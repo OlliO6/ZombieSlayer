@@ -42,7 +42,7 @@ public class Inventory : Control
 
     public override void _EnterTree()
     {
-        if (GameState.hasInstance)
+        if (GameState.HasInstance)
             GameState.instance.InventoryUnlocked += () =>
             {
                 InputManager.InventoryPressed += OnInventoryPressed;
