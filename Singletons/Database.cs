@@ -38,13 +38,13 @@ public class Database : Node
         levelsDataFile.Open(LevelsDataJsonPath, File.ModeFlags.Read);
         levelsData = JSON.Parse(levelsDataFile.GetAsText()).Result as Godot.Collections.Array;
 
-
+        ConvertCurvesAndPaths(levelsData);
     }
 
 
     private static void ConvertCurvesAndPaths(ICollection data)
     {
-        ForeachContainerInData(weaponData.Values,
+        ForeachContainerInData(data,
                 excludedDictKeys: new string[] { "CurveData" },
                 action: ConvertDataInContainer);
 

@@ -5,7 +5,7 @@ using Godot;
 
 public class ShopItem : LevelBuff
 {
-    [Export] public string itemName = "";
+    public string itemName;
 
     public override void Apply()
     {

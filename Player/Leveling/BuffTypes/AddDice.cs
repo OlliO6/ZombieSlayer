@@ -5,8 +5,8 @@ using Godot;
 
 public class AddDice : LevelBuff
 {
-    [Export] private PackedScene diceScene;
-    [Export] private PackedScene[] diceScenes = new PackedScene[6];
+    public PackedScene diceScene;
+    public PackedScene[] diceScenes;
 
     public override void Apply()
     {

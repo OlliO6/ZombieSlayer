@@ -5,7 +5,7 @@ using Godot;
 
 public class Coins : LevelBuff
 {
-    [Export] public int coins = 10;
+    public int coins;
 
     public override void Apply()
     {

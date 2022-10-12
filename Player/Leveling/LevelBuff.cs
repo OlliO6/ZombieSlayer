@@ -6,8 +6,10 @@ using Godot;
 
 public abstract class LevelBuff : Node
 {
-    [Signal] public delegate void Applied();
-    [Export] public bool dontShow;
+    public event Action Applied;
+    public bool dontShow;
+    public string overridingText = string.Empty;
     public abstract void Apply();
     public abstract string GetBuffText();
+    public void InvokeApplied() => Applied?.Invoke();
 }

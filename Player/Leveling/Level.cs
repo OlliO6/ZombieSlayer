@@ -10,9 +10,9 @@ public class Level : Node
 {
     [Signal] public delegate void LevelReached();
 
-    [Export] public int xpToLevelUp = 100;
-    [Export] public string explanation = "";
-    [Export] public bool noMenu, dontHeal;
+    public int xpToLevelUp = 100;
+    public string explanation = "";
+    public bool noMenu;
 
     private static PackedScene lvlUpDispScene = GD.Load<PackedScene>("res://UI/Leveling/LevelUpDisplay.tscn");
 
@@ -23,8 +23,7 @@ public class Level : Node
 
         IEnumerable<LevelBuff> buffs = this.GetChildren<LevelBuff>();
 
-        if (!dontHeal)
-            Player.currentPlayer?.Heal();
+        Player.currentPlayer?.Heal();
 
         EmitSignal(nameof(LevelReached));
 
@@ -51,7 +50,7 @@ public class Level : Node
             foreach (LevelBuff buff in buffs)
             {
                 buff.Apply();
-                buff.EmitSignal(nameof(LevelBuff.Applied));
+                buff.InvokeApplied();
             }
         }
 

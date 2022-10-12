@@ -1,6 +1,10 @@
 [
     {
-        "XpToNextLevel": 25,
+        "XpToLevelUp": 15,
+        "NoMenu": true
+    },
+    {
+        "XpToLevelUp": 25,
         "Explanation": "Health",
         "Buffs": [
             {
@@ -11,22 +15,22 @@
         ]
     },
     {
-        "XpToNextLevel": 35,
+        "XpToLevelUp": 35,
         "Explanation": "UpgradeDices",
         "Buffs": [
             {
                 "Type": "AddDice",
                 "Dice": {
-                    "Scene": "res://Items/Dice/Dice.tscn",
+                    "Scene": "Load: res://Items/Dice/Dice.tscn",
                     "Scenes": [
-                        "res://Items/WeaponPickUps/PistolPickup.tscn"
+                        "Load: res://Items/WeaponPickUps/PistolPickup.tscn"
                     ]
                 }
             }
         ]
     },
     {
-        "XpToNextLevel": 35,
+        "XpToLevelUp": 35,
         "Explanation": "ShopPosition",
         "Buffs": [
             {
@@ -48,7 +52,7 @@
         ]
     },
     {
-        "XpToNextLevel": 35,
+        "XpToLevelUp": 35,
         "Buffs": [
             {
                 "Type": "ShopItem",
@@ -59,7 +63,7 @@
         ]
     },
     {
-        "XpToNextLevel": 40,
+        "XpToLevelUp": 40,
         "Buffs": [
             {
                 "Type": "GameMethodCall",

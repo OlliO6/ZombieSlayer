@@ -42,7 +42,7 @@ public class LevelUpDisplay : PanelContainer
     public void AddBuffText(LevelBuff buff)
     {
         if (buff.dontShow) return;
-        string buffText = buff.GetBuffText();
+        string buffText = buff.overridingText is null or "" ? buff.GetBuffText() : buff.overridingText;
         if (buffText is "") return;
 
         Content.AddChild(new Label()

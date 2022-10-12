@@ -263,6 +263,7 @@ public class DebugOverlay : CanvasLayer
 
     internal static string GetTargetName(Godot.Object target)
     {
+        if (target is null) return "";
         LogNameAttribute logNameAttribute = target.GetType().GetCustomAttribute<LogNameAttribute>();
 
         if (logNameAttribute is not null) return logNameAttribute.name;
