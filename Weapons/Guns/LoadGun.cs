@@ -58,7 +58,7 @@ public class LoadGun : ShootingWeaponBase
     }
 
     public override float GetBulletLivetime() => bulletLivetime;
-    public override float GetBulletSpread() => spreadOverLoad.InterpolateBaked(LoadProgress);
+    public override float GetSpread() => spreadOverLoad.InterpolateBaked(LoadProgress);
 
     public override void Attack()
     {
@@ -71,7 +71,7 @@ public class LoadGun : ShootingWeaponBase
         InstantiatePoint.RemoveChild(lastBullet);
         GetTree().CurrentScene.AddChild(lastBullet);
         lastBullet.GlobalTransform = InstantiatePoint.GlobalTransform;
-        lastBullet.Rotate(Mathf.Deg2Rad(Random.NormallyDistributedFloat(deviation: GetBulletSpread())));
+        lastBullet.Rotate(Mathf.Deg2Rad(Random.NormallyDistributedFloat(deviation: GetSpread())));
 
         if (lastBullet is LoadBullet loadBullet)
         {

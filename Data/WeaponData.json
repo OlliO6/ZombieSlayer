@@ -29,12 +29,12 @@
         "PickupPath": "res://Items/WeaponPickUps/PistolPickup.tscn",
 
         "AllowHold": false,
+        "Spread": 3,
 
         "Bullet": {
             "Path": "res://Bullets/PlayerBullets/PlayerBullet.tscn",
             "Damage": 7,
             "Livetime": 3,
-            "Spread": 3,
             "Speed": [ 90, 100 ]
         }
     },
@@ -44,12 +44,12 @@
         "PickupPath": "res://Items/WeaponPickUps/RiflePickup.tscn",
 
         "AllowHold": true,
+        "Spread": 4.5,
 
         "Bullet": {
             "Path": "res://Bullets/PlayerBullets/SmallPlayerBullet.tscn",
             "Damage": 5,
             "Livetime": 3,
-            "Spread": 4.5,
             "Speed": [ 110, 130 ]
         }
     },

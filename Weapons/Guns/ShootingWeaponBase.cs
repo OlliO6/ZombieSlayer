@@ -21,8 +21,8 @@ public abstract class ShootingWeaponBase : WeaponBase
         bulletScene = GD.Load<PackedScene>(bulletData.Get<string>("Path"));
     }
 
+    public virtual float GetSpread() => 0;
     public virtual int GetBulletDamage() => 0;
-    public virtual float GetBulletSpread() => 0;
     public virtual float GetBulletSpeed() => 0;
     public virtual float GetBulletLivetime() => 0;
 
@@ -37,7 +37,7 @@ public abstract class ShootingWeaponBase : WeaponBase
 
         GetTree().CurrentScene.AddChild(lastBullet);
         lastBullet.GlobalTransform = InstantiatePoint.GlobalTransform;
-        lastBullet.Rotate(Mathf.Deg2Rad(Random.NormallyDistributedFloat(deviation: GetBulletSpread())));
+        lastBullet.Rotate(Mathf.Deg2Rad(Random.NormallyDistributedFloat(deviation: GetSpread())));
 
         AnimationPlayer.Stop();
         AnimationPlayer.Play("Shoot");
