@@ -161,23 +161,23 @@ character = "Rob"
 [node name="Explanation" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen"]
 script = ExtResource( 5 )
 text = "Press the + buttons to add items to the dice.
-You can remove them in the dice preview by clicking the symbols."
+\\wait 1/You can remove them in the dice preview by clicking the symbols."
 character = "Rob"
 
 [node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation"]
 script = ExtResource( 5 )
-text = "When you're finish press the buy dice button."
+text = "When you're finish \\wait 0.5/press the buy dice button."
 character = "Rob"
 
 [node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog"]
 script = ExtResource( 5 )
-text = "I recommend filling all 6 sides but you can do whatever you want.
-\\wait 1/\\d=0.02/Unless\\reset d/ you don't rob \\objname Rob/."
+text = "I recommend filling all 6 sides \\wait 0.5/but you can do whatever you want.
+\\wait 1/\\d=0.02/Unless\\wati 1/\\reset d/ you don't rob \\objname Rob/."
 character = "Rob"
 
 [node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog/Dialog"]
 script = ExtResource( 5 )
-text = "\\hide/\\waitforbuy/\\show/Great, now press exit and roll it with 'R'."
+text = "\\hide/\\waitforbuy/\\show/Great, \\wait 1/now press exit and roll it with 'R'."
 character = "Rob"
 callableActions = [ NodePath("../../../../../../../../Actions/WaitForBuyPressed") ]
 
@@ -210,7 +210,7 @@ character = "Rob"
 
 [node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/No/Dialog/No/Dialog"]
 script = ExtResource( 5 )
-text = "But anyways, \\wait 0.5/let me continue."
+text = "But anyways, \\wait 0.75/let me continue."
 character = "Rob"
 
 [node name="MenuOpen" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/No/Dialog/No/Dialog/Dialog"]
@@ -240,7 +240,7 @@ unique_name_in_owner = true
 visible = false
 
 [node name="ShopItemsContainer" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer" index="0"]
-margin_bottom = 118.0
+margin_bottom = 135.0
 
 [connection signal="PlayerEntered" from="." to="Label/AnimationPlayer" method="play" binds= [ "ShowText" ]]
 [connection signal="PlayerExited" from="." to="Label/AnimationPlayer" method="play" binds= [ "HideText" ]]
