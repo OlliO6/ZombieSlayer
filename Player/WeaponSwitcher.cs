@@ -22,7 +22,7 @@ public class WeaponSwitcher : Node2D
 
     public override void _Ready()
     {
-        InputManager.DropWeaponPressed += () => DropWeapon(CurrentWeapon);
+        InputManager.DropWeaponPressed += () => CallDeferred(nameof(DropWeapon), CurrentWeapon);
 
         if (GetChildCount() > 0)
         {

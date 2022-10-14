@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -17,10 +17,6 @@
 [ext_resource path="res://Player/PlayerDie.png" type="Texture" id=15]
 [ext_resource path="res://Sounds/Dying.wav" type="AudioStream" id=16]
 [ext_resource path="res://addons/Shake/CamShaker.cs" type="Script" id=17]
-[ext_resource path="res://Weapons/Guns/Dolphin/Dolphin.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Weapons/Guns/Pistol/Pistol.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Weapons/Guns/Rifle/Rifle.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Weapons/Melee/Sword/Sword.tscn" type="PackedScene" id=21]
 [ext_resource path="res://addons/Shake/ShakeProfile.cs" type="Script" id=22]
 
 [sub_resource type="Resource" id=26]
@@ -414,7 +410,7 @@ nodes/RunSpeed/position = Vector2( -260, 140 )
 nodes/State/node = SubResource( 6 )
 nodes/State/position = Vector2( -60, 120 )
 nodes/output/position = Vector2( 520, 240 )
-node_connections = [ "Damage", 0, "Animation 4", "Damage", 1, "Animation 3", "State", 0, "Animation", "State", 1, "RunSpeed", "State", 2, "Animation 5", "RunSpeed", 0, "Animation 2", "Add2", 0, "State", "Add2", 1, "Damage", "output", 0, "Add2" ]
+node_connections = [ "State", 0, "Animation", "State", 1, "RunSpeed", "State", 2, "Animation 5", "Add2", 0, "State", "Add2", 1, "Damage", "RunSpeed", 0, "Animation 2", "Damage", 0, "Animation 4", "Damage", 1, "Animation 3", "output", 0, "Add2" ]
 
 [sub_resource type="AudioStreamRandomPitch" id=14]
 audio_stream = ExtResource( 9 )
@@ -437,7 +433,7 @@ damageShake = SubResource( 26 )
 dieShake = SubResource( 27 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 1, 2, 3, 1, 2, -1, -2, -1, -3, 1, -1, 2 )
+polygon = PoolVector2Array( 1, 3, 3, 1, 2, -1, -2, -1, -3, 1, -1, 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 11 )
@@ -464,14 +460,6 @@ position = Vector2( 0, -5 )
 script = ExtResource( 10 )
 
 [node name="Dagger" parent="WeaponSwitcher" instance=ExtResource( 3 )]
-
-[node name="Pistol" parent="WeaponSwitcher" instance=ExtResource( 19 )]
-
-[node name="Rifle" parent="WeaponSwitcher" instance=ExtResource( 20 )]
-
-[node name="Sword" parent="WeaponSwitcher" instance=ExtResource( 21 )]
-
-[node name="Dolphin" parent="WeaponSwitcher" instance=ExtResource( 18 )]
 
 [node name="DiceInventory" type="Node2D" parent="."]
 position = Vector2( 0, -5 )

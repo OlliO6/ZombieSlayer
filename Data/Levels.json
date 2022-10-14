@@ -15,7 +15,7 @@
         ]
     },
     {
-        "XpToLevelUp": 35,
+        "XpToLevelUp": 40,
         "Explanation": "UpgradeDices",
         "Buffs": [
             {
@@ -30,7 +30,7 @@
         ]
     },
     {
-        "XpToLevelUp": 35,
+        "XpToLevelUp": 60,
         "Explanation": "ShopPosition",
         "Buffs": [
             {
@@ -52,7 +52,17 @@
         ]
     },
     {
-        "XpToLevelUp": 35,
+        "XpToLevelUp": 60,
+        "Buffs": [
+            {
+                "Type": "GameMethodCall",
+                "Text": "Unlocked Inventory",
+                "Method": "UnlockInventory"
+            }
+        ]
+    },
+    {
+        "XpToLevelUp": 60,
         "Buffs": [
             {
                 "Type": "ShopItem",
@@ -63,14 +73,43 @@
         ]
     },
     {
-        "XpToLevelUp": 40,
+        "XpToLevelUp": 65,
         "Buffs": [
             {
                 "Type": "GameMethodCall",
-                "Text": "Unlocked Inventory",
-                "Method": "UnlockInventory"
+                "Text": "Unlocked Evolutions",
+                "Method": "UnlockWeaponEvolutions"
+            },
+            { "Type": "Coins", "Amount": 20 }
+        ]
+    },
+    {
+        "XpToLevelUp": 70,
+        "Buffs": [
+            {
+                "Type": "ShopItem",
+                "ItemName": "Rifle"
             },
             { "Type": "Coins", "Amount": 10 }
+        ]
+    },
+    {
+        "XpToLevelUp": 70,
+        "Buffs": [
+            {
+                "Type": "ShopItem",
+                "ItemName": "Sword"
+            },
+            { "Type": "Coins", "Amount": 10 }
+        ]
+    },
+    {
+        "XpToLevelUp": 80,
+        "Buffs": [
+            {
+                "Type": "ShopItem",
+                "ItemName": "Dolphin"
+            }
         ]
     }
 ]

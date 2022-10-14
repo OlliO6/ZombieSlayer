@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Items/Dice/Dice.tscn" type="PackedScene" id=2]
@@ -20,6 +20,8 @@
 [ext_resource path="res://Weapons/Guns/Pistol/PistolIcon.png" type="Texture" id=18]
 [ext_resource path="res://Items/WeaponPickUps/PistolPickup.tscn" type="PackedScene" id=19]
 [ext_resource path="res://UI/DiceMenu/DiceScenesContainer.cs" type="Script" id=20]
+[ext_resource path="res://Items/WeaponPickUps/DolphinPickup.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Weapons/Guns/Dolphin/Dolphin.png" type="Texture" id=22]
 
 [node name="ShopMenu" type="Control"]
 pause_mode = 2
@@ -113,7 +115,7 @@ scroll_horizontal_enabled = false
 [node name="ShopItemsContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 margin_right = 64.0
-margin_bottom = 132.0
+margin_bottom = 151.0
 custom_constants/separation = 1
 
 [node name="Speed" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ShopItemsContainer" instance=ExtResource( 5 )]
@@ -177,6 +179,14 @@ SceneToBuy = ExtResource( 16 )
 Icon = ExtResource( 17 )
 startPrice = 15
 priceAdded = 7
+
+[node name="Dolphin" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ShopItemsContainer" instance=ExtResource( 5 )]
+margin_top = 133.0
+margin_bottom = 151.0
+SceneToBuy = ExtResource( 21 )
+Icon = ExtResource( 22 )
+startPrice = 20
+priceAdded = 6
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 margin_left = 90.0
