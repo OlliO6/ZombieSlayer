@@ -95,7 +95,7 @@ texture = ExtResource( 12 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 10 )
-position = Vector2( 0, -8.23529 )
+position = Vector2( 0, -8 )
 texture = ExtResource( 1 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -177,8 +177,8 @@ character = "Rob"
 
 [node name="AfterBuy" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog/Dialog"]
 script = ExtResource( 5 )
-text = "\\hide/\\waitforbuy/\\show/Great,\\wait 1/\\d=0.3/ you bought a die.
-\\wait 1/.\\wait 1/.\\wait 1/.
+text = "\\hide/\\waitforbuy/\\show/Great,\\wait 0.3/\\d=0.2/ you bought a die.
+\\wait 1/...
 \\reset d/It will help you not to\\wait 1/..."
 character = "Rob"
 callableActions = [ NodePath("../../../../../../../../Actions/WaitForBuyPressed") ]
@@ -192,7 +192,7 @@ callableActions = [ NodePath("../../../../../../../../../Actions/WaitForBuyPress
 
 [node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog/Dialog/AfterBuy/Dialog2"]
 script = ExtResource( 5 )
-text = "\\wait 1/\\d = 0.1/Roll it with 'R', bye."
+text = "\\hide/\\wait 1/\\show/\\d = 0.1/Roll it with 'R', bye."
 character = "Rob"
 
 [node name="No" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke"]
@@ -231,6 +231,15 @@ character = "Rob"
 script = ExtResource( 8 )
 to = NodePath("../../../../../../Yes/MenuOpen")
 
+[node name="Robbery" type="Node" parent="DialogPlayer"]
+script = ExtResource( 5 )
+text = "\\d=0.15/I said [b]don't[/b] Rob \\objname me/!!!"
+character = "Rob"
+
+[node name="Temporary" type="Node" parent="DialogPlayer/Robbery"]
+script = ExtResource( 5 )
+text = "Imagine an epic fight"
+
 [node name="Actions" type="Node" parent="DialogPlayer"]
 
 [node name="OpenShopMenu" type="Node" parent="DialogPlayer/Actions"]
@@ -254,11 +263,13 @@ unique_name_in_owner = true
 visible = false
 
 [node name="ShopItemsContainer" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer" index="0"]
+margin_top = 0.0
 margin_bottom = 135.0
 
 [connection signal="PlayerEntered" from="." to="Label/AnimationPlayer" method="play" binds= [ "ShowText" ]]
 [connection signal="PlayerExited" from="." to="Label/AnimationPlayer" method="play" binds= [ "HideText" ]]
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="area_exited" from="." to="." method="OnAreaExited"]
+[connection signal="Robbed" from="CanvasLayer/ShopMenu" to="." method="OnShopRobbed"]
 
 [editable path="CanvasLayer/ShopMenu"]

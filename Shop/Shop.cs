@@ -1,4 +1,5 @@
 using System;
+using Additions;
 using Diadot;
 using Godot;
 
@@ -54,6 +55,7 @@ public class Shop : Area2D, IInteractable
     public void OpenMenu()
     {
         GetTree().Paused = true;
+        PauseMode = PauseModeEnum.Process;
 
         shop.Visible = true;
         shop.DiceUpdate();
@@ -65,6 +67,7 @@ public class Shop : Area2D, IInteractable
         if (!hadFirstTalk) return;
 
         GetTree().Paused = false;
+        PauseMode = PauseModeEnum.Inherit;
         shop.Visible = false;
 
         EmitSignal(nameof(MenuClosed));
@@ -72,19 +75,22 @@ public class Shop : Area2D, IInteractable
 
     public void Interact()
     {
+        GetTree().Paused = true;
+        PauseMode = PauseModeEnum.Process;
+        Deselect();
+
         if (!hadFirstTalk)
         {
             InputManager.ProcessInput = false;
-            GetTree().Paused = true;
             dialogPlayer.Play("FirstMeeting");
             ToSignal(dialogPlayer, "DialogFinished").OnCompleted(() =>
             {
                 InputManager.ProcessInput = true;
                 hadFirstTalk = true;
             });
-
             return;
         }
+
         OpenMenu();
     }
 
@@ -96,5 +102,28 @@ public class Shop : Area2D, IInteractable
     public void Deselect()
     {
         EmitSignal(nameof(PlayerExited));
+    }
+
+    [TroughtEditor]
+    private async void OnShopRobbed()
+    {
+        GetTree().Paused = true;
+        await new TimeAwaiter(this, 1f, TimeAwaiter.PauseMode.Continue);
+        shop.Visible = false;
+        InputManager.ProcessInput = false;
+        await new TimeAwaiter(this, 2f, TimeAwaiter.PauseMode.Continue);
+        dialogPlayer.Play("Robbery");
+        ToSignal(dialogPlayer, "DialogFinished").OnCompleted(() =>
+        {
+            InputManager.ProcessInput = true;
+            GetTree().Paused = false;
+            StartFigth();
+        });
+    }
+
+    private void StartFigth()
+    {
+        Debug.LogU(this, "Start Fight");
+        // SceneManager.ChangeScence();
     }
 }

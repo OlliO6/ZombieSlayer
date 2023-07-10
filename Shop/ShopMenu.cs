@@ -7,17 +7,21 @@ using Godot;
 public class ShopMenu : Control
 {
     [Signal] public delegate void BoughtDice();
+    [Signal] public delegate void Robbed();
 
     [Export] private PackedScene diceScene;
+    [Export] public int allowRobberyPrice = 1000;
 
     public List<ShopItem> itemsToBuy = new();
 
     private Label storerForPriceLabel;
     private Container storerForShopItemsContainer;
     private Button storerForBuyDiceButton;
+    private Button storerForRobButton;
     private DiceScenesContainer storerForDiceScenesContainer;
 
     public Button BuyDiceButton => this.LazyGetNode(ref storerForBuyDiceButton, "%BuyDiceButton");
+    public Button RobButton => this.LazyGetNode(ref storerForRobButton, "%RobButton");
     public Label PriceLabel => this.LazyGetNode(ref storerForPriceLabel, "%PriceLabel");
     public Container ShopItemsContainer => this.LazyGetNode(ref storerForShopItemsContainer, "%ShopItemsContainer");
     public DiceScenesContainer DiceScenesContainer => this.LazyGetNode(ref storerForDiceScenesContainer, "%DiceScenesContainer");
@@ -66,6 +70,8 @@ public class ShopMenu : Control
 
         DiceScenesContainer.Scenes = scenes;
         PriceLabel.Text = $"Price: {price.ToString()}";
+
+        RobButton.Visible = price >= allowRobberyPrice;
     }
 
     public void OnItemRemoved(ShopItem item)
@@ -102,8 +108,8 @@ public class ShopMenu : Control
     public void UnlockItem(string name)
     {
         GetItems()
-                .First((ShopItem item) => item.Name == name)
-                .Show();
+            .First((ShopItem item) => item.Name == name)
+            .Show();
     }
 
     [TroughtEditor]
@@ -144,5 +150,25 @@ public class ShopMenu : Control
         {
             dice.scenes[i] = scenes[i];
         }
+    }
+
+    [TroughtEditor]
+    private void MakeRobbery()
+    {
+        if (Player.currentPlayer is null) return;
+
+        var items = GetItems();
+        var scenes = GetScenesToBuy();
+
+        foreach (var item in items) item.Sell();
+
+        Dice dice = diceScene.Instance<Dice>();
+        AddScenesToDice(dice, scenes);
+        Player.currentPlayer.AddDice(dice);
+
+        EmitSignal(nameof(Robbed));
+        itemsToBuy = new();
+        DiceUpdate();
+        Debug.LogU(this, "Rob got robbed.");
     }
 }

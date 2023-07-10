@@ -111,11 +111,13 @@ margin_bottom = 86.0
 size_flags_horizontal = 6
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
+scroll_vertical = 65
 
 [node name="ShopItemsContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
+margin_top = -65.0
 margin_right = 64.0
-margin_bottom = 151.0
+margin_bottom = 86.0
 custom_constants/separation = 1
 
 [node name="Speed" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ShopItemsContainer" instance=ExtResource( 5 )]
@@ -185,7 +187,7 @@ margin_top = 133.0
 margin_bottom = 151.0
 SceneToBuy = ExtResource( 21 )
 Icon = ExtResource( 22 )
-startPrice = 20
+startPrice = 2000
 priceAdded = 6
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
@@ -216,23 +218,43 @@ size_flags_vertical = 8
 
 [node name="PriceLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar"]
 unique_name_in_owner = true
-margin_right = 120.0
+margin_right = 124.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 text = "Price: 100"
 
+[node name="RobButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar"]
+unique_name_in_owner = true
+self_modulate = Color( 1, 0.560784, 0.462745, 1 )
+margin_left = 128.0
+margin_right = 160.0
+margin_bottom = 13.0
+focus_mode = 0
+size_flags_horizontal = 8
+theme_type_variation = "FlatButton"
+enabled_focus_mode = 0
+text = "Rob "
+flat = true
+align = 2
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar/RobButton"]
+margin_left = 28.0
+margin_right = 31.0
+margin_bottom = 13.0
+
 [node name="BuyDiceButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar"]
 unique_name_in_owner = true
-margin_left = 124.0
+margin_left = 164.0
 margin_right = 188.0
 margin_bottom = 13.0
 focus_mode = 0
 size_flags_horizontal = 8
 theme_type_variation = "FlatButton"
 enabled_focus_mode = 0
-text = "Buy Dice"
+text = "Buy"
 flat = true
 align = 2
 
 [connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/TopBar/BackButton" to="." method="OnBackPressed"]
+[connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar/RobButton" to="." method="MakeRobbery"]
 [connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar/BuyDiceButton" to="." method="OnBuyDicePressed"]

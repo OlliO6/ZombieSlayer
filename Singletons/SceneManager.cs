@@ -19,10 +19,8 @@ public class SceneManager : Node
         instance = this;
     }
 
-
     public static void LoadMenu() => instance._LoadMenu();
     public static void ChangeScence(PackedScene scene) => instance._ChangeScence(scene);
-
 
     private void _LoadMenu() => _ChangeScence(menuScene);
 
