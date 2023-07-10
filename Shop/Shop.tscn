@@ -175,11 +175,25 @@ text = "I recommend filling all 6 sides \\wait 0.5/but you can do whatever you w
 \\wait 1/\\d=0.02/Unless\\wati 1/\\reset d/ you don't rob \\objname Rob/."
 character = "Rob"
 
-[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog/Dialog"]
+[node name="AfterBuy" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog/Dialog"]
 script = ExtResource( 5 )
-text = "\\hide/\\waitforbuy/\\show/Great, \\wait 1/now press exit and roll it with 'R'."
+text = "\\hide/\\waitforbuy/\\show/Great,\\wait 1/\\d=0.3/ you bought a die.
+\\wait 1/.\\wait 1/.\\wait 1/.
+\\reset d/It will help you not to\\wait 1/..."
 character = "Rob"
 callableActions = [ NodePath("../../../../../../../../Actions/WaitForBuyPressed") ]
+
+[node name="Dialog2" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog/Dialog/AfterBuy"]
+script = ExtResource( 5 )
+text = "[b]DIE![/b]
+\\wait 1/[shake]MIEEHIIHII!![/shake]"
+character = "Rob"
+callableActions = [ NodePath("../../../../../../../../../Actions/WaitForBuyPressed") ]
+
+[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog/Dialog/AfterBuy/Dialog2"]
+script = ExtResource( 5 )
+text = "\\wait 1/\\d = 0.1/Roll it with 'R', bye."
+character = "Rob"
 
 [node name="No" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke"]
 script = ExtResource( 5 )

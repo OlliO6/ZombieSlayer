@@ -133,15 +133,15 @@ custom_constants/separation = 0
 [node name="FPSLabel" type="Label" parent="MarginContainer/HBoxContainer/DebugLabels"]
 margin_top = -1.0
 margin_right = 252.0
-margin_bottom = 3.2
+margin_bottom = 3.13333
 text = "FPS: 144"
 align = 1
 script = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_left = 2.0
-margin_top = 142.0
-margin_right = 2.0
+margin_top = 138.0
+margin_right = 59.0
 margin_bottom = 142.0
 mouse_filter = 2
 size_flags_horizontal = 0
@@ -149,9 +149,13 @@ size_flags_vertical = 8
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer"]
 visible = false
+margin_right = 57.0
+margin_bottom = 4.0
 color = Color( 0, 0, 0, 0.392157 )
 
 [node name="Logs" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+margin_right = 57.0
+margin_bottom = 4.0
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 10
@@ -406,8 +410,8 @@ custom_constants/margin_top = 50
 custom_constants/margin_left = 150
 custom_constants/margin_bottom = 50
 script = ExtResource( 7 )
-removeCommonStuff = false
-showTime = true
+removeCommonStuff = true
+showTime = false
 _output = NodePath("MarginContainer/VBoxContainer/RichTextLabel")
 _CommandLine = NodePath("MarginContainer/VBoxContainer/LineEdit")
 _HideCommonBtn = NodePath("MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/HideCommonButton")
@@ -459,6 +463,7 @@ margin_right = 113.0
 margin_bottom = 21.1333
 size_flags_horizontal = 10
 toggle_mode = true
+pressed = true
 text = "Hide Common "
 
 [node name="HideTimeButton" type="Button" parent="Console/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
@@ -467,6 +472,7 @@ margin_right = 203.2
 margin_bottom = 21.1333
 size_flags_horizontal = 6
 toggle_mode = true
+pressed = true
 text = "Hide Time"
 
 [node name="ClearButton" type="Button" parent="Console/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -492,42 +498,34 @@ custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 0.529412, 0.596078, 0.647059, 1 )
 bbcode_enabled = true
 bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint]
-[00:02] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
-[00:05] [tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
-[00:05] [tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to [/tint]
-[00:05] [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
-[00:05] [tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Started[/tint]
-[00:05] [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
-[00:05] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
-[00:05] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
-[00:11] [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
-[00:11] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
-[00:11] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
-[00:11] [tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
-[00:11] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
-[00:11] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
-[00:12] [tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
-[00:12] [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
-[00:12] [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
+[tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
+[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
+[tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
+[tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
+[tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
+[tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
+[tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
-[00:02] SceneManager: Loaded Menu
-[00:05] SceneManager: Loaded Game
-[00:05] WeaponSwitcher: Switched weapon to 
-[00:05] ExplanationsManager: Started MoveAndAttack
-[00:05] MoveAndAttack: Explanation Started
-[00:05] Level 0: Reached
-[00:05] EnemySpawner: False
-[00:05] EnemySpawner: Difficulty changed to Level0
-[00:11] Level 1: Reached
-[00:11] EnemySpawner: False
-[00:11] EnemySpawner: Difficulty changed to Level1
-[00:11] Level 2: Reached
-[00:11] EnemySpawner: True
-[00:11] EnemySpawner: Difficulty changed to Level1
-[00:12] Level 3: Reached
-[00:12] EnemySpawner: True
-[00:12] EnemySpawner: Difficulty changed to Level1
+SceneManager: Loaded Menu
+SceneManager: Loaded Game
+ExplanationsManager: Started MoveAndAttack
+Level 0: Reached
+EnemySpawner: False
+Level 1: Reached
+EnemySpawner: False
+Level 2: Reached
+EnemySpawner: True
+Level 3: Reached
+EnemySpawner: True
+Level 4: Reached
+EnemySpawner: False
 "
 scroll_following = true
 selection_enabled = true
