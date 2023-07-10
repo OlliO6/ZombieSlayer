@@ -124,6 +124,6 @@ public class Shop : Area2D, IInteractable
     private void StartFigth()
     {
         Debug.LogU(this, "Start Fight");
-        // SceneManager.ChangeScence();
+        SceneManager.ChangeScence(GD.Load<PackedScene>("res://RobFights/FirstFight/FirstRobFight.tscn"));
     }
 }

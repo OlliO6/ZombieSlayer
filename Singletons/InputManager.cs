@@ -34,6 +34,13 @@ public class InputManager : Node
 
     private void _GetMovementInput(out Vector2 inputVector, out float lenght)
     {
+        if (!ProcessInput)
+        {
+            inputVector = Vector2.Zero;
+            lenght = 0;
+            return;
+        }
+
         const float deadzone = 0.2f;
 
         var vector = new Vector2(

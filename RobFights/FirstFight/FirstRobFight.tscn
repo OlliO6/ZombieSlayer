@@ -1,0 +1,176 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://Shaders/Materials/StandartSpriteMat.material" type="Material" id=1]
+[ext_resource path="res://Shop/ShopKeeperRob_2.0.png" type="Texture" id=2]
+[ext_resource path="res://RobFights/RobFight.cs" type="Script" id=3]
+[ext_resource path="res://Shop/ShopKeeperRob_Shadow_2.0.png" type="Texture" id=4]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://BasicStuff/DamagingHurtArea.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game/Tilemaps.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Shaders/Flash.shader" type="Shader" id=8]
+[ext_resource path="res://RobFights/FirstFight/FirstAngryRob.cs" type="Script" id=9]
+
+[sub_resource type="Animation" id=25]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AngryRob:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 124, 25 ) ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "StartFight"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("AngryRob:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 9 ),
+"transitions": PoolRealArray( 0.406126, 1 ),
+"update": 0,
+"values": [ Vector2( 124, 25 ), Vector2( 126, 71 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=21]
+shader = ExtResource( 8 )
+shader_param/flashColor = Color( 1, 1, 1, 1 )
+shader_param/flashStrenght = 0.0
+
+[sub_resource type="CircleShape2D" id=19]
+radius = 4.0
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 5.5, 4.5 )
+
+[sub_resource type="Animation" id=24]
+resource_name = "Idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ), Vector2( 0, -9 ), Vector2( 0, -8 ) ]
+}
+
+[sub_resource type="Animation" id=26]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ) ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Run"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "Die"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeTimeScale" id=17]
+
+[sub_resource type="AnimationNodeTransition" id=13]
+input_count = 3
+input_0/name = "Ildle"
+input_0/auto_advance = false
+input_1/name = "Run"
+input_1/auto_advance = false
+input_2/name = "Dead"
+input_2/auto_advance = false
+
+[sub_resource type="AnimationNodeBlendTree" id=22]
+graph_offset = Vector2( -375.311, -88.9177 )
+nodes/Animation/node = SubResource( 11 )
+nodes/Animation/position = Vector2( -380, -20 )
+"nodes/Animation 2/node" = SubResource( 9 )
+"nodes/Animation 2/position" = Vector2( -500, 120 )
+"nodes/Animation 4/node" = SubResource( 16 )
+"nodes/Animation 4/position" = Vector2( -380, 260 )
+nodes/RunSpeed/node = SubResource( 17 )
+nodes/RunSpeed/position = Vector2( -340, 120 )
+nodes/State/node = SubResource( 13 )
+nodes/State/position = Vector2( -100, 40 )
+nodes/output/position = Vector2( 140, 40 )
+node_connections = [ "output", 0, "State", "RunSpeed", 0, "Animation 2", "State", 0, "Animation", "State", 1, "RunSpeed", "State", 2, "Animation 4" ]
+
+[node name="RobFight" type="YSort"]
+script = ExtResource( 3 )
+_rob = NodePath("AngryRob")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 25 )
+anims/StartFight = SubResource( 23 )
+
+[node name="Tilemaps" parent="." instance=ExtResource( 7 )]
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+position = Vector2( 127, 113 )
+
+[node name="AngryRob" type="KinematicBody2D" parent="."]
+position = Vector2( 124, 25 )
+collision_layer = 2
+script = ExtResource( 9 )
+MaxHealth = 1
+
+[node name="Shadow" type="Sprite" parent="AngryRob"]
+material = ExtResource( 1 )
+texture = ExtResource( 4 )
+offset = Vector2( 0, -4 )
+
+[node name="Sprite" type="Sprite" parent="AngryRob"]
+material = SubResource( 21 )
+position = Vector2( 0, -8 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, -4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AngryRob"]
+shape = SubResource( 19 )
+
+[node name="DamagingHurtArea" parent="AngryRob" instance=ExtResource( 6 )]
+collision_layer = 2
+collision_mask = 16
+DamageAmount = 1
+
+[node name="CollisionShape2D" parent="AngryRob/DamagingHurtArea" index="0"]
+position = Vector2( 0, -4 )
+shape = SubResource( 20 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AngryRob"]
+autoplay = "Idle"
+anims/Idle = SubResource( 24 )
+anims/RESET = SubResource( 26 )
+
+[node name="AnimationTree" type="AnimationTree" parent="AngryRob"]
+tree_root = SubResource( 22 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/RunSpeed/scale = 1.0
+parameters/State/current = 1
+
+[editable path="AngryRob/DamagingHurtArea"]
