@@ -92,7 +92,7 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
         dead = true;
         Debug.Log(this, "Died");
 
-        DeadYSort(this, Sprite, 5);
+        DeadYSort(this, Sprite, 4);
 
         AnimTree.SetParam("State/current", 2);
 

@@ -46,8 +46,8 @@ public static class EnemyUtilities
 
     public static void DeadYSort(Node2D enemy, Sprite sprite, float amount)
     {
-        sprite.Offset += Vector2.Down * 5;
-        enemy.Position += Vector2.Up * 5;
+        sprite.Offset += Vector2.Down * amount;
+        enemy.Position += Vector2.Up * amount;
     }
 
 
