@@ -58,7 +58,7 @@ public class Shop : Area2D, IInteractable
         PauseMode = PauseModeEnum.Process;
 
         shop.Visible = true;
-        shop.DiceUpdate();
+        shop.UpdateMenu();
 
         EmitSignal(nameof(MenuOpened));
     }

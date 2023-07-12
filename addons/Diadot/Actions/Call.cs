@@ -13,8 +13,6 @@ public class Call : DialogAction
 
     public override Task Execute()
     {
-        Debug.LogU(this, $"Executed {GetNode(node)}");
-
         GetNode(node).Callv(method, args);
         return Task.CompletedTask;
     }

@@ -236,10 +236,6 @@ script = ExtResource( 5 )
 text = "\\d=0.15/I said [b]don't[/b] Rob \\objname me/!!!"
 character = "Rob"
 
-[node name="Temporary" type="Node" parent="DialogPlayer/Robbery"]
-script = ExtResource( 5 )
-text = "Imagine an epic fight"
-
 [node name="Actions" type="Node" parent="DialogPlayer"]
 
 [node name="OpenShopMenu" type="Node" parent="DialogPlayer/Actions"]
@@ -262,14 +258,8 @@ layer = 2
 unique_name_in_owner = true
 visible = false
 
-[node name="ShopItemsContainer" parent="CanvasLayer/ShopMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer" index="0"]
-margin_top = 0.0
-margin_bottom = 135.0
-
 [connection signal="PlayerEntered" from="." to="Label/AnimationPlayer" method="play" binds= [ "ShowText" ]]
 [connection signal="PlayerExited" from="." to="Label/AnimationPlayer" method="play" binds= [ "HideText" ]]
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="area_exited" from="." to="." method="OnAreaExited"]
 [connection signal="Robbed" from="CanvasLayer/ShopMenu" to="." method="OnShopRobbed"]
-
-[editable path="CanvasLayer/ShopMenu"]

@@ -98,7 +98,7 @@ pause_mode = 2
 layer = 100
 script = ExtResource( 3 )
 IsShowingFps = true
-turnOffCommonLogs = true
+turnOffCommonLogs = false
 removeNameUniqeness = true
 _Labels = NodePath("MarginContainer/HBoxContainer/DebugLabels")
 _Logs = NodePath("MarginContainer/MarginContainer/Logs")
@@ -140,8 +140,8 @@ script = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_left = 2.0
-margin_top = 142.0
-margin_right = 2.0
+margin_top = 130.0
+margin_right = 95.0
 margin_bottom = 142.0
 mouse_filter = 2
 size_flags_horizontal = 0
@@ -149,9 +149,13 @@ size_flags_vertical = 8
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer"]
 visible = false
+margin_right = 93.0
+margin_bottom = 12.0
 color = Color( 0, 0, 0, 0.392157 )
 
 [node name="Logs" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+margin_right = 93.0
+margin_bottom = 12.0
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 10
@@ -304,6 +308,7 @@ text = "Show fps"
 margin_top = 25.0
 margin_right = 195.0
 margin_bottom = 46.2
+pressed = true
 text = "Common logs"
 
 [node name="NoUniqueNamesToggle" type="CheckButton" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer"]
@@ -505,18 +510,19 @@ bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint
 [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
 [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 5: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 6: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 7: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
 [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started ShopPosition[/tint]
 [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started UpgradeDices[/tint]
 [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started Health[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 8: Reached[/tint]
+[tint r=0.88 g=1 b=1 a=1]OpenShopMenu: Executed [Area2D:8970][/tint]
+[tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
+[tint r=0.88 g=1 b=1 a=1]DicePickup: False[/tint]
+[tint r=0.88 g=1 b=1 a=1]WeaponSwitcher: Added weapon Pistol[/tint]
+[tint r=0.88 g=1 b=1 a=1]PistolPickup: Collected[/tint]
+[tint r=0 g=1 b=1 a=1]MagnetUpgrade: Buff added[/tint]
+[tint r=0.88 g=1 b=1 a=1]DicePickup: Collected[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
+[tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 5: Reached[/tint]
 [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
@@ -531,18 +537,19 @@ Level 2: Reached
 EnemySpawner: True
 Level 3: Reached
 EnemySpawner: True
-Level 4: Reached
-EnemySpawner: False
-Level 5: Reached
-EnemySpawner: True
-Level 6: Reached
-EnemySpawner: True
-Level 7: Reached
-EnemySpawner: True
 ExplanationsManager: Started ShopPosition
 ExplanationsManager: Started UpgradeDices
 ExplanationsManager: Started Health
-Level 8: Reached
+OpenShopMenu: Executed [Area2D:8970]
+ShopMenu: Selled Dice
+DicePickup: False
+WeaponSwitcher: Added weapon Pistol
+PistolPickup: Collected
+MagnetUpgrade: Buff added
+DicePickup: Collected
+Level 4: Reached
+EnemySpawner: False
+Level 5: Reached
 EnemySpawner: True
 "
 scroll_following = true

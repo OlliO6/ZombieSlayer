@@ -22,6 +22,7 @@ _global_script_class_icons={
 
 SkipInput="SkipDialog"
 DefaultDelay=0.06
+CharsToSkipWhenSkippPressed=8
 
 [MonoCustomResourceRegistry]
 

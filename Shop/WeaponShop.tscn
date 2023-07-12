@@ -1,0 +1,79 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Shop/WeaponShop.cs" type="Script" id=2]
+[ext_resource path="res://Shop/WeaponShopItem.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Items/WeaponPickUps/RiflePickup.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Weapons/Guns/Dolphin/Dolphin.png" type="Texture" id=6]
+[ext_resource path="res://Items/WeaponPickUps/DolphinPickup.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Items/WeaponPickUps/PistolPickup.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Items/WeaponPickUps/SwordPickup.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Weapons/Melee/Sword/SwordIcon.png" type="Texture" id=10]
+[ext_resource path="res://Weapons/Guns/Rifle/RifleIcon.png" type="Texture" id=11]
+[ext_resource path="res://Weapons/Guns/Pistol/PistolIcon.png" type="Texture" id=12]
+[ext_resource path="res://Items/WeaponPickUps/DaggerPickup.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Weapons/Melee/Dagger/Dagger.png" type="Texture" id=14]
+
+[node name="WeaponShop" type="Control"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 6
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="ShopItemsContainer" type="VBoxContainer" parent="ScrollContainer"]
+unique_name_in_owner = true
+margin_right = 256.0
+margin_bottom = 89.0
+size_flags_horizontal = 3
+custom_constants/separation = 1
+
+[node name="Dagger" parent="ScrollContainer/ShopItemsContainer" instance=ExtResource( 3 )]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 256.0
+margin_bottom = 17.0
+SceneToBuy = ExtResource( 13 )
+Icon = ExtResource( 14 )
+price = 15
+
+[node name="Pistol" parent="ScrollContainer/ShopItemsContainer" instance=ExtResource( 3 )]
+margin_left = 0.0
+margin_top = 18.0
+margin_right = 256.0
+margin_bottom = 35.0
+SceneToBuy = ExtResource( 8 )
+Icon = ExtResource( 12 )
+price = 20
+
+[node name="Rifle" parent="ScrollContainer/ShopItemsContainer" instance=ExtResource( 3 )]
+margin_left = 0.0
+margin_top = 36.0
+margin_right = 256.0
+margin_bottom = 53.0
+SceneToBuy = ExtResource( 4 )
+Icon = ExtResource( 11 )
+price = 80
+
+[node name="Sword" parent="ScrollContainer/ShopItemsContainer" instance=ExtResource( 3 )]
+margin_left = 0.0
+margin_top = 54.0
+margin_right = 256.0
+margin_bottom = 71.0
+SceneToBuy = ExtResource( 9 )
+Icon = ExtResource( 10 )
+price = 90
+
+[node name="Dolphin" parent="ScrollContainer/ShopItemsContainer" instance=ExtResource( 3 )]
+margin_left = 0.0
+margin_top = 72.0
+margin_right = 256.0
+margin_bottom = 89.0
+SceneToBuy = ExtResource( 7 )
+Icon = ExtResource( 6 )
+price = 9999

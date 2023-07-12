@@ -9,107 +9,53 @@ public class ShopMenu : Control
     [Signal] public delegate void BoughtDice();
     [Signal] public delegate void Robbed();
 
-    [Export] private PackedScene diceScene;
+    [Export] public PackedScene diceScene;
     [Export] public int allowRobberyPrice = 1000;
 
-    public List<ShopItem> itemsToBuy = new();
-
+    private UpgradeShop storerForUpgradeShop;
+    private WeaponShop storerForWeaponShop;
     private Label storerForPriceLabel;
-    private Container storerForShopItemsContainer;
     private Button storerForBuyDiceButton;
     private Button storerForRobButton;
-    private DiceScenesContainer storerForDiceScenesContainer;
+    private Button storerForSwitchShopButton;
 
+    public UpgradeShop UpgradeShop => this.LazyGetNode(ref storerForUpgradeShop, "%UpgradeShop");
+    public WeaponShop WeaponShop => this.LazyGetNode(ref storerForWeaponShop, "%WeaponShop");
     public Button BuyDiceButton => this.LazyGetNode(ref storerForBuyDiceButton, "%BuyDiceButton");
     public Button RobButton => this.LazyGetNode(ref storerForRobButton, "%RobButton");
+    public Button SwitchShopButton => this.LazyGetNode(ref storerForSwitchShopButton, "%SwitchShopButton");
     public Label PriceLabel => this.LazyGetNode(ref storerForPriceLabel, "%PriceLabel");
-    public Container ShopItemsContainer => this.LazyGetNode(ref storerForShopItemsContainer, "%ShopItemsContainer");
-    public DiceScenesContainer DiceScenesContainer => this.LazyGetNode(ref storerForDiceScenesContainer, "%DiceScenesContainer");
 
     public override void _Ready()
     {
-        foreach (ShopItem item in ShopItemsContainer.GetChildren().OfType<ShopItem>())
-        {
-            item.Hide();
-            item.UpdateShopItem();
-        }
-        DiceUpdate();
-
-        DiceScenesContainer.Connect(nameof(DiceScenesContainer.Interacted), this, nameof(OnSceneFieldInteracted));
+        UpdateMenu();
     }
 
-    private void OnSceneFieldInteracted(int index)
+    public void UpdateMenu()
     {
-        if (itemsToBuy.Count >= index + 1)
-        {
-            var removingItem = itemsToBuy[index];
+        var price = GetPrice();
 
-            removingItem.currentAmount--;
-            removingItem.count--;
-            removingItem.UpdateShopItem();
-
-            itemsToBuy.RemoveAt(index);
-            DiceUpdate();
-        }
-    }
-
-    public void DiceUpdate()
-    {
-        var items = GetItems();
-        var scenes = GetScenesToBuy();
-        int price = GetPrice();
-
-        foreach (ShopItem item in items)
-            item.SetAddButtonEnabled(scenes.Count < 6);
-
-        BuyDiceButton.Disabled = (scenes.Count is 0 || Player.currentPlayer is null || Player.currentPlayer.Coins < price) ? true : false;
-
-        // Make Scene count 6 
-        while (scenes.Count < 6)
-            scenes.Add(null);
-
-        DiceScenesContainer.Scenes = scenes;
-        PriceLabel.Text = $"Price: {price.ToString()}";
-
+        PriceLabel.Text = $"Price: {Mathf.Max(0, price).ToString()}";
+        BuyDiceButton.Disabled = (price < 0 || Player.currentPlayer is null || Player.currentPlayer.Coins < price) ? true : false;
         RobButton.Visible = price >= allowRobberyPrice;
+        SwitchShopButton.Text = UpgradeShop.Visible ? "Weapons" : "Upgrades";
     }
-
-    public void OnItemRemoved(ShopItem item)
-    {
-        itemsToBuy.Remove(item);
-        DiceUpdate();
-    }
-
-    public void OnItemAdded(ShopItem item)
-    {
-        itemsToBuy.Add(item);
-        DiceUpdate();
-    }
-
-    public List<ShopItem> GetItems() => ShopItemsContainer.GetChildren().OfType<ShopItem>().ToList();
-
-    public List<PackedScene> GetScenesToBuy() => itemsToBuy.ConvertAll((ShopItem item) => item.SceneToBuy);
 
     public int GetPrice()
     {
-        int result = 0;
+        if (UpgradeShop.Visible)
+            return UpgradeShop.GetPrice();
 
-        foreach (ShopItem item in GetItems())
-        {
-            for (int count = item.count - 1; count >= item.count - item.currentAmount; count--)
-            {
-                result += item.GetPrice(count);
-            }
-        }
+        if (WeaponShop.Visible)
+            return WeaponShop.GetPrice();
 
-        return result;
+        return 0;
     }
 
     public void UnlockItem(string name)
     {
-        GetItems()
-            .First((ShopItem item) => item.Name == name)
-            .Show();
+        UpgradeShop.UnlockItem(name);
+        WeaponShop.UnlockItem(name);
     }
 
     [TroughtEditor]
@@ -120,36 +66,21 @@ public class ShopMenu : Control
     {
         if (Player.currentPlayer is null) return;
 
-        var items = GetItems();
-        var scenes = GetScenesToBuy();
         int price = GetPrice();
 
-        if (Player.currentPlayer.Coins < price) return;
+        if (Player.currentPlayer.Coins < price)
+            return;
 
-        foreach (var item in items) item.Sell();
-
-        Dice dice = diceScene.Instance<Dice>();
-        AddScenesToDice(dice, scenes);
+        Dice dice = UpgradeShop.Visible ?
+            UpgradeShop.MakeDice() :
+            WeaponShop.MakeDice();
 
         Player.currentPlayer.Coins -= price;
         Player.currentPlayer.AddDice(dice);
 
         EmitSignal(nameof(BoughtDice));
-        itemsToBuy = new();
-        DiceUpdate();
+        UpdateMenu();
         Debug.LogU(this, "Selled Dice");
-    }
-
-    private void AddScenesToDice(Dice dice, List<PackedScene> scenes)
-    {
-        const int sideCount = 6;
-
-        dice.scenes = new PackedScene[sideCount];
-
-        for (int i = 0; i < (scenes.Count > sideCount ? sideCount : scenes.Count); i++)
-        {
-            dice.scenes[i] = scenes[i];
-        }
     }
 
     [TroughtEditor]
@@ -157,18 +88,22 @@ public class ShopMenu : Control
     {
         if (Player.currentPlayer is null) return;
 
-        var items = GetItems();
-        var scenes = GetScenesToBuy();
+        Dice dice = UpgradeShop.Visible ?
+            UpgradeShop.MakeDice() :
+            WeaponShop.MakeDice();
 
-        foreach (var item in items) item.Sell();
-
-        Dice dice = diceScene.Instance<Dice>();
-        AddScenesToDice(dice, scenes);
         Player.currentPlayer.AddDice(dice);
 
         EmitSignal(nameof(Robbed));
-        itemsToBuy = new();
-        DiceUpdate();
+        UpdateMenu();
         Debug.LogU(this, "Rob got robbed.");
+    }
+
+    [TroughtEditor]
+    private void OnSwitchShopPressed()
+    {
+        UpgradeShop.Visible = !UpgradeShop.Visible;
+        WeaponShop.Visible = !WeaponShop.Visible;
+        UpdateMenu();
     }
 }
