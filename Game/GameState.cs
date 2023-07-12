@@ -64,6 +64,11 @@ public class GameState : YSort
             shop.UnlockShopItem(shopItem);
         }
     }
+
+    public void UnlockWeaponEvolutions()
+    {
+        Debug.Log(this, "Weapon Evolutions Unlocked.");
+    }
 }
 
 public struct GameStats

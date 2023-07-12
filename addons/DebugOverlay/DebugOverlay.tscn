@@ -516,7 +516,6 @@ bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint
 [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started ShopPosition[/tint]
 [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started UpgradeDices[/tint]
 [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started Health[/tint]
-[tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 8: Reached[/tint]
 [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
 "
@@ -543,7 +542,6 @@ EnemySpawner: True
 ExplanationsManager: Started ShopPosition
 ExplanationsManager: Started UpgradeDices
 ExplanationsManager: Started Health
-Player: Got 1 damage
 Level 8: Reached
 EnemySpawner: True
 "
