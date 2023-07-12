@@ -219,7 +219,7 @@ character = "Rob"
 
 [node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/No/Dialog/No"]
 script = ExtResource( 5 )
-text = "But that can't be the case\\wait 0.9/ so maybe you can't get it because you're just a little \\wait 1.2/dumb."
+text = "Or you're just \\wait 1.2/dumb."
 character = "Rob"
 
 [node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/No/Dialog/No/Dialog"]

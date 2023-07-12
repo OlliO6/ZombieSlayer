@@ -134,7 +134,7 @@ custom_constants/separation = 0
 margin_top = -1.0
 margin_right = 252.0
 margin_bottom = 3.2
-text = "FPS: 30"
+text = "FPS: 144"
 align = 1
 script = ExtResource( 4 )
 
@@ -505,6 +505,20 @@ bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint
 [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
 [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
+[tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 5: Reached[/tint]
+[tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 6: Reached[/tint]
+[tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 7: Reached[/tint]
+[tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started ShopPosition[/tint]
+[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started UpgradeDices[/tint]
+[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started Health[/tint]
+[tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 8: Reached[/tint]
+[tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
 SceneManager: Loaded Menu
@@ -517,6 +531,20 @@ EnemySpawner: False
 Level 2: Reached
 EnemySpawner: True
 Level 3: Reached
+EnemySpawner: True
+Level 4: Reached
+EnemySpawner: False
+Level 5: Reached
+EnemySpawner: True
+Level 6: Reached
+EnemySpawner: True
+Level 7: Reached
+EnemySpawner: True
+ExplanationsManager: Started ShopPosition
+ExplanationsManager: Started UpgradeDices
+ExplanationsManager: Started Health
+Player: Got 1 damage
+Level 8: Reached
 EnemySpawner: True
 "
 scroll_following = true
