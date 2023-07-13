@@ -12,9 +12,9 @@ public class ShowHideExplanation : Explanation
     {
         if (pause)
         {
-            GetTree().Paused = true;
             if (dontPausePlayer)
                 Player.currentPlayer.PauseMode = PauseModeEnum.Process;
+            GetTree().Paused = true;
         }
 
         if (fadeInTime > 0)
@@ -33,9 +33,9 @@ public class ShowHideExplanation : Explanation
     {
         if (pause)
         {
-            GetTree().Paused = false;
             if (dontPausePlayer)
                 Player.currentPlayer.PauseMode = PauseModeEnum.Inherit;
+            GetTree().Paused = false;
         }
 
         if (fadeOutTime > 0)

@@ -18,8 +18,8 @@ public class MoveAndAttackExplanations : Explanation
         Control moveTutorial = GetNode<Control>("MoveTutorial");
         Control attackTutorial = GetNode<Control>("AttackTutorial");
 
-        GetTree().Paused = true;
         player.PauseMode = PauseModeEnum.Process;
+        GetTree().Paused = true;
 
         Show();
         moveTutorial.Hide();
@@ -44,8 +44,8 @@ public class MoveAndAttackExplanations : Explanation
             walkDist += prevPos.DistanceTo(player.Position);
         }
 
-        GetTree().Paused = false;
         player.PauseMode = PauseModeEnum.Inherit;
+        GetTree().Paused = false;
 
         // Fade out move tutorial
         tween.Kill();
@@ -67,8 +67,8 @@ public class MoveAndAttackExplanations : Explanation
         float prevDmg = player.damageMultiplier;
         player.damageMultiplier = 1000;
 
-        GetTree().Paused = true;
         player.PauseMode = PauseModeEnum.Process;
+        GetTree().Paused = true;
 
         // Fade in attack tutorial
         attackTutorial.Show();
@@ -93,8 +93,8 @@ public class MoveAndAttackExplanations : Explanation
         ToSignal(tween, "finished")
                 .OnCompleted(Finish);
 
-        GetTree().Paused = false;
         player.PauseMode = PauseModeEnum.Inherit;
+        GetTree().Paused = false;
     }
 
     protected override void End()

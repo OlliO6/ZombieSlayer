@@ -54,8 +54,8 @@ public class Shop : Area2D, IInteractable
 
     public void OpenMenu()
     {
-        GetTree().Paused = true;
         PauseMode = PauseModeEnum.Process;
+        GetTree().Paused = true;
 
         shop.Visible = true;
         shop.UpdateMenu();
@@ -66,8 +66,8 @@ public class Shop : Area2D, IInteractable
     {
         if (!hadFirstTalk) return;
 
-        GetTree().Paused = false;
         PauseMode = PauseModeEnum.Inherit;
+        GetTree().Paused = false;
         shop.Visible = false;
 
         EmitSignal(nameof(MenuClosed));
@@ -75,8 +75,8 @@ public class Shop : Area2D, IInteractable
 
     public void Interact()
     {
-        GetTree().Paused = true;
         PauseMode = PauseModeEnum.Process;
+        GetTree().Paused = true;
         Deselect();
 
         if (!hadFirstTalk)
