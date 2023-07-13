@@ -341,7 +341,7 @@ nodes/RunSpeed/position = Vector2( -271.68, 23.68 )
 nodes/State/node = SubResource( 21 )
 nodes/State/position = Vector2( -52.8, 178.56 )
 nodes/output/position = Vector2( 120, 180 )
-node_connections = [ "State", 0, "RunSpeed", "State", 1, "Animation 4", "State", 2, "DiyingType", "RunSpeed", 0, "Animation 2", "DiyingType", 0, "Animation", "DiyingType", 1, "Animation 3", "output", 0, "State" ]
+node_connections = [ "RunSpeed", 0, "Animation 2", "State", 0, "RunSpeed", "State", 1, "Animation 4", "State", 2, "DiyingType", "DiyingType", 0, "Animation", "DiyingType", 1, "Animation 3", "output", 0, "State" ]
 
 [sub_resource type="AudioStreamRandomPitch" id=2]
 audio_stream = ExtResource( 4 )
