@@ -1,5 +1,7 @@
+using System.Text;
 using Additions;
 using Godot;
+using Godot.Collections;
 
 public class OptionsManager : Node
 {
@@ -16,8 +18,7 @@ public class OptionsManager : Node
     };
     private static OptionSet currentOptions;
 
-    const string DefaultOptionsPath = "res://Singletons/Options/DefaultOptions.tres";
-    const string UserOptionsPath = "user://Options.tres";
+    const string UserOptionsPath = "user://.settings";
 
     #region Current Options Shortcuts 
 
@@ -90,6 +91,7 @@ public class OptionsManager : Node
         instance = this;
 
         SetToUserFile();
+        SaveOptions();
         UpdateOptions();
         UpdateShaders();
     }
@@ -100,21 +102,72 @@ public class OptionsManager : Node
 
     public static void SetToUserFile()
     {
-        if (!ResourceLoader.Exists(UserOptionsPath))
+        var options = LoadOptions();
+        if (options is null)
         {
-            CurrentOptions = GD.Load<OptionSet>(DefaultOptionsPath).Duplicate() as OptionSet;
-            ResourceSaver.Save(UserOptionsPath, CurrentOptions);
+            ResetOptions();
             return;
         }
-
-        CurrentOptions = ResourceLoader.Load<OptionSet>(UserOptionsPath, noCache: true);
+        CurrentOptions = options;
     }
 
-    public static void ResetOptions() => CurrentOptions = GD.Load<OptionSet>(DefaultOptionsPath).Duplicate() as OptionSet;
-    public static void SaveOptions()
+    public static void ResetOptions() => CurrentOptions = new OptionSet();
+    public static async void SaveOptions()
     {
+        await instance.ToSignal(instance.GetTree(), "idle_frame");
         Debug.LogU(instance, "Saving Options");
-        ResourceSaver.Save(UserOptionsPath, CurrentOptions);
+
+        var sb = new StringBuilder();
+
+        sb.Append("{")
+            .Append("\"fullscreen\":")
+            .Append(CurrentOptions.fullscreen ? "true" : "false")
+            .Append(",\"sfxVolume\":")
+            .Append(CurrentOptions.sfxVolume.InvariantToString())
+            .Append(",\"musicVolume\":")
+            .Append(CurrentOptions.musicVolume.InvariantToString())
+            .Append(",\"useUpscaling\":")
+            .Append(CurrentOptions.useUpscaling ? "true" : "false")
+            .Append(",\"language\":")
+            .Append("\"")
+            .Append(CurrentOptions.language)
+            .Append("\"")
+            .Append("}");
+
+        var file = new File();
+
+        file.Open(UserOptionsPath, File.ModeFlags.Write);
+        file.StoreString(sb.ToString());
+        file.Close();
+    }
+
+    public static OptionSet LoadOptions()
+    {
+        var file = new File();
+        if (!file.FileExists(UserOptionsPath))
+            return null;
+
+        file.Open(UserOptionsPath, File.ModeFlags.Read);
+        if (file.GetError() != Error.Ok)
+            return null;
+
+        string text = file.GetAsText();
+        file.Close();
+
+        var parsed = JSON.Parse(text);
+        if (parsed.Error != Error.Ok)
+            return null;
+
+        var dict = parsed.Result as Dictionary;
+
+        return new OptionSet()
+        {
+            fullscreen = dict.Get<bool>("fullscreen"),
+            sfxVolume = dict.Get<float>("sfxVolume"),
+            musicVolume = dict.Get<float>("musicVolume"),
+            useUpscaling = dict.Get<bool>("useUpscaling"),
+            language = dict.Get<string>("language")
+        };
     }
 
     public static void UpdateOptions()
