@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player/ShockWave.cs" type="Script" id=1]
 [ext_resource path="res://addons/Shake/ShakeProfile.cs" type="Script" id=2]
 [ext_resource path="res://addons/Shake/PlayerCamShakeInducer.cs" type="Script" id=3]
+[ext_resource path="res://Player/Shockwave.wav" type="AudioStream" id=4]
 
 [sub_resource type="Shader" id=28]
 code = "shader_type canvas_item;
@@ -109,6 +110,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [ 0.02 ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=33]
 resource_name = "shock"
@@ -188,6 +201,32 @@ tracks/5/keys = {
 "method": "Shake"
 } ]
 }
+tracks/6/type = "audio"
+tracks/6/path = NodePath("AudioStreamPlayer")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.55 ),
+"transitions": PoolRealArray( 4.14106, 1 ),
+"update": 0,
+"values": [ -18.62, -80.0 ]
+}
 
 [sub_resource type="CircleShape2D" id=34]
 radius = 80.0
@@ -215,6 +254,7 @@ anims/RESET = SubResource( 32 )
 anims/shock = SubResource( 33 )
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 monitorable = false
@@ -226,3 +266,6 @@ disabled = true
 [node name="PlayerCamShakeInducer" type="Node" parent="."]
 script = ExtResource( 3 )
 shakeProfile = SubResource( 35 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )

@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Shockwave.wav-cc19d86c18da3c1f59f7b9625e4d76b6.sample"
+
+[deps]
+
+source_file="res://Player/Shockwave.wav"
+dest_files=[ "res://.import/Shockwave.wav-cc19d86c18da3c1f59f7b9625e4d76b6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=true
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

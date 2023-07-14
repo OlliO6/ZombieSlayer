@@ -42,6 +42,7 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
         AnimTree.SetParam("RunSpeed/scale", 1f);
 
         GetNode("DetonationArea").Connect("body_entered", this, nameof(DetonationZoneEntered));
+        StunnTimer.Connect(Constants.timeout, this, nameof(UnStunn));
     }
 
     private void DetonationZoneEntered(Node node)
