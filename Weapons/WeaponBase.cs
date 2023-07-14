@@ -48,9 +48,29 @@ public abstract class WeaponBase : Node2D
         disabled = false;
     }
 
+    public virtual void RotateWeapon()
+    {
+        Vector2 mousePos = GetGlobalMousePosition();
+        LookAt(mousePos);
+
+        if (GlobalPosition.x > mousePos.x)
+        {
+            Scale = new Vector2(-1, 1);
+            Rotate(Mathf.Deg2Rad(180));
+            return;
+        }
+        Scale = new Vector2(1, 1);
+    }
+
+    public override void _PhysicsProcess(float delta)
+    {
+        RotateWeapon();
+    }
+
     public override void _Process(float delta)
     {
-        if (InputManager.attackInput && !disabled) AttackInputProcess(delta);
+        if (InputManager.attackInput && !disabled)
+            AttackInputProcess(delta);
     }
 
     protected virtual void AttackInputStarted() { }

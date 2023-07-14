@@ -45,24 +45,6 @@ public abstract class ShootingWeaponBase : WeaponBase
         EmitSignal(nameof(AttackStarted));
     }
 
-    public override void _Process(float delta)
-    {
-        base._Process(delta);
-
-        Vector2 mousePos = GetGlobalMousePosition();
-        LookAt(mousePos);
-
-        if (GlobalPosition.x > mousePos.x)
-        {
-            Scale = new Vector2(-1, 1);
-            Rotate(Mathf.Deg2Rad(180));
-        }
-        else
-        {
-            Scale = new Vector2(1, 1);
-        }
-    }
-
     protected override void OnAnimationFinished(string animation)
     {
         if (animation is "Shoot")

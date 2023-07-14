@@ -75,21 +75,10 @@ public class MeleeBase : WeaponBase
         EmitSignal(nameof(AttackStarted));
     }
 
-    public override void _Process(float delta)
+    public override void _PhysicsProcess(float delta)
     {
-        base._Process(delta);
-        if (isAttacking) return;
-
-        Vector2 mousePos = GetGlobalMousePosition();
-        LookAt(mousePos);
-
-        if (GlobalPosition.x > mousePos.x)
-        {
-            Scale = new Vector2(-1, 1);
-            Rotate(Mathf.Deg2Rad(180));
-            return;
-        }
-        Scale = new Vector2(1, 1);
+        if (!isAttacking)
+            RotateWeapon();
     }
 
     protected override void OnAnimationFinished(string animation)

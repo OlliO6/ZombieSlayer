@@ -521,6 +521,7 @@ amountThreshold = 0.02
 [node name="Camera2D" type="Camera2D" parent="."]
 rotating = true
 current = true
+process_mode = 0
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true

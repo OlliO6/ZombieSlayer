@@ -14,12 +14,8 @@ public class Bullet : Area2D, IKillable, IDamageDealer
 
     public TimeAwaiter liveAwaiter;
 
-    #region AnimationPlayer Reference
-
     private AnimationPlayer storerForAnimationPlayer;
     public AnimationPlayer AnimationPlayer => this.LazyGetNode(ref storerForAnimationPlayer, "AnimationPlayer");
-
-    #endregion
 
     public virtual int DamageAmount => damage;
 
