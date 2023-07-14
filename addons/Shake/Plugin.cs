@@ -6,7 +6,6 @@ public class Plugin : EditorPlugin
 {
     public override void _EnterTree()
     {
-        GD.Print("Hello world");
         AddCustomType(nameof(PlayerCamShakeInducer), nameof(Node), GD.Load<CSharpScript>("res://addons/Shake/PlayerCamShakeInducer.cs"), null);
     }
 

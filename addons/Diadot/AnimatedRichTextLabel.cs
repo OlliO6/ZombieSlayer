@@ -21,6 +21,8 @@ public class AnimatedRichTextLabel : RichTextLabel
 
     private CancellationTokenSource cancellation;
 
+    private bool skipPressed;
+
     public string PathToObjNamesJson
     {
         get => pathToObjNamesJson;
@@ -58,6 +60,7 @@ public class AnimatedRichTextLabel : RichTextLabel
 
     public async void Play(string codeText)
     {
+        skipPressed = false;
         cancellation?.Cancel();
         cancellation = new CancellationTokenSource();
         CancellationToken token = cancellation.Token;
@@ -83,7 +86,7 @@ public class AnimatedRichTextLabel : RichTextLabel
             if (c is not ' ') EmitSignal(nameof(NonWhiteSpaceAdvanced));
             EmitSignal(nameof(Advanced));
 
-            if (Input.IsActionPressed(ProjectSettingsControl.SkipInput))
+            if (skipPressed)
             {
                 if (skipped < ProjectSettingsControl.CharsToSkipWhenSkippPressed)
                 {
@@ -91,10 +94,16 @@ public class AnimatedRichTextLabel : RichTextLabel
                     continue;
                 }
                 skipped = 0;
+
+                await new TimeAwaiter(this, ProjectSettingsControl.DefaultDelay * 0.5f);
+                if (token.IsCancellationRequested)
+                    return;
+                continue;
             }
 
             await new TimeAwaiter(this, delay);
-            if (token.IsCancellationRequested) return;
+            if (token.IsCancellationRequested)
+                return;
         }
         await TryToHandleExpression(expressions, Text.Length);
         if (token.IsCancellationRequested) return;
@@ -321,7 +330,7 @@ public class AnimatedRichTextLabel : RichTextLabel
 
                 case "wait":
                     if (spaceSeperated.Length < 2) return false;
-                    await new TimeAwaiter(this, ParseFloat(spaceSeperated[1]) / (Input.IsActionPressed(ProjectSettingsControl.SkipInput) ? (float)ProjectSettingsControl.CharsToSkipWhenSkippPressed : 1f));
+                    await new TimeAwaiter(this, skipPressed ? 0 : ParseFloat(spaceSeperated[1]));
                     return true;
             }
             return false;
@@ -332,25 +341,35 @@ public class AnimatedRichTextLabel : RichTextLabel
 
     public override void _Input(InputEvent @event)
     {
-        if (@event is not InputEventMouseButton mouseInput) return;
+        if (@event.IsEcho())
+            return;
 
-        if (mouseInput.Pressed)
+        if (@event is InputEventMouseButton mouseInput)
         {
-            if (GetGlobalRect().HasPoint(mouseInput.Position))
+            if (mouseInput.Pressed)
             {
-                Input.ParseInputEvent(new InputEventAction()
+                if (GetGlobalRect().HasPoint(mouseInput.Position))
                 {
-                    Action = ProjectSettingsControl.SkipInput,
-                    Pressed = true
-                });
+                    Input.ParseInputEvent(new InputEventAction()
+                    {
+                        Action = ProjectSettingsControl.SkipInput,
+                        Pressed = true
+                    });
+                }
+                return;
             }
+            Input.ParseInputEvent(new InputEventAction()
+            {
+                Action = ProjectSettingsControl.SkipInput,
+                Pressed = false
+            });
             return;
         }
-        Input.ParseInputEvent(new InputEventAction()
+
+        if (@event.IsAction(ProjectSettingsControl.SkipInput))
         {
-            Action = ProjectSettingsControl.SkipInput,
-            Pressed = false
-        });
+            skipPressed = @event.IsPressed();
+        }
     }
 
     public void CancelPlay() => cancellation?.Cancel();
