@@ -233,7 +233,7 @@ radius = 80.0
 
 [sub_resource type="Resource" id=35]
 script = ExtResource( 2 )
-amplitude = 0.4
+amplitude = 0.5
 time = 0.4
 speed = 0.0
 easeType = 0

@@ -168,7 +168,7 @@ tracks/3/keys = {
 [sub_resource type="Resource" id=16]
 script = ExtResource( 6 )
 amplitude = 1.0
-time = 0.6
+time = 0.35
 speed = 0.0
 easeType = 0
 transitionType = 1

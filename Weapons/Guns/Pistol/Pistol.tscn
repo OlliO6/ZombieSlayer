@@ -80,7 +80,7 @@ tracks/4/keys = {
 
 [sub_resource type="Resource" id=8]
 script = ExtResource( 5 )
-amplitude = 0.3
+amplitude = 0.15
 time = 0.15
 speed = 0.0
 easeType = 0
