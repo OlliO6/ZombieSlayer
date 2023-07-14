@@ -9,6 +9,12 @@ public interface IDamageable
     public void GetDamage(int amount);
     public bool AllowDamageFrom(IDamageDealer from);
 }
+public interface IStunnable
+{
+    bool IsStunned { get; }
+    Timer StunnTimer { get; }
+    void Stunn(float time);
+}
 public interface IDamageDealer
 {
     public int DamageAmount { get; }

@@ -4,7 +4,7 @@ using Godot;
 using static EnemyUtilities;
 
 [Additions.Debugging.DefaultColor("LightGreen")]
-public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
+public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth, IStunnable
 {
     [Signal] public delegate void Damaged();
     [Signal] public delegate void Died();
@@ -21,23 +21,17 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
     public event System.Action<IEnemy> EnemyDied;
 
     private bool dead, isInvincible;
-    private bool isStunned;
     float runSpeedScale;
-
-
-    #region AnimTree Reference
 
     private AnimationTree storerForAnimTree;
     public AnimationTree AnimTree => this.LazyGetNode(ref storerForAnimTree, "AnimationTree");
 
-    #endregion
-
-    #region Sprite Reference
-
     private Sprite storerForSprite;
     public Sprite Sprite => this.LazyGetNode(ref storerForSprite, "Sprite");
 
-    #endregion
+    public bool IsStunned { get; private set; }
+
+    public Timer StunnTimer => GetNode<Timer>("StunnTimer");
 
     public override void _Ready()
     {
@@ -48,11 +42,12 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
         AnimTree.SetParam("State/current", 1);
         float weight = Mathf.InverseLerp(movementSpeedRange.x, movementSpeedRange.y, movementSpeed);
         runSpeedScale = Mathf.Lerp(0.6f, 1, weight);
+        StunnTimer.Connect(Constants.timeout, this, nameof(UnStunn));
     }
 
     public override void _PhysicsProcess(float delta)
     {
-        if (dead || isStunned || !Player.Exists ||
+        if (dead || IsStunned || !Player.Exists ||
                 Position.DistanceTo(Player.currentPlayer.Position) < NoMoveDist)
         {
             AnimTree.SetParam("RunSpeed/scale", 0);
@@ -77,14 +72,21 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth
 
         if (CurrentHealth <= 0) Die();
 
-        isStunned = true;
         isInvincible = true;
         new TimeAwaiter(this, InvisTime, onCompleted: () => isInvincible = false);
-        new TimeAwaiter(this, StunTime, onCompleted: () =>
-                {
-                    isStunned = false;
-                    AnimTree.Set("parameters/RunSpeed/scale", runSpeedScale);
-                });
+        Stunn(StunTime);
+    }
+
+    public void Stunn(float time)
+    {
+        IsStunned = true;
+        StunnTimer.Start(time);
+    }
+
+    private void UnStunn()
+    {
+        IsStunned = false;
+        AnimTree.Set("parameters/RunSpeed/scale", runSpeedScale);
     }
 
     public void Die()

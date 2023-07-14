@@ -16,7 +16,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     [Signal] public delegate void LevelChanged(int to);
     [Signal] public delegate void DeathStarted();
     [Signal] public delegate void DeathEnded();
-    [Signal] public delegate void Damged();
+    [Signal] public delegate void Damaged();
     [Signal] public delegate void InvincibilityStarted();
     [Signal] public delegate void InvincibilityEnded();
     [Signal] public delegate void HealthChanged();
@@ -213,7 +213,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         ShakeCam(damageShake);
 
         AnimationTree.Set("parameters/Damage/active", true);
-        EmitSignal(nameof(Damged));
+        EmitSignal(nameof(Damaged));
         Debug.LogU(this, $"Got {amount} damage");
 
         if (isDead) return;

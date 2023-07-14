@@ -10,6 +10,7 @@ public class LevelingSystem : Node
 {
     [Signal] public delegate void XpChanged();
     [Signal] public delegate void LevelChanged();
+    [Signal] public delegate void LevelUp();
 
     [Export] public int startLevelIndex = 0;
     [Export] public float xpRaiseOneLvlTweenTime = 0.15f;
@@ -89,7 +90,10 @@ public class LevelingSystem : Node
         if (CurrentLevelIndex >= Levels.GetChildCount()) return;
 
         ToSignal(CurrentLevelNode, nameof(Level.LevelReached)).OnCompleted(() =>
-                EmitSignal(nameof(LevelChanged)));
+        {
+            EmitSignal(nameof(LevelChanged));
+            EmitSignal(nameof(LevelUp));
+        });
         CurrentLevelNode.ReachLevel();
         StartTween();
     }

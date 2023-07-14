@@ -134,14 +134,14 @@ custom_constants/separation = 0
 margin_top = -1.0
 margin_right = 252.0
 margin_bottom = 3.2
-text = "FPS: 144"
+text = "FPS: 30"
 align = 1
 script = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_left = 2.0
-margin_top = 138.0
-margin_right = 58.0
+margin_top = 110.0
+margin_right = 95.0
 margin_bottom = 142.0
 mouse_filter = 2
 size_flags_horizontal = 0
@@ -149,13 +149,13 @@ size_flags_vertical = 8
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer"]
 visible = false
-margin_right = 56.0
-margin_bottom = 4.0
+margin_right = 93.0
+margin_bottom = 32.0
 color = Color( 0, 0, 0, 0.392157 )
 
 [node name="Logs" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
-margin_right = 56.0
-margin_bottom = 4.0
+margin_right = 93.0
+margin_bottom = 32.0
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 10
@@ -506,20 +506,12 @@ bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint
 [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
 [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
+[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started Health[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
 [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
+[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started UpgradeDices[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
 [tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
-[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started ShopPosition[/tint]
-[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started UpgradeDices[/tint]
-[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started Health[/tint]
-[tint r=0.88 g=1 b=1 a=1]OpenShopMenu: Executed [Area2D:8970][/tint]
-[tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
-[tint r=0.88 g=1 b=1 a=1]DicePickup: False[/tint]
-[tint r=0.88 g=1 b=1 a=1]WeaponSwitcher: Added weapon Pistol[/tint]
-[tint r=0.88 g=1 b=1 a=1]PistolPickup: Collected[/tint]
-[tint r=0 g=1 b=1 a=1]MagnetUpgrade: Buff added[/tint]
-[tint r=0.88 g=1 b=1 a=1]DicePickup: Collected[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
 [tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 5: Reached[/tint]
@@ -533,20 +525,12 @@ Level 0: Reached
 EnemySpawner: False
 Level 1: Reached
 EnemySpawner: False
+ExplanationsManager: Started Health
 Level 2: Reached
 EnemySpawner: True
+ExplanationsManager: Started UpgradeDices
 Level 3: Reached
 EnemySpawner: True
-ExplanationsManager: Started ShopPosition
-ExplanationsManager: Started UpgradeDices
-ExplanationsManager: Started Health
-OpenShopMenu: Executed [Area2D:8970]
-ShopMenu: Selled Dice
-DicePickup: False
-WeaponSwitcher: Added weapon Pistol
-PistolPickup: Collected
-MagnetUpgrade: Buff added
-DicePickup: Collected
 Level 4: Reached
 EnemySpawner: False
 Level 5: Reached

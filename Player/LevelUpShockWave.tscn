@@ -146,7 +146,7 @@ tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 0.840896, 1 ),
+"transitions": PoolRealArray( 0.466516, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 1.1, 1.1 ) ]
 }
@@ -200,13 +200,15 @@ speed = 0.0
 easeType = 0
 transitionType = 1
 
-[node name="ShockWave" type="Sprite"]
+[node name="LevelUpShockWave" type="Sprite"]
 material = SubResource( 29 )
 z_index = 5
 texture = SubResource( 31 )
 script = ExtResource( 1 )
 baseRadius = 80.0
 damageAmount = 22
+knockbackSpeed = 5.0
+stunnTime = 2.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 32 )

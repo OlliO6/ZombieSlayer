@@ -17,7 +17,7 @@
 [ext_resource path="res://Player/PlayerDie.png" type="Texture" id=15]
 [ext_resource path="res://Sounds/Dying.wav" type="AudioStream" id=16]
 [ext_resource path="res://addons/Shake/CamShaker.cs" type="Script" id=17]
-[ext_resource path="res://Player/ShockWave.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Player/LevelUpShockWave.tscn" type="PackedScene" id=18]
 [ext_resource path="res://addons/Shake/ShakeProfile.cs" type="Script" id=22]
 
 [sub_resource type="Resource" id=26]
@@ -411,7 +411,7 @@ nodes/RunSpeed/position = Vector2( -260, 140 )
 nodes/State/node = SubResource( 6 )
 nodes/State/position = Vector2( -60, 120 )
 nodes/output/position = Vector2( 520, 240 )
-node_connections = [ "RunSpeed", 0, "Animation 2", "State", 0, "Animation", "State", 1, "RunSpeed", "State", 2, "Animation 5", "Damage", 0, "Animation 4", "Damage", 1, "Animation 3", "Add2", 0, "State", "Add2", 1, "Damage", "output", 0, "Add2" ]
+node_connections = [ "Damage", 0, "Animation 4", "Damage", 1, "Animation 3", "Add2", 0, "State", "Add2", 1, "Damage", "RunSpeed", 0, "Animation 2", "State", 0, "Animation", "State", 1, "RunSpeed", "State", 2, "Animation 5", "output", 0, "Add2" ]
 
 [sub_resource type="AudioStreamRandomPitch" id=14]
 audio_stream = ExtResource( 9 )
@@ -546,16 +546,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="ShockWave" parent="." instance=ExtResource( 18 )]
-knockbackSpeed = 0.0
+[node name="LevelUpShockWave" parent="." instance=ExtResource( 18 )]
 
 [connection signal="CoinsAmountChanged" from="." to="UI/IngameUI" method="OnCoinsAmountChanged"]
 [connection signal="HealthChanged" from="." to="UI/IngameUI" method="OnPlayerHealthChanged"]
-[connection signal="InvincibilityEnded" from="." to="HurtArea" method="Check" flags=3]
 [connection signal="InvincibilityEnded" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ true ]]
+[connection signal="InvincibilityEnded" from="." to="HurtArea" method="Check" flags=3]
 [connection signal="InvincibilityStarted" from="." to="HurtArea" method="set_monitoring" flags=3 binds= [ false ]]
 [connection signal="LevelChanged" from="Leveling" to="." method="OnLevelChanged"]
 [connection signal="LevelChanged" from="Leveling" to="UI/IngameUI" method="OnLevelChanged"]
+[connection signal="LevelUp" from="Leveling" to="LevelUpShockWave" method="InduceShockWave"]
 [connection signal="WeaponChanged" from="WeaponSwitcher" to="UI/IngameUI" method="OnWeaponChanged"]
 [connection signal="InventoryPressed" from="UI/PauseMenu" to="UI/Inventory" method="Open"]
 

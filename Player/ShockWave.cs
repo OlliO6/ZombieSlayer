@@ -3,13 +3,14 @@ using System;
 using Additions;
 using Shaking;
 using System.Collections.Generic;
+using Enemies;
 
 public class ShockWave : Sprite
 {
     [Export] public float baseRadius;
     [Export] public int damageAmount;
     [Export] public float knockbackSpeed;
-    [Export] public ShakeProfile shake;
+    [Export] public float stunnTime;
 
     public bool isShocking;
 
@@ -53,6 +54,7 @@ public class ShockWave : Sprite
             {
                 _damaged.Add(damageable);
                 damageable.GetDamage(damageAmount);
+                (damageable as IStunnable)?.Stunn(stunnTime);
             }
 
             if (node is KinematicBody2D kinematicBody)
@@ -61,14 +63,6 @@ public class ShockWave : Sprite
                 var targetPos = GlobalPosition + dir * Radius;
                 kinematicBody.MoveAndSlide((targetPos - kinematicBody.GlobalPosition) * knockbackSpeed);
             }
-        }
-    }
-
-    public override void _Input(InputEvent @event)
-    {
-        if (@event is InputEventKey keyInput && keyInput.PhysicalScancode is (uint)KeyList.C)
-        {
-            InduceShockWave();
         }
     }
 }

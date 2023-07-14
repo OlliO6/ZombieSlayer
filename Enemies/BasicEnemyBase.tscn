@@ -121,7 +121,7 @@ nodes/RunSpeed/position = Vector2( -340, 120 )
 nodes/State/node = SubResource( 13 )
 nodes/State/position = Vector2( -100, 40 )
 nodes/output/position = Vector2( 140, 40 )
-node_connections = [ "RunSpeed", 0, "Animation 2", "State", 0, "Animation", "State", 1, "RunSpeed", "State", 2, "Animation 4", "output", 0, "State" ]
+node_connections = [ "output", 0, "State", "State", 0, "Animation", "State", 1, "RunSpeed", "State", 2, "Animation 4", "RunSpeed", 0, "Animation 2" ]
 
 [node name="EnemyBase" type="KinematicBody2D"]
 collision_layer = 2
@@ -160,5 +160,8 @@ parameters/RunSpeed/scale = 1.0
 parameters/State/current = 1
 
 [node name="VisibilityDisabler" parent="." instance=ExtResource( 4 )]
+
+[node name="StunnTimer" type="Timer" parent="."]
+one_shot = true
 
 [editable path="DamagingHurtArea"]
