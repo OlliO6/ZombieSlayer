@@ -51,7 +51,7 @@ public class LoadGun : ShootingWeaponBase
 
         isAttacking = true;
 
-        lastBullet.dead = false;
+        lastBullet.IsDead = false;
         lastBullet.liveAwaiter.Continue();
         InstantiatePoint.RemoveChild(lastBullet);
         GetTree().CurrentScene.AddChild(lastBullet);
@@ -87,7 +87,7 @@ public class LoadGun : ShootingWeaponBase
                 loadBullet.speedOverPower = bulletSpeedOverPower;
                 loadBullet.scaleOverPower = bulletScaleOverPower;
             }
-            lastBullet.dead = true;
+            lastBullet.IsDead = true;
             AnimationPlayer.Play("Load");
             CallDeferred(nameof(PauseBullet));
             InstantiatePoint.AddChild(lastBullet);

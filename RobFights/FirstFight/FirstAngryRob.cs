@@ -24,6 +24,8 @@ public class FirstAngryRob : Node2D, IDamageable, IHealth, IKillable, IEnemy
         }
     }
 
+    public bool IsDead { get; private set; }
+
     public event Action<IEnemy> EnemyDied;
 
     public bool AllowDamageFrom(IDamageDealer from) => Enabled;
@@ -36,7 +38,10 @@ public class FirstAngryRob : Node2D, IDamageable, IHealth, IKillable, IEnemy
 
     public void Die()
     {
-        Enabled = false;
+        if (IsDead)
+            return;
+
+        IsDead = true;
         EnemyDied?.Invoke(this);
         EnemyUtilities.SpawnCoins(this, Coins);
     }

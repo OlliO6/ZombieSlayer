@@ -17,7 +17,7 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
     [Export] private int coinsAmount;
     [Export] private float movementSpeed;
 
-    private bool isInvincible, dead, exploded, isDetonating;
+    private bool isInvincible, exploded, isDetonating;
     private AnimationTree storerForAnimTree;
     private Sprite storerForSprite;
 
@@ -34,6 +34,8 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
 
     public Timer StunnTimer => GetNode<Timer>("StunnTimer");
 
+    public bool IsDead { get; private set; }
+
     public override void _Ready()
     {
         BasicSetup(this);
@@ -47,7 +49,7 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
 
     private void DetonationZoneEntered(Node node)
     {
-        if (dead || node is not Player) return;
+        if (IsDead || node is not Player) return;
 
         AnimTree.SetParam("State/current", 1);
         isDetonating = true;
@@ -55,7 +57,7 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
 
     public override void _PhysicsProcess(float delta)
     {
-        if (dead || IsStunned || !Player.Exists ||
+        if (IsDead || IsStunned || !Player.Exists ||
                 Position.DistanceTo(Player.currentPlayer.Position) < NoMoveDist)
         {
             AnimTree.SetParam("RunSpeed/scale", 0);
@@ -100,7 +102,10 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
 
     public void Die()
     {
-        dead = true;
+        if (IsDead)
+            return;
+
+        IsDead = true;
         AnimTree.SetParam("State/current", 2);
         AnimTree.SetParam("DiyingType/current", 0);
 
@@ -115,7 +120,7 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
 
     public void Explode()
     {
-        dead = true;
+        IsDead = true;
         exploded = true;
         AnimTree.SetParam("State/current", 2);
         AnimTree.SetParam("DiyingType/current", 1);

@@ -3,6 +3,7 @@ using Godot;
 public interface IKillable
 {
     public void Die();
+    public bool IsDead { get; }
 }
 public interface IDamageable
 {

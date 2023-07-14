@@ -20,7 +20,7 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth, 
     [Export] public int MaxHealth { get; set; }
     public event System.Action<IEnemy> EnemyDied;
 
-    private bool dead, isInvincible;
+    private bool isInvincible;
     float runSpeedScale;
 
     private AnimationTree storerForAnimTree;
@@ -32,6 +32,8 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth, 
     public bool IsStunned { get; private set; }
 
     public Timer StunnTimer => GetNode<Timer>("StunnTimer");
+
+    public bool IsDead { get; private set; }
 
     public override void _Ready()
     {
@@ -47,7 +49,7 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth, 
 
     public override void _PhysicsProcess(float delta)
     {
-        if (dead || IsStunned || !Player.Exists ||
+        if (IsDead || IsStunned || !Player.Exists ||
                 Position.DistanceTo(Player.currentPlayer.Position) < NoMoveDist)
         {
             AnimTree.SetParam("RunSpeed/scale", 0);
@@ -91,7 +93,10 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth, 
 
     public void Die()
     {
-        dead = true;
+        if (IsDead)
+            return;
+
+        IsDead = true;
         Debug.Log(this, "Died");
 
         DeadYSort(this, Sprite, 4);

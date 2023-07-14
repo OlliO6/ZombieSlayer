@@ -9,7 +9,7 @@ public class Bullet : Area2D, IKillable, IDamageDealer
     [Export] private bool goTroughAllTargets = false;
     [Export] public int goThroughTargetsCount = 0;
 
-    public bool dead;
+    public bool IsDead { get; set; }
     public float speed;
 
     public TimeAwaiter liveAwaiter;
@@ -30,7 +30,7 @@ public class Bullet : Area2D, IKillable, IDamageDealer
 
     public override void _PhysicsProcess(float delta)
     {
-        if (dead) return;
+        if (IsDead) return;
         GlobalPosition += speed * delta * GlobalTransform.x.Normalized();
     }
 
@@ -41,19 +41,19 @@ public class Bullet : Area2D, IKillable, IDamageDealer
     }
     public virtual void DieInstant()
     {
-        dead = true;
+        IsDead = true;
         QueueFree();
     }
     public virtual void Die()
     {
-        if (dead) return;
-        dead = true;
+        if (IsDead) return;
+        IsDead = true;
         AnimationPlayer.Play("Die");
     }
 
     public bool AllowDamageTo(IDamageable to)
     {
-        if (dead) return false;
+        if (IsDead) return false;
 
         HitTarget();
         return true;

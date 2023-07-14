@@ -34,8 +34,8 @@ public class LoadBullet : Bullet
 
     public override void Die()
     {
-        if (dead) return;
-        dead = true;
+        if (IsDead) return;
+        IsDead = true;
         var tween = CreateTween();
         tween.TweenProperty(this, "scale", Vector2.Zero, Scale.x / dieAnimSpeed);
         ToSignal(tween, "finished").OnCompleted(DieInstant);

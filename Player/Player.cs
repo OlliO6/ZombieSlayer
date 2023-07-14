@@ -76,7 +76,6 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     #endregion
 
-    public bool isDead;
     public bool isInvincible;
     public List<IInteractable> interactablesInRange = new(1);
     public IInteractable currentInteractable;
@@ -85,6 +84,8 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     private int coins;
 
     [Export] public int MaxHealth { get; set; }
+
+    public bool IsDead { get; private set; }
 
     public int CurrentHealth
     {
@@ -136,7 +137,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     public override void _PhysicsProcess(float delta)
     {
-        if (isDead) return;
+        if (IsDead) return;
 
         InputManager.GetMovementInput(out Vector2 inputVector, out float lenght);
 
@@ -205,7 +206,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     public void GetDamage(int amount)
     {
-        if (isInvincible || isDead)
+        if (isInvincible || IsDead)
             return;
 
         if (GameStats.Current.healthUnlocked) CurrentHealth -= amount;
@@ -216,7 +217,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         EmitSignal(nameof(Damaged));
         Debug.LogU(this, $"Got {amount} damage");
 
-        if (isDead) return;
+        if (IsDead) return;
 
         isInvincible = true;
         EmitSignal(nameof(InvincibilityStarted));
@@ -233,7 +234,10 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     public void Die()
     {
-        isDead = true;
+        if (IsDead)
+            return;
+
+        IsDead = true;
 
         ShakeCam(dieShake);
 
@@ -246,7 +250,7 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     public void EndDeath()
     {
-        if (isDead) EmitSignal(nameof(DeathEnded));
+        if (IsDead) EmitSignal(nameof(DeathEnded));
     }
 
     [TroughtEditor]
