@@ -38,6 +38,7 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth, 
     public override void _Ready()
     {
         BasicSetup(this);
+        SetupDespawnOnLevelUpAndNotOnScreen(this, GetNode<VisibilityNotifier2D>("VisibilityDisabler"));
         CurrentHealth = MaxHealth;
         movementSpeed = Random.FloatRange(movementSpeedRange);
 

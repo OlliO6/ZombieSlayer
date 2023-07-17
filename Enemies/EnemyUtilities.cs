@@ -18,6 +18,17 @@ public static class EnemyUtilities
         };
     }
 
+    public static async void SetupDespawnOnLevelUpAndNotOnScreen(Node enemy, VisibilityNotifier2D visibilityNotifier)
+    {
+        await Player.currentPlayer.ToSignal(Player.currentPlayer.Leveling, nameof(Leveling.LevelingSystem.LevelUp));
+
+        if (Object.IsInstanceValid(enemy) && !visibilityNotifier.IsOnScreen())
+        {
+            GD.Print("DASWDASDASDSA");
+            enemy.QueueFree();
+        }
+    }
+
     public static void FlashSprite(Sprite sprite, float inTime = 0.05f, float outTime = 0.15f, float flashStrenght = 0.9f)
     {
         var tween = sprite.CreateTween();

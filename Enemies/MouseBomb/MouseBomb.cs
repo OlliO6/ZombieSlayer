@@ -39,6 +39,8 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
     public override void _Ready()
     {
         BasicSetup(this);
+        SetupDespawnOnLevelUpAndNotOnScreen(this, GetNode<VisibilityNotifier2D>("VisibilityDisabler"));
+
         CurrentHealth = MaxHealth;
 
         AnimTree.SetParam("RunSpeed/scale", 1f);
