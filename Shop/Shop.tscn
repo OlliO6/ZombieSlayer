@@ -236,6 +236,11 @@ script = ExtResource( 5 )
 text = "\\d=0.15/I said [b]don't[/b] Rob \\objname me/!!!"
 character = "Rob"
 
+[node name="Dialog" type="Node" parent="DialogPlayer/Robbery"]
+script = ExtResource( 5 )
+text = "\\wait 2/Imagine an epic fight against \\objname Rob/."
+onStartActions = [ NodePath("../../Actions/StartFight") ]
+
 [node name="Actions" type="Node" parent="DialogPlayer"]
 
 [node name="OpenShopMenu" type="Node" parent="DialogPlayer/Actions"]
@@ -250,6 +255,13 @@ script = ExtResource( 6 )
 command = "waitforbuy"
 path = NodePath("../../../CanvasLayer/ShopMenu")
 signal = "BoughtDice"
+
+[node name="StartFight" type="Node" parent="DialogPlayer/Actions"]
+script = ExtResource( 11 )
+command = "startfight"
+node = NodePath("../../..")
+method = "StartFigth"
+args = [  ]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
