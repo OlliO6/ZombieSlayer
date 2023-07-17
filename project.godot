@@ -45,11 +45,11 @@ default_bus_layout="res://BusLayout.tres"
 [autoload]
 
 InputManager="*res://Singletons/InputManager.cs"
-SceneManager="*res://Singletons/SceneManager.tscn"
 OptionsManager="*res://Singletons/Options/OptionsManager.cs"
 Debug="*res://addons/DebugOverlay/DebugOverlay.tscn"
 ExplanationsManager="*res://Singletons/Explanations/Explanations.tscn"
 Database="*res://Singletons/Database.cs"
+Transitions="*res://Singletons/Transitions/Transitions.tscn"
 
 [display]
 

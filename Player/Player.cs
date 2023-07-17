@@ -132,7 +132,15 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         MagnetAreaSize = startMagnetSize;
         Heal();
 
-        ToSignal(this, nameof(DeathEnded)).OnCompleted(SceneManager.LoadMenu);
+        ToSignal(this, nameof(DeathEnded)).OnCompleted(() =>
+        {
+            Transitions.StartTransition(Transitions.TransitionPixel, () =>
+            {
+                GetTree().ChangeSceneTo(Scenes.Menu);
+                GetTree().Paused = false;
+                Transitions.EndTransition(Transitions.TransitionPixel);
+            });
+        });
     }
 
     public override void _PhysicsProcess(float delta)

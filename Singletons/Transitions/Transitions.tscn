@@ -1,0 +1,378 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Singletons/Transitions/Transitions.cs" type="Script" id=1]
+
+[sub_resource type="Animation" id=3]
+resource_name = "BlackFade_end"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("BlackFade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BlackFade:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "BlackFade_start"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("BlackFade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BlackFade:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "Blocks_end"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Blocks:material:shader_param/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, -1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Blocks:material:shader_param/noise:noise:seed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 5 ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "Blocks_start"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Blocks:material:shader_param/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -1.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Blocks:material:shader_param/noise:noise:seed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Horizontal_end"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Horizontal:material:shader_param/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.05, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Horizontal:material:shader_param/lenght")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -0.05 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Horizontal_start"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Horizontal:material:shader_param/lenght")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.05 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Horizontal:material:shader_param/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, -0.05 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "Pixel_end"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pixel:material:shader_param/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, -1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pixel:material:shader_param/noise:noise:seed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 5 ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "Pixel_start"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pixel:material:shader_param/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -1.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pixel:material:shader_param/noise:noise:seed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BlackFade:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Horizontal:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Blocks:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform float progress;
+uniform float lenght = 0.1;
+
+void fragment() {
+	vec2 m_uv = (UV - vec2(0.5)) * 2.0;
+	float a = smoothstep(progress, progress + lenght, abs(m_uv.x));
+	COLOR.a = a;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+shader_param/progress = 1.0
+shader_param/lenght = 0.05
+
+[sub_resource type="Shader" id=9]
+code = "shader_type canvas_item;
+
+uniform float progress;
+uniform float step_size = 0.1;
+uniform sampler2D noise;
+
+void fragment() {
+	float stepped = round(progress / step_size) * step_size;
+	float a = progress + texture(noise, UV + vec2(stepped * 16.0)).r;
+	COLOR.a = clamp(a, 0., 1.);
+}
+"
+
+[sub_resource type="OpenSimplexNoise" id=19]
+seed = 5
+octaves = 1
+period = 48.3
+persistence = 0.0
+lacunarity = 0.1
+
+[sub_resource type="NoiseTexture" id=12]
+flags = 3
+width = 16
+height = 10
+noise = SubResource( 19 )
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 9 )
+shader_param/progress = -1.0
+shader_param/step_size = 0.1
+shader_param/noise = SubResource( 12 )
+
+[sub_resource type="OpenSimplexNoise" id=11]
+seed = 5
+period = 0.1
+persistence = 1.0
+lacunarity = 4.0
+
+[sub_resource type="NoiseTexture" id=17]
+flags = 3
+width = 256
+height = 144
+noise = SubResource( 11 )
+
+[sub_resource type="ShaderMaterial" id=18]
+shader = SubResource( 9 )
+shader_param/progress = -1.0
+shader_param/step_size = 0.1
+shader_param/noise = SubResource( 17 )
+
+[node name="Transitions" type="CanvasLayer"]
+pause_mode = 2
+layer = 20
+script = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/BlackFade_end = SubResource( 3 )
+anims/BlackFade_start = SubResource( 1 )
+anims/Blocks_end = SubResource( 13 )
+anims/Blocks_start = SubResource( 14 )
+anims/Horizontal_end = SubResource( 7 )
+anims/Horizontal_start = SubResource( 8 )
+anims/Pixel_end = SubResource( 15 )
+anims/Pixel_start = SubResource( 16 )
+anims/RESET = SubResource( 2 )
+
+[node name="BlackFade" type="ColorRect" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Horizontal" type="ColorRect" parent="."]
+visible = false
+self_modulate = Color( 0, 0, 0, 1 )
+material = SubResource( 6 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Blocks" type="ColorRect" parent="."]
+visible = false
+self_modulate = Color( 0, 0, 0, 1 )
+material = SubResource( 10 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Pixel" type="ColorRect" parent="."]
+visible = false
+self_modulate = Color( 0, 0, 0, 1 )
+material = SubResource( 18 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )

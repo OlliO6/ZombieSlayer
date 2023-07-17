@@ -11,7 +11,11 @@ public class BootSplash : CanvasLayer
 
     private void LoadMenu()
     {
-        SceneManager.LoadMenu();
+        Transitions.StartTransition(Transitions.TransitionPixel, () =>
+        {
+            GetTree().ChangeSceneTo(Scenes.Menu);
+            Transitions.EndTransition(Transitions.TransitionPixel);
+        });
     }
 
     public override void _UnhandledInput(InputEvent @event)

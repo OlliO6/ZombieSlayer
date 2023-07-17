@@ -3,12 +3,16 @@ using Godot;
 
 public class Menu : CanvasLayer
 {
-    [Export] private PackedScene gameScene;
-
     [TroughtEditor]
     private void OnPlayPressed()
     {
-        SceneManager.ChangeScence(gameScene);
+        GetTree().Paused = true;
+        Transitions.StartTransition(Transitions.TransitionBlackFade, 0.2f, () =>
+       {
+           GetTree().Paused = false;
+           GetTree().ChangeSceneTo(Scenes.Game);
+           Transitions.EndTransition(Transitions.TransitionPixel);
+       });
     }
 
     [TroughtEditor]

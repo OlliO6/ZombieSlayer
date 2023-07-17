@@ -43,7 +43,16 @@ public class PauseMenu : Control
     }
 
     [TroughtEditor]
-    private void OnMenuButtonPressed() => SceneManager.LoadMenu();
+    private void OnMenuButtonPressed()
+    {
+        GetTree().Paused = true;
+        Transitions.StartTransition(Transitions.TransitionPixel, () =>
+       {
+           GetTree().ChangeSceneTo(Scenes.Menu);
+           Transitions.EndTransition(Transitions.TransitionPixel);
+           GetTree().Paused = false;
+       });
+    }
 
     [TroughtEditor]
     private void OnInventoryButtonPressed()

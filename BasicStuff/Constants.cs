@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Godot;
 
-[Tool]
 public static class Icons
 {
     /// <summary>Every icon should be 16 by 16 pixels.</summary>
@@ -21,4 +20,13 @@ public static class Icons
         // Other Pickups
         { GD.Load<PackedScene>("res://Items/Health/HealthPickup.tscn"), GD.Load<Texture>("res://Items/Health/HealthIcon.png") }
     };
+}
+
+public static class Scenes
+{
+    public const string MenuPath = "res://UI/Menu/Menu.tscn";
+    public const string GamePath = "res://Game/Game.tscn";
+
+    public static PackedScene Menu = GD.Load<PackedScene>(MenuPath);
+    public static PackedScene Game = GD.Load<PackedScene>(GamePath);
 }
