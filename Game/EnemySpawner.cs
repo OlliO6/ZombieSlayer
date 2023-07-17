@@ -31,7 +31,6 @@ public class EnemySpawner : Node
         {
             difficultyIndex = value;
             DifficultyLevel newLevel = GetNodeOrNull<DifficultyLevel>($"Level{difficultyIndex}");
-            Debug.LogU(this, newLevel is null);
             if (newLevel is null) return;
             difficultyLevel = newLevel;
             timeToNextSpawn = difficultyLevel.GetTimeToNextSpawn();
@@ -49,11 +48,12 @@ public class EnemySpawner : Node
     {
         DifficultyIndex = to;
         Debug.Log(this, $"Difficulty changed to {difficultyLevel.Name}");
+        timeToNextSpawn = Player.currentPlayer.Leveling.CurrentLevelNode.stopEnemySpawningTime;
     }
 
     public override void _Process(float delta)
     {
-        if (difficultyLevel is null || (enemyCount >= difficultyLevel.Instantiater.maxEnemyCount && difficultyLevel.Instantiater.maxEnemyCount is not -1)) return;
+        if (difficultyLevel is null || (enemyCount >= difficultyLevel.Instantiater.maxEnemyCount && difficultyLevel.Instantiater.maxEnemyCount != -1)) return;
 
         timeToNextSpawn -= delta;
 

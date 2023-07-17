@@ -14,9 +14,12 @@ public class LevelingSystem : Node
 
     [Export] public int startLevelIndex = 0;
     [Export] public float xpRaiseOneLvlTweenTime = 0.15f;
+    [Export] public int xpToLevelUpWhenReachedMaxLevel = 100;
 
     public int xpToNextLevel;
     public float interpolatedXp;
+    public bool reachedMaxLevel = false;
+
     private SceneTreeTween tween;
     private int currentLevel;
     private int currentXp;
@@ -46,6 +49,13 @@ public class LevelingSystem : Node
         get => currentLevel;
         private set
         {
+            if (value >= Levels.GetChildCount())
+            {
+                reachedMaxLevel = true;
+                xpToNextLevel += xpToLevelUpWhenReachedMaxLevel;
+                return;
+            }
+
             currentLevel = value;
 
             xpToNextLevel = Levels.GetChildren<Level>()
@@ -56,7 +66,7 @@ public class LevelingSystem : Node
 
     private void SetXp(int to)
     {
-        if (to == currentXp) return;
+        if (to == currentXp || reachedMaxLevel) return;
 
         currentXp = to;
         StartTween();
@@ -87,14 +97,14 @@ public class LevelingSystem : Node
     {
         CurrentLevelIndex++;
         AnimationPlayer.Play("LevelUp");
-        if (CurrentLevelIndex >= Levels.GetChildCount()) return;
 
         ToSignal(CurrentLevelNode, nameof(Level.LevelReached)).OnCompleted(() =>
         {
             EmitSignal(nameof(LevelChanged));
             EmitSignal(nameof(LevelUp));
         });
-        CurrentLevelNode.ReachLevel();
+        if (!reachedMaxLevel)
+            CurrentLevelNode.ReachLevel();
         StartTween();
     }
 

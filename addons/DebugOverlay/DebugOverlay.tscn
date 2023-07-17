@@ -133,15 +133,15 @@ custom_constants/separation = 0
 [node name="FPSLabel" type="Label" parent="MarginContainer/HBoxContainer/DebugLabels"]
 margin_top = -1.0
 margin_right = 252.0
-margin_bottom = 3.13333
-text = "FPS: 144"
+margin_bottom = 3.2
+text = "FPS: 60"
 align = 1
 script = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_left = 2.0
-margin_top = 142.0
-margin_right = 2.0
+margin_top = 130.0
+margin_right = 73.0
 margin_bottom = 142.0
 mouse_filter = 2
 size_flags_horizontal = 0
@@ -149,9 +149,13 @@ size_flags_vertical = 8
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer"]
 visible = false
+margin_right = 71.0
+margin_bottom = 12.0
 color = Color( 0, 0, 0, 0.392157 )
 
 [node name="Logs" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+margin_right = 71.0
+margin_bottom = 12.0
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 10
@@ -445,7 +449,7 @@ margin_bottom = 21.0
 
 [node name="BackButton" type="Button" parent="Console/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 43.2
-margin_bottom = 21.1333
+margin_bottom = 21.2
 text = "Back"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Console/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -457,7 +461,7 @@ size_flags_horizontal = 6
 [node name="HideCommonButton" type="Button" parent="Console/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
 margin_left = -0.600014
 margin_right = 113.0
-margin_bottom = 21.1333
+margin_bottom = 21.2
 size_flags_horizontal = 10
 toggle_mode = true
 pressed = true
@@ -466,7 +470,7 @@ text = "Hide Common "
 [node name="HideTimeButton" type="Button" parent="Console/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
 margin_left = 116.0
 margin_right = 203.2
-margin_bottom = 21.1333
+margin_bottom = 21.2
 size_flags_horizontal = 6
 toggle_mode = true
 pressed = true
@@ -475,7 +479,7 @@ text = "Hide Time"
 [node name="ClearButton" type="Button" parent="Console/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 652.0
 margin_right = 704.0
-margin_bottom = 21.1333
+margin_bottom = 21.2
 size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.0
 text = "Clear"
@@ -495,88 +499,32 @@ custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 0.529412, 0.596078, 0.647059, 1 )
 bbcode_enabled = true
 bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint]
-[tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Menu[/tint]
-[tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded Game[/tint]
+[tint r=0.88 g=1 b=1 a=1]OptionsManager: Saving Options[/tint]
 [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
-[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started ShopPosition[/tint]
-[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started UpgradeDices[/tint]
-[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started Health[/tint]
-[tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]EnemySpawner: False[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 5: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 6: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 7: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 8: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 9: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]EnemySpawner: True[/tint]
-[tint r=0.88 g=1 b=1 a=1]ShopMenu: Rob got robbed.[/tint]
-[tint r=0.88 g=1 b=1 a=1]Shop: Start Fight[/tint]
-[tint r=1 g=0.41 b=0.71 a=1]SceneManager: Loaded FirstRobFight[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]RobFight: Fight finished[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]RobFight: Fight finished[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started Health[/tint]
-[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started UpgradeDices[/tint]
-[tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
-[tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
-[tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
-SceneManager: Loaded Menu
-SceneManager: Loaded Game
+OptionsManager: Saving Options
 ExplanationsManager: Started MoveAndAttack
 Level 0: Reached
-EnemySpawner: False
 Level 1: Reached
-EnemySpawner: False
 Level 2: Reached
-EnemySpawner: True
 Level 3: Reached
-EnemySpawner: True
-ExplanationsManager: Started ShopPosition
-ExplanationsManager: Started UpgradeDices
-ExplanationsManager: Started Health
-ShopMenu: Selled Dice
 Level 4: Reached
-EnemySpawner: False
 Level 5: Reached
-EnemySpawner: True
 Level 6: Reached
-EnemySpawner: True
 Level 7: Reached
-EnemySpawner: True
 Level 8: Reached
-EnemySpawner: True
 Level 9: Reached
-EnemySpawner: True
-ShopMenu: Rob got robbed.
-Shop: Start Fight
-SceneManager: Loaded FirstRobFight
-Level 0: Reached
-RobFight: Fight finished
-Level 1: Reached
-RobFight: Fight finished
-Level 2: Reached
-ExplanationsManager: Started Health
-ExplanationsManager: Started UpgradeDices
-Player: Got 1 damage
-Player: Got 1 damage
-Player: Got 1 damage
 "
 scroll_following = true
 selection_enabled = true
@@ -591,11 +539,13 @@ margin_bottom = 425.0
 [node name="LineEdit" type="LineEdit" parent="Console/MarginContainer/VBoxContainer"]
 margin_top = 429.0
 margin_right = 704.0
-margin_bottom = 456.133
+margin_bottom = 456.2
 size_flags_stretch_ratio = 0.19
+text = "LVLUP"
 clear_button_enabled = true
 placeholder_text = "Command Line"
 caret_blink = true
+caret_position = 5
 
 [node name="Commands" type="Node" parent="Console"]
 script = ExtResource( 10 )

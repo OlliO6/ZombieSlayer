@@ -121,7 +121,7 @@ public class Shop : Area2D, IInteractable
         });
     }
 
-    private async void StartFigth()
+    private void StartFigth()
     {
         Debug.LogU(this, "Start Fight");
         GetTree().Paused = true;

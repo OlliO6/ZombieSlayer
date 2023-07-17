@@ -13,6 +13,7 @@ public class Level : Node
     public int xpToLevelUp = 100;
     public string explanation = "";
     public bool noMenu;
+    public float stopEnemySpawningTime = 15;
 
     private static PackedScene lvlUpDispScene = GD.Load<PackedScene>("res://UI/Leveling/LevelUpDisplay.tscn");
 

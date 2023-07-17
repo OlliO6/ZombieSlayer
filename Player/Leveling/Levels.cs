@@ -19,6 +19,7 @@ public class Levels : Node
                 xpToLevelUp = (int)lvlData.GetOrDefault<float>("XpToLevelUp", 0),
                 explanation = lvlData.GetOrDefault<string>("Explanation", string.Empty),
                 noMenu = lvlData.GetOrDefault<bool>("NoMenu", false),
+                stopEnemySpawningTime = lvlData.GetOrDefault<float>("StopEnemySpawningTime", 15),
                 Name = $"Level {i}"
             };
 
