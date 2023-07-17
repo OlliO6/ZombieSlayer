@@ -80,7 +80,10 @@ public class Levels : Node
             case nameof(MusicChange):
                 return new MusicChange()
                 {
-
+                    song = data.Get<AudioStream>("Song"),
+                    fadeOutTime = data.GetOrDefault<float>("FadeOutTime", 0.5f),
+                    fadeInTime = data.GetOrDefault<float>("FadeInTime", 0f),
+                    delay = data.GetOrDefault<float>("Delay", 0f),
                 };
 
             default:

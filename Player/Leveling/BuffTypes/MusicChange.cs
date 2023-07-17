@@ -5,8 +5,8 @@ using Godot;
 
 public class MusicChange : LevelBuff
 {
-    [Export] public AudioStream song;
-    [Export] public float fadeOutTime = 0.5f, delay = 0, fadeInTime = 0;
+    public AudioStream song;
+    public float fadeOutTime = 0.5f, delay = 0, fadeInTime = 0;
 
     public override void Apply()
     {

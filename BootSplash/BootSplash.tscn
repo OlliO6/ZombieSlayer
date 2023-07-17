@@ -239,7 +239,7 @@ theme = ExtResource( 2 )
 use_parent_material = true
 frames = SubResource( 17 )
 animation = "Glow"
-frame = 19
+frame = 12
 playing = true
 centered = false
 

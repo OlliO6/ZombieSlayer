@@ -120,7 +120,16 @@
         "XpToLevelUp": 90,
         "Buffs": [
             {
-
+                "Type": "MusicChange",
+                "Song": "Load: res://Music/GameSongLvl10.wav"
+            },
+            {
+                "Type": "JustText",
+                "Text": "Reached Max Level!"
+            },
+            {
+                "Type": "JustText",
+                "Text": "End of early acces version"
             }
         ]
     }
