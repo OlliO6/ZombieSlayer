@@ -266,7 +266,7 @@ vec4 GetColor(vec2 uv, sampler2D text , vec2 pixel_size)
 
         if (@event is InputEventKey keyInput)
         {
-            if (keyInput.Pressed && keyInput.Scancode is (uint)KeyList.F11)
+            if (keyInput.Pressed && keyInput.Scancode is (uint)KeyList.F11 or (uint)KeyList.F)
             {
                 ToggleFullscreen();
             }
