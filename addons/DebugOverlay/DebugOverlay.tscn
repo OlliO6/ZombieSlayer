@@ -134,7 +134,7 @@ custom_constants/separation = 0
 margin_top = -1.0
 margin_right = 252.0
 margin_bottom = 3.13333
-text = "FPS: 60"
+text = "FPS: 61"
 align = 1
 script = ExtResource( 4 )
 
@@ -407,7 +407,7 @@ custom_constants/margin_top = 50
 custom_constants/margin_left = 150
 custom_constants/margin_bottom = 50
 script = ExtResource( 7 )
-removeCommonStuff = true
+removeCommonStuff = false
 showTime = false
 _output = NodePath("MarginContainer/VBoxContainer/RichTextLabel")
 _CommandLine = NodePath("MarginContainer/VBoxContainer/LineEdit")
@@ -460,7 +460,6 @@ margin_right = 113.0
 margin_bottom = 21.1333
 size_flags_horizontal = 10
 toggle_mode = true
-pressed = true
 text = "Hide Common "
 
 [node name="HideTimeButton" type="Button" parent="Console/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
@@ -496,33 +495,23 @@ custom_colors/selection_color = Color( 0.529412, 0.596078, 0.647059, 1 )
 bbcode_enabled = true
 bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint]
 [tint r=0.88 g=1 b=1 a=1]OptionsManager: Saving Options[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to [/tint]
 [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
+[tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Started[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
-[tint r=0.88 g=1 b=1 a=1]OptionsManager: Saving Options[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 5: Reached[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 6: Reached[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 7: Reached[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 8: Reached[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 9: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
 OptionsManager: Saving Options
+WeaponSwitcher: Switched weapon to 
 ExplanationsManager: Started MoveAndAttack
+MoveAndAttack: Explanation Started
 Level 0: Reached
-OptionsManager: Saving Options
+EnemySpawner: Difficulty changed to Level0
 Level 1: Reached
-Level 2: Reached
-Level 3: Reached
-Level 4: Reached
-Level 5: Reached
-Level 6: Reached
-Level 7: Reached
-Level 8: Reached
-Level 9: Reached
+EnemySpawner: Difficulty changed to Level1
 "
 scroll_following = true
 selection_enabled = true

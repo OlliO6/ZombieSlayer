@@ -1,3 +1,4 @@
+#if TOOLS
 namespace RandomSceneNodes;
 using Godot;
 
@@ -15,3 +16,5 @@ public class plugin : EditorPlugin
         RemoveCustomType("RandomScene");
     }
 }
+
+#endif

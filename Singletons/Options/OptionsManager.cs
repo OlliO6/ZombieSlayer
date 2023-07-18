@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Additions;
 using Godot;
@@ -95,6 +96,12 @@ public class OptionsManager : Node
         UpdateOptions();
         UpdateShaders();
     }
+
+    public override void _Ready()
+    {
+        PauseMode = PauseModeEnum.Process;
+    }
+
     public override void _ExitTree()
     {
         SaveOptions();
@@ -252,5 +259,23 @@ vec4 GetColor(vec2 uv, sampler2D text , vec2 pixel_size)
 
             shader.Code = code;
         }
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+
+        if (@event is InputEventKey keyInput)
+        {
+            if (keyInput.Pressed && keyInput.Scancode is (uint)KeyList.F11)
+            {
+                ToggleFullscreen();
+            }
+        }
+    }
+
+    private void ToggleFullscreen()
+    {
+        IsFullscreen = !OS.WindowFullscreen;
+        UpdateOptions();
     }
 }

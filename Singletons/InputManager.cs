@@ -74,14 +74,6 @@ public class InputManager : Node
         InvokeIfActionPressed(@event, "ui_cancel", UICancelPressed, true);
         InvokeIfActionPressed(@event, "Inventory", InventoryPressed, true);
         InvokeIfActionPressed(@event, "DiceMenu", DiceMenuPressed, true);
-
-        if (@event is InputEventKey keyInput)
-        {
-            if (keyInput.Pressed && keyInput.Scancode is (uint)KeyList.F11)
-            {
-                ToggleFullscreen();
-            }
-        }
     }
 
     private bool InvokeIfActionPressed(InputEvent @event, string actionName, Action eventAction, bool ignorePausing = false)
@@ -92,11 +84,5 @@ public class InputManager : Node
             return true;
         }
         return false;
-    }
-
-    private void ToggleFullscreen()
-    {
-        OptionsManager.IsFullscreen = !OptionsManager.IsFullscreen;
-        OptionsManager.UpdateOptions();
     }
 }

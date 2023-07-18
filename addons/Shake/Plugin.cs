@@ -1,3 +1,4 @@
+#if TOOLS
 using System;
 using Godot;
 
@@ -14,3 +15,5 @@ public class Plugin : EditorPlugin
         RemoveCustomType(nameof(PlayerCamShakeInducer));
     }
 }
+
+#endif
