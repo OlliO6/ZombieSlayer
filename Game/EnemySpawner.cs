@@ -16,6 +16,8 @@ public class EnemySpawner : Node
 
     #endregion
 
+    public List<IEnemy> enemies = new List<IEnemy>(10);
+
     public DifficultyLevel difficultyLevel;
     private int enemyCount, difficultyIndex;
 
@@ -69,10 +71,14 @@ public class EnemySpawner : Node
         enemyCount++;
 
         IEnemy enemy = difficultyLevel.Instantiater.Instantiate<IEnemy>();
+        enemies.Add(enemy);
         enemy.EnemyDied += OnEnemyDied;
 
-        if (enemy is not Node enemyNode) return;
+        if (enemy is not Node enemyNode)
+            return;
+
         GetParent().AddChild(enemyNode);
+        enemyNode.Connect("tree_exited", this, nameof(OnEnemyExitTree), new(enemyNode));
 
         if (enemy is Node2D enemy2D)
         {
@@ -93,5 +99,15 @@ public class EnemySpawner : Node
     private void OnEnemyDied(IEnemy enemy)
     {
         enemyCount--;
+        enemies.Remove(enemy);
+    }
+
+    private void OnEnemyExitTree(Node node)
+    {
+        if (node is not IEnemy enemy || !enemies.Contains(enemy))
+            return;
+
+        enemyCount--;
+        enemies.Remove(enemy);
     }
 }
