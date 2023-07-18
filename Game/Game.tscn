@@ -285,9 +285,9 @@ script = ExtResource( 8 )
 [node name="BombWave" type="Node" parent="EnemySpawner/Level4"]
 script = ExtResource( 9 )
 Forever = false
-freeAfter = 10
-maxEnemyCount = 4
-timeBetweenSpawnignRange = Vector2( 0.5, 1.5 )
+freeAfter = 5
+maxEnemyCount = 5
+timeBetweenSpawnignRange = Vector2( 2, 1.5 )
 
 [node name="Zombie" type="Node" parent="EnemySpawner/Level4/BombWave"]
 script = ExtResource( 10 )
@@ -296,11 +296,11 @@ scene = ExtResource( 6 )
 [node name="MouseBomb" type="Node" parent="EnemySpawner/Level4/BombWave"]
 script = ExtResource( 10 )
 scene = ExtResource( 17 )
-priority = 5
+priority = 7
 
 [node name="Instantiater2" type="Node" parent="EnemySpawner/Level4"]
 script = ExtResource( 9 )
-maxEnemyCount = 5
+maxEnemyCount = 4
 timeBetweenSpawnignRange = Vector2( 1, 3 )
 
 [node name="Zombie" type="Node" parent="EnemySpawner/Level4/Instantiater2"]
@@ -309,6 +309,40 @@ scene = ExtResource( 6 )
 priority = 3
 
 [node name="MouseBomb" type="Node" parent="EnemySpawner/Level4/Instantiater2"]
+script = ExtResource( 10 )
+scene = ExtResource( 17 )
+
+[node name="Level8" type="Node" parent="EnemySpawner"]
+script = ExtResource( 8 )
+
+[node name="Instantiater" type="Node" parent="EnemySpawner/Level8"]
+script = ExtResource( 9 )
+maxEnemyCount = 6
+timeBetweenSpawnignRange = Vector2( 1, 3 )
+
+[node name="Zombie" type="Node" parent="EnemySpawner/Level8/Instantiater"]
+script = ExtResource( 10 )
+scene = ExtResource( 6 )
+priority = 3
+
+[node name="MouseBomb" type="Node" parent="EnemySpawner/Level8/Instantiater"]
+script = ExtResource( 10 )
+scene = ExtResource( 17 )
+
+[node name="Level10" type="Node" parent="EnemySpawner"]
+script = ExtResource( 8 )
+
+[node name="Instantiater" type="Node" parent="EnemySpawner/Level10"]
+script = ExtResource( 9 )
+maxEnemyCount = 10
+timeBetweenSpawnignRange = Vector2( 0.5, 2 )
+
+[node name="Zombie" type="Node" parent="EnemySpawner/Level10/Instantiater"]
+script = ExtResource( 10 )
+scene = ExtResource( 6 )
+priority = 3
+
+[node name="MouseBomb" type="Node" parent="EnemySpawner/Level10/Instantiater"]
 script = ExtResource( 10 )
 scene = ExtResource( 17 )
 

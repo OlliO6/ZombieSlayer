@@ -6,15 +6,9 @@ using Godot;
 
 public class EnemySpawner : Node
 {
-    [Signal] public delegate void WaveStarted();
-
-    #region SpawnPositionsHolder Reference
-
     private Node storerForSpawnPositionsHolder;
     public Node SpawnPositionsHolder => this.LazyGetNode(ref storerForSpawnPositionsHolder, _SpawnPositionsHolder);
     [Export] private NodePath _SpawnPositionsHolder = "SpawnPositionsHolder";
-
-    #endregion
 
     public List<IEnemy> enemies = new List<IEnemy>(10);
 
