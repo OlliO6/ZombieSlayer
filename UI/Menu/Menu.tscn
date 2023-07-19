@@ -13,19 +13,19 @@
 script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 80.0
+margin_left = 55.236
 margin_top = 11.0
-margin_right = 184.0
+margin_right = 207.236
 margin_bottom = 25.0
 theme = ExtResource( 1 )
-text = "Zombie Slayer"
+text = "Zombie Slayer (WIP)"
 
 [node name="Dekoration" type="Control" parent="."]
 material = ExtResource( 9 )
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Sprite" type="Sprite" parent="Dekoration"]
+[node name="Sprite" type="Sprite" parent="Dekoration"] 
 use_parent_material = true
 position = Vector2( 49, 74 )
 texture = ExtResource( 7 )

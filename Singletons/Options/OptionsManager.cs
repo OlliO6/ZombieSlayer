@@ -90,16 +90,16 @@ public class OptionsManager : Node
     public override void _EnterTree()
     {
         instance = this;
-
-        SetToUserFile();
-        SaveOptions();
-        UpdateOptions();
-        UpdateShaders();
     }
 
     public override void _Ready()
     {
         PauseMode = PauseModeEnum.Process;
+
+        SetToUserFile();
+        SaveOptions();
+        UpdateOptions();
+        UpdateShaders();
     }
 
     public override void _ExitTree()

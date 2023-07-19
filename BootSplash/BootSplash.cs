@@ -13,6 +13,7 @@ public class BootSplash : CanvasLayer
     {
         Transitions.StartTransition(Transitions.TransitionPixel, () =>
         {
+            OptionsManager.IsFullscreen = OptionsManager.IsFullscreen;
             GetTree().ChangeSceneTo(Scenes.Menu);
             Transitions.EndTransition(Transitions.TransitionPixel);
         });
