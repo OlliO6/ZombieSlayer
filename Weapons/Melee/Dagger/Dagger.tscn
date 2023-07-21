@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Weapons/Melee/MeleeBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Weapons/Melee/Dagger/Dagger.png" type="Texture" id=2]
 [ext_resource path="res://Sounds/SwordSwing.wav" type="AudioStream" id=3]
+[ext_resource path="res://Weapons/WeaponAbility.cs" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.54422, 6.53734 )
@@ -232,5 +233,8 @@ anims/Swing = SubResource( 3 )
 stream = SubResource( 2 )
 volume_db = -5.0
 pitch_scale = 1.24
+
+[node name="Node2D" type="Node2D" parent="." index="3"]
+script = ExtResource( 4 )
 
 [editable path="Sprite/DamageDealer"]

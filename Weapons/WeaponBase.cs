@@ -1,6 +1,7 @@
 using System;
 using Additions;
 using Godot;
+using Godot.Collections;
 
 public abstract class WeaponBase : Node2D
 {
@@ -8,6 +9,8 @@ public abstract class WeaponBase : Node2D
     [Signal] public delegate void AttackFinished();
 
     [Export] public string weaponName = "";
+
+    public bool hasAbility;
 
     public Godot.Collections.Dictionary data;
     public PackedScene weaponPickupScene;
@@ -21,8 +24,9 @@ public abstract class WeaponBase : Node2D
 
     protected virtual void ApplyData()
     {
-        data = Database.weaponData[weaponName] as Godot.Collections.Dictionary;
+        data = Database.weaponData[weaponName] as Dictionary;
         weaponPickupScene = data.Get<PackedScene>("PickupScene");
+        var ability = data.GetOrDefault<Dictionary>("Ability", null);
     }
 
     public override void _Ready()

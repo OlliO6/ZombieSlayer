@@ -10,6 +10,8 @@ public class InputManager : Node
 
     public static event Action AttackInputStarted;
     public static event Action AttackInputEnded;
+    public static event Action AbilityInputStarted;
+    public static event Action AbilityInput;
     public static event Action DropWeaponPressed;
     public static event Action UICancelPressed;
     public static event Action InventoryPressed;
@@ -65,6 +67,18 @@ public class InputManager : Node
 
             attackInput = false;
             AttackInputEnded?.Invoke();
+            return;
+        }
+
+        if (@event.IsAction("Ability"))
+        {
+            if (@event.IsPressed())
+            {
+                AbilityInputStarted?.Invoke();
+                return;
+            }
+
+            AbilityInput?.Invoke();
             return;
         }
 

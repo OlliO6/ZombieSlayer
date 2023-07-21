@@ -73,6 +73,8 @@ public class WeaponStats : Control
         {
         }
 
+
+
         AddLabels();
 
         void AddGunBaseStats(ShootingWeaponBase gun)
@@ -96,8 +98,6 @@ public class WeaponStats : Control
             tooltips.Add("DPS", "Best possible damage per second");
         }
 
-
-
         void RemoveLabels()
         {
             foreach (Label label in StatLabelContainer.GetChildren())
@@ -114,9 +114,7 @@ public class WeaponStats : Control
                     MouseFilter = MouseFilterEnum.Stop,
                     HintTooltip = tooltips.ContainsKey(stat.Key) ? tooltips[stat.Key] : ""
                 };
-
                 label.Set("custom_fonts/font", font);
-
                 StatLabelContainer.AddChild(label);
             }
         }
