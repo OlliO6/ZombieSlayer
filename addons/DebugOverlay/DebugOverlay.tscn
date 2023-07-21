@@ -97,7 +97,7 @@ script = ExtResource( 2 )
 pause_mode = 2
 layer = 100
 script = ExtResource( 3 )
-IsShowingFps = true
+IsShowingFps = false
 turnOffCommonLogs = false
 removeNameUniqeness = true
 _Labels = NodePath("MarginContainer/HBoxContainer/DebugLabels")
@@ -131,17 +131,18 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="FPSLabel" type="Label" parent="MarginContainer/HBoxContainer/DebugLabels"]
+visible = false
 margin_top = -1.0
 margin_right = 252.0
-margin_bottom = 3.13333
+margin_bottom = 3.02471
 text = "FPS: 60"
 align = 1
 script = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_left = 2.0
-margin_top = 142.0
-margin_right = 2.0
+margin_top = 138.0
+margin_right = 52.0
 margin_bottom = 142.0
 mouse_filter = 2
 size_flags_horizontal = 0
@@ -149,9 +150,13 @@ size_flags_vertical = 8
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer"]
 visible = false
+margin_right = 50.0
+margin_bottom = 4.0
 color = Color( 0, 0, 0, 0.392157 )
 
 [node name="Logs" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+margin_right = 50.0
+margin_bottom = 4.0
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 10
@@ -172,7 +177,7 @@ _ExitButton = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContain
 _PrintCommonLogsToggle = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer/PrintCommonToggle")
 _NoUniqueNamesToggle = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer/NoUniqueNamesToggle")
 _ShowFpsToggle = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer/ShowFpsToggle")
-screenshotDir = "C:\\Users\\olive\\Pictures\\Screenshots/ZombieSlayer"
+screenshotDir = "C:/Users/olive/GodotProjects/ZombieSlayer/Promo/Screenshots"
 dateInScreenShot = true
 
 [node name="ColorRect" type="ColorRect" parent="DebugMenu"]
@@ -201,21 +206,21 @@ margin_right = 992.0
 margin_bottom = 95.0
 
 [node name="AudioServerControl" type="VBoxContainer" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_right = 725.0
+margin_right = 726.0
 margin_bottom = 95.0
 size_flags_horizontal = 3
 script = ExtResource( 9 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 729.0
-margin_right = 867.0
+margin_left = 730.0
+margin_right = 868.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 size_flags_vertical = 0
 custom_constants/separation = 0
 
 [node name="PhysicFrameButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
-margin_left = -0.800011
+margin_left = -0.449173
 margin_right = 104.0
 margin_bottom = 32.0
 hint_tooltip = "Continue one physics frame."
@@ -224,7 +229,7 @@ text = "Physic Step"
 
 [node name="10xPhysicsButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
 margin_left = 104.0
-margin_right = 138.4
+margin_right = 138.304
 margin_bottom = 32.0
 hint_tooltip = "Continue one frame."
 size_flags_horizontal = 2
@@ -233,7 +238,7 @@ action_mode = 0
 text = "10x"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 871.0
+margin_left = 872.0
 margin_right = 992.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
@@ -241,8 +246,8 @@ size_flags_vertical = 0
 custom_constants/separation = 0
 
 [node name="OneFrameButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
-margin_left = -0.200005
-margin_right = 87.0
+margin_left = -0.912964
+margin_right = 86.0
 margin_bottom = 32.0
 hint_tooltip = "Continue one frame."
 size_flags_horizontal = 10
@@ -251,8 +256,8 @@ action_mode = 0
 text = "Idle Step"
 
 [node name="10xIdleButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
-margin_left = 87.0
-margin_right = 121.4
+margin_left = 86.0
+margin_right = 120.304
 margin_bottom = 32.0
 hint_tooltip = "Continue one frame."
 size_flags_horizontal = 2
@@ -267,12 +272,12 @@ margin_bottom = 544.0
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2"]
-margin_right = 195.0
+margin_right = 193.0
 margin_bottom = 433.0
 size_flags_vertical = 3
 
 [node name="ExitButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
-margin_right = 195.0
+margin_right = 193.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = ExtResource( 6 )
@@ -281,7 +286,7 @@ text = "Exit Overlay"
 
 [node name="PrintStrayButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
 margin_top = 54.0
-margin_right = 195.0
+margin_right = 193.711
 margin_bottom = 104.0
 rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = ExtResource( 6 )
@@ -290,38 +295,37 @@ text = "Print Stray Nodes"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
 margin_top = 235.0
-margin_right = 195.0
+margin_right = 193.0
 margin_bottom = 306.0
 size_flags_vertical = 6
 
 [node name="ShowFpsToggle" type="CheckButton" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer"]
-margin_right = 195.0
-margin_bottom = 21.2
-pressed = true
+margin_right = 193.0
+margin_bottom = 21.0988
 text = "Show fps"
 
 [node name="PrintCommonToggle" type="CheckButton" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer"]
 margin_top = 25.0
-margin_right = 195.0
-margin_bottom = 46.2
+margin_right = 193.0
+margin_bottom = 46.0988
 pressed = true
 text = "Common logs"
 
 [node name="NoUniqueNamesToggle" type="CheckButton" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/VBoxContainer"]
 margin_top = 50.0
-margin_right = 195.0
-margin_bottom = 71.2
+margin_right = 193.0
+margin_bottom = 71.0988
 hint_tooltip = "If on the names of the Objects logging and watched will be made ununique."
 pressed = true
 text = "No unique names"
 
 [node name="VSeparator" type="VSeparator" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 199.0
-margin_right = 203.0
+margin_left = 197.0
+margin_right = 201.0
 margin_bottom = 433.0
 
 [node name="MarginContainer" type="MarginContainer" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 207.0
+margin_left = 205.0
 margin_right = 992.0
 margin_bottom = 433.0
 size_flags_horizontal = 3
@@ -331,14 +335,14 @@ custom_constants/margin_left = 8
 [node name="HBoxContainer" type="HBoxContainer" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
 margin_left = 8.0
 margin_top = 166.0
-margin_right = 777.0
+margin_right = 779.0
 margin_bottom = 266.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_vertical = 6
 custom_constants/separation = 12
 
 [node name="ConsolButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
-margin_right = 219.0
+margin_right = 220.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
@@ -347,22 +351,22 @@ custom_fonts/font = ExtResource( 6 )
 text = "Console"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
-margin_left = 231.0
-margin_right = 564.0
+margin_left = 232.0
+margin_right = 565.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="ScreenshotButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer"]
-margin_right = 248.0
+margin_right = 249.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 6 )
 text = "Screenshot"
 
 [node name="ScreenshotIUButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer"]
-margin_left = 248.0
-margin_right = 333.0
+margin_left = 249.0
+margin_right = 333.469
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.29
@@ -370,23 +374,23 @@ custom_fonts/font = ExtResource( 6 )
 text = "With UI"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
-margin_left = 576.0
-margin_right = 769.0
+margin_left = 577.0
+margin_right = 771.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.58
 custom_constants/separation = 0
 
 [node name="QuitButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer2"]
-margin_right = 119.0
+margin_right = 120.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 6 )
 text = "Quit Game"
 
 [node name="CrashButton" type="Button" parent="DebugMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/HBoxContainer2"]
-margin_left = 119.0
-margin_right = 193.0
+margin_left = 120.0
+margin_right = 194.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.61
@@ -444,37 +448,37 @@ margin_right = 704.0
 margin_bottom = 21.0
 
 [node name="BackButton" type="Button" parent="Console/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_right = 43.2
-margin_bottom = 21.1333
+margin_right = 43.0724
+margin_bottom = 21.0988
 text = "Back"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Console/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 245.0
+margin_left = 246.0
 margin_right = 449.0
 margin_bottom = 21.0
 size_flags_horizontal = 6
 
 [node name="HideCommonButton" type="Button" parent="Console/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
-margin_left = -0.600014
+margin_left = -0.217278
 margin_right = 113.0
-margin_bottom = 21.1333
+margin_bottom = 21.0988
 size_flags_horizontal = 10
 toggle_mode = true
 text = "Hide Common "
 
 [node name="HideTimeButton" type="Button" parent="Console/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
 margin_left = 116.0
-margin_right = 203.2
-margin_bottom = 21.1333
+margin_right = 202.913
+margin_bottom = 21.0988
 size_flags_horizontal = 6
 toggle_mode = true
 pressed = true
 text = "Hide Time"
 
 [node name="ClearButton" type="Button" parent="Console/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 652.0
+margin_left = 652.159
 margin_right = 704.0
-margin_bottom = 21.1333
+margin_bottom = 21.0988
 size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.0
 text = "Clear"
@@ -502,6 +506,146 @@ bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint
 [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
 [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 5: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 6: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 7: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 8: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level8[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 9: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level8[/tint]
+[tint r=1 g=1 b=1 a=1]Node2D: Weapon Evolutions Unlocked.[/tint]
+[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started ShopPosition[/tint]
+[tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Ended[/tint]
+[tint r=1 g=1 b=1 a=1]ShopPosition: Explanation Started[/tint]
+[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
+[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started UpgradeDices[/tint]
+[tint r=1 g=1 b=1 a=1]ShopPosition: Explanation Ended[/tint]
+[tint r=1 g=1 b=1 a=1]UpgradeDices: Explanation Started[/tint]
+[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started Health[/tint]
+[tint r=1 g=1 b=1 a=1]UpgradeDices: Explanation Ended[/tint]
+[tint r=1 g=1 b=1 a=1]Health: Explanation Started[/tint]
+[tint r=1 g=1 b=1 a=1]Health: Explanation Ended[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Ended[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=0.88 g=1 b=1 a=1]WeaponSwitcher: Added weapon Pistol[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
+[tint r=0.88 g=1 b=1 a=1]PistolPickup: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]DialogPlayer: FirstMeeting started[/tint]
+[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
+[tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
+[tint r=1 g=0.84 b=0 a=1]Gave 120 coins to player[/tint]
+[tint r=1 g=1 b=1 a=1]DialogPlayer: FirstMeeting ended[/tint]
+[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
+[tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
+[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
+[tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
+[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
+[tint r=0.88 g=1 b=1 a=1]ShopMenu: Rob got robbed.[/tint]
+[tint r=1 g=1 b=1 a=1]DialogPlayer: Robbery started[/tint]
+[tint r=0.88 g=1 b=1 a=1]Shop: Start Fight[/tint]
+[tint r=1 g=1 b=1 a=1]DialogPlayer: Robbery ended[/tint]
+[tint r=0.88 g=1 b=1 a=1]DicePickup: False[/tint]
+[tint r=0.88 g=1 b=1 a=1]WeaponSwitcher: Added weapon Dolphin[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
+[tint r=0.88 g=1 b=1 a=1]DolphinPickup: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
+[tint r=0.88 g=1 b=1 a=1]DicePickup: Collected[/tint]
+[tint r=0 g=1 b=1 a=1]DamageUpgrade: Buff added[/tint]
+[tint r=1 g=1 b=1 a=1]DamagePickup: Collected[/tint]
+[tint r=0.88 g=1 b=1 a=1]WeaponSwitcher: Added weapon Rifle[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dolphin[/tint]
+[tint r=0.88 g=1 b=1 a=1]RiflePickup: Collected[/tint]
+[tint r=0.88 g=1 b=1 a=1]WeaponSwitcher: Added weapon Sword[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Rifle[/tint]
+[tint r=0.88 g=1 b=1 a=1]SwordPickup: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Sword[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dolphin[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=0.75 g=0.75 b=0.75 a=1][shake]Failed executing[/shake][/tint] [tint r=0.78 g=0.08 b=0.52 a=1]'givecoins'[/tint][tint r=0.75 g=0.75 b=0.75 a=1]. Use it like this: [/tint]givecoins int
+[tint r=0.75 g=0.75 b=0.75 a=1][shake]Failed executing[/shake][/tint] [tint r=0.78 g=0.08 b=0.52 a=1]'givecoins'[/tint][tint r=0.75 g=0.75 b=0.75 a=1]. Use it like this: [/tint]givecoins int
+[tint r=1 g=0.84 b=0 a=1]Gave 120 coins to player[/tint]
+[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
+[tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
+[tint r=1 g=0.84 b=0 a=1]Gave 120 coins to player[/tint]
+[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
+[tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=0.88 g=1 b=1 a=1]DicePickup: False[/tint]
+[tint r=0.88 g=1 b=1 a=1]DicePickup: False[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 10: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level10[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=0 g=1 b=1 a=1]MovementSpeedUpgrade: Buff added[/tint]
+[tint r=1 g=1 b=1 a=1]SpeedPickup: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
+[tint r=0.88 g=1 b=1 a=1]DicePickup: Collected[/tint]
+[tint r=0 g=1 b=1 a=1]MovementSpeedUpgrade: Buff added[/tint]
+[tint r=1 g=1 b=1 a=1]SpeedPickup: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
+[tint r=0.88 g=1 b=1 a=1]DicePickup: Collected[/tint]
+[tint r=1 g=0.84 b=0 a=1]Gave 120 coins to player[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
 OptionsManager: Saving Options
@@ -512,6 +656,146 @@ Level 0: Reached
 EnemySpawner: Difficulty changed to Level0
 Level 1: Reached
 EnemySpawner: Difficulty changed to Level1
+Level 2: Reached
+EnemySpawner: Difficulty changed to Level1
+Level 3: Reached
+EnemySpawner: Difficulty changed to Level1
+Level 4: Reached
+EnemySpawner: Difficulty changed to Level4
+Level 5: Reached
+EnemySpawner: Difficulty changed to Level4
+Level 6: Reached
+EnemySpawner: Difficulty changed to Level4
+Level 7: Reached
+EnemySpawner: Difficulty changed to Level4
+Level 8: Reached
+EnemySpawner: Difficulty changed to Level8
+Level 9: Reached
+EnemySpawner: Difficulty changed to Level8
+Node2D: Weapon Evolutions Unlocked.
+ExplanationsManager: Started ShopPosition
+MoveAndAttack: Explanation Ended
+ShopPosition: Explanation Started
+DiceInventory: Added Dice
+ExplanationsManager: Started UpgradeDices
+ShopPosition: Explanation Ended
+UpgradeDices: Explanation Started
+ExplanationsManager: Started Health
+UpgradeDices: Explanation Ended
+Health: Explanation Started
+Health: Explanation Ended
+Zombie: Died
+Coin: Collected
+MoveAndAttack: Explanation Ended
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+WeaponSwitcher: Added weapon Pistol
+WeaponSwitcher: Switched weapon to Dagger
+PistolPickup: Collected
+DialogPlayer: FirstMeeting started
+DiceInventory: Added Dice
+ShopMenu: Selled Dice
+Gave 120 coins to player
+DialogPlayer: FirstMeeting ended
+DiceInventory: Added Dice
+ShopMenu: Selled Dice
+DiceInventory: Added Dice
+ShopMenu: Selled Dice
+DiceInventory: Added Dice
+ShopMenu: Rob got robbed.
+DialogPlayer: Robbery started
+Shop: Start Fight
+DialogPlayer: Robbery ended
+DicePickup: False
+WeaponSwitcher: Added weapon Dolphin
+WeaponSwitcher: Switched weapon to Pistol
+DolphinPickup: Collected
+DiceInventory: Added Dice
+DicePickup: Collected
+DamageUpgrade: Buff added
+DamagePickup: Collected
+WeaponSwitcher: Added weapon Rifle
+WeaponSwitcher: Switched weapon to Dolphin
+RiflePickup: Collected
+WeaponSwitcher: Added weapon Sword
+WeaponSwitcher: Switched weapon to Rifle
+SwordPickup: Collected
+Zombie: Died
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Zombie: Died
+Zombie: Died
+MouseBomb: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+MouseBomb: Died
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+WeaponSwitcher: Switched weapon to Sword
+WeaponSwitcher: Switched weapon to Dagger
+WeaponSwitcher: Switched weapon to Pistol
+WeaponSwitcher: Switched weapon to Dolphin
+Zombie: Died
+Coin: Collected
+Coin: Collected
+MouseBomb: Died
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+MouseBomb: Died
+Failed executing 'givecoins'. Use it like this: givecoins int
+Failed executing 'givecoins'. Use it like this: givecoins int
+Gave 120 coins to player
+DiceInventory: Added Dice
+ShopMenu: Selled Dice
+Gave 120 coins to player
+DiceInventory: Added Dice
+ShopMenu: Selled Dice
+Zombie: Died
+DicePickup: False
+DicePickup: False
+Zombie: Died
+Level 10: Reached
+EnemySpawner: Difficulty changed to Level10
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+MovementSpeedUpgrade: Buff added
+SpeedPickup: Collected
+DiceInventory: Added Dice
+DicePickup: Collected
+MovementSpeedUpgrade: Buff added
+SpeedPickup: Collected
+DiceInventory: Added Dice
+DicePickup: Collected
+Gave 120 coins to player
 "
 scroll_following = true
 selection_enabled = true
@@ -526,7 +810,7 @@ margin_bottom = 425.0
 [node name="LineEdit" type="LineEdit" parent="Console/MarginContainer/VBoxContainer"]
 margin_top = 429.0
 margin_right = 704.0
-margin_bottom = 456.133
+margin_bottom = 456.099
 size_flags_stretch_ratio = 0.19
 clear_button_enabled = true
 placeholder_text = "Command Line"
