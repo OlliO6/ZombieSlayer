@@ -234,7 +234,7 @@ stream = SubResource( 2 )
 volume_db = -5.0
 pitch_scale = 1.24
 
-[node name="Node2D" type="Node2D" parent="." index="3"]
+[node name="Ability" type="Node2D" parent="." index="3"]
 script = ExtResource( 4 )
 
 [editable path="Sprite/DamageDealer"]

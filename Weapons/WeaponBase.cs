@@ -7,6 +7,8 @@ public abstract class WeaponBase : Node2D
 {
     [Signal] public delegate void AttackStarted();
     [Signal] public delegate void AttackFinished();
+    [Signal] public delegate void Enabled();
+    [Signal] public delegate void Disabled();
 
     [Export] public string weaponName = "";
 
@@ -43,6 +45,7 @@ public abstract class WeaponBase : Node2D
         InputManager.AttackInputEnded -= AttackInputEnded;
         Visible = false;
         disabled = true;
+        EmitSignal(nameof(Disabled));
     }
     public virtual void Enable()
     {
@@ -50,6 +53,7 @@ public abstract class WeaponBase : Node2D
         InputManager.AttackInputEnded += AttackInputEnded;
         Visible = true;
         disabled = false;
+        EmitSignal(nameof(Enabled));
     }
 
     public virtual void RotateWeapon()

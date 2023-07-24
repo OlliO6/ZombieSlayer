@@ -135,14 +135,14 @@ visible = false
 margin_top = -1.0
 margin_right = 252.0
 margin_bottom = 3.02471
-text = "FPS: 60"
+text = "FPS: 144"
 align = 1
 script = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_left = 2.0
-margin_top = 138.0
-margin_right = 52.0
+margin_top = 142.0
+margin_right = 2.0
 margin_bottom = 142.0
 mouse_filter = 2
 size_flags_horizontal = 0
@@ -150,13 +150,9 @@ size_flags_vertical = 8
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer"]
 visible = false
-margin_right = 50.0
-margin_bottom = 4.0
 color = Color( 0, 0, 0, 0.392157 )
 
 [node name="Logs" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
-margin_right = 50.0
-margin_bottom = 4.0
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 10
@@ -510,19 +506,6 @@ bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint
 [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
 [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
-[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 5: Reached[/tint]
-[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 6: Reached[/tint]
-[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 7: Reached[/tint]
-[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 8: Reached[/tint]
-[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level8[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 9: Reached[/tint]
-[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level8[/tint]
-[tint r=1 g=1 b=1 a=1]Node2D: Weapon Evolutions Unlocked.[/tint]
 [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started ShopPosition[/tint]
 [tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Ended[/tint]
 [tint r=1 g=1 b=1 a=1]ShopPosition: Explanation Started[/tint]
@@ -533,119 +516,27 @@ bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint
 [tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started Health[/tint]
 [tint r=1 g=1 b=1 a=1]UpgradeDices: Explanation Ended[/tint]
 [tint r=1 g=1 b=1 a=1]Health: Explanation Started[/tint]
+[tint r=1 g=1 b=1 a=1]UpgradeDices: Explanation Ended[/tint]
 [tint r=1 g=1 b=1 a=1]Health: Explanation Ended[/tint]
 [tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
 [tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
 [tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Ended[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=0.88 g=1 b=1 a=1]WeaponSwitcher: Added weapon Pistol[/tint]
-[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
-[tint r=0.88 g=1 b=1 a=1]PistolPickup: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]DialogPlayer: FirstMeeting started[/tint]
-[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
-[tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
-[tint r=1 g=0.84 b=0 a=1]Gave 120 coins to player[/tint]
-[tint r=1 g=1 b=1 a=1]DialogPlayer: FirstMeeting ended[/tint]
-[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
-[tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
-[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
-[tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
-[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
-[tint r=0.88 g=1 b=1 a=1]ShopMenu: Rob got robbed.[/tint]
-[tint r=1 g=1 b=1 a=1]DialogPlayer: Robbery started[/tint]
-[tint r=0.88 g=1 b=1 a=1]Shop: Start Fight[/tint]
-[tint r=1 g=1 b=1 a=1]DialogPlayer: Robbery ended[/tint]
-[tint r=0.88 g=1 b=1 a=1]DicePickup: False[/tint]
-[tint r=0.88 g=1 b=1 a=1]WeaponSwitcher: Added weapon Dolphin[/tint]
-[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
-[tint r=0.88 g=1 b=1 a=1]DolphinPickup: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
-[tint r=0.88 g=1 b=1 a=1]DicePickup: Collected[/tint]
-[tint r=0 g=1 b=1 a=1]DamageUpgrade: Buff added[/tint]
-[tint r=1 g=1 b=1 a=1]DamagePickup: Collected[/tint]
-[tint r=0.88 g=1 b=1 a=1]WeaponSwitcher: Added weapon Rifle[/tint]
-[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dolphin[/tint]
-[tint r=0.88 g=1 b=1 a=1]RiflePickup: Collected[/tint]
-[tint r=0.88 g=1 b=1 a=1]WeaponSwitcher: Added weapon Sword[/tint]
-[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Rifle[/tint]
-[tint r=0.88 g=1 b=1 a=1]SwordPickup: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
-[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
-[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
-[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
-[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Sword[/tint]
-[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
-[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
-[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dolphin[/tint]
-[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
-[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
-[tint r=0.75 g=0.75 b=0.75 a=1][shake]Failed executing[/shake][/tint] [tint r=0.78 g=0.08 b=0.52 a=1]'givecoins'[/tint][tint r=0.75 g=0.75 b=0.75 a=1]. Use it like this: [/tint]givecoins int
-[tint r=0.75 g=0.75 b=0.75 a=1][shake]Failed executing[/shake][/tint] [tint r=0.78 g=0.08 b=0.52 a=1]'givecoins'[/tint][tint r=0.75 g=0.75 b=0.75 a=1]. Use it like this: [/tint]givecoins int
-[tint r=1 g=0.84 b=0 a=1]Gave 120 coins to player[/tint]
-[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
-[tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
-[tint r=1 g=0.84 b=0 a=1]Gave 120 coins to player[/tint]
-[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
-[tint r=0.88 g=1 b=1 a=1]ShopMenu: Selled Dice[/tint]
-[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
-[tint r=0.88 g=1 b=1 a=1]DicePickup: False[/tint]
-[tint r=0.88 g=1 b=1 a=1]DicePickup: False[/tint]
-[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
-[tint r=0.5 g=1 b=0.83 a=1]Level 10: Reached[/tint]
-[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level10[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
-[tint r=0 g=1 b=1 a=1]MovementSpeedUpgrade: Buff added[/tint]
-[tint r=1 g=1 b=1 a=1]SpeedPickup: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
-[tint r=0.88 g=1 b=1 a=1]DicePickup: Collected[/tint]
-[tint r=0 g=1 b=1 a=1]MovementSpeedUpgrade: Buff added[/tint]
-[tint r=1 g=1 b=1 a=1]SpeedPickup: Collected[/tint]
-[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
-[tint r=0.88 g=1 b=1 a=1]DicePickup: Collected[/tint]
-[tint r=1 g=0.84 b=0 a=1]Gave 120 coins to player[/tint]
+[tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[tint r=0 g=0.75 b=1 a=1]Player: Is dying[/tint]
+[tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to [/tint]
+[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
+[tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Started[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
 OptionsManager: Saving Options
@@ -660,19 +551,6 @@ Level 2: Reached
 EnemySpawner: Difficulty changed to Level1
 Level 3: Reached
 EnemySpawner: Difficulty changed to Level1
-Level 4: Reached
-EnemySpawner: Difficulty changed to Level4
-Level 5: Reached
-EnemySpawner: Difficulty changed to Level4
-Level 6: Reached
-EnemySpawner: Difficulty changed to Level4
-Level 7: Reached
-EnemySpawner: Difficulty changed to Level4
-Level 8: Reached
-EnemySpawner: Difficulty changed to Level8
-Level 9: Reached
-EnemySpawner: Difficulty changed to Level8
-Node2D: Weapon Evolutions Unlocked.
 ExplanationsManager: Started ShopPosition
 MoveAndAttack: Explanation Ended
 ShopPosition: Explanation Started
@@ -683,119 +561,27 @@ UpgradeDices: Explanation Started
 ExplanationsManager: Started Health
 UpgradeDices: Explanation Ended
 Health: Explanation Started
+UpgradeDices: Explanation Ended
 Health: Explanation Ended
 Zombie: Died
 Coin: Collected
+Coin: Collected
 MoveAndAttack: Explanation Ended
-Coin: Collected
-Zombie: Died
-Coin: Collected
-Coin: Collected
-WeaponSwitcher: Added weapon Pistol
-WeaponSwitcher: Switched weapon to Dagger
-PistolPickup: Collected
-DialogPlayer: FirstMeeting started
-DiceInventory: Added Dice
-ShopMenu: Selled Dice
-Gave 120 coins to player
-DialogPlayer: FirstMeeting ended
-DiceInventory: Added Dice
-ShopMenu: Selled Dice
-DiceInventory: Added Dice
-ShopMenu: Selled Dice
-DiceInventory: Added Dice
-ShopMenu: Rob got robbed.
-DialogPlayer: Robbery started
-Shop: Start Fight
-DialogPlayer: Robbery ended
-DicePickup: False
-WeaponSwitcher: Added weapon Dolphin
-WeaponSwitcher: Switched weapon to Pistol
-DolphinPickup: Collected
-DiceInventory: Added Dice
-DicePickup: Collected
-DamageUpgrade: Buff added
-DamagePickup: Collected
-WeaponSwitcher: Added weapon Rifle
-WeaponSwitcher: Switched weapon to Dolphin
-RiflePickup: Collected
-WeaponSwitcher: Added weapon Sword
-WeaponSwitcher: Switched weapon to Rifle
-SwordPickup: Collected
-Zombie: Died
-Zombie: Died
-Coin: Collected
-Coin: Collected
-Coin: Collected
-Coin: Collected
-Zombie: Died
-Coin: Collected
-Coin: Collected
-Zombie: Died
-Zombie: Died
-Zombie: Died
-MouseBomb: Died
-Coin: Collected
-Coin: Collected
-Coin: Collected
-Coin: Collected
-Coin: Collected
-Zombie: Died
-Coin: Collected
-Coin: Collected
-Coin: Collected
-Coin: Collected
-Coin: Collected
-MouseBomb: Died
-Coin: Collected
-Coin: Collected
-Zombie: Died
-Coin: Collected
-Coin: Collected
-WeaponSwitcher: Switched weapon to Sword
-WeaponSwitcher: Switched weapon to Dagger
-WeaponSwitcher: Switched weapon to Pistol
-WeaponSwitcher: Switched weapon to Dolphin
-Zombie: Died
-Coin: Collected
-Coin: Collected
-MouseBomb: Died
-Zombie: Died
-Coin: Collected
-Coin: Collected
-Coin: Collected
-Coin: Collected
-MouseBomb: Died
-Failed executing 'givecoins'. Use it like this: givecoins int
-Failed executing 'givecoins'. Use it like this: givecoins int
-Gave 120 coins to player
-DiceInventory: Added Dice
-ShopMenu: Selled Dice
-Gave 120 coins to player
-DiceInventory: Added Dice
-ShopMenu: Selled Dice
-Zombie: Died
-DicePickup: False
-DicePickup: False
-Zombie: Died
-Level 10: Reached
-EnemySpawner: Difficulty changed to Level10
-Coin: Collected
-Coin: Collected
-Coin: Collected
-Coin: Collected
-Zombie: Died
-Coin: Collected
-Coin: Collected
-MovementSpeedUpgrade: Buff added
-SpeedPickup: Collected
-DiceInventory: Added Dice
-DicePickup: Collected
-MovementSpeedUpgrade: Buff added
-SpeedPickup: Collected
-DiceInventory: Added Dice
-DicePickup: Collected
-Gave 120 coins to player
+Player: Got 1 damage
+Player: Got 1 damage
+Player: Is dying
+Player: Got 1 damage
+WeaponSwitcher: Switched weapon to 
+ExplanationsManager: Started MoveAndAttack
+MoveAndAttack: Explanation Started
+Level 0: Reached
+EnemySpawner: Difficulty changed to Level0
+Level 1: Reached
+EnemySpawner: Difficulty changed to Level1
+Level 2: Reached
+EnemySpawner: Difficulty changed to Level1
+Level 3: Reached
+EnemySpawner: Difficulty changed to Level1
 "
 scroll_following = true
 selection_enabled = true
