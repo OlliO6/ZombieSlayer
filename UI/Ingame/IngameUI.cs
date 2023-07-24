@@ -107,14 +107,7 @@ public class IngameUI : Control
 
             field.Visible = true;
             field.IsSelected = i == index;
-
-            if (weapon is null)
-            {
-                field.Icon = null;
-                continue;
-            }
-
-            field.Icon = weapon.Icon;
+            field.Weapon = weapon;
         }
     }
 

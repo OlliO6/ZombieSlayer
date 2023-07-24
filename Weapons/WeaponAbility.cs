@@ -29,11 +29,17 @@ public class WeaponAbility : Node2D
         get => _isReady;
         set
         {
+            if (value == IsReady)
+                return;
+
             _isReady = value;
             if (value)
+            {
+                CooldownProgress = 1;
                 EmitSignal(nameof(GotReady));
-            else
-                CooldownTimer = 0;
+                return;
+            }
+            CooldownTimer = 0;
         }
     }
 

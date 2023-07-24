@@ -13,6 +13,7 @@ public abstract class WeaponBase : Node2D
     [Export] public string weaponName = "";
 
     public bool hasAbility;
+    public WeaponAbility ability;
 
     public Godot.Collections.Dictionary data;
     public PackedScene weaponPickupScene;
@@ -28,7 +29,9 @@ public abstract class WeaponBase : Node2D
     {
         data = Database.weaponData[weaponName] as Dictionary;
         weaponPickupScene = data.Get<PackedScene>("PickupScene");
-        var ability = data.GetOrDefault<Dictionary>("Ability", null);
+        hasAbility = data.GetOrDefault<bool>("HasAbility", false);
+        if (hasAbility)
+            ability = GetNode<WeaponAbility>("Ability");
     }
 
     public override void _Ready()
