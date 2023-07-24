@@ -23,6 +23,18 @@ public class WeaponSwitcher : Node2D
     public override void _Ready()
     {
         InputManager.DropWeaponPressed += () => CallDeferred(nameof(DropWeapon), CurrentWeapon);
+        InputManager.SwitchWeaponLeftPressed += () =>
+        {
+            currentIndex--;
+            if (currentIndex < 0) currentIndex = GetChildCount() - 1;
+            WeaponsChanged();
+        };
+        InputManager.SwitchWeaponRightPressed += () =>
+        {
+            currentIndex++;
+            if (currentIndex > GetChildCount() - 1) currentIndex = 0;
+            WeaponsChanged();
+        };
 
         if (GetChildCount() > 0)
         {
@@ -38,30 +50,8 @@ public class WeaponSwitcher : Node2D
 
     public override void _Input(InputEvent @event)
     {
-        if (!@event.IsPressed()) return;
-
-        if (@event is InputEventMouseButton mouseButtonInput)
-        {
-            if (mouseButtonInput.ButtonIndex is (int)ButtonList.WheelUp)
-            {
-                currentIndex++;
-
-                if (currentIndex > GetChildCount() - 1) currentIndex = 0;
-
-                WeaponsChanged();
-                return;
-            }
-            if (mouseButtonInput.ButtonIndex is (int)ButtonList.WheelDown)
-            {
-
-                currentIndex--;
-
-                if (currentIndex < 0) currentIndex = GetChildCount() - 1;
-
-                WeaponsChanged();
-            }
+        if (!@event.IsPressed())
             return;
-        }
 
         if (@event is InputEventKey keyInput)
         {

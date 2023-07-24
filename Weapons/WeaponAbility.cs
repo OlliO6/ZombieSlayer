@@ -55,17 +55,17 @@ public class WeaponAbility : Node2D
     {
         Weapon.Connect(nameof(WeaponBase.Enabled), this, nameof(OnWeaponEnabled));
         Weapon.Connect(nameof(WeaponBase.Disabled), this, nameof(OnWeaponDisabled));
-        IsReady = true;
+        IsReady = false;
     }
 
     private void OnWeaponEnabled()
     {
-        InputManager.AbilityInput += TryToUse;
+        InputManager.AbilityInputEnded += TryToUse;
     }
 
     private void OnWeaponDisabled()
     {
-        InputManager.AbilityInput -= TryToUse;
+        InputManager.AbilityInputEnded -= TryToUse;
     }
 
     public override void _Process(float delta)
