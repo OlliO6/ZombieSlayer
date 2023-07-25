@@ -20,22 +20,22 @@ public class WeaponSwitcher : Node2D
 
     [Signal] public delegate void WeaponChanged(int to);
 
+    public override void _EnterTree()
+    {
+        InputManager.DropWeaponPressed += DropCurrentWeapon;
+        InputManager.SwitchWeaponLeftPressed += SwitchWeaponLeft;
+        InputManager.SwitchWeaponRightPressed += SwitchWeaponRight;
+    }
+
+    public override void _ExitTree()
+    {
+        InputManager.DropWeaponPressed -= DropCurrentWeapon;
+        InputManager.SwitchWeaponLeftPressed -= SwitchWeaponLeft;
+        InputManager.SwitchWeaponRightPressed -= SwitchWeaponRight;
+    }
+
     public override void _Ready()
     {
-        InputManager.DropWeaponPressed += () => CallDeferred(nameof(DropWeapon), CurrentWeapon);
-        InputManager.SwitchWeaponLeftPressed += () =>
-        {
-            currentIndex--;
-            if (currentIndex < 0) currentIndex = GetChildCount() - 1;
-            WeaponsChanged();
-        };
-        InputManager.SwitchWeaponRightPressed += () =>
-        {
-            currentIndex++;
-            if (currentIndex > GetChildCount() - 1) currentIndex = 0;
-            WeaponsChanged();
-        };
-
         if (GetChildCount() > 0)
         {
             foreach (WeaponBase weapon in this.GetChildren<WeaponBase>())
@@ -46,6 +46,20 @@ public class WeaponSwitcher : Node2D
             currentIndex = 0;
             WeaponsChanged();
         }
+    }
+
+    private void SwitchWeaponLeft()
+    {
+        currentIndex--;
+        if (currentIndex < 0) currentIndex = GetChildCount() - 1;
+        WeaponsChanged();
+    }
+
+    private void SwitchWeaponRight()
+    {
+        currentIndex++;
+        if (currentIndex > GetChildCount() - 1) currentIndex = 0;
+        WeaponsChanged();
     }
 
     public override void _Input(InputEvent @event)
@@ -115,6 +129,8 @@ public class WeaponSwitcher : Node2D
 
         WeaponsChanged();
     }
+
+    public void DropCurrentWeapon() => CallDeferred(nameof(DropWeapon), CurrentWeapon);
 
     public void DropWeapon(WeaponBase weapon)
     {

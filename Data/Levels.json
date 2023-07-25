@@ -19,7 +19,7 @@
     {
         "XpToLevelUp": 40,
         "Explanation": "UpgradeDices",
-        "StopEnemySpawningTime": 20,
+        "StopEnemySpawningTime": 15,
         "Buffs": [
             {
                 "Type": "AddDice",
