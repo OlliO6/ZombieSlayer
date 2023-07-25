@@ -360,7 +360,7 @@ pitch_scale = 0.966859
 bus = "SFX"
 script = ExtResource( 5 )
 pitchRange = Vector2( 0.96, 1.1 )
-volumeRange = Vector2( -15, -8 )
+volumeRange = Vector2( -5, 0 )
 streams = [ ExtResource( 3 ), ExtResource( 4 ) ]
 
 [node name="PressAudio" type="AudioStreamPlayer" parent="."]
@@ -370,7 +370,7 @@ pitch_scale = 0.20197
 bus = "SFX"
 script = ExtResource( 5 )
 pitchRange = Vector2( 0.2, 0.22 )
-volumeRange = Vector2( 0, 1 )
+volumeRange = Vector2( 1.5, 2 )
 streams = [ ExtResource( 3 ), ExtResource( 4 ) ]
 
 [connection signal="button_down" from="." to="AnimationPlayer" method="play" binds= [ "Down", 0.1 ]]

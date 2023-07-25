@@ -7,7 +7,7 @@ public class Menu : CanvasLayer
     {
         if (OS.GetName() is "HTML5")
         {
-            GetNode<Button>("Control/CenterContainer/VBoxContainer/QuitButton").Visible = false;
+            GetNode<Button>("Control/QuitButton").Visible = false;
         }
     }
 
@@ -15,7 +15,7 @@ public class Menu : CanvasLayer
     private void OnPlayPressed()
     {
         GetTree().Paused = true;
-        Transitions.StartTransition(Transitions.TransitionBlackFade, 0.2f, () =>
+        Transitions.StartTransition(Transitions.TransitionPixel, 0.2f, () =>
         {
             GetTree().Paused = false;
             GetTree().ChangeSceneTo(Scenes.Game);
@@ -26,6 +26,9 @@ public class Menu : CanvasLayer
     [TroughtEditor]
     private void OnQuitPressed()
     {
-        GetTree().Quit();
+        Transitions.StartTransition(Transitions.TransitionPixel, 0.5f, () =>
+        {
+            GetTree().Quit();
+        });
     }
 }

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://UI/DiceMenu/DiceMenu.cs" type="Script" id=1]
 [ext_resource path="res://UI/DiceMenu/DiceSceneField.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/Fonts/PondeSmall.tres" type="DynamicFont" id=3]
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=4]
 [ext_resource path="res://UI/DiceMenu/DiceScenesContainer.cs" type="Script" id=5]
+[ext_resource path="res://UI/CustomControls/Button/Button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/DiceMenu/DiceField.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Animation" id=4]
@@ -199,7 +200,6 @@ margin_right = 78.0
 columns = 3
 script = ExtResource( 5 )
 diceSceneFieldScene = ExtResource( 2 )
-number = NodePath("")
 
 [node name="Separator" type="HSeparator" parent="HBoxContainer/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -207,27 +207,24 @@ margin_top = 4.0
 margin_right = 78.0
 margin_bottom = 7.0
 
-[node name="ThrowSelectedButton" type="Button" parent="HBoxContainer/CenterContainer/VBoxContainer"]
+[node name="ThrowSelectedButton" parent="HBoxContainer/CenterContainer/VBoxContainer" instance=ExtResource( 6 )]
 unique_name_in_owner = true
 margin_top = 11.0
 margin_right = 78.0
 margin_bottom = 23.0
-focus_mode = 0
 custom_fonts/font = ExtResource( 3 )
 disabled = true
-enabled_focus_mode = 0
 text = "Trhow selected"
 
-[node name="ThrowAllButton" type="Button" parent="HBoxContainer/CenterContainer/VBoxContainer"]
+[node name="ThrowAllButton" parent="HBoxContainer/CenterContainer/VBoxContainer" instance=ExtResource( 6 )]
 unique_name_in_owner = true
 margin_top = 27.0
 margin_right = 78.0
 margin_bottom = 39.0
-focus_mode = 0
 custom_fonts/font = ExtResource( 3 )
 disabled = true
-enabled_focus_mode = 0
 text = "Trhow all"
+autoSelect = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"

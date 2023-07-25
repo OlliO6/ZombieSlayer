@@ -6,7 +6,7 @@ using Godot;
 public static class EnemyUtilities
 {
     public const float InvisTime = 0.075f, StunTime = 0.15f;
-    public const float NoMoveDist = 2;
+    public const float NoMoveDist = 3;
     public static PackedScene coinScene = GD.Load<PackedScene>("res://Items/Coin/Coin.tscn");
 
     public static void BasicSetup(IEnemy enemy)

@@ -2,7 +2,7 @@ using System;
 using Additions;
 using Godot;
 
-public class InputManager : Node
+public class InputManager : Control
 {
     const string MoveLeftActionName = "MoveLeft";
     const string MoveRightActionName = "MoveRight";
@@ -39,6 +39,8 @@ public class InputManager : Node
     private static readonly InputEventJoypadMotion MoveUpControllerEvent = new() { Axis = (int)JoystickList.Axis1, AxisValue = -1 };
     private static readonly InputEventJoypadMotion MoveDownControllerEvent = new() { Axis = (int)JoystickList.Axis1, AxisValue = 1 };
 
+    private Control _focusedControl;
+
     public static bool ProcessInput
     {
         get => instance.IsProcessingUnhandledInput();
@@ -54,7 +56,7 @@ public class InputManager : Node
                 return;
 
             _currentInputType = value;
-            // InputTypeChanged?.Invoke(value);
+            InputTypeChanged?.Invoke(value);
 
             switch (CurrentInputType)
             {
@@ -89,6 +91,24 @@ public class InputManager : Node
         PauseMode = PauseModeEnum.Process;
         CurrentInputType = InputType.MouseAndKeyboard;
         GD.Randomize();
+    }
+
+    public override void _Process(float delta)
+    {
+        var newFocus = GetFocusOwner();
+
+        if (newFocus != _focusedControl)
+        {
+            _focusedControl = newFocus;
+            if (newFocus is null)
+                TryFocusButton();
+        }
+    }
+
+    private void TryFocusButton()
+    {
+        foreach (var button in GetTree().Root.GetAllChildren<GameButton>())
+            button.UpdateSelection();
     }
 
     public static void GetMovementInput(out Vector2 inputVector, out float lenght) => instance._GetMovementInput(out inputVector, out lenght);

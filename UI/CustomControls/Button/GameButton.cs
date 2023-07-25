@@ -29,11 +29,15 @@ public class GameButton : Button
             UpdateSelection();
     }
 
-    private void UpdateSelection()
+    public void UpdateSelection()
     {
-        GD.Print("Hello world");
-        if (IsVisibleInTree())
+        if (autoSelect && IsVisibleInTree())
+        {
+            var selectAudioPlayer = GetNode<RngAudioPlayer>("SelectAudio");
+            selectAudioPlayer.mute = true;
             GrabFocus();
+            selectAudioPlayer.mute = false;
+        }
     }
 
     public override void _Process(float delta)

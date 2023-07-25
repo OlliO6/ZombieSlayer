@@ -1,13 +1,16 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/Menu/Menu.cs" type="Script" id=2]
+[ext_resource path="res://UI/Fonts/PondeSmall.tres" type="DynamicFont" id=3]
 [ext_resource path="res://UI/OptionsMenu/OptionsMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Music/Boss1.wav" type="AudioStream" id=5]
 [ext_resource path="res://Weapons/Guns/Pistol/Pistol.png" type="Texture" id=6]
 [ext_resource path="res://Player/Player.png" type="Texture" id=7]
 [ext_resource path="res://Enemies/Zombie/Zombie.png" type="Texture" id=8]
 [ext_resource path="res://Shaders/Materials/StandartSpriteMat.material" type="Material" id=9]
+[ext_resource path="res://UI/CustomControls/Button/Button.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Promo/Banner Image not scaled.png" type="Texture" id=11]
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -25,7 +28,7 @@ material = ExtResource( 9 )
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Sprite" type="Sprite" parent="Dekoration"] 
+[node name="Sprite" type="Sprite" parent="Dekoration"]
 use_parent_material = true
 position = Vector2( 49, 74 )
 texture = ExtResource( 7 )
@@ -73,40 +76,38 @@ frame = 5
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[node name="QuitButton" parent="Control" instance=ExtResource( 10 )]
+margin_left = 121.0
+margin_top = 118.0
+margin_right = 141.0
+margin_bottom = 126.0
+theme_type_variation = "FlatButton"
+custom_fonts/font = ExtResource( 3 )
+text = "Quit"
+
 [node name="CenterContainer" type="CenterContainer" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 theme = ExtResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
-margin_left = 83.0
-margin_top = 42.0
-margin_right = 173.0
-margin_bottom = 101.0
+margin_left = 97.0
+margin_top = 53.0
+margin_right = 159.0
+margin_bottom = 91.0
 
-[node name="PlayButton" type="Button" parent="Control/CenterContainer/VBoxContainer"]
-margin_right = 90.0
-margin_bottom = 17.0
-focus_mode = 0
-enabled_focus_mode = 0
+[node name="PlayButton" parent="Control/CenterContainer/VBoxContainer" instance=ExtResource( 10 )]
+margin_right = 62.0
 text = "Play"
+autoSelect = true
 
-[node name="OptionsButton" type="Button" parent="Control/CenterContainer/VBoxContainer"]
+[node name="OptionsButton" parent="Control/CenterContainer/VBoxContainer" instance=ExtResource( 10 )]
 margin_top = 21.0
-margin_right = 90.0
+margin_right = 62.0
 margin_bottom = 38.0
-focus_mode = 0
-enabled_focus_mode = 0
+theme_type_variation = "SmallButton"
 text = "Options"
-
-[node name="QuitButton" type="Button" parent="Control/CenterContainer/VBoxContainer"]
-margin_top = 42.0
-margin_right = 90.0
-margin_bottom = 59.0
-rect_min_size = Vector2( 90, 0 )
-focus_mode = 0
-enabled_focus_mode = 0
-text = "Quit"
 
 [node name="OptionsMenu" parent="Control" instance=ExtResource( 4 )]
 
@@ -115,6 +116,22 @@ stream = ExtResource( 5 )
 autoplay = true
 bus = "Music"
 
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 10, -9 )
+scale = Vector2( 2, 2 )
+z_index = -1
+texture = ExtResource( 11 )
+centered = false
+
+[node name="ColorRect" type="ColorRect" parent="Sprite"]
+margin_left = -8.0
+margin_top = 50.0
+margin_right = 128.0
+margin_bottom = 90.0
+mouse_filter = 2
+color = Color( 0.466667, 0.592157, 0.345098, 1 )
+
+[connection signal="pressed" from="Control/QuitButton" to="." method="OnQuitPressed"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/PlayButton" to="." method="OnPlayPressed"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/OptionsButton" to="Control/OptionsMenu" method="OnOptionsPressed"]
-[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/QuitButton" to="." method="OnQuitPressed"]
