@@ -137,7 +137,6 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
             Transitions.StartTransition(Transitions.TransitionPixel, () =>
             {
                 GetTree().ChangeSceneTo(Scenes.Menu);
-                GetTree().Paused = false;
                 Transitions.EndTransition(Transitions.TransitionPixel);
             });
         });

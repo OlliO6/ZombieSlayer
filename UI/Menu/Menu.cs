@@ -14,10 +14,8 @@ public class Menu : CanvasLayer
     [TroughtEditor]
     private void OnPlayPressed()
     {
-        GetTree().Paused = true;
         Transitions.StartTransition(Transitions.TransitionPixel, 0.2f, () =>
         {
-            GetTree().Paused = false;
             GetTree().ChangeSceneTo(Scenes.Game);
             Transitions.EndTransition(Transitions.TransitionPixel);
         });
@@ -29,6 +27,6 @@ public class Menu : CanvasLayer
         Transitions.StartTransition(Transitions.TransitionPixel, 0.5f, () =>
         {
             GetTree().Quit();
-        });
+        }, false);
     }
 }

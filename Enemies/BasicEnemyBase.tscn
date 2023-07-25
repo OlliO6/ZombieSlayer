@@ -121,7 +121,7 @@ nodes/RunSpeed/position = Vector2( -340, 120 )
 nodes/State/node = SubResource( 13 )
 nodes/State/position = Vector2( -100, 40 )
 nodes/output/position = Vector2( 140, 40 )
-node_connections = [ "output", 0, "State", "State", 0, "Animation", "State", 1, "RunSpeed", "State", 2, "Animation 4", "RunSpeed", 0, "Animation 2" ]
+node_connections = [ "State", 0, "Animation", "State", 1, "RunSpeed", "State", 2, "Animation 4", "RunSpeed", 0, "Animation 2", "output", 0, "State" ]
 
 [node name="EnemyBase" type="KinematicBody2D"]
 collision_layer = 2

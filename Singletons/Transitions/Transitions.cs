@@ -21,8 +21,11 @@ public class Transitions : CanvasLayer
         Instance = this;
     }
 
-    public static async void StartTransition(string transitionType, float speed, Action onFinish)
+    public static async void StartTransition(string transitionType, float speed, Action onFinish, bool pause = true)
     {
+        if (pause)
+            Instance.GetTree().Paused = true;
+
         Instance.GetNode<CanvasItem>(TransitionBlackFade).Visible = transitionType == TransitionBlackFade;
         Instance.GetNode<CanvasItem>(TransitionPixel).Visible = transitionType == TransitionPixel;
         Instance.GetNode<CanvasItem>(TransitionBlocks).Visible = transitionType == TransitionBlocks;
@@ -35,13 +38,16 @@ public class Transitions : CanvasLayer
         onFinish?.Invoke();
     }
 
-    public static void StartTransition(string transitionType, Action onFinish)
+    public static void StartTransition(string transitionType, Action onFinish, bool pause = true)
     {
         StartTransition(transitionType, 1, onFinish);
     }
 
-    public static async void EndTransition(string transitionType, float speed, Action onFinish = null)
+    public static async void EndTransition(string transitionType, float speed, Action onFinish = null, bool unpause = true, bool unpauseAtStart = false)
     {
+        if (unpauseAtStart && unpause)
+            Instance.GetTree().Paused = false;
+
         Instance.GetNode<CanvasItem>(TransitionBlackFade).Visible = transitionType == TransitionBlackFade;
         Instance.GetNode<CanvasItem>(TransitionPixel).Visible = transitionType == TransitionPixel;
         Instance.GetNode<CanvasItem>(TransitionBlocks).Visible = transitionType == TransitionBlocks;
@@ -50,11 +56,14 @@ public class Transitions : CanvasLayer
         Instance.Anim.Play(transitionType + EndAnimSuffix, customSpeed: speed);
         await Instance.ToSignal(Instance.Anim, "animation_finished");
 
+        if (!unpauseAtStart && unpause)
+            Instance.GetTree().Paused = false;
+
         Instance.GetNode<CanvasItem>(transitionType).Visible = false;
         onFinish?.Invoke();
     }
 
-    public static void EndTransition(string transitionType, Action onFinish = null)
+    public static void EndTransition(string transitionType, Action onFinish = null, bool unpause = true)
     {
         EndTransition(transitionType, 1, onFinish);
     }

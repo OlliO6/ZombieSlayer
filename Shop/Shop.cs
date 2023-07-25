@@ -123,12 +123,10 @@ public class Shop : Area2D, IInteractable
     public void StartFigth()
     {
         Debug.LogU(this, "Start Fight");
-        GetTree().Paused = true;
         Transitions.StartTransition(Transitions.TransitionBlocks, 0.5f, () =>
        {
            // SceneManager.ChangeScence(GD.Load<PackedScene>("res://RobFights/FirstFight/FirstRobFight.tscn"));
-           // GetTree().Paused = false;
-           Transitions.EndTransition(Transitions.TransitionBlocks);
+           Transitions.EndTransition(Transitions.TransitionBlocks, unpause: false);
        });
     }
 }
