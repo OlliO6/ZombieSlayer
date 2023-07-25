@@ -20,6 +20,7 @@ public class InputManager : Node
     public static bool attackInput;
     private static InputType _currentInputType;
 
+    public static event Action<InputType> InputTypeChanged;
     public static event Action AttackInputStarted;
     public static event Action AttackInputEnded;
     public static event Action AbilityInputStarted;
@@ -53,6 +54,7 @@ public class InputManager : Node
                 return;
 
             _currentInputType = value;
+            // InputTypeChanged?.Invoke(value);
 
             switch (CurrentInputType)
             {

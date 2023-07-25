@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=27 format=2]
+[gd_resource type="Theme" load_steps=30 format=2]
 
 [ext_resource path="res://UI/Theme/UncheckedCheckbox.png" type="Texture" id=1]
 [ext_resource path="res://UI/Theme/CheckedCheckbox.png" type="Texture" id=2]
@@ -80,6 +80,32 @@ margin_left = 2.0
 margin_right = 2.0
 margin_top = 2.0
 margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id=25]
+texture = ExtResource( 6 )
+region_rect = Rect2( 1, 0, 6, 8 )
+margin_left = 4.0
+margin_right = 2.0
+margin_top = 2.0
+margin_bottom = 2.0
+modulate_color = Color( 1, 1, 1, 0.501961 )
+
+[sub_resource type="StyleBoxTexture" id=26]
+texture = ExtResource( 6 )
+region_rect = Rect2( 1, 0, 6, 8 )
+margin_left = 4.0
+margin_right = 2.0
+margin_top = 2.0
+margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id=27]
+texture = ExtResource( 6 )
+region_rect = Rect2( 1, 0, 6, 8 )
+margin_left = 4.0
+margin_right = 2.0
+margin_top = 2.0
+margin_bottom = 2.0
+modulate_color = Color( 0.760784, 0.760784, 0.760784, 1 )
 
 [sub_resource type="StyleBoxTexture" id=23]
 texture = ExtResource( 6 )
@@ -207,6 +233,12 @@ PopupPanel/styles/panel = SubResource( 5 )
 RichTextLabel/fonts/bold_font = ExtResource( 9 )
 RichTextLabel/fonts/normal_font = ExtResource( 8 )
 ScrollContainer/styles/bg = null
+SmallButton/base_type = "Button"
+SmallButton/styles/disabled = SubResource( 25 )
+SmallButton/styles/focus = SubResource( 26 )
+SmallButton/styles/hover = SubResource( 26 )
+SmallButton/styles/normal = SubResource( 26 )
+SmallButton/styles/pressed = SubResource( 27 )
 TooltipLabel/colors/font_color = Color( 0.803922, 0.745098, 0.67451, 1 )
 TooltipLabel/colors/font_color_shadow = Color( 0, 0, 0, 0.1 )
 TooltipLabel/constants/shadow_offset_x = 0

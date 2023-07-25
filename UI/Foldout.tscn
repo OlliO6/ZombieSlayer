@@ -16,10 +16,11 @@
 margin_right = 125.0
 margin_bottom = 21.0
 script = ExtResource( 1 )
+IsCollapsed = false
 
 [node name="Button" type="Button" parent="."]
 margin_right = 125.0
-margin_bottom = 14.0
+margin_bottom = 13.0
 focus_mode = 0
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
@@ -32,10 +33,9 @@ flat = true
 align = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-visible = false
-margin_top = 18.0
+margin_top = 17.0
 margin_right = 125.0
-margin_bottom = 21.0
+margin_bottom = 20.0
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
 margin_right = 8.0
