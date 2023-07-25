@@ -16,6 +16,7 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
 
     [Export] private int coinsAmount;
     [Export] private float movementSpeed;
+    [Export] public float stunTimeAfterBodyDamage = 1.5f;
 
     private bool isInvincible, exploded, isDetonating;
     private AnimationTree storerForAnimTree;
@@ -40,11 +41,10 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
     {
         BasicSetup(this);
         SetupDespawnOnLevelUpAndNotOnScreen(this, GetNode<VisibilityNotifier2D>("VisibilityDisabler"));
-
+        GetNode<DamagingHurtArea>("DamagingHurtArea").AllowDealingDamage = AboutToDealBodyDamage;
         CurrentHealth = MaxHealth;
 
         AnimTree.SetParam("RunSpeed/scale", 1f);
-
         GetNode("DetonationArea").Connect("body_entered", this, nameof(DetonationZoneEntered));
         StunnTimer.Connect(Constants.timeout, this, nameof(UnStunn));
     }
@@ -70,6 +70,12 @@ public class MouseBomb : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealt
         Vector2 dirToPlayer = GetDirectionToPlayer(this);
         Sprite.FlipH = dirToPlayer.x > 0; // Greater because sprite is flipped
         MoveAndSlide(dirToPlayer * movementSpeed * (isDetonating ? detonationSpeedFactor : 1));
+    }
+
+    private bool AboutToDealBodyDamage(IDamageable to)
+    {
+        Stunn(stunTimeAfterBodyDamage);
+        return true;
     }
 
     public bool AllowDamageFrom(IDamageDealer from) => !isInvincible;

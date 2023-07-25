@@ -11,6 +11,7 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth, 
 
     [Export] private int coinsAmount = 2;
     [Export] private Vector2 movementSpeedRange;
+    [Export] public float stunTimeAfterBodyDamage = 1;
 
     public float movementSpeed;
     public int DamageAmount => 1;
@@ -41,6 +42,7 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth, 
         SetupDespawnOnLevelUpAndNotOnScreen(this, GetNode<VisibilityNotifier2D>("VisibilityDisabler"));
         CurrentHealth = MaxHealth;
         movementSpeed = Random.FloatRange(movementSpeedRange);
+        GetNode<DamagingHurtArea>("DamagingHurtArea").AllowDealingDamage = AboutToDealBodyDamage;
 
         AnimTree.SetParam("State/current", 1);
         float weight = Mathf.InverseLerp(movementSpeedRange.x, movementSpeedRange.y, movementSpeed);
@@ -61,6 +63,12 @@ public class Zombie : KinematicBody2D, IEnemy, IDamageable, IKillable, IHealth, 
         Vector2 dirToPlayer = GetDirectionToPlayer(this);
         Sprite.FlipH = dirToPlayer.x < 0;
         MoveAndSlide(dirToPlayer * movementSpeed);
+    }
+
+    private bool AboutToDealBodyDamage(IDamageable to)
+    {
+        Stunn(stunTimeAfterBodyDamage);
+        return true;
     }
 
     public bool AllowDamageFrom(IDamageDealer from) => !isInvincible;
