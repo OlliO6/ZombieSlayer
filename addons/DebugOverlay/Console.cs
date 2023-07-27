@@ -122,6 +122,7 @@ public class Console : MarginContainer
 
         commandHistory.Insert(1, command);
         CurrentHistoryIndex = 0;
+        ToSignal(GetTree(), "idle_frame").OnCompleted(CommandLine.GrabFocus);
     }
     [TroughtEditor]
     private void LineEdited(string text)

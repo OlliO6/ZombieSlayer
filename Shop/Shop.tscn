@@ -233,8 +233,9 @@ to = NodePath("../../../../../../Yes/MenuOpen")
 
 [node name="Robbery" type="Node" parent="DialogPlayer"]
 script = ExtResource( 5 )
-text = "\\d=0.15/I said [b]don't[/b] Rob \\objname me/!!!"
+text = "\\hide/\\wait 1/\\hidemenu/\\wait 2/\\show/\\d=0.15/I said [b]don't[/b] Rob \\objname me/!!!"
 character = "Rob"
+callableActions = [ NodePath("../Actions/HideMenu") ]
 
 [node name="Dialog" type="Node" parent="DialogPlayer/Robbery"]
 script = ExtResource( 5 )
@@ -261,6 +262,13 @@ script = ExtResource( 11 )
 command = "startfight"
 node = NodePath("../../..")
 method = "StartFigth"
+args = [  ]
+
+[node name="HideMenu" type="Node" parent="DialogPlayer/Actions"]
+script = ExtResource( 11 )
+command = "hidemenu"
+node = NodePath("../../../CanvasLayer/ShopMenu")
+method = "hide"
 args = [  ]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

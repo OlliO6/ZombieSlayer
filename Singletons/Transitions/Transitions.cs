@@ -40,7 +40,7 @@ public class Transitions : CanvasLayer
 
     public static void StartTransition(string transitionType, Action onFinish, bool pause = true)
     {
-        StartTransition(transitionType, 1, onFinish);
+        StartTransition(transitionType, 1, onFinish, pause);
     }
 
     public static async void EndTransition(string transitionType, float speed, Action onFinish = null, bool unpause = true, bool unpauseAtStart = false)
@@ -63,8 +63,8 @@ public class Transitions : CanvasLayer
         onFinish?.Invoke();
     }
 
-    public static void EndTransition(string transitionType, Action onFinish = null, bool unpause = true)
+    public static void EndTransition(string transitionType, Action onFinish = null, bool unpause = true, bool unpauseAtStart = false)
     {
-        EndTransition(transitionType, 1, onFinish);
+        EndTransition(transitionType, 1, onFinish, unpause, unpauseAtStart);
     }
 }

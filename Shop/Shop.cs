@@ -64,7 +64,8 @@ public class Shop : Area2D, IInteractable
     }
     public void CloseMenu()
     {
-        if (!hadFirstTalk) return;
+        if (dialogPlayer.IsInDialog)
+            return;
 
         PauseMode = PauseModeEnum.Inherit;
         GetTree().Paused = false;
@@ -105,13 +106,10 @@ public class Shop : Area2D, IInteractable
     }
 
     [TroughtEditor]
-    private async void OnShopRobbed()
+    private void OnShopRobbed()
     {
         GetTree().Paused = true;
-        await new TimeAwaiter(this, 1f, TimeAwaiter.PauseMode.Continue);
-        shop.Visible = false;
         InputManager.ProcessInput = false;
-        await new TimeAwaiter(this, 2f, TimeAwaiter.PauseMode.Continue);
         dialogPlayer.Play("Robbery");
         ToSignal(dialogPlayer, "DialogFinished").OnCompleted(() =>
         {

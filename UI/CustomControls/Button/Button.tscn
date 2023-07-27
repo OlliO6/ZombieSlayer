@@ -364,12 +364,12 @@ volumeRange = Vector2( -5, 0 )
 streams = [ ExtResource( 3 ), ExtResource( 4 ) ]
 
 [node name="PressAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-volume_db = 0.68585
-pitch_scale = 0.20197
+stream = ExtResource( 4 )
+volume_db = 1.94768
+pitch_scale = 0.321453
 bus = "SFX"
 script = ExtResource( 5 )
-pitchRange = Vector2( 0.2, 0.22 )
+pitchRange = Vector2( 0.3, 0.33 )
 volumeRange = Vector2( 1.5, 2 )
 streams = [ ExtResource( 3 ), ExtResource( 4 ) ]
 

@@ -201,7 +201,12 @@ size_flags_horizontal = 4
 text = "Ok"
 autoSelect = true
 
+[node name="PressAudio" parent="PanelContainer/MarginContainer/VBoxContainer/OkButton" index="3"]
+volumeRange = Vector2( -80, -70 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Close = SubResource( 3 )
 anims/Open = SubResource( 4 )
 anims/RESET = SubResource( 5 )
+
+[editable path="PanelContainer/MarginContainer/VBoxContainer/OkButton"]

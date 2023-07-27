@@ -20,6 +20,8 @@ public class DialogPlayer : CanvasLayer
     public AnimatedRichTextLabel textLabel;
     public IDialogProvider currentDialog;
 
+    public bool IsInDialog => currentDialog != null;
+
     public override void _EnterTree()
     {
         Hide();
