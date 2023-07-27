@@ -121,22 +121,29 @@ public class DialogPlayer : CanvasLayer
         dialog.OnStarted();
         EmitSignal(nameof(DialogStarted), dialog.Name);
 
-        void InitOptions(string[] options)
+        async void InitOptions(string[] options)
         {
+            if (options.Length == 0)
+                return;
+
             foreach (var option in options)
             {
                 Button button = new Button()
                 {
-                    EnabledFocusMode = Control.FocusModeEnum.None,
-                    Flat = true,
+                    EnabledFocusMode = Control.FocusModeEnum.All,
                     Text = option
                 };
                 optionsContainer.AddChild(button);
                 button.Connect("pressed", this, nameof(OnOptionButtonPressed), new() { option });
                 button.Hide();
-
-                textLabel.Connect(nameof(AnimatedRichTextLabel.Finished), button, "show");
             }
+
+            await ToSignal(textLabel, nameof(AnimatedRichTextLabel.Finished));
+
+            for (int i = 0; i < optionsContainer.GetChildCount(); i++)
+                optionsContainer.GetChild<Button>(i).Show();
+
+            optionsContainer.GetChild<Button>(0).GrabFocus();
         }
     }
 
