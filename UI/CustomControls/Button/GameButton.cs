@@ -33,7 +33,7 @@ public class GameButton : Button
     {
         if (autoSelect && IsVisibleInTree())
         {
-            var selectAudioPlayer = GetNode<SelectionKnobs>("SelectionKnobs").selectAudioPlayer;
+            var selectAudioPlayer = GetNode<SelectionKnobs>("%SelectionKnobs").selectAudioPlayer;
             selectAudioPlayer.mute = true;
             GrabFocus();
             selectAudioPlayer.mute = false;
@@ -42,10 +42,10 @@ public class GameButton : Button
 
     public override void _Process(float delta)
     {
-        // If Mouse exists while pressing (Mouse exited signal doesn't work in this case)
+        // If Mouse exits while pressing (Mouse exited signal doesn't work in this case)
         if (Pressed && Input.IsMouseButtonPressed((int)ButtonList.Left))
         {
-            SelectionKnobs selectionKnobs = GetNode<SelectionKnobs>("SelectionKnobs");
+            SelectionKnobs selectionKnobs = GetNode<SelectionKnobs>("%SelectionKnobs");
 
             if (!GetGlobalRect().HasPoint(GetGlobalMousePosition()))
                 selectionKnobs.Idle();

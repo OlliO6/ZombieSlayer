@@ -11,7 +11,7 @@
 resource_local_to_scene = true
 shader = ExtResource( 1 )
 shader_param/frames = Vector2( 3, 2 )
-shader_param/currentFrame = Vector2( 0, 1 )
+shader_param/currentFrame = Vector2( 2, 0 )
 
 [node name="DiceField" type="NinePatchRect"]
 margin_right = 18.0
@@ -32,6 +32,7 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]
+self_modulate = Color( 0.454902, 0.454902, 0.454902, 1 )
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0

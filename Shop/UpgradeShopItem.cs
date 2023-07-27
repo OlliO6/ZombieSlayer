@@ -29,6 +29,9 @@ public class UpgradeShopItem : ShopItem
         }
     }
 
+    public GameButton GetAddButton() => GetNode<GameButton>("HBoxContainer/AddButton");
+    public GameButton GetRemoveButton() => GetNode<GameButton>("HBoxContainer/RemoveButton");
+
     public override void UpdateShopItem()
     {
         base.UpdateShopItem();
@@ -57,11 +60,11 @@ public class UpgradeShopItem : ShopItem
 
     public void SetAddButtonEnabled(bool enabled)
     {
-        GetNode<Button>("HBoxContainer/AddButton").Disabled = !enabled;
+        GetAddButton().Disabled = !enabled;
     }
     public void SetRemoveButtonEnabled(bool enabled)
     {
-        GetNode<Button>("HBoxContainer/RemoveButton").Disabled = !enabled;
+        GetRemoveButton().Disabled = !enabled;
     }
 
     public override void Sell()

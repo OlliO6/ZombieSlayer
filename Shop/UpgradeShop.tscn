@@ -33,8 +33,10 @@ script = ExtResource( 2 )
 margin_left = 29.0
 margin_right = 93.0
 margin_bottom = 144.0
+rect_clip_content = false
 size_flags_horizontal = 6
 size_flags_vertical = 3
+follow_focus = true
 scroll_horizontal_enabled = false
 
 [node name="ShopItemsContainer" type="VBoxContainer" parent="ScrollContainer"]

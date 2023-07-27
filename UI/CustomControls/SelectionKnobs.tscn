@@ -261,6 +261,7 @@ anchor_bottom = 0.5
 mouse_filter = 2
 
 [node name="Sprite" type="Sprite" parent="Left"]
+z_index = 1
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 3, 8, 10 )
@@ -273,6 +274,7 @@ anchor_bottom = 0.5
 mouse_filter = 2
 
 [node name="Sprite" type="Sprite" parent="Right"]
+z_index = 1
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 8, 3, 8, 10 )

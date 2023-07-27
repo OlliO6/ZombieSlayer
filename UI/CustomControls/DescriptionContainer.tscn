@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/Fonts/PondeSmall.tres" type="DynamicFont" id=1]
+
+[sub_resource type="CSharpScript" id=1]
+resource_name = "DescriptionContainer"
+script/source = "using Godot;
+using System;
+
+public class DescriptionContainer : PanelContainer
+{
+    // Declare member variables here. Examples:
+    // private int a = 2;
+    // private string b = \"text\";
+
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
+    {
+        
+    }
+
+//  // Called every frame. 'delta' is the elapsed time since the previous frame.
+//  public override void _Process(float delta)
+//  {
+//      
+//  }
+}
+"
+
+[node name="DescriptionContainer" type="PanelContainer"]
+margin_right = 68.0
+margin_bottom = 12.0
+script = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 4.0
+margin_top = 2.0
+margin_right = 64.0
+margin_bottom = 10.0
+custom_fonts/font = ExtResource( 1 )
+text = "Description"
+autowrap = true

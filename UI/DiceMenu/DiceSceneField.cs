@@ -35,36 +35,28 @@ public class DiceSceneField : NinePatchRect
     private void Deactivate()
     {
         IconRect.Hide();
-
         Modulate = new Color(Colors.White, 0.5f);
     }
 
-    #region IconRect Reference
-
     private TextureRect storerForIconRect;
-
     public TextureRect IconRect => this.LazyGetNode(ref storerForIconRect, "Icon");
 
-    #endregion
+    // public DescriptionContainer DescriptionContainer => GetNode<DescriptionContainer>("DescriptionContainer");
 
-    public override void _Ready()
+    // public override void _Ready()
+    // {
+    //     DescriptionContainer.text = Utils.GetDescriptionForScene(Scene);
+    // }
+
+    [TroughtEditor]
+    private void OnFocusEntered()
     {
-        HintTooltip = GetDescription();
+        // DescriptionContainer.Show();
     }
 
-    private string GetDescription()
+    [TroughtEditor]
+    private void OnFocusExited()
     {
-        if (Scene is null) return "";
-
-        SceneState sceneState = Scene.GetState();
-
-        int propCount = sceneState.GetNodePropertyCount(0);
-
-        if (propCount > 1 && sceneState.GetNodePropertyValue(0, 1) is CSharpScript script)
-        {
-            return script.Call("GetDescription") as string;
-        }
-
-        return "";
+        // DescriptionContainer.Hide();
     }
 }

@@ -29,6 +29,8 @@ public class Shop : Area2D, IInteractable
         InputManager.UICancelPressed -= OnUICancelPressed;
     }
 
+    private void SetExitButtonDisabled(bool disabled) => shop.GetNode<GameButton>("%ExitButton").Disabled = disabled;
+
     private void OnUICancelPressed()
     {
         if (shop.Visible)
@@ -61,7 +63,16 @@ public class Shop : Area2D, IInteractable
         shop.UpdateMenu();
 
         EmitSignal(nameof(MenuOpened));
+
+        if (dialogPlayer.IsInDialog)
+        {
+            ToSignal(dialogPlayer, nameof(DialogPlayer.DialogFinished))
+                .OnCompleted(shop.GrabUIFocus);
+            return;
+        }
+        shop.GrabUIFocus();
     }
+
     public void CloseMenu()
     {
         if (dialogPlayer.IsInDialog)
@@ -83,9 +94,11 @@ public class Shop : Area2D, IInteractable
         if (!hadFirstTalk)
         {
             InputManager.ProcessInput = false;
+            SetExitButtonDisabled(true);
             dialogPlayer.Play("FirstMeeting");
             ToSignal(dialogPlayer, "DialogFinished").OnCompleted(() =>
             {
+                SetExitButtonDisabled(false);
                 InputManager.ProcessInput = true;
                 hadFirstTalk = true;
             });
@@ -110,9 +123,11 @@ public class Shop : Area2D, IInteractable
     {
         GetTree().Paused = true;
         InputManager.ProcessInput = false;
+        SetExitButtonDisabled(true);
         dialogPlayer.Play("Robbery");
         ToSignal(dialogPlayer, "DialogFinished").OnCompleted(() =>
         {
+            SetExitButtonDisabled(false);
             InputManager.ProcessInput = true;
             GetTree().Paused = false;
         });
@@ -122,9 +137,9 @@ public class Shop : Area2D, IInteractable
     {
         Debug.LogU(this, "Start Fight");
         Transitions.StartTransition(Transitions.TransitionBlocks, 0.5f, () =>
-       {
-           // SceneManager.ChangeScence(GD.Load<PackedScene>("res://RobFights/FirstFight/FirstRobFight.tscn"));
-           Transitions.EndTransition(Transitions.TransitionBlocks, unpause: false);
-       });
+        {
+            // SceneManager.ChangeScence(GD.Load<PackedScene>("res://RobFights/FirstFight/FirstRobFight.tscn"));
+            Transitions.EndTransition(Transitions.TransitionBlocks, unpause: false);
+        });
     }
 }

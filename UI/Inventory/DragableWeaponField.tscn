@@ -1,15 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Shaders/Materials/StandartSpriteMat.material" type="Material" id=1]
 [ext_resource path="res://UI/Theme/BrownRect.png" type="Texture" id=2]
 [ext_resource path="res://UI/Theme/SmallRect.png" type="Texture" id=3]
 [ext_resource path="res://UI/Inventory/DragableWeaponField.cs" type="Script" id=4]
+[ext_resource path="res://UI/CustomControls/SelectionKnobs.tscn" type="PackedScene" id=5]
 
 [node name="DragableWeaponField" type="NinePatchRect"]
 material = ExtResource( 1 )
 margin_right = 18.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 18, 18 )
+focus_mode = 2
 mouse_filter = 0
 texture = ExtResource( 3 )
 region_rect = Rect2( 1, 1, 6, 6 )
@@ -47,3 +49,8 @@ patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
+
+[node name="SelectionKnobs" parent="." instance=ExtResource( 5 )]
+
+[connection signal="focus_entered" from="." to="SelectionKnobs" method="Select"]
+[connection signal="focus_exited" from="." to="SelectionKnobs" method="Deselect"]

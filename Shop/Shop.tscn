@@ -177,11 +177,11 @@ character = "Rob"
 
 [node name="AfterBuy" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog/Dialog"]
 script = ExtResource( 5 )
-text = "\\hide/\\waitforbuy/\\show/Great,\\wait 0.3/\\d=0.2/ you bought a die.
+text = "\\grabfocus/\\hide/\\waitforbuy/\\show/\\releasefocus/Great,\\wait 0.3/\\d=0.2/ you bought a die.
 \\wait 1/...
 \\reset d/It will help you not to\\wait 1/..."
 character = "Rob"
-callableActions = [ NodePath("../../../../../../../../Actions/WaitForBuyPressed") ]
+callableActions = [ NodePath("../../../../../../../../Actions/WaitForBuyPressed"), NodePath("../../../../../../../../Actions/MenuUIGrabFocus"), NodePath("../../../../../../../../Actions/MenuUIReleaseFocus") ]
 
 [node name="Dialog2" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog/Dialog/AfterBuy"]
 script = ExtResource( 5 )
@@ -233,7 +233,7 @@ to = NodePath("../../../../../../Yes/MenuOpen")
 
 [node name="Robbery" type="Node" parent="DialogPlayer"]
 script = ExtResource( 5 )
-text = "\\hide/\\wait 1/\\hidemenu/\\wait 2/\\show/\\d=0.15/I said [b]don't[/b] Rob \\objname me/!!!"
+text = "\\hide/\\wait 1/\\hidemenu/\\wait 2/\\show/\\d=0.15/I said [b]don't[/b] rob \\objname me/!!!"
 character = "Rob"
 callableActions = [ NodePath("../Actions/HideMenu") ]
 
@@ -269,6 +269,20 @@ script = ExtResource( 11 )
 command = "hidemenu"
 node = NodePath("../../../CanvasLayer/ShopMenu")
 method = "hide"
+args = [  ]
+
+[node name="MenuUIGrabFocus" type="Node" parent="DialogPlayer/Actions"]
+script = ExtResource( 11 )
+command = "grabfocus"
+node = NodePath("../../../CanvasLayer/ShopMenu")
+method = "GrabUIFocus"
+args = [  ]
+
+[node name="MenuUIReleaseFocus" type="Node" parent="DialogPlayer/Actions"]
+script = ExtResource( 11 )
+command = "releasefocus"
+node = NodePath("../../../CanvasLayer/ShopMenu")
+method = "ReleaseUIFocus"
 args = [  ]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

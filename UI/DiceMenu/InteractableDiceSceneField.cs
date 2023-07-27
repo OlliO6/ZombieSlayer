@@ -8,12 +8,11 @@ public class InteractableDiceSceneField : DiceSceneField
 {
     [Signal] public delegate void Interacted();
 
-    public override void _Ready()
+    public override void _GuiInput(InputEvent @event)
     {
-        base._Ready();
-
-        GetNode("Button").Connect("pressed", this, nameof(OnButtonPressed));
+        if (@event.IsActionPressed("ui_accept") || (@event is InputEventMouseButton mouseInput && mouseInput.IsPressed() && mouseInput.ButtonIndex is (int)ButtonList.Left))
+        {
+            EmitSignal(nameof(Interacted));
+        }
     }
-
-    private void OnButtonPressed() => EmitSignal(nameof(Interacted));
 }

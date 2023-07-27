@@ -81,15 +81,13 @@ public class DragableWeaponField : WeaponField
         if (Player.currentPlayer is null) return;
 
         WeaponSwitcher weapons = Player.currentPlayer.WeaponInv;
-
         weapons.MoveChild(weapons.GetChild(fromIndex), toIndex);
-
         weapons.WeaponsChanged();
     }
 
     public override void _GuiInput(InputEvent @event)
     {
-        if (!Disabled && @event is InputEventMouseButton mouseInput && mouseInput.IsPressed() && mouseInput.ButtonIndex is (int)ButtonList.Left)
+        if (!Disabled && (@event.IsActionPressed("ui_accept") || (@event is InputEventMouseButton mouseInput && mouseInput.IsPressed() && mouseInput.ButtonIndex is (int)ButtonList.Left)))
         {
             IsSelected = !IsSelected;
         }

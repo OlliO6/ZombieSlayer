@@ -14,7 +14,7 @@ public class WeaponShopItem : ShopItem
     {
         base._Ready();
 
-        Connect("pressed", this, nameof(Select));
+        GetNode<GameButton>("Button").Connect("pressed", this, nameof(Select));
 
         if (Owner is not null)
         {
@@ -25,10 +25,11 @@ public class WeaponShopItem : ShopItem
     public void Select()
     {
         EmitSignal(nameof(Selected), this);
+        GetNode<Control>("SelectFrame").Show();
     }
 
     public void Deselect()
     {
-        Set("pressed", false);
+        GetNode<Control>("SelectFrame").Hide();
     }
 }

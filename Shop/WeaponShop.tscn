@@ -19,60 +19,69 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-size_flags_horizontal = 6
+rect_clip_content = true
+custom_constants/margin_right = 24
+custom_constants/margin_left = 24
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+margin_left = 24.0
+margin_right = 232.0
+margin_bottom = 144.0
+rect_clip_content = false
+size_flags_horizontal = 5
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
-[node name="ShopItemsContainer" type="VBoxContainer" parent="ScrollContainer"]
+[node name="ShopItemsContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
 unique_name_in_owner = true
-margin_right = 256.0
+margin_right = 208.0
 margin_bottom = 89.0
 size_flags_horizontal = 3
 custom_constants/separation = 1
 
-[node name="Dagger" parent="ScrollContainer/ShopItemsContainer" instance=ExtResource( 3 )]
+[node name="Dagger" parent="MarginContainer/ScrollContainer/ShopItemsContainer" instance=ExtResource( 3 )]
 margin_left = 0.0
 margin_top = 0.0
-margin_right = 256.0
+margin_right = 208.0
 margin_bottom = 17.0
 SceneToBuy = ExtResource( 13 )
 Icon = ExtResource( 14 )
 price = 15
 
-[node name="Pistol" parent="ScrollContainer/ShopItemsContainer" instance=ExtResource( 3 )]
+[node name="Pistol" parent="MarginContainer/ScrollContainer/ShopItemsContainer" instance=ExtResource( 3 )]
 margin_left = 0.0
 margin_top = 18.0
-margin_right = 256.0
+margin_right = 208.0
 margin_bottom = 35.0
 SceneToBuy = ExtResource( 8 )
 Icon = ExtResource( 12 )
 price = 20
 
-[node name="Rifle" parent="ScrollContainer/ShopItemsContainer" instance=ExtResource( 3 )]
+[node name="Rifle" parent="MarginContainer/ScrollContainer/ShopItemsContainer" instance=ExtResource( 3 )]
 margin_left = 0.0
 margin_top = 36.0
-margin_right = 256.0
+margin_right = 208.0
 margin_bottom = 53.0
 SceneToBuy = ExtResource( 4 )
 Icon = ExtResource( 11 )
 price = 80
 
-[node name="Sword" parent="ScrollContainer/ShopItemsContainer" instance=ExtResource( 3 )]
+[node name="Sword" parent="MarginContainer/ScrollContainer/ShopItemsContainer" instance=ExtResource( 3 )]
 margin_left = 0.0
 margin_top = 54.0
-margin_right = 256.0
+margin_right = 208.0
 margin_bottom = 71.0
 SceneToBuy = ExtResource( 9 )
 Icon = ExtResource( 10 )
 price = 90
 
-[node name="Dolphin" parent="ScrollContainer/ShopItemsContainer" instance=ExtResource( 3 )]
+[node name="Dolphin" parent="MarginContainer/ScrollContainer/ShopItemsContainer" instance=ExtResource( 3 )]
 margin_left = 0.0
 margin_top = 72.0
-margin_right = 256.0
+margin_right = 208.0
 margin_bottom = 89.0
 SceneToBuy = ExtResource( 7 )
 Icon = ExtResource( 6 )

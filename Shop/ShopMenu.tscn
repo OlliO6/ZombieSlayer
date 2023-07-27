@@ -1,17 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Items/Dice/Dice.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Shop/ShopMenu.cs" type="Script" id=3]
 [ext_resource path="res://Shop/WeaponShop.tscn" type="PackedScene" id=4]
-[ext_resource path="res://UI/Fonts/ponde___.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Shop/UpgradeShop.tscn" type="PackedScene" id=6]
-
-[sub_resource type="DynamicFont" id=1]
-size = 8
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 5 )
+[ext_resource path="res://UI/CustomControls/Button/Button.tscn" type="PackedScene" id=7]
 
 [node name="ShopMenu" type="Control"]
 pause_mode = 2
@@ -59,19 +53,14 @@ margin_bottom = 122.0
 margin_right = 188.0
 margin_bottom = 13.0
 
-[node name="BackButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TopBar"]
+[node name="ExitButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TopBar" instance=ExtResource( 7 )]
+unique_name_in_owner = true
 margin_right = 32.0
 margin_bottom = 13.0
-focus_mode = 0
+focus_neighbour_right = NodePath("../SwitchShopButton")
 size_flags_horizontal = 0
-size_flags_vertical = 5
-theme = ExtResource( 1 )
 theme_type_variation = "FlatButton"
-shortcut_in_tooltip = false
-enabled_focus_mode = 0
 text = "Exit"
-flat = true
-align = 0
 
 [node name="ShopLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TopBar"]
 unique_name_in_owner = true
@@ -81,21 +70,15 @@ size_flags_vertical = 5
 text = " Shop"
 align = 1
 
-[node name="SwitchShopButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TopBar"]
+[node name="SwitchShopButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TopBar" instance=ExtResource( 7 )]
 unique_name_in_owner = true
-margin_left = 131.0
+margin_left = 132.0
 margin_right = 188.0
 margin_bottom = 13.0
-focus_mode = 0
+focus_neighbour_left = NodePath("../ExitButton")
 size_flags_horizontal = 8
-size_flags_vertical = 5
-theme = ExtResource( 1 )
-custom_fonts/font = SubResource( 1 )
-shortcut_in_tooltip = false
-enabled_focus_mode = 0
+theme_type_variation = "FlatButton"
 text = "Weapons"
-flat = true
-align = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
 margin_top = 17.0
@@ -133,39 +116,33 @@ margin_bottom = 13.0
 size_flags_horizontal = 3
 text = "Price: 100"
 
-[node name="RobButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar"]
+[node name="RobButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar" instance=ExtResource( 7 )]
 unique_name_in_owner = true
 self_modulate = Color( 1, 0.560784, 0.462745, 1 )
 margin_left = 128.0
 margin_right = 160.0
 margin_bottom = 13.0
-focus_mode = 0
-size_flags_horizontal = 8
 theme_type_variation = "FlatButton"
-enabled_focus_mode = 0
 text = "Rob "
-flat = true
-align = 2
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar/RobButton"]
-margin_left = 28.0
-margin_right = 31.0
-margin_bottom = 13.0
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -3.0
+margin_top = -6.5
+margin_bottom = 6.5
 
-[node name="BuyDiceButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar"]
+[node name="BuyDiceButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar" instance=ExtResource( 7 )]
 unique_name_in_owner = true
 margin_left = 164.0
 margin_right = 188.0
 margin_bottom = 13.0
-focus_mode = 0
-size_flags_horizontal = 8
 theme_type_variation = "FlatButton"
-enabled_focus_mode = 0
 text = "Buy"
-flat = true
-align = 2
 
-[connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/TopBar/BackButton" to="." method="OnBackPressed"]
+[connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/TopBar/ExitButton" to="." method="OnBackPressed"]
 [connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/TopBar/SwitchShopButton" to="." method="OnSwitchShopPressed"]
 [connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar/RobButton" to="." method="MakeRobbery"]
 [connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/BottomBar/BuyDiceButton" to="." method="OnBuyDicePressed"]

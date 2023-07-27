@@ -58,6 +58,36 @@ public class ShopMenu : Control
         WeaponShop.UnlockItem(name);
     }
 
+    public void GrabUIFocus()
+    {
+        if (UpgradeShop.Visible)
+        {
+            foreach (var child in UpgradeShop.ShopItemsContainer.GetChildren<UpgradeShopItem>())
+            {
+                if (child.IsVisibleInTree())
+                {
+                    child.GetAddButton().GrabFocus();
+                    return;
+                }
+            }
+            return;
+        }
+        foreach (var child in WeaponShop.ShopItemsContainer.GetChildren<WeaponShopItem>())
+        {
+            if (child.IsVisibleInTree())
+            {
+                child.GetNode<GameButton>("Button").GrabFocus();
+                return;
+            }
+        }
+        GetNode<GameButton>("ExitButton").GrabFocus();
+    }
+
+    public void ReleaseUIFocus()
+    {
+        GetFocusOwner().ReleaseFocus();
+    }
+
     [TroughtEditor]
     private void OnBackPressed() => (Owner as Shop)?.CloseMenu();
 
