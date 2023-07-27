@@ -102,6 +102,10 @@ margin_right = 62.0
 text = "Play"
 autoSelect = true
 
+[node name="PressAudio" parent="Control/CenterContainer/VBoxContainer/PlayButton" index="2"]
+pause_mode = 2
+pitchRange = Vector2( 0.1, 0.1 )
+
 [node name="OptionsButton" parent="Control/CenterContainer/VBoxContainer" instance=ExtResource( 10 )]
 margin_top = 21.0
 margin_right = 62.0
@@ -135,3 +139,5 @@ color = Color( 0.466667, 0.592157, 0.345098, 1 )
 [connection signal="pressed" from="Control/QuitButton" to="." method="OnQuitPressed"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/PlayButton" to="." method="OnPlayPressed"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/OptionsButton" to="Control/OptionsMenu" method="OnOptionsPressed"]
+
+[editable path="Control/CenterContainer/VBoxContainer/PlayButton"]

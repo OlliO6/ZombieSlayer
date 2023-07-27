@@ -158,6 +158,8 @@ mouse_filter = 0
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
 margin_right = 18.0
 margin_bottom = 144.0
+rect_clip_content = false
+follow_focus = true
 scroll_horizontal_enabled = false
 
 [node name="DiceContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer"]

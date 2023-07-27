@@ -144,6 +144,7 @@ margin_bottom = 85.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 margin_bottom = 83.0
+rect_clip_content = false
 scroll_horizontal_enabled = false
 
 [node name="DiceContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer"]

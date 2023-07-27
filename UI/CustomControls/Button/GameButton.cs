@@ -33,7 +33,7 @@ public class GameButton : Button
     {
         if (autoSelect && IsVisibleInTree())
         {
-            var selectAudioPlayer = GetNode<RngAudioPlayer>("SelectAudio");
+            var selectAudioPlayer = GetNode<SelectionKnobs>("SelectionKnobs").selectAudioPlayer;
             selectAudioPlayer.mute = true;
             GrabFocus();
             selectAudioPlayer.mute = false;
@@ -45,11 +45,12 @@ public class GameButton : Button
         // If Mouse exists while pressing (Mouse exited signal doesn't work in this case)
         if (Pressed && Input.IsMouseButtonPressed((int)ButtonList.Left))
         {
-            AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+            SelectionKnobs selectionKnobs = GetNode<SelectionKnobs>("SelectionKnobs");
+
             if (!GetGlobalRect().HasPoint(GetGlobalMousePosition()))
-                animationPlayer.Play("Idle", 0.1f);
-            else if (animationPlayer.CurrentAnimation != "Down")
-                animationPlayer.Play("Down", 0.1f);
+                selectionKnobs.Idle();
+            else if (selectionKnobs.anim.CurrentAnimation != "Down")
+                selectionKnobs.Down();
         }
     }
 }

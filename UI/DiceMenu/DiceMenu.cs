@@ -6,46 +6,29 @@ using Godot;
 
 public class DiceMenu : Control
 {
-    [Export] private PackedScene diceFieldScene;
-
     [Signal] public delegate void Opened();
     [Signal] public delegate void OpenStarted();
     [Signal] public delegate void Closed();
 
-    private bool isOpen;
-    private int slectedCount;
-    private DiceField watchedField;
+    [Export] private PackedScene diceFieldScene;
 
-    #region AnimationPlayer Reference
+    private bool isOpen;
+    private DiceField selectedField;
 
     private AnimationPlayer storerForAnimationPlayer;
     public AnimationPlayer AnimationPlayer => this.LazyGetNode(ref storerForAnimationPlayer, "AnimationPlayer");
 
-    #endregion
-    #region DiceContainer Reference
-
     private Container storerForDiceContainer;
     public Container DiceContainer => this.LazyGetNode(ref storerForDiceContainer, "%DiceContainer");
-
-    #endregion
-    #region DiceScenesContainer Reference
 
     private DiceScenesContainer storerForDiceScenesContainer;
     public DiceScenesContainer DiceScenesContainer => this.LazyGetNode(ref storerForDiceScenesContainer, "%DiceScenesContainer");
 
-    #endregion
-    #region ThrowAllButton Reference
-
     private Button storerForThrowAllButton;
     public Button ThrowAllButton => this.LazyGetNode(ref storerForThrowAllButton, "%ThrowAllButton");
 
-    #endregion
-    #region ThrowSelectedButton Reference
-
     private Button storerForThrowSelectedButton;
     public Button ThrowSelectedButton => this.LazyGetNode(ref storerForThrowSelectedButton, "%ThrowSelectedButton");
-
-    #endregion
 
     public override void _Ready()
     {
@@ -66,15 +49,16 @@ public class DiceMenu : Control
 
     private void OnDiceMenuPressed()
     {
-        if (isOpen) Close();
-        else Open();
+        if (isOpen)
+            Close();
+        else
+            Open();
     }
     private void OnUICancelPressed()
     {
-        if (isOpen) Close();
+        if (isOpen)
+            Close();
     }
-
-    #region Open and close 
 
     private async void Open()
     {
@@ -110,13 +94,9 @@ public class DiceMenu : Control
         AnimationPlayer.Advance(animationPosition);
     }
 
-    #endregion
-
     private void UpdateDices()
     {
         if (Player.currentPlayer is null) return;
-
-        slectedCount = 0;
 
         IEnumerable<Dice> dices = Player.currentPlayer.GetWorkingDices();
 
@@ -130,63 +110,36 @@ public class DiceMenu : Control
         {
             DiceField diceField = diceFieldScene.Instance<DiceField>();
 
-            diceField.watchable = true;
             diceField.IsSelected = false;
-            diceField.IsWatched = false;
+            diceField.autoSelect = true;
             diceField.dice = dice;
 
             diceField.Connect(nameof(DiceField.Selected), this, nameof(OnDiceFieldSelected));
-            diceField.Connect(nameof(DiceField.Deselected), this, nameof(OnDiceFieldDeselected));
-            diceField.Connect(nameof(DiceField.WatchStarted), this, nameof(OnDiceFieldWatched));
 
             DiceContainer.AddChild(diceField);
         }
 
-        ShowDiceScenes(null);
-        watchedField = null;
+        bool hasAtLeastOneDice = DiceContainer.GetChildCount() > 0;
 
-        ThrowSelectedButton.Disabled = true;
-        ThrowAllButton.Disabled = DiceContainer.GetChildCount() > 0 ? false : true;
+        if (hasAtLeastOneDice)
+            DiceContainer.GetChild<DiceField>(0).IsSelected = true;
+        else
+            OnDiceFieldSelected(null);
+
+        ThrowAllButton.Disabled = !hasAtLeastOneDice;
+        ThrowSelectedButton.Disabled = !hasAtLeastOneDice;
     }
 
-    [TroughtEditor]
-    public void OnDiceFieldSelected(DiceField diceField)
+    private void OnDiceFieldSelected(DiceField diceField)
     {
-        slectedCount++;
 
-        if (slectedCount is 1)
-        {
-            ThrowSelectedButton.Disabled = false;
-        }
-    }
+        if (IsInstanceValid(selectedField))
+            selectedField.IsSelected = false;
 
-    [TroughtEditor]
-    public void OnDiceFieldDeselected(DiceField diceField)
-    {
-        slectedCount--;
-
-        if (slectedCount is <= 0)
-        {
-            slectedCount = 0;
-            ThrowSelectedButton.Disabled = true;
-        }
-    }
-
-    [TroughtEditor]
-    public void OnDiceFieldWatched(DiceField diceField)
-    {
-        ShowDiceScenes(diceField);
-        watchedField = diceField;
-    }
-
-    public void ShowDiceScenes(DiceField diceField)
-    {
-        Dice dice = diceField is null ? null : diceField.dice;
-
-        if (watchedField is not null) watchedField.IsWatched = false;
-        watchedField = diceField;
+        selectedField = diceField;
 
         HSeparator separator = GetNode<HSeparator>("%Separator");
+        Dice dice = diceField is null ? null : diceField.dice;
 
         if (dice is null || dice.scenes is null || dice.scenes.Length is 0)
         {
@@ -214,9 +167,6 @@ public class DiceMenu : Control
     {
         Close();
 
-        foreach (DiceField diceField in DiceContainer.GetChildren())
-        {
-            if (diceField.IsSelected) diceField.dice.Throw();
-        }
+        selectedField?.dice.Throw();
     }
 }

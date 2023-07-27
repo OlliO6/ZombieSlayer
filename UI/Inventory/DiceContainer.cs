@@ -27,8 +27,8 @@ public class DiceContainer : VBoxContainer
         {
             DiceField diceField = diceFieldScene.Instance<DiceField>();
 
-            diceField.watchable = false;
-            diceField.IsWatched = false;
+            diceField.autoSelect = false;
+            diceField.allowDeselect = true;
             diceField.IsSelected = false;
             diceField.dice = dice;
 

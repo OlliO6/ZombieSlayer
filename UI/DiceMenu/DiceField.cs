@@ -1,6 +1,7 @@
 using Godot;
 using System.Linq;
 using Additions;
+using System;
 
 [Tool]
 public class DiceField : NinePatchRect, ISelectable
@@ -21,21 +22,8 @@ public class DiceField : NinePatchRect, ISelectable
         }
     }
 
-    [Export]
-    public bool IsWatched
-    {
-        get => watchable ? _watched : false;
-        set
-        {
-            _watched = watchable ? value : false;
-
-            GetNode<ColorRect>("ColorRect")?.SetDeferred("modulate", IsWatched ? new("747474") : Colors.White);
-
-            if (IsWatched) EmitSignal(nameof(WatchStarted), this);
-        }
-    }
-
-    [Export] public bool watchable;
+    [Export] public bool allowDeselect;
+    [Export] public bool autoSelect;
 
     public Dice dice;
 
@@ -43,33 +31,28 @@ public class DiceField : NinePatchRect, ISelectable
 
     [Signal] public delegate void Selected(DiceField from);
     [Signal] public delegate void Deselected(DiceField from);
-    [Signal] public delegate void WatchStarted(DiceField from);
-
-    #region SelectFrame Reference
 
     private Control storerForSelectFrame;
     public Control SelectFrame => this.LazyGetNode(ref storerForSelectFrame, "SelectFrame");
 
-    #endregion
-
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         SetTexture();
         GetNode<ColorRect>("ColorRect").SelfModulate = (dice is null ? true : dice.broken) ? new("747474") : Colors.White;
+        Connect("focus_entered", this, nameof(OnFocusEntered));
+    }
+
+    private void OnFocusEntered()
+    {
+        if (autoSelect)
+            IsSelected = true;
     }
 
     public override void _GuiInput(InputEvent @event)
     {
-        if (@event is InputEventMouseButton mouseInput && mouseInput.IsPressed() && mouseInput.ButtonIndex is (int)ButtonList.Left)
+        if (allowDeselect && (@event.IsActionPressed("ui_accept") || (@event is InputEventMouseButton mouseInput && mouseInput.IsPressed() && mouseInput.ButtonIndex is (int)ButtonList.Left)))
         {
-            if (!watchable || IsWatched)
-            {
-                IsSelected = !IsSelected;
-                return;
-            }
-
-            IsWatched = true;
+            IsSelected = !IsSelected;
         }
     }
 
