@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/E.png-bb38cae448aff0d3c73aec2cd96a8922.stex"
+path="res://.import/Unknown.png-a36e44be3c5fc86e2324f120fd1ac44b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/ButtonIcons/MouseAndKeyboard/E.png"
-dest_files=[ "res://.import/E.png-bb38cae448aff0d3c73aec2cd96a8922.stex" ]
+source_file="res://UI/ButtonIcons/Unknown.png"
+dest_files=[ "res://.import/Unknown.png-a36e44be3c5fc86e2324f120fd1ac44b.stex" ]
 
 [params]
 

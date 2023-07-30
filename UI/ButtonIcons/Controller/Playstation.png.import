@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Unknown.png-3af99bcacde2505949a183337faf35c6.stex"
+path="res://.import/Playstation.png-ce8900c702d3788a7968f6d79706c745.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/ButtonIcons/MouseAndKeyboard/Unknown.png"
-dest_files=[ "res://.import/Unknown.png-3af99bcacde2505949a183337faf35c6.stex" ]
+source_file="res://UI/ButtonIcons/Controller/Playstation.png"
+dest_files=[ "res://.import/Playstation.png-ce8900c702d3788a7968f6d79706c745.stex" ]
 
 [params]
 

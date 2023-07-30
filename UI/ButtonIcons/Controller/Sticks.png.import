@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/LeftMouse.png-d2909260dc81df6b78c6a32f53285586.stex"
+path="res://.import/Sticks.png-4d2d98fdaca76296289473e9a1626566.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/ButtonIcons/MouseAndKeyboard/LeftMouse.png"
-dest_files=[ "res://.import/LeftMouse.png-d2909260dc81df6b78c6a32f53285586.stex" ]
+source_file="res://UI/ButtonIcons/Controller/Sticks.png"
+dest_files=[ "res://.import/Sticks.png-4d2d98fdaca76296289473e9a1626566.stex" ]
 
 [params]
 

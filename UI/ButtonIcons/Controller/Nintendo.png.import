@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/I.png-52c31a7759685c48f13eb671aa502cd1.stex"
+path="res://.import/Nintendo.png-bdc70af3fc7eb0cbe1083bad8e2f79cb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/ButtonIcons/MouseAndKeyboard/I.png"
-dest_files=[ "res://.import/I.png-52c31a7759685c48f13eb671aa502cd1.stex" ]
+source_file="res://UI/ButtonIcons/Controller/Nintendo.png"
+dest_files=[ "res://.import/Nintendo.png-bdc70af3fc7eb0cbe1083bad8e2f79cb.stex" ]
 
 [params]
 
