@@ -140,8 +140,8 @@ script = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_left = 2.0
-margin_top = 102.0
-margin_right = 98.0
+margin_top = 142.0
+margin_right = 2.0
 margin_bottom = 142.0
 mouse_filter = 2
 size_flags_horizontal = 0
@@ -149,13 +149,9 @@ size_flags_vertical = 8
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer"]
 visible = false
-margin_right = 96.0
-margin_bottom = 40.0
 color = Color( 0, 0, 0, 0.392157 )
 
 [node name="Logs" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
-margin_right = 96.0
-margin_bottom = 40.0
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 10
@@ -504,6 +500,10 @@ bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint
 [tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Started[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
 [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Ended[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
 [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
@@ -514,6 +514,14 @@ bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint
 [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
 [tint r=0.5 g=1 b=0.83 a=1]Level 5: Reached[/tint]
 [tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 6: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 7: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 8: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level8[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 9: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level8[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
 OptionsManager: Saving Options
@@ -522,6 +530,10 @@ ExplanationsManager: Started MoveAndAttack
 MoveAndAttack: Explanation Started
 Level 0: Reached
 EnemySpawner: Difficulty changed to Level0
+Zombie: Died
+Coin: Collected
+Coin: Collected
+MoveAndAttack: Explanation Ended
 Level 1: Reached
 EnemySpawner: Difficulty changed to Level1
 Level 2: Reached
@@ -532,6 +544,14 @@ Level 4: Reached
 EnemySpawner: Difficulty changed to Level4
 Level 5: Reached
 EnemySpawner: Difficulty changed to Level4
+Level 6: Reached
+EnemySpawner: Difficulty changed to Level4
+Level 7: Reached
+EnemySpawner: Difficulty changed to Level4
+Level 8: Reached
+EnemySpawner: Difficulty changed to Level8
+Level 9: Reached
+EnemySpawner: Difficulty changed to Level8
 "
 scroll_following = true
 selection_enabled = true

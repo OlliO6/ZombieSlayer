@@ -134,7 +134,7 @@ callableActions = [ NodePath("Actions/OpenShopMenu") ]
 
 [node name="FirstMeeting" type="Node" parent="DialogPlayer"]
 script = ExtResource( 5 )
-text = "Hello i am Robert the shop keeper. 
+text = "\\disableinput/Hello i am Robert the shop keeper. 
 \\wait 1/You can call me \\objname Rob/."
 character = "Robert"
 
@@ -177,7 +177,7 @@ character = "Rob"
 
 [node name="AfterBuy" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog/Dialog"]
 script = ExtResource( 5 )
-text = "\\grabfocus/\\hide/\\waitforbuy/\\show/\\releasefocus/Great,\\wait 0.3/\\d=0.2/ you bought a die.
+text = "\\enableinput/\\grabfocus/\\hide/\\waitforbuy/\\show/\\disableinput/Great,\\wait 0.3/\\d=0.2/ you bought a die.
 \\wait 1/...
 \\reset d/It will help you not to\\wait 1/..."
 character = "Rob"
@@ -192,7 +192,7 @@ callableActions = [ NodePath("../../../../../../../../../Actions/WaitForBuyPress
 
 [node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog/Dialog/AfterBuy/Dialog2"]
 script = ExtResource( 5 )
-text = "\\hide/\\wait 1/\\show/\\d = 0.1/Roll it with 'R', bye."
+text = "\\hide/\\wait 1/\\show/\\d = 0.1/Roll it with 'R', bye.\\enableinput/"
 character = "Rob"
 
 [node name="No" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke"]

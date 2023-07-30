@@ -54,16 +54,21 @@ public class DialogPlayer : CanvasLayer
                 Show();
                 return;
 
-            // case "enableinput":
-
-            // case "disableinput":
-
             case "pause":
                 GetTree().Paused = true;
                 return;
 
             case "unpause":
                 GetTree().Paused = true;
+                return;
+
+            // Project Specific
+            case "enableinput":
+                InputManager.ProcessInput = true;
+                return;
+
+            case "disableinput":
+                InputManager.ProcessInput = false;
                 return;
         }
 
@@ -136,6 +141,8 @@ public class DialogPlayer : CanvasLayer
                 optionsContainer.AddChild(button);
                 button.Connect("pressed", this, nameof(OnOptionButtonPressed), new() { option });
                 button.Hide();
+                // Project Specific
+                button.AddToGroup(InputManager.DontStealFocusGroup);
             }
 
             await ToSignal(textLabel, nameof(AnimatedRichTextLabel.Finished));

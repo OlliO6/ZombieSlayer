@@ -23,7 +23,14 @@ public class DiceSceneField : NinePatchRect
         }
     }
 
+    private string _description;
+
     private PackedScene _scene;
+
+    public override void _Ready()
+    {
+        _description = Utils.GetDescriptionForScene(Scene);
+    }
 
     private void SetIcon(Texture icon)
     {
@@ -41,22 +48,15 @@ public class DiceSceneField : NinePatchRect
     private TextureRect storerForIconRect;
     public TextureRect IconRect => this.LazyGetNode(ref storerForIconRect, "Icon");
 
-    // public DescriptionContainer DescriptionContainer => GetNode<DescriptionContainer>("DescriptionContainer");
-
-    // public override void _Ready()
-    // {
-    //     DescriptionContainer.text = Utils.GetDescriptionForScene(Scene);
-    // }
-
     [TroughtEditor]
     private void OnFocusEntered()
     {
-        // DescriptionContainer.Show();
+        UIManager.ShowDescription(_description, this);
     }
 
     [TroughtEditor]
     private void OnFocusExited()
     {
-        // DescriptionContainer.Hide();
+        UIManager.HideDescription(_description);
     }
 }

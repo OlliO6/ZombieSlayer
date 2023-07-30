@@ -50,6 +50,7 @@ Debug="*res://addons/DebugOverlay/DebugOverlay.tscn"
 ExplanationsManager="*res://Singletons/Explanations/Explanations.tscn"
 Database="*res://Singletons/Database.cs"
 Transitions="*res://Singletons/Transitions/Transitions.tscn"
+UiManager="*res://Singletons/UI/UIManager.tscn"
 
 [display]
 

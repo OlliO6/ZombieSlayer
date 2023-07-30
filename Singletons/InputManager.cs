@@ -9,6 +9,8 @@ public class InputManager : Control
     const string MoveUpActionName = "MoveUp";
     const string MoveDownActionName = "MoveDown";
 
+    public const string DontStealFocusGroup = "DontStealFocus";
+
     public enum InputType
     {
         MouseAndKeyboard,
@@ -40,6 +42,7 @@ public class InputManager : Control
     private static readonly InputEventJoypadMotion MoveDownControllerEvent = new() { Axis = (int)JoystickList.Axis1, AxisValue = 1 };
 
     private Control _focusedControl;
+    private Control _focusStealer;
 
     public static bool ProcessInput
     {
@@ -91,6 +94,16 @@ public class InputManager : Control
         PauseMode = PauseModeEnum.Process;
         CurrentInputType = InputType.MouseAndKeyboard;
         GD.Randomize();
+
+        _focusStealer = new()
+        {
+            FocusMode = FocusModeEnum.All,
+            FocusNeighbourLeft = ".",
+            FocusNeighbourRight = ".",
+            FocusNeighbourTop = ".",
+            FocusNeighbourBottom = "."
+        };
+        AddChild(_focusStealer);
     }
 
     public override void _Process(float delta)
@@ -102,6 +115,11 @@ public class InputManager : Control
             _focusedControl = newFocus;
             if (newFocus is null)
                 TryFocusButton();
+        }
+
+        if (!ProcessInput && (!_focusedControl?.IsInGroup(DontStealFocusGroup) ?? false))
+        {
+            _focusStealer.GrabFocus();
         }
     }
 

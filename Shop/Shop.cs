@@ -93,13 +93,11 @@ public class Shop : Area2D, IInteractable
 
         if (!hadFirstTalk)
         {
-            InputManager.ProcessInput = false;
             SetExitButtonDisabled(true);
             dialogPlayer.Play("FirstMeeting");
             ToSignal(dialogPlayer, "DialogFinished").OnCompleted(() =>
             {
                 SetExitButtonDisabled(false);
-                InputManager.ProcessInput = true;
                 hadFirstTalk = true;
             });
             return;
@@ -122,13 +120,11 @@ public class Shop : Area2D, IInteractable
     private void OnShopRobbed()
     {
         GetTree().Paused = true;
-        InputManager.ProcessInput = false;
         SetExitButtonDisabled(true);
         dialogPlayer.Play("Robbery");
         ToSignal(dialogPlayer, "DialogFinished").OnCompleted(() =>
         {
             SetExitButtonDisabled(false);
-            InputManager.ProcessInput = true;
             GetTree().Paused = false;
         });
     }
