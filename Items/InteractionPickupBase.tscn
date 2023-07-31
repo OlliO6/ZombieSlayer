@@ -1,6 +1,6 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=1]
+[ext_resource path="res://BasicStuff/InteractInstruction.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Weapons/Guns/Pistol/PistolIcon.png" type="Texture" id=2]
 [ext_resource path="res://Sounds/WeaponCollect.wav" type="AudioStream" id=3]
 [ext_resource path="res://Items/InteractionPickupBase.cs" type="Script" id=4]
@@ -62,18 +62,6 @@ tracks/3/keys = {
 "method": "queue_free"
 } ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("Label:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 0.392292, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
 
 [sub_resource type="Animation" id=5]
 resource_name = "Idle"
@@ -83,7 +71,7 @@ loop = true
 [sub_resource type="Animation" id=9]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Label:modulate")
+tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -92,27 +80,15 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:position")
+tracks/1/path = NodePath("Sprite:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -121,82 +97,6 @@ tracks/2/keys = {
 
 [sub_resource type="CircleShape2D" id=8]
 radius = 3.0
-
-[sub_resource type="Animation" id=10]
-resource_name = "HideText"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("Label:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=11]
-resource_name = "Idle"
-length = 0.8
-loop = true
-
-[sub_resource type="Animation" id=12]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Label:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=13]
-resource_name = "ShowText"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("Label:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
 
 [node name="InteractionPickup" type="Area2D"]
 collision_layer = 32
@@ -221,32 +121,15 @@ shape = SubResource( 8 )
 stream = ExtResource( 3 )
 bus = "SFX"
 
-[node name="Label" type="Label" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -36.0
-margin_top = 3.0
-margin_right = 36.0
-margin_bottom = 17.0
-theme = ExtResource( 1 )
-text = "press 'e'"
-align = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
-root_node = NodePath("../..")
-autoplay = "Idle"
-anims/HideText = SubResource( 10 )
-anims/Idle = SubResource( 11 )
-anims/RESET = SubResource( 12 )
-anims/ShowText = SubResource( 13 )
+[node name="InteractInstruction" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 9 )
 
 [node name="VisibilityDisabler" parent="." instance=ExtResource( 5 )]
 position = Vector2( 2.98023e-08, 0 )
 scale = Vector2( 0.5, 0.5 )
 
 [connection signal="Collected" from="." to="AnimationPlayer" method="play" binds= [ "Collect" ]]
-[connection signal="PlayerEntered" from="." to="Label/AnimationPlayer" method="play" binds= [ "ShowText" ]]
-[connection signal="PlayerExited" from="." to="Label/AnimationPlayer" method="play" binds= [ "HideText" ]]
+[connection signal="PlayerEntered" from="." to="InteractInstruction" method="FadeIn"]
+[connection signal="PlayerExited" from="." to="InteractInstruction" method="FadeOut"]
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="area_exited" from="." to="." method="OnAreaExited"]

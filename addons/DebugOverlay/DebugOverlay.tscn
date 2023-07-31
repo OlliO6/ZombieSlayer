@@ -140,8 +140,8 @@ script = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_left = 2.0
-margin_top = 142.0
-margin_right = 2.0
+margin_top = 86.0
+margin_right = 98.0
 margin_bottom = 142.0
 mouse_filter = 2
 size_flags_horizontal = 0
@@ -149,9 +149,13 @@ size_flags_vertical = 8
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer"]
 visible = false
+margin_right = 96.0
+margin_bottom = 56.0
 color = Color( 0, 0, 0, 0.392157 )
 
 [node name="Logs" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+margin_right = 96.0
+margin_bottom = 56.0
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 10
@@ -445,7 +449,7 @@ margin_bottom = 21.0
 
 [node name="BackButton" type="Button" parent="Console/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 43.2
-margin_bottom = 21.2
+margin_bottom = 21.1333
 text = "Back"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Console/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -457,7 +461,7 @@ size_flags_horizontal = 6
 [node name="HideCommonButton" type="Button" parent="Console/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
 margin_left = -0.600014
 margin_right = 113.0
-margin_bottom = 21.2
+margin_bottom = 21.1333
 size_flags_horizontal = 10
 toggle_mode = true
 text = "Hide Common "
@@ -465,7 +469,7 @@ text = "Hide Common "
 [node name="HideTimeButton" type="Button" parent="Console/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
 margin_left = 116.0
 margin_right = 203.2
-margin_bottom = 21.2
+margin_bottom = 21.1333
 size_flags_horizontal = 6
 toggle_mode = true
 pressed = true
@@ -474,7 +478,7 @@ text = "Hide Time"
 [node name="ClearButton" type="Button" parent="Console/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 652.0
 margin_right = 704.0
-margin_bottom = 21.2
+margin_bottom = 21.1333
 size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.0
 text = "Clear"
@@ -495,9 +499,819 @@ custom_colors/selection_color = Color( 0.529412, 0.596078, 0.647059, 1 )
 bbcode_enabled = true
 bbcode_text = "[tint r=1 g=1 b=1 a=0.5]ZombieSlayer <Debug Editor> started[/tint]
 [tint r=0.88 g=1 b=1 a=1]OptionsManager: Saving Options[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to [/tint]
+[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
+[tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Started[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 5: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 6: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 7: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 8: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level8[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 9: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level8[/tint]
+[tint r=1 g=1 b=1 a=1]InputManager: Device Changed to 'Nintendo', name: 'Nintendo Switch Pro Controller'[/tint]
+[tint r=1 g=1 b=1 a=1]Node2D: Weapon Evolutions Unlocked.[/tint]
+[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started ShopPosition[/tint]
+[tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Ended[/tint]
+[tint r=1 g=1 b=1 a=1]ShopPosition: Explanation Started[/tint]
+[tint r=1 g=1 b=1 a=1]ShopPosition: Explanation Ended[/tint]
+[tint r=1 g=1 b=1 a=1]ShopPosition: Explanation Ended[/tint]
+[tint r=1 g=1 b=1 a=1]DiceInventory: Added Dice[/tint]
+[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started UpgradeDices[/tint]
+[tint r=1 g=1 b=1 a=1]UpgradeDices: Explanation Started[/tint]
+[tint r=1 g=1 b=1 a=1]UpgradeDices: Explanation Ended[/tint]
+[tint r=1 g=1 b=1 a=1]UpgradeDices: Explanation Ended[/tint]
+[tint r=1 g=1 b=1 a=1]InputManager: Device Changed to 'KeyboardMouse', name: 'Nintendo Switch Pro Controller'[/tint]
+[tint r=1 g=1 b=1 a=1]InputManager: Device Changed to 'Nintendo', name: 'Nintendo Switch Pro Controller'[/tint]
+[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started Health[/tint]
+[tint r=1 g=1 b=1 a=1]Health: Explanation Started[/tint]
+[tint r=1 g=1 b=1 a=1]Health: Explanation Ended[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Ended[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=0.88 g=1 b=1 a=1]WeaponSwitcher: Added weapon Pistol[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
+[tint r=0.88 g=1 b=1 a=1]PistolPickup: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 10: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level10[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Exploded[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Exploded[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Exploded[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Exploded[/tint]
+[tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Exploded[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Exploded[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Exploded[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Exploded[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]Coin: Collected[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Dagger[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]MouseBomb: Died[/tint]
+[tint r=1 g=1 b=1 a=1]Zombie: Died[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to Pistol[/tint]
+[tint r=0 g=0.75 b=1 a=1]Player: Is dying[/tint]
+[tint r=0 g=0.75 b=1 a=1]Player: Got 1 damage[/tint]
+[tint r=1 g=1 b=1 a=1]InputManager: Device Changed to 'KeyboardMouse', name: 'Nintendo Switch Pro Controller'[/tint]
+[tint r=1 g=1 b=1 a=1]WeaponSwitcher: Switched weapon to [/tint]
+[tint r=0.88 g=1 b=1 a=1]ExplanationsManager: Started MoveAndAttack[/tint]
+[tint r=1 g=1 b=1 a=1]MoveAndAttack: Explanation Started[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 0: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level0[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 1: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 2: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 3: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level1[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 4: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 5: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 6: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
+[tint r=0.5 g=1 b=0.83 a=1]Level 7: Reached[/tint]
+[tint r=1 g=1 b=1 a=1]EnemySpawner: Difficulty changed to Level4[/tint]
 "
 text = "ZombieSlayer <Debug Editor> started
 OptionsManager: Saving Options
+WeaponSwitcher: Switched weapon to 
+ExplanationsManager: Started MoveAndAttack
+MoveAndAttack: Explanation Started
+Level 0: Reached
+EnemySpawner: Difficulty changed to Level0
+Level 1: Reached
+EnemySpawner: Difficulty changed to Level1
+Level 2: Reached
+EnemySpawner: Difficulty changed to Level1
+Level 3: Reached
+EnemySpawner: Difficulty changed to Level1
+Level 4: Reached
+EnemySpawner: Difficulty changed to Level4
+Level 5: Reached
+EnemySpawner: Difficulty changed to Level4
+Level 6: Reached
+EnemySpawner: Difficulty changed to Level4
+Level 7: Reached
+EnemySpawner: Difficulty changed to Level4
+Level 8: Reached
+EnemySpawner: Difficulty changed to Level8
+Level 9: Reached
+EnemySpawner: Difficulty changed to Level8
+InputManager: Device Changed to 'Nintendo', name: 'Nintendo Switch Pro Controller'
+Node2D: Weapon Evolutions Unlocked.
+ExplanationsManager: Started ShopPosition
+MoveAndAttack: Explanation Ended
+ShopPosition: Explanation Started
+ShopPosition: Explanation Ended
+ShopPosition: Explanation Ended
+DiceInventory: Added Dice
+ExplanationsManager: Started UpgradeDices
+UpgradeDices: Explanation Started
+UpgradeDices: Explanation Ended
+UpgradeDices: Explanation Ended
+InputManager: Device Changed to 'KeyboardMouse', name: 'Nintendo Switch Pro Controller'
+InputManager: Device Changed to 'Nintendo', name: 'Nintendo Switch Pro Controller'
+ExplanationsManager: Started Health
+Health: Explanation Started
+Health: Explanation Ended
+Zombie: Died
+Zombie: Died
+MoveAndAttack: Explanation Ended
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Player: Got 1 damage
+Player: Got 1 damage
+Zombie: Died
+Coin: Collected
+Coin: Collected
+WeaponSwitcher: Added weapon Pistol
+WeaponSwitcher: Switched weapon to Dagger
+PistolPickup: Collected
+Zombie: Died
+Zombie: Died
+WeaponSwitcher: Switched weapon to Pistol
+Zombie: Died
+Zombie: Died
+Zombie: Died
+Coin: Collected
+WeaponSwitcher: Switched weapon to Dagger
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Zombie: Died
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+MouseBomb: Died
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Level 10: Reached
+EnemySpawner: Difficulty changed to Level10
+MouseBomb: Died
+MouseBomb: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+MouseBomb: Died
+Zombie: Died
+Zombie: Died
+Zombie: Died
+Zombie: Died
+MouseBomb: Exploded
+Zombie: Died
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Zombie: Died
+WeaponSwitcher: Switched weapon to Pistol
+Zombie: Died
+Zombie: Died
+Zombie: Died
+MouseBomb: Died
+Zombie: Died
+Player: Got 1 damage
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+WeaponSwitcher: Switched weapon to Dagger
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+MouseBomb: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+WeaponSwitcher: Switched weapon to Pistol
+MouseBomb: Died
+MouseBomb: Exploded
+Zombie: Died
+Zombie: Died
+Zombie: Died
+Coin: Collected
+WeaponSwitcher: Switched weapon to Dagger
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+WeaponSwitcher: Switched weapon to Pistol
+Zombie: Died
+Coin: Collected
+Zombie: Died
+Zombie: Died
+Zombie: Died
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+WeaponSwitcher: Switched weapon to Dagger
+Coin: Collected
+Coin: Collected
+Coin: Collected
+MouseBomb: Exploded
+Zombie: Died
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Zombie: Died
+WeaponSwitcher: Switched weapon to Pistol
+Zombie: Died
+Zombie: Died
+MouseBomb: Exploded
+Player: Got 1 damage
+Zombie: Died
+Coin: Collected
+MouseBomb: Exploded
+WeaponSwitcher: Switched weapon to Dagger
+WeaponSwitcher: Switched weapon to Pistol
+WeaponSwitcher: Switched weapon to Dagger
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Zombie: Died
+WeaponSwitcher: Switched weapon to Pistol
+Zombie: Died
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+WeaponSwitcher: Switched weapon to Dagger
+Coin: Collected
+Coin: Collected
+Zombie: Died
+MouseBomb: Died
+Zombie: Died
+Zombie: Died
+WeaponSwitcher: Switched weapon to Pistol
+Zombie: Died
+Zombie: Died
+Zombie: Died
+Zombie: Died
+WeaponSwitcher: Switched weapon to Dagger
+MouseBomb: Died
+WeaponSwitcher: Switched weapon to Pistol
+Zombie: Died
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Zombie: Died
+WeaponSwitcher: Switched weapon to Dagger
+MouseBomb: Exploded
+Zombie: Died
+Zombie: Died
+MouseBomb: Exploded
+Zombie: Died
+Zombie: Died
+MouseBomb: Exploded
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+MouseBomb: Died
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Zombie: Died
+WeaponSwitcher: Switched weapon to Pistol
+Zombie: Died
+Zombie: Died
+Zombie: Died
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Zombie: Died
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Zombie: Died
+MouseBomb: Died
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+WeaponSwitcher: Switched weapon to Dagger
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+MouseBomb: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+WeaponSwitcher: Switched weapon to Pistol
+Zombie: Died
+Zombie: Died
+Zombie: Died
+Zombie: Died
+Zombie: Died
+Zombie: Died
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Zombie: Died
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+Coin: Collected
+WeaponSwitcher: Switched weapon to Dagger
+Zombie: Died
+MouseBomb: Died
+Zombie: Died
+WeaponSwitcher: Switched weapon to Pistol
+Player: Is dying
+Player: Got 1 damage
+InputManager: Device Changed to 'KeyboardMouse', name: 'Nintendo Switch Pro Controller'
+WeaponSwitcher: Switched weapon to 
+ExplanationsManager: Started MoveAndAttack
+MoveAndAttack: Explanation Started
+Level 0: Reached
+EnemySpawner: Difficulty changed to Level0
+Level 1: Reached
+EnemySpawner: Difficulty changed to Level1
+Level 2: Reached
+EnemySpawner: Difficulty changed to Level1
+Level 3: Reached
+EnemySpawner: Difficulty changed to Level1
+Level 4: Reached
+EnemySpawner: Difficulty changed to Level4
+Level 5: Reached
+EnemySpawner: Difficulty changed to Level4
+Level 6: Reached
+EnemySpawner: Difficulty changed to Level4
+Level 7: Reached
+EnemySpawner: Difficulty changed to Level4
 "
 scroll_following = true
 selection_enabled = true
@@ -512,7 +1326,7 @@ margin_bottom = 425.0
 [node name="LineEdit" type="LineEdit" parent="Console/MarginContainer/VBoxContainer"]
 margin_top = 429.0
 margin_right = 704.0
-margin_bottom = 456.2
+margin_bottom = 456.133
 focus_neighbour_top = NodePath(".")
 focus_neighbour_bottom = NodePath(".")
 size_flags_stretch_ratio = 0.19

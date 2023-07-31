@@ -1,8 +1,8 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Shop/ShopKeeperRob_2.0.png" type="Texture" id=1]
 [ext_resource path="res://Shop/Shop.cs" type="Script" id=2]
-[ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=3]
+[ext_resource path="res://BasicStuff/InteractInstruction.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Shop/ShopMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/Diadot/Dialog.cs" type="Script" id=5]
 [ext_resource path="res://addons/Diadot/Actions/ToSignal.cs" type="Script" id=6]
@@ -37,53 +37,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=7]
 length = 0.001
 
-[sub_resource type="Animation" id=3]
-resource_name = "HideText"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("Label:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=4]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Label:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=5]
-resource_name = "ShowText"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("Label:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-
 [node name="Shop" type="Area2D"]
 collision_layer = 0
 collision_mask = 4
@@ -113,21 +66,8 @@ autoplay = "Fly"
 anims/Fly = SubResource( 6 )
 anims/RESET = SubResource( 7 )
 
-[node name="Label" type="Label" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-margin_left = -60.0
-margin_top = 4.0
-margin_right = 60.0
-margin_bottom = 18.0
-theme = ExtResource( 3 )
-text = "Press 'e'"
-align = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
-root_node = NodePath("../..")
-anims/HideText = SubResource( 3 )
-anims/RESET = SubResource( 4 )
-anims/ShowText = SubResource( 5 )
+[node name="InteractInstruction" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 11 )
 
 [node name="DialogPlayer" parent="." instance=ExtResource( 7 )]
 callableActions = [ NodePath("Actions/OpenShopMenu") ]
@@ -155,42 +95,46 @@ character = "Rob"
 [node name="MenuOpen" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes"]
 script = ExtResource( 5 )
 text = "\\hide/\\wait 1/\\openmenu/\\wait 1/\\show/This\\wait 1/ is my menu. 
-You can buy a 6 sided dice here. "
+You can buy a dice here. "
 character = "Rob"
 
 [node name="Explanation" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen"]
 script = ExtResource( 5 )
-text = "Press the + buttons to add items to the dice.
-\\wait 1/You can remove them in the dice preview by clicking the symbols."
+text = "Press the + buttons to add items to the dice."
 character = "Rob"
 
-[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation"]
+[node name="Dialog2" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation"]
+script = ExtResource( 5 )
+text = "The right side is the dice preview, it represents the 6 sides of the dice. When you roll a dice, one side is selected and you get the item that is on that side or nothing if the side is empty."
+character = "Rob"
+
+[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog2"]
 script = ExtResource( 5 )
 text = "When you're finish \\wait 0.5/press the buy dice button."
 character = "Rob"
 
-[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog"]
+[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog2/Dialog"]
 script = ExtResource( 5 )
 text = "I recommend filling all 6 sides \\wait 0.5/but you can do whatever you want.
 \\wait 1/\\d=0.02/Unless\\wati 1/\\reset d/ you don't rob \\objname Rob/."
 character = "Rob"
 
-[node name="AfterBuy" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog/Dialog"]
+[node name="AfterBuy" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog2/Dialog/Dialog"]
 script = ExtResource( 5 )
 text = "\\enableinput/\\grabfocus/\\hide/\\waitforbuy/\\show/\\disableinput/Great,\\wait 0.3/\\d=0.2/ you bought a die.
 \\wait 1/...
 \\reset d/It will help you not to\\wait 1/..."
 character = "Rob"
-callableActions = [ NodePath("../../../../../../../../Actions/WaitForBuyPressed"), NodePath("../../../../../../../../Actions/MenuUIGrabFocus"), NodePath("../../../../../../../../Actions/MenuUIReleaseFocus") ]
+callableActions = [ NodePath("../../../../../../../../../Actions/WaitForBuyPressed"), NodePath("../../../../../../../../../Actions/MenuUIGrabFocus"), NodePath("../../../../../../../../../Actions/MenuUIReleaseFocus") ]
 
-[node name="Dialog2" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog/Dialog/AfterBuy"]
+[node name="Dialog2" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog2/Dialog/Dialog/AfterBuy"]
 script = ExtResource( 5 )
 text = "[b]DIE![/b]
 \\wait 1/[shake]MIEEHIIHII!![/shake]"
 character = "Rob"
-callableActions = [ NodePath("../../../../../../../../../Actions/WaitForBuyPressed") ]
+callableActions = [ NodePath("../../../../../../../../../../Actions/WaitForBuyPressed") ]
 
-[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog/Dialog/AfterBuy/Dialog2"]
+[node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog2/Dialog/Dialog/AfterBuy/Dialog2"]
 script = ExtResource( 5 )
 text = "\\hide/\\wait 1/\\show/\\d = 0.1/Roll it with 'R', bye.\\enableinput/"
 character = "Rob"
@@ -292,8 +236,8 @@ layer = 2
 unique_name_in_owner = true
 visible = false
 
-[connection signal="PlayerEntered" from="." to="Label/AnimationPlayer" method="play" binds= [ "ShowText" ]]
-[connection signal="PlayerExited" from="." to="Label/AnimationPlayer" method="play" binds= [ "HideText" ]]
+[connection signal="PlayerEntered" from="." to="InteractInstruction" method="FadeIn"]
+[connection signal="PlayerExited" from="." to="InteractInstruction" method="FadeOut"]
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="area_exited" from="." to="." method="OnAreaExited"]
 [connection signal="Robbed" from="CanvasLayer/ShopMenu" to="." method="OnShopRobbed"]

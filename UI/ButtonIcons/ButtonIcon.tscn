@@ -14,10 +14,10 @@
 script = ExtResource( 5 )
 
 [node name="Unknown" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 6 )
 
 [node name="Wasd" type="Sprite" parent="."]
-visible = false
 texture = ExtResource( 2 )
 
 [node name="MouseCursor" type="Sprite" parent="."]

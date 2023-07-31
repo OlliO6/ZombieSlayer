@@ -31,6 +31,7 @@ public class InputManager : Control
     public static bool attackInput;
     private static InputType _currentInputType;
 
+    public static event Action<bool> InputDisabled;
     public static event Action InputTypeChanged;
     public static event Action DeviceChanged;
     public static event Action AttackInputStarted;
@@ -58,7 +59,11 @@ public class InputManager : Control
     public static bool ProcessInput
     {
         get => instance.IsProcessingUnhandledInput();
-        set => instance.SetProcessUnhandledInput(value);
+        set
+        {
+            instance.SetProcessUnhandledInput(value);
+            InputDisabled?.Invoke(value);
+        }
     }
 
     public static DeviceType CurrentDevice

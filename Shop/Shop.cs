@@ -89,7 +89,6 @@ public class Shop : Area2D, IInteractable
     {
         PauseMode = PauseModeEnum.Process;
         GetTree().Paused = true;
-        Deselect();
 
         if (!hadFirstTalk)
         {
