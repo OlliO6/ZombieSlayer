@@ -23,9 +23,9 @@ public class GameButton : Button
         InputManager.InputTypeChanged -= OnInputTypeChanged;
     }
 
-    private void OnInputTypeChanged(InputManager.InputType type)
+    private void OnInputTypeChanged()
     {
-        if (type is InputManager.InputType.Controller)
+        if (InputManager.CurrentInputType is InputManager.InputType.Controller)
             UpdateSelection();
     }
 

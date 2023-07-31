@@ -1,6 +1,7 @@
 using System;
 using Additions;
 using Godot;
+using System.Linq;
 
 public class InputManager : Control
 {
@@ -17,12 +18,21 @@ public class InputManager : Control
         Controller
     }
 
+    public enum DeviceType
+    {
+        KeyboardMouse,
+        Playstation,
+        XBox,
+        Nintendo
+    }
+
     public static InputManager instance;
 
     public static bool attackInput;
     private static InputType _currentInputType;
 
-    public static event Action<InputType> InputTypeChanged;
+    public static event Action InputTypeChanged;
+    public static event Action DeviceChanged;
     public static event Action AttackInputStarted;
     public static event Action AttackInputEnded;
     public static event Action AbilityInputStarted;
@@ -43,11 +53,25 @@ public class InputManager : Control
 
     private Control _focusedControl;
     private Control _focusStealer;
+    private static DeviceType _currentDevice;
 
     public static bool ProcessInput
     {
         get => instance.IsProcessingUnhandledInput();
         set => instance.SetProcessUnhandledInput(value);
+    }
+
+    public static DeviceType CurrentDevice
+    {
+        get => _currentDevice;
+        set
+        {
+            if (value == CurrentDevice)
+                return;
+
+            _currentDevice = value;
+            DeviceChanged?.Invoke();
+        }
     }
 
     public static InputType CurrentInputType
@@ -59,7 +83,7 @@ public class InputManager : Control
                 return;
 
             _currentInputType = value;
-            InputTypeChanged?.Invoke(value);
+            InputTypeChanged?.Invoke();
 
             switch (CurrentInputType)
             {
@@ -85,6 +109,8 @@ public class InputManager : Control
                         InputMap.ActionAddEvent(MoveDownActionName, MoveDownControllerEvent);
                     break;
             }
+
+            UpdateCurrentDeviceType();
         }
     }
 
@@ -104,6 +130,43 @@ public class InputManager : Control
             FocusNeighbourBottom = "."
         };
         AddChild(_focusStealer);
+
+        Input.Singleton.Connect("joy_connection_changed", this, nameof(OnJoyConnectionChanged));
+        UpdateCurrentDeviceType();
+    }
+
+    private void OnJoyConnectionChanged(int device, bool connected)
+    {
+        if (device != 0)
+            return;
+
+        if (!connected)
+        {
+            CurrentInputType = InputType.MouseAndKeyboard;
+            return;
+        }
+
+        CurrentInputType = InputType.Controller;
+        UpdateCurrentDeviceType();
+    }
+
+    public static void UpdateCurrentDeviceType()
+    {
+        if (CurrentInputType is InputType.MouseAndKeyboard)
+        {
+            CurrentDevice = DeviceType.KeyboardMouse;
+            return;
+        }
+
+        var controllerName = Input.GetJoyName(0).ToLowerInvariant();
+
+        if (new[] { "ps3 controller", "ps4 controller", "ps5 controller" }.Any(c => controllerName.Contains(c)))
+            CurrentDevice = DeviceType.Playstation;
+
+        if (new[] { "switch controller", "switch pro controller", "joy-con", "nintendo switch" }.Any(c => controllerName.Contains(c)))
+            CurrentDevice = DeviceType.Nintendo;
+
+        CurrentDevice = DeviceType.XBox;
     }
 
     public override void _Process(float delta)

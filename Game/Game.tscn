@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Tilemaps.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Game/EnemySpawner.cs" type="Script" id=4]
 [ext_resource path="res://Music/GameSong.wav" type="AudioStream" id=5]
 [ext_resource path="res://Enemies/Zombie/Zombie.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/ButtonIcons/ButtonIcon.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Game/DifficultyLevel.cs" type="Script" id=8]
 [ext_resource path="res://Game/EnemyInstantiater.cs" type="Script" id=9]
 [ext_resource path="res://addons/Random Scene Node/RandomScene.cs" type="Script" id=10]
@@ -57,14 +58,19 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="Explanations/MoveAndAttack/MoveTutorial"]
+anchor_left = 0.14
 anchor_right = 1.0
 margin_top = 16.0
 size_flags_vertical = 1
-text = "Move with 'wasd'"
+text = "to move"
 align = 1
 valign = 1
 
+[node name="MoveIcon" parent="Explanations/MoveAndAttack/MoveTutorial" instance=ExtResource( 7 )]
+position = Vector2( 102, 25 )
+
 [node name="AttackTutorial" type="Control" parent="Explanations/MoveAndAttack"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -76,12 +82,25 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="Explanations/MoveAndAttack/AttackTutorial"]
+anchor_left = 0.14
 anchor_right = 1.0
-margin_top = 16.0
+margin_left = 82.16
+margin_top = 14.0
+margin_right = 82.16
+margin_bottom = 43.0
 size_flags_vertical = 1
-text = "Attack with 'left mouse'"
-align = 1
+custom_constants/line_spacing = 6
+text = "to aim
+to attack"
 valign = 1
+
+[node name="AimIcon" parent="Explanations/MoveAndAttack/AttackTutorial" instance=ExtResource( 7 )]
+position = Vector2( 103, 18 )
+inputAction = 1
+
+[node name="AttackIcon" parent="Explanations/MoveAndAttack/AttackTutorial" instance=ExtResource( 7 )]
+position = Vector2( 103, 38 )
+inputAction = 2
 
 [node name="Health" type="Control" parent="Explanations"]
 visible = false
@@ -146,9 +165,13 @@ alignment = 1
 margin_right = 256.0
 margin_bottom = 13.0
 size_flags_vertical = 1
-text = "Press 'R' to roll you dices"
+text = "to roll you dices"
 align = 1
 valign = 1
+
+[node name="ButtonIcon" parent="Explanations/UpgradeDices/VBoxContainer/Label" instance=ExtResource( 7 )]
+position = Vector2( 48.16, 7 )
+inputAction = 5
 
 [node name="Button" parent="Explanations/UpgradeDices/VBoxContainer" instance=ExtResource( 3 )]
 margin_left = 117.0
