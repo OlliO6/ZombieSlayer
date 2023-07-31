@@ -121,12 +121,12 @@ public class ButtonIcons : Node2D
         {
             case InputAction.Move:
                 StickIcons.Show();
-                StickIcons.Frame = 0;
+                StickIcons.Frame = 1;
                 return;
 
             case InputAction.Aim:
                 StickIcons.Show();
-                StickIcons.Frame = 1;
+                StickIcons.Frame = 0;
                 return;
 
             case InputAction.Inventory:

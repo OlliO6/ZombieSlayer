@@ -71,6 +71,7 @@ public class InputManager : Control
 
             _currentDevice = value;
             DeviceChanged?.Invoke();
+            Debug.Log(instance, $"Device Changed to '{value}', name: '{Input.GetJoyName(0)}'");
         }
     }
 
@@ -161,10 +162,16 @@ public class InputManager : Control
         var controllerName = Input.GetJoyName(0).ToLowerInvariant();
 
         if (new[] { "ps3 controller", "ps4 controller", "ps5 controller" }.Any(c => controllerName.Contains(c)))
+        {
             CurrentDevice = DeviceType.Playstation;
+            return;
+        }
 
         if (new[] { "switch controller", "switch pro controller", "joy-con", "nintendo switch" }.Any(c => controllerName.Contains(c)))
+        {
             CurrentDevice = DeviceType.Nintendo;
+            return;
+        }
 
         CurrentDevice = DeviceType.XBox;
     }
