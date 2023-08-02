@@ -51,7 +51,8 @@ margin_bottom = 2.0
 mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
-margin_right = 186.0
+margin_left = 70.0
+margin_right = 116.0
 margin_bottom = 26.0
 mouse_filter = 2
 custom_constants/margin_right = 4
@@ -63,7 +64,7 @@ custom_constants/margin_bottom = 4
 unique_name_in_owner = true
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 182.0
+margin_right = 42.0
 margin_bottom = 22.0
 mouse_filter = 2
 custom_constants/separation = 2
@@ -75,34 +76,6 @@ alignment = 1
 margin_left = 20.0
 margin_right = 38.0
 Icon = ExtResource( 5 )
-
-[node name="WeaponField3" parent="CenterContainer/MarginContainer/WeaponContainer" instance=ExtResource( 6 )]
-margin_left = 40.0
-margin_right = 58.0
-
-[node name="WeaponField4" parent="CenterContainer/MarginContainer/WeaponContainer" instance=ExtResource( 6 )]
-margin_left = 60.0
-margin_right = 78.0
-
-[node name="WeaponField5" parent="CenterContainer/MarginContainer/WeaponContainer" instance=ExtResource( 6 )]
-margin_left = 80.0
-margin_right = 98.0
-
-[node name="WeaponField6" parent="CenterContainer/MarginContainer/WeaponContainer" instance=ExtResource( 6 )]
-margin_left = 100.0
-margin_right = 118.0
-
-[node name="WeaponField7" parent="CenterContainer/MarginContainer/WeaponContainer" instance=ExtResource( 6 )]
-margin_left = 120.0
-margin_right = 138.0
-
-[node name="WeaponField8" parent="CenterContainer/MarginContainer/WeaponContainer" instance=ExtResource( 6 )]
-margin_left = 140.0
-margin_right = 158.0
-
-[node name="WeaponField9" parent="CenterContainer/MarginContainer/WeaponContainer" instance=ExtResource( 6 )]
-margin_left = 160.0
-margin_right = 178.0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0

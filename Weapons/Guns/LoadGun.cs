@@ -72,7 +72,7 @@ public class LoadGun : ShootingWeaponBase
         EmitSignal(nameof(AttackStarted));
     }
 
-    protected override void AttackInputProcess(float delta)
+    public override void AttackInputProcess(float delta)
     {
         if (isAttacking) return;
 
@@ -106,7 +106,7 @@ public class LoadGun : ShootingWeaponBase
 
     private void PauseBullet() => lastBullet.liveAwaiter.Pause();
 
-    protected override void AttackInputEnded()
+    public override void AttackInputEnded()
     {
         if (isAttacking || !isLoading) return;
 

@@ -49,9 +49,10 @@ public class MeleeBase : WeaponBase
         }
     }
 
-    protected override void AttackInputStarted()
+    public override void AttackInputStarted()
     {
-        if (!isAttacking) Attack();
+        if (!isAttacking)
+            Attack();
     }
 
     public override void Attack()

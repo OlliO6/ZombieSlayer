@@ -22,16 +22,26 @@ public class WeaponSwitcher : Node2D
 
     public override void _EnterTree()
     {
-        InputManager.DropWeaponPressed += DropCurrentWeapon;
         InputManager.SwitchWeaponLeftPressed += SwitchWeaponLeft;
         InputManager.SwitchWeaponRightPressed += SwitchWeaponRight;
+        InputManager.AttackInputStarted += AttackInputStarted;
+        InputManager.AttackInputEnded += AttackInputEnded;
+        InputManager.AttackLeftStarted += AttackLeftStarted;
+        InputManager.AttackLeftEnded += AttackLeftEnded;
+        InputManager.AttackRightStarted += AttackRightStarted;
+        InputManager.AttackRightEnded += AttackRightEnded;
     }
 
     public override void _ExitTree()
     {
-        InputManager.DropWeaponPressed -= DropCurrentWeapon;
         InputManager.SwitchWeaponLeftPressed -= SwitchWeaponLeft;
         InputManager.SwitchWeaponRightPressed -= SwitchWeaponRight;
+        InputManager.AttackInputStarted -= AttackInputStarted;
+        InputManager.AttackInputEnded -= AttackInputEnded;
+        InputManager.AttackLeftStarted -= AttackLeftStarted;
+        InputManager.AttackLeftEnded -= AttackLeftEnded;
+        InputManager.AttackRightStarted -= AttackRightStarted;
+        InputManager.AttackRightEnded -= AttackRightEnded;
     }
 
     public override void _Ready()
@@ -48,17 +58,61 @@ public class WeaponSwitcher : Node2D
         }
     }
 
-    private void SwitchWeaponLeft()
+    private void AttackInputStarted()
     {
-        currentIndex--;
-        if (currentIndex < 0) currentIndex = GetChildCount() - 1;
+        CurrentWeapon?.AttackInputStarted();
+    }
+
+    private void AttackInputEnded()
+    {
+        CurrentWeapon?.AttackInputEnded();
+    }
+
+    private void AttackLeftStarted()
+    {
+        SwitchWeaponLeft();
+        CurrentWeapon?.AttackInputStarted();
+    }
+
+    private void AttackRightStarted()
+    {
+        SwitchWeaponRight();
+        CurrentWeapon?.AttackInputStarted();
+    }
+
+    private void AttackLeftEnded()
+    {
+        if (currentIndex == 0)
+            CurrentWeapon?.AttackInputEnded();
+    }
+
+    private void AttackRightEnded()
+    {
+        if (currentIndex == 1)
+            CurrentWeapon?.AttackInputEnded();
+    }
+
+    public override void _Process(float delta)
+    {
+        if (InputManager.AttackInput)
+            CurrentWeapon?.AttackInputProcess(delta);
+    }
+
+    public void SwitchWeaponLeft()
+    {
+        if (currentIndex == 0)
+            return;
+
+        currentIndex = 0;
         WeaponsChanged();
     }
 
-    private void SwitchWeaponRight()
+    public void SwitchWeaponRight()
     {
-        currentIndex++;
-        if (currentIndex > GetChildCount() - 1) currentIndex = 0;
+        if (currentIndex == 1)
+            return;
+
+        currentIndex = 1;
         WeaponsChanged();
     }
 
@@ -79,27 +133,6 @@ public class WeaponSwitcher : Node2D
                 case (int)KeyList.Key2:
                     if (GetChildCount() >= 2) currentIndex = 1;
                     break;
-                case (int)KeyList.Key3:
-                    if (GetChildCount() >= 3) currentIndex = 2;
-                    break;
-                case (int)KeyList.Key4:
-                    if (GetChildCount() >= 4) currentIndex = 3;
-                    break;
-                case (int)KeyList.Key5:
-                    if (GetChildCount() >= 5) currentIndex = 4;
-                    break;
-                case (int)KeyList.Key6:
-                    if (GetChildCount() >= 6) currentIndex = 5;
-                    break;
-                case (int)KeyList.Key7:
-                    if (GetChildCount() >= 7) currentIndex = 6;
-                    break;
-                case (int)KeyList.Key8:
-                    if (GetChildCount() >= 8) currentIndex = 7;
-                    break;
-                case (int)KeyList.Key9:
-                    if (GetChildCount() >= 9) currentIndex = 8;
-                    break;
             }
 
             if (prevIndex != currentIndex) WeaponsChanged();
@@ -108,10 +141,14 @@ public class WeaponSwitcher : Node2D
 
     public void WeaponsChanged()
     {
+        if (currentIndex < 0)
+            currentIndex = 0;
+        else if (currentIndex > Mathf.Min(GetChildCount() - 1, 1))
+            currentIndex = GetChildCount() - 1;
+
         Debug.Log(this, $"Switched weapon to {(IsInstanceValid(CurrentWeapon) ? CurrentWeapon.Name : CurrentWeapon)}");
 
         CurrentWeapon = GetChild<WeaponBase>(currentIndex);
-
         EmitSignal(nameof(WeaponChanged), currentIndex);
     }
 

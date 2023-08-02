@@ -44,16 +44,12 @@ public abstract class WeaponBase : Node2D
 
     public virtual void Disable()
     {
-        InputManager.AttackInputStarted -= AttackInputStarted;
-        InputManager.AttackInputEnded -= AttackInputEnded;
         Visible = false;
         disabled = true;
         EmitSignal(nameof(Disabled));
     }
     public virtual void Enable()
     {
-        InputManager.AttackInputStarted += AttackInputStarted;
-        InputManager.AttackInputEnded += AttackInputEnded;
         Visible = true;
         disabled = false;
         EmitSignal(nameof(Enabled));
@@ -66,15 +62,9 @@ public abstract class WeaponBase : Node2D
         RotateWeapon();
     }
 
-    public override void _Process(float delta)
-    {
-        if (InputManager.attackInput && !disabled)
-            AttackInputProcess(delta);
-    }
-
-    protected virtual void AttackInputStarted() { }
-    protected virtual void AttackInputEnded() { }
-    protected virtual void AttackInputProcess(float delta) { }
+    public virtual void AttackInputStarted() { }
+    public virtual void AttackInputEnded() { }
+    public virtual void AttackInputProcess(float delta) { }
     public virtual void Attack() { isAttacking = true; EmitSignal(nameof(AttackStarted)); }
     protected virtual void OnAnimationFinished(string animation)
     {

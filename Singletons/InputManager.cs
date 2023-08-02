@@ -28,7 +28,6 @@ public class InputManager : Control
 
     public static InputManager instance;
 
-    public static bool attackInput;
     private static InputType _currentInputType;
 
     public static event Action<bool> InputDisabled;
@@ -47,6 +46,15 @@ public class InputManager : Control
     public static event Action PausePressed;
     public static event Action InteractPressed;
 
+    public static event Action AttackLeftStarted;
+    public static event Action AttackLeftEnded;
+    public static event Action AttackRightStarted;
+    public static event Action AttackRightEnded;
+    public static event Action AbilityRightStarted;
+    public static event Action AbilityRightEnded;
+    public static event Action AbilityLeftStarted;
+    public static event Action AbilityLeftEnded;
+
     private static readonly InputEventJoypadMotion MoveLeftControllerEvent = new() { Axis = (int)JoystickList.Axis0, AxisValue = -1 };
     private static readonly InputEventJoypadMotion MoveRightControllerEvent = new() { Axis = (int)JoystickList.Axis0, AxisValue = 1 };
     private static readonly InputEventJoypadMotion MoveUpControllerEvent = new() { Axis = (int)JoystickList.Axis1, AxisValue = -1 };
@@ -55,6 +63,9 @@ public class InputManager : Control
     private Control _focusedControl;
     private Control _focusStealer;
     private static DeviceType _currentDevice;
+
+    public static bool AttackInput => Input.IsActionPressed("Attack") || Input.IsActionPressed("AttackLeft") || Input.IsActionPressed("AttackRight");
+    public static bool AbilityInput => Input.IsActionPressed("Ability") || Input.IsActionPressed("AbilityLeft") || Input.IsActionPressed("AbilityRight");
 
     public static bool ProcessInput
     {
@@ -242,45 +253,46 @@ public class InputManager : Control
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (@event.IsAction("Attack"))
-        {
-            if (@event.IsPressed())
-            {
-                attackInput = true;
-                AttackInputStarted?.Invoke();
-                return;
-            }
+        bool playerProcessing = Player.currentPlayer?.PauseMode == PauseModeEnum.Process;
 
-            attackInput = false;
-            AttackInputEnded?.Invoke();
-            return;
-        }
-
-        if (@event.IsAction("Ability"))
-        {
-            if (@event.IsPressed())
-            {
-                AbilityInputStarted?.Invoke();
-                return;
-            }
-
-            AbilityInputEnded?.Invoke();
-            return;
-        }
-
-        InvokeIfActionPressed(@event, "Interact", InteractPressed);
-        InvokeIfActionPressed(@event, "DropWeapon", DropWeaponPressed);
-        InvokeIfActionPressed(@event, "SwitchWeaponRight", SwitchWeaponRightPressed);
-        InvokeIfActionPressed(@event, "SwitchWeaponLeft", SwitchWeaponLeftPressed);
         InvokeIfActionPressed(@event, "Pause", PausePressed, true);
         InvokeIfActionPressed(@event, "ui_cancel", UICancelPressed, true);
         InvokeIfActionPressed(@event, "Inventory", InventoryPressed, true);
         InvokeIfActionPressed(@event, "DiceMenu", DiceMenuPressed, true);
+
+        InvokeIfActionPressed(@event, "Interact", InteractPressed, playerProcessing);
+        InvokeIfActionPressed(@event, "SwitchWeaponRight", SwitchWeaponRightPressed, playerProcessing);
+        InvokeIfActionPressed(@event, "SwitchWeaponLeft", SwitchWeaponLeftPressed, playerProcessing);
+
+        InvokeIfActionPressed(@event, "Attack", AttackInputStarted, playerProcessing);
+        InvokeIfActionReleased(@event, "Attack", AttackInputEnded, playerProcessing);
+        InvokeIfActionPressed(@event, "Ability", AbilityInputStarted, playerProcessing);
+        InvokeIfActionReleased(@event, "Ability", AbilityInputEnded, playerProcessing);
+
+        InvokeIfActionPressed(@event, "AttackRight", AttackRightStarted, playerProcessing);
+        InvokeIfActionReleased(@event, "AttackRight", AttackRightEnded, playerProcessing);
+        InvokeIfActionPressed(@event, "AttackLeft", AttackLeftStarted, playerProcessing);
+        InvokeIfActionReleased(@event, "AttackLeft", AttackLeftEnded, playerProcessing);
+
+        InvokeIfActionPressed(@event, "AbilityRight", AbilityRightStarted, playerProcessing);
+        InvokeIfActionReleased(@event, "AbilityRight", AbilityRightEnded, playerProcessing);
+        InvokeIfActionPressed(@event, "AbilityLeft", AbilityLeftStarted, playerProcessing);
+        InvokeIfActionReleased(@event, "AbilityLeft", AbilityLeftEnded, playerProcessing);
     }
 
     private bool InvokeIfActionPressed(InputEvent @event, string actionName, Action eventAction, bool ignorePausing = false)
     {
         if (@event.IsActionPressed(actionName) && (ignorePausing || !instance.GetTree().Paused))
+        {
+            eventAction?.Invoke();
+            return true;
+        }
+        return false;
+    }
+
+    private bool InvokeIfActionReleased(InputEvent @event, string actionName, Action eventAction, bool ignorePausing = false)
+    {
+        if (@event.IsActionReleased(actionName) && (ignorePausing || !instance.GetTree().Paused))
         {
             eventAction?.Invoke();
             return true;

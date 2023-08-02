@@ -25,12 +25,12 @@ public class Gun : ShootingWeaponBase
     public override int GetBulletDamage() => Mathf.RoundToInt(bulletDamage * (Player.currentPlayer is null ? 1 : Player.currentPlayer.damageMultiplier));
     public override float GetBulletSpeed() => (float)GD.RandRange(bulletSpeedRange.x, bulletSpeedRange.y);
 
-    protected override void AttackInputStarted()
+    public override void AttackInputStarted()
     {
         if (!isAttacking) Attack();
     }
 
-    protected override void AttackInputProcess(float delta)
+    public override void AttackInputProcess(float delta)
     {
         if (allowHold && !isAttacking) Attack();
     }
