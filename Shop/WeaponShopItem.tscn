@@ -9,6 +9,7 @@ margin_left = 1.0
 margin_top = 1.0
 margin_right = 87.0
 margin_bottom = 18.0
+mouse_filter = 2
 script = ExtResource( 2 )
 
 [node name="Button" parent="." instance=ExtResource( 1 )]
@@ -31,6 +32,7 @@ patch_margin_bottom = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_right = 86.0
 margin_bottom = 17.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="Icon" type="TextureRect" parent="HBoxContainer"]
@@ -38,6 +40,7 @@ unique_name_in_owner = true
 margin_right = 16.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 16, 16 )
+mouse_filter = 2
 stretch_mode = 4
 
 [node name="PriceLabel" type="Label" parent="HBoxContainer"]

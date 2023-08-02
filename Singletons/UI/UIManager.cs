@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class UIManager : CanvasLayer
+public class UIManager : Node
 {
     public static UIManager Instance { get; private set; }
 
@@ -17,6 +17,7 @@ public class UIManager : CanvasLayer
     {
         descriptionContainer = GetNode<Container>("%DescriptionContainer");
         description = GetNode<Label>("%Description");
+        Input.MouseMode = Input.MouseModeEnum.Confined;
     }
 
     public static void ShowDescription(string text, Control control) => Instance._ShowDescription(text, control);
