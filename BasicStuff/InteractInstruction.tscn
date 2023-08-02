@@ -6,6 +6,7 @@
 [ext_resource path="res://UI/ButtonIcons/Controller/XBox.png" type="Texture" id=4]
 
 [node name="InteractInstruction" instance=ExtResource( 1 )]
+pause_mode = 2
 modulate = Color( 1, 1, 1, 0 )
 script = ExtResource( 2 )
 inputAction = 4

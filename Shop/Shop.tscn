@@ -136,7 +136,7 @@ callableActions = [ NodePath("../../../../../../../../../../Actions/WaitForBuyPr
 
 [node name="Dialog" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke/Yes/MenuOpen/Explanation/Dialog2/Dialog/Dialog/AfterBuy/Dialog2"]
 script = ExtResource( 5 )
-text = "\\hide/\\wait 1/\\show/\\d = 0.1/Roll it with 'R', bye.\\enableinput/"
+text = "\\hide/\\wait 1/\\show/\\d = 0.1/Bye.\\enableinput/"
 character = "Rob"
 
 [node name="No" type="Node" parent="DialogPlayer/FirstMeeting/BadJoke"]

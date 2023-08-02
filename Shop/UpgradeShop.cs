@@ -25,6 +25,7 @@ public class UpgradeShop : HBoxContainer
         DiceUpdate();
 
         DiceScenesContainer.Connect(nameof(DiceScenesContainer.Interacted), this, nameof(OnSceneFieldInteracted));
+        DiceScenesContainer.Connect(nameof(DiceScenesContainer.LostFocus), ShopMenu, nameof(ShopMenu.GrabUIFocus));
     }
 
     private void OnSceneFieldInteracted(int index)
