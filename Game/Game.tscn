@@ -1,226 +1,22 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Tilemaps.tscn" type="PackedScene" id=2]
-[ext_resource path="res://UI/CustomControls/Button/Button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game/Explanations.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Game/EnemySpawner.cs" type="Script" id=4]
 [ext_resource path="res://Music/GameSong.wav" type="AudioStream" id=5]
 [ext_resource path="res://Enemies/Zombie/Zombie.tscn" type="PackedScene" id=6]
-[ext_resource path="res://UI/ButtonIcons/ButtonIcon.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Game/DifficultyLevel.cs" type="Script" id=8]
 [ext_resource path="res://Game/EnemyInstantiater.cs" type="Script" id=9]
 [ext_resource path="res://addons/Random Scene Node/RandomScene.cs" type="Script" id=10]
 [ext_resource path="res://Game/GameState.cs" type="Script" id=11]
-[ext_resource path="res://Singletons/Explanations/ShowHideExplanation.cs" type="Script" id=12]
-[ext_resource path="res://Singletons/Explanations/MoveAndAttackExplanations.cs" type="Script" id=13]
-[ext_resource path="res://Shaders/Vigniette.shader" type="Shader" id=14]
-[ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=15]
 [ext_resource path="res://Enemies/MouseBomb/MouseBomb.tscn" type="PackedScene" id=17]
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 14 )
-shader_param/size = 0.324
-shader_param/smoothness = 0.523
-shader_param/color = Color( 0, 0, 0, 0.784314 )
 
 [node name="Node2D" type="YSort"]
 script = ExtResource( 11 )
 shopParent = NodePath("ShopPos")
 
-[node name="Explanations" type="CanvasLayer" parent="."]
-pause_mode = 2
-layer = 5
-
-[node name="MoveAndAttack" type="Control" parent="Explanations"]
-visible = false
-margin_right = 256.0
-margin_bottom = 144.0
-mouse_filter = 2
-theme = ExtResource( 15 )
-script = ExtResource( 13 )
-startDelay = 0.5
-minWalkDist = 20.0
-minZombieDist = 50.0
-moveFadeInTime = 1.0
-moveFadeOutTime = 1.0
-attackFadeInTime = 0.5
-attackFadeOutTime = 0.5
-
-[node name="MoveTutorial" type="Control" parent="Explanations/MoveAndAttack"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-
-[node name="ColorRect" type="ColorRect" parent="Explanations/MoveAndAttack/MoveTutorial"]
-material = SubResource( 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Explanations/MoveAndAttack/MoveTutorial"]
-anchor_left = 0.14
-anchor_right = 1.0
-margin_top = 16.0
-size_flags_vertical = 1
-text = "to move"
-align = 1
-valign = 1
-
-[node name="MoveIcon" parent="Explanations/MoveAndAttack/MoveTutorial" instance=ExtResource( 7 )]
-position = Vector2( 102, 25 )
-
-[node name="AttackTutorial" type="Control" parent="Explanations/MoveAndAttack"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-
-[node name="ColorRect" type="ColorRect" parent="Explanations/MoveAndAttack/AttackTutorial"]
-material = SubResource( 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Explanations/MoveAndAttack/AttackTutorial"]
-anchor_left = 0.14
-anchor_right = 1.0
-margin_left = 82.16
-margin_top = 14.0
-margin_right = 82.16
-margin_bottom = 43.0
-size_flags_vertical = 1
-custom_constants/line_spacing = 6
-text = "to aim
-to attack"
-valign = 1
-
-[node name="AimIcon" parent="Explanations/MoveAndAttack/AttackTutorial" instance=ExtResource( 7 )]
-position = Vector2( 103, 18 )
-inputAction = 1
-
-[node name="AttackIcon" parent="Explanations/MoveAndAttack/AttackTutorial" instance=ExtResource( 7 )]
-position = Vector2( 103, 38 )
-inputAction = 2
-
-[node name="Health" type="Control" parent="Explanations"]
-visible = false
-margin_right = 256.0
-margin_bottom = 144.0
-mouse_filter = 2
-theme = ExtResource( 15 )
-script = ExtResource( 12 )
-
-[node name="ColorRect" type="ColorRect" parent="Explanations/Health"]
-material = SubResource( 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Explanations/Health"]
-anchor_right = 1.0
-margin_top = 8.0
-mouse_filter = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="Explanations/Health/VBoxContainer"]
-margin_right = 256.0
-margin_bottom = 29.0
-size_flags_vertical = 1
-text = "Level ups will heal you
-And you can die now"
-align = 1
-valign = 1
-
-[node name="Button" parent="Explanations/Health/VBoxContainer" instance=ExtResource( 3 )]
-margin_left = 117.0
-margin_top = 33.0
-margin_right = 139.0
-margin_bottom = 50.0
-size_flags_horizontal = 4
-theme_type_variation = "SmallButton"
-text = "Ok"
-autoSelect = true
-
-[node name="UpgradeDices" type="Control" parent="Explanations"]
-visible = false
-margin_right = 256.0
-margin_bottom = 144.0
-mouse_filter = 2
-theme = ExtResource( 15 )
-script = ExtResource( 12 )
-
-[node name="ColorRect" type="ColorRect" parent="Explanations/UpgradeDices"]
-material = SubResource( 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Explanations/UpgradeDices"]
-anchor_right = 1.0
-margin_top = 24.0
-mouse_filter = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="Explanations/UpgradeDices/VBoxContainer"]
-margin_right = 256.0
-margin_bottom = 13.0
-size_flags_vertical = 1
-text = "to roll you dices"
-align = 1
-valign = 1
-
-[node name="ButtonIcon" parent="Explanations/UpgradeDices/VBoxContainer/Label" instance=ExtResource( 7 )]
-position = Vector2( 48.16, 7 )
-inputAction = 5
-
-[node name="Button" parent="Explanations/UpgradeDices/VBoxContainer" instance=ExtResource( 3 )]
-margin_left = 117.0
-margin_top = 17.0
-margin_right = 139.0
-margin_bottom = 34.0
-size_flags_horizontal = 4
-theme_type_variation = "SmallButton"
-text = "Ok"
-autoSelect = true
-
-[node name="ShopPosition" type="Control" parent="Explanations"]
-visible = false
-margin_right = 256.0
-margin_bottom = 144.0
-mouse_filter = 2
-theme = ExtResource( 15 )
-script = ExtResource( 12 )
-
-[node name="ColorRect" type="ColorRect" parent="Explanations/ShopPosition"]
-material = SubResource( 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Explanations/ShopPosition"]
-anchor_right = 1.0
-margin_top = 8.0
-mouse_filter = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="Explanations/ShopPosition/VBoxContainer"]
-margin_right = 256.0
-margin_bottom = 29.0
-size_flags_vertical = 1
-text = "The shop is at the 
-top of the map"
-align = 1
-valign = 1
-
-[node name="Button" parent="Explanations/ShopPosition/VBoxContainer" instance=ExtResource( 3 )]
-margin_left = 117.0
-margin_top = 33.0
-margin_right = 139.0
-margin_bottom = 50.0
-size_flags_horizontal = 4
-theme_type_variation = "SmallButton"
-text = "Ok"
-autoSelect = true
+[node name="Explanations" parent="." instance=ExtResource( 3 )]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
@@ -332,7 +128,6 @@ script = ExtResource( 10 )
 scene = ExtResource( 17 )
 
 [node name="SpawnPositions" type="Node2D" parent="."]
-visible = false
 
 [node name="Node2D" type="Node2D" parent="SpawnPositions"]
 position = Vector2( -112, 16 )
@@ -477,7 +272,3 @@ position = Vector2( 108, 189 )
 
 [node name="Node2D48" type="Node2D" parent="SpawnPositions"]
 position = Vector2( 25, 46 )
-
-[connection signal="pressed" from="Explanations/Health/VBoxContainer/Button" to="Explanations/Health" method="Finish"]
-[connection signal="pressed" from="Explanations/UpgradeDices/VBoxContainer/Button" to="Explanations/UpgradeDices" method="Finish"]
-[connection signal="pressed" from="Explanations/ShopPosition/VBoxContainer/Button" to="Explanations/ShopPosition" method="Finish"]

@@ -19,6 +19,7 @@ public class WeaponSwitcher : Node2D
     private WeaponBase _currentWeapon;
 
     [Signal] public delegate void WeaponChanged(int to);
+    [Signal] public delegate void WeaponAdded();
 
     public override void _EnterTree()
     {
@@ -157,14 +158,14 @@ public class WeaponSwitcher : Node2D
         Debug.LogU(this, $"Added weapon {weapon.Name}");
 
         AddChild(weapon);
-        MoveChild(weapon, currentIndex);
 
-        if (GetChildCount() > 9)
-        {
-            DropWeapon(CurrentWeapon);
-        }
+        if (GetChildCount() > 2)
+            MoveChild(weapon, currentIndex);
+        else
+            currentIndex = weapon.GetIndex();
 
         WeaponsChanged();
+        EmitSignal(nameof(WeaponAdded));
     }
 
     public void DropCurrentWeapon() => CallDeferred(nameof(DropWeapon), CurrentWeapon);

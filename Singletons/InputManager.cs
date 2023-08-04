@@ -128,6 +128,11 @@ public class InputManager : Control
             }
 
             UpdateCurrentDeviceType();
+
+            Input.MouseMode = CurrentInputType is InputType.MouseAndKeyboard ? Input.MouseModeEnum.Confined : Input.MouseModeEnum.Hidden;
+
+            instance.GetTree().SetGroup("VisibleWhileKeyboardInput", "visible", CurrentInputType is InputType.MouseAndKeyboard);
+            instance.GetTree().SetGroup("VisibleWhileControllerInput", "visible", CurrentInputType is InputType.Controller);
         }
     }
 

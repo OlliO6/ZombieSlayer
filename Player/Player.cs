@@ -27,54 +27,29 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
     [Export] private float startMagnetSize = 4;
     [Export] private ShakeProfile damageShake, dieShake;
 
-    #region AnimationTree Reference
-
     private AnimationTree storerForAnimationTree;
     public AnimationTree AnimationTree => this.LazyGetNode(ref storerForAnimationTree, "AnimationTree");
-
-    #endregion
-    #region Sprite Reference
 
     private Sprite storerForSprite;
     public Sprite Sprite => this.LazyGetNode(ref storerForSprite, "Sprite");
 
-    #endregion
-    #region MagnetArea Reference
-
     private MagnetArea storerForMagnetArea;
     public MagnetArea MagnetArea => this.LazyGetNode(ref storerForMagnetArea, "MagnetArea");
-
-    #endregion
-    #region WeaponInv Reference
 
     private WeaponSwitcher storerForWeapons;
     public WeaponSwitcher WeaponInv => this.LazyGetNode(ref storerForWeapons, "WeaponSwitcher");
 
-    #endregion
-    #region UpgradeHolder Reference
-
     private Node storerForUpgrades;
     public Node UpgradeHolder => this.LazyGetNode(ref storerForUpgrades, "Upgrades");
-
-    #endregion
-    #region DiceInventory Reference
 
     private DiceInventory storerForDiceInventory;
     public DiceInventory DiceInventory => this.LazyGetNode(ref storerForDiceInventory, "DiceInventory");
 
-    #endregion
-    #region Leveling Reference
-
     private LevelingSystem storerForLeveling;
     public LevelingSystem Leveling => this.LazyGetNode(ref storerForLeveling, "Leveling");
 
-    #endregion
-    #region CamShaker Reference
-
     private CamShaker storerForCamShaker;
     public CamShaker CamShaker => this.LazyGetNode(ref storerForCamShaker, "CamShaker");
-
-    #endregion
 
     public bool isInvincible;
     public List<IInteractable> interactablesInRange = new(1);
@@ -164,11 +139,12 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
             return;
         }
 
-        IInteractable nextSelect = interactablesInRange
+        var nextSelect = interactablesInRange
                 .OrderBy((IInteractable interactable) => Position.DistanceSquaredTo(interactable.Position))
                 .First();
 
-        if (currentInteractable == nextSelect) return;
+        if (currentInteractable == nextSelect)
+            return;
 
         currentInteractable?.Deselect();
         nextSelect.Select();
@@ -177,12 +153,16 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
 
     public void AddInteractable(IInteractable interactable)
     {
-        if (interactablesInRange.Contains(interactable)) return;
+        if (interactablesInRange.Contains(interactable))
+            return;
+
         interactablesInRange.Add(interactable);
     }
     public void RemoveInteractable(IInteractable interactable)
     {
-        if (!interactablesInRange.Contains(interactable)) return;
+        if (!interactablesInRange.Contains(interactable))
+            return;
+
         interactablesInRange.Remove(interactable);
         if (currentInteractable == interactable) currentInteractable?.Deselect();
     }
@@ -216,7 +196,8 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         if (isInvincible || IsDead)
             return;
 
-        if (GameStats.Current.healthUnlocked) CurrentHealth -= amount;
+        if (GameStats.Current.healthUnlocked)
+            CurrentHealth -= amount;
 
         ShakeCam(damageShake);
 
@@ -231,12 +212,12 @@ public class Player : KinematicBody2D, IDamageable, IKillable, IHealth
         Sprite.SetShaderParam("blinking", true);
 
         new TimeAwaiter(this, invincibilityTime,
-                onCompleted: () =>
-                {
-                    isInvincible = false;
-                    EmitSignal(nameof(InvincibilityEnded));
-                    Sprite.SetShaderParam("blinking", false);
-                });
+            onCompleted: () =>
+            {
+                isInvincible = false;
+                EmitSignal(nameof(InvincibilityEnded));
+                Sprite.SetShaderParam("blinking", false);
+            });
     }
 
     public void Die()

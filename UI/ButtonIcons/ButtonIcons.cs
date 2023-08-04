@@ -9,7 +9,9 @@ public class ButtonIcons : Node2D
         Move,
         Aim,
         Attack,
+        AttackLeft,
         Ability,
+        AbilityLeft,
         Interact,
         DiceMenu,
         Inventory,
@@ -154,20 +156,20 @@ public class ButtonIcons : Node2D
                 ControllerIcons.Frame = 6;
                 return;
 
-            case InputAction.Ability:
+            case InputAction.AttackLeft:
                 ControllerIcons.Frame = 7;
+                return;
+
+            case InputAction.Ability:
+                ControllerIcons.Frame = 4;
+                return;
+
+            case InputAction.AbilityLeft:
+                ControllerIcons.Frame = 5;
                 return;
 
             case InputAction.Interact:
                 ControllerIcons.Frame = 0;
-                return;
-
-            case InputAction.SwitchWeaponLeft:
-                ControllerIcons.Frame = 5;
-                return;
-
-            case InputAction.SwitchWeaponRight:
-                ControllerIcons.Frame = 4;
                 return;
         }
     }

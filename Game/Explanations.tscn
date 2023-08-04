@@ -1,0 +1,281 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Shaders/Vigniette.shader" type="Shader" id=2]
+[ext_resource path="res://UI/ButtonIcons/ButtonIcon.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Singletons/Explanations/ShowHideExplanation.cs" type="Script" id=4]
+[ext_resource path="res://Singletons/Explanations/MoveAndAttackExplanations.cs" type="Script" id=6]
+[ext_resource path="res://UI/Theme/Theme.tres" type="Theme" id=7]
+[ext_resource path="res://UI/CustomControls/Button/Button.tscn" type="PackedScene" id=8]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/size = 0.324
+shader_param/smoothness = 0.523
+shader_param/color = Color( 0, 0, 0, 0.784314 )
+
+[node name="Explanations" type="CanvasLayer"]
+pause_mode = 2
+layer = 5
+
+[node name="MoveAndAttack" type="Control" parent="."]
+visible = false
+margin_right = 256.0
+margin_bottom = 144.0
+mouse_filter = 2
+theme = ExtResource( 7 )
+script = ExtResource( 6 )
+startDelay = 0.5
+minWalkDist = 20.0
+minZombieDist = 50.0
+moveFadeInTime = 1.0
+moveFadeOutTime = 1.0
+attackFadeInTime = 0.5
+attackFadeOutTime = 0.5
+
+[node name="MoveTutorial" type="Control" parent="MoveAndAttack"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="MoveAndAttack/MoveTutorial"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MoveAndAttack/MoveTutorial"]
+anchor_left = 0.14
+anchor_right = 1.0
+margin_top = 16.0
+size_flags_vertical = 1
+text = "to move"
+align = 1
+valign = 1
+
+[node name="MoveIcon" parent="MoveAndAttack/MoveTutorial" instance=ExtResource( 3 )]
+position = Vector2( 102, 25 )
+
+[node name="AttackTutorial" type="Control" parent="MoveAndAttack"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="MoveAndAttack/AttackTutorial"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MoveAndAttack/AttackTutorial"]
+anchor_left = 0.14
+anchor_right = 1.0
+margin_left = 82.16
+margin_top = 14.0
+margin_right = 82.16
+margin_bottom = 43.0
+size_flags_vertical = 1
+custom_constants/line_spacing = 6
+text = "to aim
+to attack"
+valign = 1
+
+[node name="AimIcon" parent="MoveAndAttack/AttackTutorial" instance=ExtResource( 3 )]
+position = Vector2( 103, 18 )
+inputAction = 1
+
+[node name="AttackIcon" parent="MoveAndAttack/AttackTutorial" instance=ExtResource( 3 )]
+position = Vector2( 103, 38 )
+inputAction = 2
+
+[node name="Health" type="Control" parent="."]
+visible = false
+margin_right = 256.0
+margin_bottom = 144.0
+mouse_filter = 2
+theme = ExtResource( 7 )
+script = ExtResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="Health"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Health"]
+anchor_right = 1.0
+margin_top = 8.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Health/VBoxContainer"]
+margin_right = 256.0
+margin_bottom = 29.0
+size_flags_vertical = 1
+text = "Level ups will heal you
+And you can die now"
+align = 1
+valign = 1
+
+[node name="Button" parent="Health/VBoxContainer" instance=ExtResource( 8 )]
+margin_left = 117.0
+margin_top = 33.0
+margin_right = 139.0
+margin_bottom = 50.0
+size_flags_horizontal = 4
+theme_type_variation = "SmallButton"
+text = "Ok"
+autoSelect = true
+
+[node name="UpgradeDices" type="Control" parent="."]
+visible = false
+margin_right = 256.0
+margin_bottom = 144.0
+mouse_filter = 2
+theme = ExtResource( 7 )
+script = ExtResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="UpgradeDices"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeDices"]
+anchor_right = 1.0
+margin_top = 24.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UpgradeDices/VBoxContainer"]
+margin_right = 256.0
+margin_bottom = 13.0
+size_flags_vertical = 1
+text = "to roll you dices"
+align = 1
+valign = 1
+
+[node name="ButtonIcon" parent="UpgradeDices/VBoxContainer/Label" instance=ExtResource( 3 )]
+position = Vector2( 48.16, 7 )
+inputAction = 7
+
+[node name="Button" parent="UpgradeDices/VBoxContainer" instance=ExtResource( 8 )]
+margin_left = 117.0
+margin_top = 17.0
+margin_right = 139.0
+margin_bottom = 34.0
+size_flags_horizontal = 4
+theme_type_variation = "SmallButton"
+text = "Ok"
+autoSelect = true
+
+[node name="SwitchWeapons" type="Control" parent="."]
+visible = false
+margin_right = 256.0
+margin_bottom = 144.0
+mouse_filter = 2
+theme = ExtResource( 7 )
+script = ExtResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="SwitchWeapons"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SwitchWeapons"]
+anchor_right = 1.0
+margin_top = 24.0
+mouse_filter = 2
+alignment = 1
+
+[node name="KeyboardLabel" type="Label" parent="SwitchWeapons/VBoxContainer" groups=["VisibleWhileKeyboardInput"]]
+margin_right = 256.0
+margin_bottom = 29.0
+size_flags_vertical = 1
+text = "or 'mouse wheel'     
+to switch weapons      "
+align = 2
+valign = 1
+
+[node name="ButtonIcon" parent="SwitchWeapons/VBoxContainer/KeyboardLabel" instance=ExtResource( 3 )]
+position = Vector2( 62, 7 )
+inputAction = 9
+
+[node name="ButtonIcon2" parent="SwitchWeapons/VBoxContainer/KeyboardLabel" instance=ExtResource( 3 )]
+position = Vector2( 75.84, 7 )
+inputAction = 10
+
+[node name="ControllerLabel" type="Label" parent="SwitchWeapons/VBoxContainer" groups=["VisibleWhileControllerInput"]]
+visible = false
+margin_right = 256.0
+margin_bottom = 29.0
+size_flags_vertical = 1
+text = "or   to attack
+with different weapons"
+align = 1
+valign = 1
+
+[node name="ButtonIcon" parent="SwitchWeapons/VBoxContainer/ControllerLabel" instance=ExtResource( 3 )]
+position = Vector2( 62, 6 )
+inputAction = 3
+testDevice = 2
+
+[node name="ButtonIcon2" parent="SwitchWeapons/VBoxContainer/ControllerLabel" instance=ExtResource( 3 )]
+position = Vector2( 99, 6 )
+inputAction = 2
+testDevice = 2
+
+[node name="Button" parent="SwitchWeapons/VBoxContainer" instance=ExtResource( 8 )]
+margin_left = 117.0
+margin_top = 33.0
+margin_right = 139.0
+margin_bottom = 50.0
+size_flags_horizontal = 4
+theme_type_variation = "SmallButton"
+text = "Ok"
+autoSelect = true
+
+[node name="ShopPosition" type="Control" parent="."]
+visible = false
+margin_right = 256.0
+margin_bottom = 144.0
+mouse_filter = 2
+theme = ExtResource( 7 )
+script = ExtResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="ShopPosition"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShopPosition"]
+anchor_right = 1.0
+margin_top = 8.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="ShopPosition/VBoxContainer"]
+margin_right = 256.0
+margin_bottom = 29.0
+size_flags_vertical = 1
+text = "The shop is at the 
+top of the map"
+align = 1
+valign = 1
+
+[node name="Button" parent="ShopPosition/VBoxContainer" instance=ExtResource( 8 )]
+margin_left = 117.0
+margin_top = 33.0
+margin_right = 139.0
+margin_bottom = 50.0
+size_flags_horizontal = 4
+theme_type_variation = "SmallButton"
+text = "Ok"
+autoSelect = true
+
+[connection signal="pressed" from="Health/VBoxContainer/Button" to="Health" method="Finish"]
+[connection signal="pressed" from="UpgradeDices/VBoxContainer/Button" to="UpgradeDices" method="Finish"]
+[connection signal="pressed" from="SwitchWeapons/VBoxContainer/Button" to="SwitchWeapons" method="Finish"]
+[connection signal="pressed" from="ShopPosition/VBoxContainer/Button" to="ShopPosition" method="Finish"]

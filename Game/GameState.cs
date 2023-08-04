@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Additions;
 using Godot;
 
@@ -15,6 +16,7 @@ public class GameState : YSort
     public GameStats stats = new GameStats();
     [Export] private NodePath shopParent;
     public Shop shop;
+    public Player player;
 
     public override void _EnterTree()
     {
@@ -29,6 +31,17 @@ public class GameState : YSort
     public override void _Ready()
     {
         ExplanationsManager.StartExplanation("MoveAndAttack");
+        player = GetNode<Player>("Player");
+        player.WeaponInv.Connect(nameof(WeaponSwitcher.WeaponAdded), this, nameof(PlayerGotWeapon));
+    }
+
+    private void PlayerGotWeapon()
+    {
+        if (player.GetWeapons().Count() == 2)
+        {
+            ExplanationsManager.StartExplanation("SwitchWeapons");
+            return;
+        }
     }
 
     public void UnlockHealth()
@@ -49,9 +62,8 @@ public class GameState : YSort
         GetNode(shopParent).AddChild(shop);
 
         foreach (string shopItem in stats.unlockedShopItems)
-        {
             shop.UnlockShopItem(shopItem);
-        }
+
         ShopUnlocked?.Invoke();
     }
 
